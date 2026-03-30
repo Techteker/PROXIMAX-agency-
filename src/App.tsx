@@ -140,6 +140,38 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
   const [inductionBanner, setInductionBanner] = useState<string | null>(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    service: 'Select a service',
+    budget: '',
+    message: ''
+  });
+
+  const handleWhatsAppSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const { name, email, service, budget, message } = formData;
+    
+    const whatsappMessage = `🚀 *New Inquiry from PROXIMAX Website* 🚀%0A%0A` +
+      `👤 *Name:* ${name}%0A` +
+      `📧 *Email:* ${email}%0A` +
+      `🛠️ *Service:* ${service}%0A` +
+      `💰 *Budget:* ${budget}%0A` +
+      `📝 *Message:* ${message}%0A%0A` +
+      `_Sent from PROXIMAX Digital_`;
+    
+    const whatsappUrl = `https://wa.me/919341579348?text=${whatsappMessage}`;
+    window.open(whatsappUrl, '_blank');
+    
+    // Clear form after submission
+    setFormData({
+      name: '',
+      email: '',
+      service: 'Select a service',
+      budget: '',
+      message: ''
+    });
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -165,9 +197,10 @@ export default function App() {
             <div className="absolute inset-0 bg-[#050505]/95 backdrop-blur-xl" onClick={() => setSelectedService(null)} />
             
             <motion.div 
-              initial={{ opacity: 0, y: 50, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 50, scale: 0.9 }}
+              initial={{ opacity: 0, y: 50, scale: 0.8, rotate: -10 }}
+              animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
+              exit={{ opacity: 0, y: 50, scale: 0.8, rotate: 10 }}
+              transition={{ type: "spring", stiffness: 100, damping: 20 }}
               className="relative w-full max-w-4xl bg-[#121212] border border-white/10 rounded-[3rem] overflow-hidden shadow-2xl max-h-full overflow-y-auto"
             >
               {/* Close Button */}
@@ -180,12 +213,32 @@ export default function App() {
 
               <div className="grid lg:grid-cols-2">
                 {/* Left Side: Visuals */}
-                <div className="relative aspect-square lg:aspect-auto bg-gradient-to-br from-yellow-600/20 to-slate-600/20 p-12 flex flex-col justify-center items-center text-center">
-                  <div className="w-24 h-24 rounded-3xl bg-yellow-600 text-white flex items-center justify-center mb-8 shadow-2xl shadow-yellow-500/20">
-                    <selectedService.icon className="w-12 h-12" />
+                <div className="relative aspect-square lg:aspect-auto bg-[#181818] p-12 flex flex-col justify-center items-center text-center overflow-hidden">
+                  {/* Magic Background */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-600/20 to-transparent z-0" />
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-600/10 rounded-full blur-[100px] animate-pulse" />
+                  <div className="absolute bottom-0 left-0 w-64 h-64 bg-yellow-600/5 rounded-full blur-[100px]" />
+                  
+                  {/* Magic Color Glow */}
+                  <motion.div
+                    animate={{ 
+                      scale: [1, 1.2, 1],
+                      rotate: [0, 90, 180, 270, 360],
+                      backgroundColor: ["rgba(202, 138, 4, 0.1)", "rgba(234, 179, 8, 0.15)", "rgba(245, 158, 11, 0.1)"]
+                    }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-0 z-0 blur-[120px]"
+                  />
+                  <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-yellow-500/10 rounded-full blur-[100px] animate-pulse" />
+                  <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-orange-500/5 rounded-full blur-[100px]" />
+                  
+                  <div className="relative z-10">
+                    <div className="w-24 h-24 rounded-3xl bg-yellow-600 text-white flex items-center justify-center mb-8 shadow-2xl shadow-yellow-500/20 mx-auto">
+                      <selectedService.icon className="w-12 h-12" />
+                    </div>
+                    <h2 className="text-4xl font-bold text-white mb-4 tracking-tighter">{selectedService.title}</h2>
+                    <p className="text-yellow-400 font-black uppercase tracking-[0.3em] text-xs">Service Exploration</p>
                   </div>
-                  <h2 className="text-4xl font-bold text-white mb-4 tracking-tighter">{selectedService.title}</h2>
-                  <p className="text-yellow-400 font-black uppercase tracking-[0.3em] text-xs">Service Exploration</p>
                   
                   {/* Decorative Elements */}
                   <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none" />
@@ -337,10 +390,20 @@ export default function App() {
 
       {/* Hero Section */}
       <section id="home" className="relative pt-40 pb-24 overflow-hidden">
-        {/* Background Gradients */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 overflow-hidden">
-          <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-yellow-600/10 rounded-full blur-[120px]" />
-          <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-slate-400/10 rounded-full blur-[120px]" />
+        {/* Premium Background Elements */}
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          {/* Main Glows */}
+          <div className="absolute top-[-10%] left-[-10%] w-[70%] h-[70%] bg-yellow-600/10 rounded-full blur-[120px] animate-pulse" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[70%] bg-yellow-900/10 rounded-full blur-[120px]" />
+          
+          {/* Subtle Grid Pattern */}
+          <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
+          
+          {/* Radial Center Glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(234,179,8,0.05)_0%,transparent_70%)]" />
+          
+          {/* Noise Texture Overlay */}
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
         </div>
 
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
@@ -349,16 +412,17 @@ export default function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-xs font-bold uppercase tracking-widest mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-xs font-bold uppercase tracking-widest mb-8 relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-yellow-500"></span>
               </span>
               Best Premium Digital Agency
             </div>
-            <h1 className="text-6xl md:text-8xl font-bold leading-[0.95] text-white mb-8 tracking-tighter">
+            <h1 className="text-6xl md:text-8xl font-bold leading-[0.95] text-white mb-8 tracking-tighter drop-shadow-2xl">
               Scale Your <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 via-white to-slate-300">Business</span> <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 via-white to-slate-300 animate-pulse">Business</span> <br />
               Beyond Limits.
             </h1>
             <p className="text-xl text-slate-400 mb-10 max-w-lg leading-relaxed">
@@ -395,12 +459,12 @@ export default function App() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative z-10 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl group aspect-[10/8] bg-[#121212]">
+            <div className="relative z-10 rounded-[3rem] overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] group aspect-[10/8] bg-gradient-to-br from-[#121212] to-[#0a0a0a] backdrop-blur-3xl">
               {inductionBanner ? (
                 <img 
                   src={inductionBanner} 
                   alt="Premium Induction Banner" 
-                  className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700"
+                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-1000 scale-105 group-hover:scale-100"
                   referrerPolicy="no-referrer"
                 />
               ) : (
@@ -408,11 +472,11 @@ export default function App() {
                   <Cpu className="w-12 h-12 text-yellow-500 opacity-20" />
                 </div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80" />
               
               {/* Premium Badge */}
-              <div className="absolute top-8 right-8 px-5 py-2.5 bg-yellow-600 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-full shadow-2xl z-20 flex items-center gap-2 backdrop-blur-md border border-white/20">
-                <Sparkles className="w-3 h-3" />
+              <div className="absolute top-8 right-8 px-6 py-3 bg-yellow-600/90 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-full shadow-2xl z-20 flex items-center gap-2 backdrop-blur-md border border-white/20 group-hover:bg-yellow-500 transition-colors">
+                <Sparkles className="w-3 h-3 animate-spin-slow" />
                 Best Premium Agency
               </div>
             </div>
@@ -441,9 +505,10 @@ export default function App() {
 
       {/* Services Section */}
       <section id="services" className="py-32 bg-[#0a0a0a] relative overflow-hidden">
-        {/* Background Glows */}
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-yellow-600/5 rounded-full blur-[120px] -z-10" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-yellow-600/5 rounded-full blur-[120px] -z-10" />
+        {/* Magic Background Particles/Glows */}
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-yellow-600/10 rounded-full blur-[150px] -z-10 animate-pulse" />
+        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-yellow-600/5 rounded-full blur-[150px] -z-10" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(234,179,8,0.03)_0%,transparent_70%)] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-24">
@@ -453,7 +518,18 @@ export default function App() {
               viewport={{ once: true }}
               className="max-w-2xl"
             >
-              <h2 className="text-yellow-500 font-black uppercase tracking-[0.4em] text-xs mb-6">Expertise</h2>
+              <motion.div
+                animate={{ 
+                  opacity: [0.5, 1, 0.5],
+                  scale: [0.98, 1, 0.98]
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="inline-block"
+              >
+                <h2 className="text-yellow-500 font-black uppercase tracking-[0.4em] text-xs mb-6 flex items-center gap-3">
+                  <Sparkles className="w-3 h-3" /> Expertise
+                </h2>
+              </motion.div>
               <h3 className="text-5xl md:text-6xl font-bold text-white leading-tight">Solutions Built for <br /> Digital Dominance</h3>
             </motion.div>
             <motion.p 
@@ -479,41 +555,135 @@ export default function App() {
                 }
               }
             }}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
             {services.map((service, index) => (
               <motion.div
                 key={index}
                 variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+                  hidden: { opacity: 0, scale: 0.8, y: 50 },
+                  show: { 
+                    opacity: 1, 
+                    scale: 1, 
+                    y: 0, 
+                    transition: { 
+                      type: "spring",
+                      stiffness: 100,
+                      damping: 15,
+                      duration: 0.8 
+                    } 
+                  }
                 }}
                 whileHover={{ 
-                  y: -10,
-                  transition: { duration: 0.3 }
+                  y: -15,
+                  scale: 1.02,
+                  transition: { duration: 0.4, ease: "easeOut" }
                 }}
-                className="group p-10 bg-[#121212] rounded-[2rem] border border-white/5 hover:border-yellow-500/30 hover:bg-[#181818] transition-all duration-500 relative overflow-hidden"
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setSelectedService(service)}
+                className="group p-10 bg-[#121212] rounded-[2.5rem] border border-white/5 hover:border-yellow-500/40 hover:bg-[#181818] transition-all duration-500 relative overflow-hidden cursor-pointer"
               >
-                {/* Hover Glow */}
-                <div className="absolute -inset-full bg-gradient-to-br from-yellow-600/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                {/* Magic Color Burst on Click */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileTap={{ 
+                      opacity: [0, 0.8, 0], 
+                      scale: [0, 2, 3],
+                      transition: { duration: 0.6, ease: "easeOut" } 
+                    }}
+                    className="absolute w-40 h-40 bg-yellow-500/40 rounded-full blur-3xl"
+                  />
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileTap={{ 
+                      opacity: [0, 0.6, 0], 
+                      scale: [0, 1.5, 2.5],
+                      transition: { duration: 0.8, ease: "easeOut", delay: 0.1 } 
+                    }}
+                    className="absolute w-32 h-32 bg-orange-500/30 rounded-full blur-2xl"
+                  />
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileTap={{ 
+                      opacity: [0, 1, 0], 
+                      scale: [0, 1, 2],
+                      transition: { duration: 0.4, ease: "easeOut" } 
+                    }}
+                    className="absolute w-20 h-20 bg-white/20 rounded-full blur-xl"
+                  />
+                  
+                  {/* Magic Particles */}
+                  {[...Array(8)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0, x: 0, y: 0 }}
+                      whileTap={{ 
+                        opacity: [0, 1, 0],
+                        scale: [0, 1, 0],
+                        x: [0, (Math.random() - 0.5) * 200],
+                        y: [0, (Math.random() - 0.5) * 200],
+                        transition: { duration: 0.8, ease: "easeOut" }
+                      }}
+                      className={`absolute w-2 h-2 rounded-full blur-[1px] ${
+                        i % 3 === 0 ? 'bg-yellow-400' : i % 3 === 1 ? 'bg-orange-400' : 'bg-white'
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                {/* Magic Glow Effect */}
+                <div className="absolute -top-24 -right-24 w-48 h-48 bg-yellow-500/10 rounded-full blur-[80px] group-hover:bg-yellow-500/20 transition-all duration-700" />
+                <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-yellow-500/5 rounded-full blur-[80px] group-hover:bg-yellow-500/15 transition-all duration-700" />
+                
+                {/* Animated Border Glow */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/0 via-yellow-500/5 to-yellow-500/0 animate-shimmer" />
+                </div>
                 
                 <motion.div 
-                  whileHover={{ rotate: 12, scale: 1.1 }}
-                  className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 group-hover:bg-yellow-600 group-hover:text-white transition-all duration-500"
+                  whileHover={{ 
+                    rotate: [0, -10, 10, -10, 0],
+                    scale: 1.1,
+                    transition: { duration: 0.5 }
+                  }}
+                  animate={{
+                    boxShadow: [
+                      "0 0 20px rgba(202, 138, 4, 0.2)",
+                      "0 0 40px rgba(234, 179, 8, 0.4)",
+                      "0 0 20px rgba(202, 138, 4, 0.2)"
+                    ]
+                  }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="w-20 h-20 rounded-3xl bg-white/5 flex items-center justify-center mb-10 group-hover:bg-yellow-600 group-hover:text-white group-hover:shadow-[0_0_30px_rgba(202,138,4,0.4)] transition-all duration-500 relative z-10"
                 >
-                  <service.icon className="w-8 h-8" />
+                  <service.icon className="w-10 h-10" />
                 </motion.div>
-                <h4 className="text-2xl font-bold text-white mb-4 group-hover:text-yellow-400 transition-colors">{service.title}</h4>
-                <p className="text-slate-400 text-sm leading-relaxed mb-8 opacity-80 group-hover:opacity-100 transition-opacity">
-                  {service.description}
-                </p>
-                <div className="h-px w-full bg-white/5 mb-8 group-hover:bg-yellow-500/20 transition-colors" />
-                <button 
-                  onClick={() => setSelectedService(service)}
-                  className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-widest text-yellow-400 group-hover:gap-4 transition-all"
-                >
-                  Explore Service <ChevronRight className="w-4 h-4" />
-                </button>
+
+                <div className="relative z-10">
+                  <h4 className="text-2xl font-bold text-white mb-4 group-hover:text-yellow-400 transition-colors tracking-tight">{service.title}</h4>
+                  <p className="text-slate-400 text-sm leading-relaxed mb-8 opacity-80 group-hover:opacity-100 transition-opacity">
+                    {service.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {service.results.slice(0, 2).map((result, i) => (
+                      <span key={i} className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 bg-white/5 rounded-full text-slate-400 group-hover:bg-yellow-500/10 group-hover:text-yellow-500 transition-all">
+                        {result}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="h-px w-full bg-white/5 mb-8 group-hover:bg-yellow-500/20 transition-colors" />
+                  
+                  <button 
+                    className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-widest text-yellow-400 group-hover:gap-5 transition-all relative group/btn"
+                  >
+                    <span className="relative z-10">Explore Magic</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
+                    <div className="absolute inset-0 bg-yellow-500/20 blur-xl opacity-0 group-hover/btn:opacity-100 transition-opacity rounded-full" />
+                  </button>
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -692,13 +862,16 @@ export default function App() {
             </div>
             
             <div className="bg-[#121212] p-12 rounded-[3rem] border border-white/5 shadow-2xl">
-              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-6" onSubmit={handleWhatsAppSubmit}>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Full Name</label>
                     <input 
                       type="text" 
+                      required
                       placeholder="John Doe"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-slate-600 focus:outline-none focus:border-yellow-500 transition-colors"
                     />
                   </div>
@@ -706,7 +879,10 @@ export default function App() {
                     <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Email Address</label>
                     <input 
                       type="email" 
+                      required
                       placeholder="john@example.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-slate-600 focus:outline-none focus:border-yellow-500 transition-colors"
                     />
                   </div>
@@ -714,7 +890,11 @@ export default function App() {
                 
                 <div className="space-y-2">
                   <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Service Interested In</label>
-                  <select className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-yellow-500 transition-colors appearance-none">
+                  <select 
+                    value={formData.service}
+                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-yellow-500 transition-colors appearance-none"
+                  >
                     <option className="bg-[#121212]">Select a service</option>
                     {services.map(s => <option key={s.title} className="bg-[#121212]">{s.title}</option>)}
                   </select>
@@ -725,6 +905,8 @@ export default function App() {
                   <input 
                     type="text" 
                     placeholder="e.g. ₹50,000 or $600"
+                    value={formData.budget}
+                    onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                     className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-slate-600 focus:outline-none focus:border-yellow-500 transition-colors"
                   />
                 </div>
@@ -733,13 +915,21 @@ export default function App() {
                   <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Message</label>
                   <textarea 
                     rows={4}
+                    required
                     placeholder="Tell us about your project..."
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-slate-600 focus:outline-none focus:border-yellow-500 transition-colors resize-none"
                   ></textarea>
                 </div>
                 
-                <button className="w-full bg-yellow-600 text-white py-5 rounded-2xl font-black text-lg hover:bg-yellow-700 transition-all shadow-xl shadow-yellow-600/20">
-                  Send Message
+                <button 
+                  type="submit"
+                  className="w-full bg-green-600 text-white py-5 rounded-2xl font-black text-lg hover:bg-green-500 transition-all shadow-[0_0_30px_rgba(22,163,74,0.4)] flex items-center justify-center gap-3 group/submit relative overflow-hidden"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/submit:translate-x-full transition-transform duration-1000" />
+                  <MessageSquare className="w-6 h-6 group-hover:scale-110 transition-transform relative z-10" />
+                  <span className="relative z-10">Send to WhatsApp</span>
                 </button>
               </form>
             </div>
