@@ -7,7 +7,7 @@ export const generateInductionBanner = async () => {
     contents: {
       parts: [
         {
-          text: 'A premium, modern induction banner for a professional digital marketing company. Style: sleek, high-tech, corporate, futuristic vibe. Features: abstract geometric shapes, smooth gradients, subtle shadows. Color palette: professional blue, white, and silver. High contrast. Ultra high resolution, 4K quality, vector-style clean design. Dynamic and eye-catching composition, professional branding style. No clutter, minimal yet impactful. Space for company logo and headline.',
+          text: 'A high-quality, modern business growth banner for PROXIMAX. Include the PROXIMAX text logo prominently. Show elements of business growth like trending charts, upward arrows, digital connections, and network icons. Include graphics/icons of social media platforms: Instagram, Facebook, Google, YouTube. Use vibrant, professional colors (yellow, gold, deep black) with a tech-savvy, futuristic style. Premium, sleek, and visually engaging. 4K quality, vector-style clean design.',
         },
       ],
     },
