@@ -38,7 +38,11 @@ import {
 } from 'lucide-react';
 import { cn } from './lib/utils';
 
-const InternshipPage = () => {
+const InternshipPage = ({ emailSettings, setEmailSettings, saveEmailSettings }: { 
+  emailSettings: any, 
+  setEmailSettings: any, 
+  saveEmailSettings: any 
+}) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -60,7 +64,10 @@ const InternshipPage = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          auth: emailSettings.user && emailSettings.pass ? emailSettings : undefined
+        }),
       });
 
       if (response.ok) {
@@ -572,6 +579,19 @@ export default function App() {
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [emailSettings, setEmailSettings] = useState({
+    user: localStorage.getItem('PROXIMAX_EMAIL_USER') || '',
+    pass: localStorage.getItem('PROXIMAX_EMAIL_PASS') || '',
+    recipient: localStorage.getItem('PROXIMAX_RECIPIENT_EMAIL') || 'rajendarrana732@gmail.com'
+  });
+
+  const saveEmailSettings = () => {
+    localStorage.setItem('PROXIMAX_EMAIL_USER', emailSettings.user);
+    localStorage.setItem('PROXIMAX_EMAIL_PASS', emailSettings.pass);
+    localStorage.setItem('PROXIMAX_RECIPIENT_EMAIL', emailSettings.recipient);
+    alert("Email settings saved locally!");
+  };
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -590,7 +610,10 @@ export default function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          auth: emailSettings.user && emailSettings.pass ? emailSettings : undefined
+        }),
       });
 
       if (response.ok) {
@@ -1507,7 +1530,11 @@ export default function App() {
       </section>
     </>
   ) : (
-    <InternshipPage />
+    <InternshipPage 
+      emailSettings={emailSettings} 
+      setEmailSettings={setEmailSettings} 
+      saveEmailSettings={saveEmailSettings} 
+    />
   )}
 
   {/* Footer */}
@@ -1521,7 +1548,45 @@ export default function App() {
             <p className="text-sm leading-relaxed mb-10 opacity-60 font-sans font-light">
               Your premier digital growth partner. We combine creativity, technology, and data to deliver results that matter.
             </p>
-            <div className="flex gap-6">
+            
+            {/* Email Configuration Box */}
+            <div className="mt-12 p-6 rounded-2xl bg-white/5 border border-white/10">
+              <h4 className="text-white font-display font-black text-[10px] uppercase tracking-[0.4em] mb-6">Email Setup</h4>
+              <p className="text-xs leading-relaxed mb-6 opacity-60 font-sans font-light">
+                Fill these boxes to enable form submissions. Data is saved in your browser.
+              </p>
+              <div className="space-y-4">
+                <input 
+                  type="email" 
+                  placeholder="Your Gmail"
+                  value={emailSettings.user}
+                  onChange={(e) => setEmailSettings({...emailSettings, user: e.target.value})}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white focus:border-gold-500 outline-none transition-colors"
+                />
+                <input 
+                  type="password" 
+                  placeholder="App Password"
+                  value={emailSettings.pass}
+                  onChange={(e) => setEmailSettings({...emailSettings, pass: e.target.value})}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white focus:border-gold-500 outline-none transition-colors"
+                />
+                <input 
+                  type="email" 
+                  placeholder="Recipient Email"
+                  value={emailSettings.recipient}
+                  onChange={(e) => setEmailSettings({...emailSettings, recipient: e.target.value})}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white focus:border-gold-500 outline-none transition-colors"
+                />
+                <button 
+                  onClick={saveEmailSettings}
+                  className="w-full bg-gold-600 hover:bg-gold-700 text-white text-[10px] font-display font-black uppercase tracking-widest py-3 rounded-xl transition-all shadow-lg shadow-gold-600/20"
+                >
+                  Save Settings
+                </button>
+              </div>
+            </div>
+
+            <div className="flex gap-6 mt-10">
               {[
                 { Icon: Linkedin, href: "#" },
                 { Icon: Twitter, href: "#" },

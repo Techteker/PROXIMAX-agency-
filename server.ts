@@ -20,21 +20,32 @@ async function startServer() {
 
   // API Route for sending email
   app.post("/api/contact", async (req, res) => {
-    const { name, email, service, budget, message } = req.body;
+    const { name, email, service, budget, message, auth: clientAuth } = req.body;
 
-    // Configure your email transporter
-    // Note: You need to set EMAIL_USER and EMAIL_PASS in your environment variables
+    // Use client-provided auth if available, otherwise fallback to environment variables
+    const emailUser = clientAuth?.user || process.env.EMAIL_USER;
+    const emailPass = clientAuth?.pass || process.env.EMAIL_PASS;
+    const recipientEmail = clientAuth?.recipient || process.env.RECIPIENT_EMAIL || "rajendarrana732@gmail.com";
+
+    if (!emailUser || !emailPass) {
+      console.warn("Email credentials not provided.");
+      return res.status(400).json({ 
+        success: false, 
+        message: "Email configuration missing. Please set it up in the app settings." 
+      });
+    }
+
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: emailUser,
+        pass: emailPass,
       },
     });
 
     const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.RECIPIENT_EMAIL || "rajendarrana732@gmail.com",
+      from: emailUser,
+      to: recipientEmail,
       subject: `New Inquiry from ${name} - PROXIMAX Agency`,
       text: `
         Name: ${name}
@@ -57,37 +68,42 @@ async function startServer() {
     };
 
     try {
-      if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-        console.warn("EMAIL_USER or EMAIL_PASS not set. Email not sent.");
-        return res.status(200).json({ 
-          success: true, 
-          message: "Form received (Email not sent due to missing configuration)." 
-        });
-      }
-
       await transporter.sendMail(mailOptions);
       res.status(200).json({ success: true, message: "Email sent successfully!" });
     } catch (error) {
       console.error("Error sending email:", error);
-      res.status(500).json({ success: false, message: "Failed to send email." });
+      res.status(500).json({ success: false, message: "Failed to send email. Check your credentials." });
     }
   });
 
   // API Route for Internship Form
   app.post("/api/internship", async (req, res) => {
-    const { name, phone, email, college, role, motivation } = req.body;
+    const { name, phone, email, college, role, motivation, auth: clientAuth } = req.body;
+
+    // Use client-provided auth if available, otherwise fallback to environment variables
+    const emailUser = clientAuth?.user || process.env.EMAIL_USER;
+    const emailPass = clientAuth?.pass || process.env.EMAIL_PASS;
+    const recipientEmail = clientAuth?.recipient || process.env.RECIPIENT_EMAIL || "rajendarrana732@gmail.com";
+
+    if (!emailUser || !emailPass) {
+      console.warn("Email credentials not provided.");
+      return res.status(400).json({ 
+        success: false, 
+        message: "Email configuration missing. Please set it up in the app settings." 
+      });
+    }
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: emailUser,
+        pass: emailPass,
       },
     });
 
     const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.RECIPIENT_EMAIL || "rajendarrana732@gmail.com",
+      from: emailUser,
+      to: recipientEmail,
       subject: `New Internship Application from ${name} - PROXIMAX`,
       text: `
         Name: ${name}
@@ -112,19 +128,11 @@ async function startServer() {
     };
 
     try {
-      if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-        console.warn("EMAIL_USER or EMAIL_PASS not set. Email not sent.");
-        return res.status(200).json({ 
-          success: true, 
-          message: "Application received (Email not sent due to missing configuration)." 
-        });
-      }
-
       await transporter.sendMail(mailOptions);
       res.status(200).json({ success: true, message: "Internship application sent successfully!" });
     } catch (error) {
       console.error("Error sending internship email:", error);
-      res.status(500).json({ success: false, message: "Failed to send application email." });
+      res.status(500).json({ success: false, message: "Failed to send application email. Check your credentials." });
     }
   });
 
