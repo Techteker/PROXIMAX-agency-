@@ -34,7 +34,7 @@ async function startServer() {
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: "ranarajendar930@gmail.com",
+      to: "ranarajendar720@gmail.com",
       subject: `New Inquiry from ${name} - PROXIMAX Agency`,
       text: `
         Name: ${name}
@@ -70,6 +70,61 @@ async function startServer() {
     } catch (error) {
       console.error("Error sending email:", error);
       res.status(500).json({ success: false, message: "Failed to send email." });
+    }
+  });
+
+  // API Route for Internship Form
+  app.post("/api/internship", async (req, res) => {
+    const { name, phone, email, college, role, motivation } = req.body;
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: "ranarajendar720@gmail.com",
+      subject: `New Internship Application from ${name} - PROXIMAX`,
+      text: `
+        Name: ${name}
+        Phone: ${phone}
+        Email: ${email}
+        College: ${college}
+        Role: ${role}
+        Motivation: ${motivation}
+      `,
+      html: `
+        <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+          <h2 style="color: #D4AF37;">New Internship Application: ${name}</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Phone:</strong> ${phone}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>College:</strong> ${college}</p>
+          <p><strong>Role:</strong> ${role}</p>
+          <p><strong>Motivation:</strong></p>
+          <p style="background: #f9f9f9; padding: 15px; border-radius: 5px;">${motivation}</p>
+        </div>
+      `,
+    };
+
+    try {
+      if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+        console.warn("EMAIL_USER or EMAIL_PASS not set. Email not sent.");
+        return res.status(200).json({ 
+          success: true, 
+          message: "Application received (Email not sent due to missing configuration)." 
+        });
+      }
+
+      await transporter.sendMail(mailOptions);
+      res.status(200).json({ success: true, message: "Internship application sent successfully!" });
+    } catch (error) {
+      console.error("Error sending internship email:", error);
+      res.status(500).json({ success: false, message: "Failed to send application email." });
     }
   });
 
