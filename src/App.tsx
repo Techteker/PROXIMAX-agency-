@@ -394,19 +394,19 @@ export default function App() {
               The Gold Standard of Digital
             </div>
             <h1 className="text-7xl md:text-9xl font-serif italic leading-[0.85] text-white mb-10 tracking-tighter">
-              Elevate Your <br />
-              <span className="text-gradient">Presence</span> <br />
-              to Prestige.
+              Grow Your <br />
+              <span className="text-gradient">Local Business</span> <br />
+              with Leads.
             </h1>
             <p className="text-xl text-slate-400 mb-12 max-w-lg leading-relaxed font-sans font-light">
-              PROXIMAX is a bespoke digital atelier. We craft high-performance growth engines for brands that demand nothing less than excellence.
+              We help Real Estate, Jewellery, and Fashion brands dominate their local market with expert SEO and GMB strategies.
             </p>
             <div className="flex flex-wrap gap-6">
               <button 
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 className="bg-gold-600 text-white px-12 py-5 rounded-full font-display font-black text-xs uppercase tracking-widest hover:bg-gold-700 transition-all shadow-2xl shadow-gold-600/20 flex items-center gap-3 group"
               >
-                Inquire Now <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                Get Free Growth Strategy <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
               <button 
                 onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
@@ -609,7 +609,7 @@ export default function App() {
                   <div className="h-px w-64 bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto opacity-70" />
                   <div className="flex items-center justify-center gap-6">
                     <div className="h-[2px] w-12 bg-gold-500/40" />
-                    <p className="text-lg font-display font-black text-slate-300 uppercase tracking-[0.8em]">Digital Excellence</p>
+                    <p className="text-lg font-display font-black text-slate-300 uppercase tracking-[0.8em]">Local Business Growth</p>
                     <div className="h-[2px] w-12 bg-gold-500/40" />
                   </div>
                 </motion.div>
@@ -661,6 +661,26 @@ export default function App() {
               </div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* USPs Section */}
+      <section className="py-24 bg-[#0a0a0a] border-y border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-5 gap-12">
+            {[
+              { title: "Lead-Focused", desc: "We don't just get traffic; we get you customers." },
+              { title: "GMB Experts", desc: "Dominate local search and show up when customers need you." },
+              { title: "Niche Expertise", desc: "Specialized marketing for Real Estate, Jewellery, and Fashion." },
+              { title: "Data-Driven", desc: "Transparent reporting and measurable ROI for every campaign." },
+              { title: "Personalized", desc: "Dedicated experts who understand your local business goals." }
+            ].map((usp, i) => (
+              <div key={i} className="text-center">
+                <div className="text-gold-500 font-display font-black uppercase tracking-widest text-[10px] mb-4">{usp.title}</div>
+                <p className="text-slate-400 text-xs leading-relaxed">{usp.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -781,14 +801,14 @@ export default function App() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-gold-500 font-display font-black uppercase tracking-[0.5em] text-[10px] mb-8">Our Philosophy</h2>
-              <h3 className="text-6xl font-serif italic text-white mb-10 leading-[0.9] tracking-tighter">Crafting Legacies <br /> in the Digital Age</h3>
+              <h2 className="text-gold-500 font-display font-black uppercase tracking-[0.5em] text-[10px] mb-8">About PROXIMAX</h2>
+              <h3 className="text-6xl font-serif italic text-white mb-10 leading-[0.9] tracking-tighter">Your Partner in <br /> Local Growth</h3>
               <p className="text-xl text-slate-500 mb-10 leading-relaxed font-sans font-light">
-                Rajendar Rana established PROXIMAX with a singular vision: to redefine digital excellence through the lens of prestige and performance.
+                PROXIMAX is a premier digital marketing agency dedicated to helping local businesses scale. We combine technical SEO mastery with creative strategy to deliver consistent leads and sustainable growth for our clients.
               </p>
               <blockquote className="border-l-2 border-gold-500 pl-10 py-4 mb-16">
                 <p className="text-2xl text-white italic font-serif leading-relaxed opacity-90">
-                  "We don't just build websites; we build monuments of digital influence. Every brand has a story that deserves to be told with absolute distinction."
+                  "Leads That Matter. Growth That Lasts. We don't just build websites; we build monuments of digital influence."
                 </p>
               </blockquote>
               
