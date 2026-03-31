@@ -7,13 +7,13 @@ export const generateInductionBanner = async () => {
     contents: {
       parts: [
         {
-          text: 'A high-quality, modern business growth banner for PROXIMAX. Include the PROXIMAX text logo prominently. Show elements of business growth like trending charts, upward arrows, digital connections, and network icons. Include graphics/icons of social media platforms: Instagram, Facebook, Google, YouTube. Use vibrant, professional colors (yellow, gold, deep black) with a tech-savvy, futuristic style. Premium, sleek, and visually engaging. 4K quality, vector-style clean design.',
+          text: 'An ultra-premium, luxury digital agency banner for PROXIMAX. The aesthetic should be "Quiet Luxury" meets "High-Tech". Deep matte black background with liquid gold accents. Minimalist and sophisticated. Subtle, elegant 3D trending charts and network nodes in glowing gold. The PROXIMAX logo should be integrated with a metallic gold finish. Cinematic lighting, soft bokeh, and high-end textures. Avoid clutter. Focus on prestige, authority, and digital excellence. 8K resolution, photorealistic, architectural visualization style.',
         },
       ],
     },
     config: {
       imageConfig: {
-        aspectRatio: "16:9",
+        aspectRatio: "3:4",
       },
     },
   });
