@@ -31,7 +31,6 @@ import {
   Cpu
 } from 'lucide-react';
 import { cn } from './lib/utils';
-import { generateInductionBanner } from './services/imageService';
 
 const services = [
   {
@@ -140,7 +139,6 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
-  const [inductionBanner, setInductionBanner] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -190,9 +188,6 @@ export default function App() {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     
-    // Generate induction banner on load
-    generateInductionBanner().then(setInductionBanner);
-
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -431,38 +426,132 @@ export default function App() {
             {/* Premium Glow Behind Banner */}
             <div className="absolute -inset-4 bg-gold-600/10 blur-[60px] rounded-[3rem] opacity-50" />
             
-            <div className="relative z-10 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-[0_0_80px_rgba(0,0,0,0.8)] group aspect-[4/5] bg-[#0a0a0a]">
-              {inductionBanner ? (
-                <img 
-                  src={inductionBanner} 
-                  alt="Premium Induction Banner" 
-                  className="w-full h-full object-cover opacity-70 group-hover:opacity-90 transition-all duration-1000 scale-110 group-hover:scale-100"
-                  referrerPolicy="no-referrer"
+            <div className="relative z-10 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-[0_0_80px_rgba(0,0,0,0.8)] group aspect-[4/5] bg-[#020202]">
+              {/* Premium Animated Background */}
+              <div className="absolute inset-0 overflow-hidden">
+                <motion.div 
+                  animate={{ 
+                    scale: [1, 1.15, 1],
+                    rotate: [0, 3, 0],
+                    opacity: [0.3, 0.5, 0.3]
+                  }}
+                  transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-0 bg-gradient-to-br from-gold-900/30 via-black to-gold-800/20"
                 />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gold-900/20 to-slate-900/20 animate-pulse">
-                  <Cpu className="w-12 h-12 text-gold-500 opacity-20" />
+                
+                {/* Liquid Gold Accents */}
+                <motion.div 
+                  animate={{ 
+                    x: [-20, 20, -20],
+                    y: [-20, 20, -20],
+                    opacity: [0.1, 0.2, 0.1]
+                  }}
+                  transition={{ duration: 15, repeat: Infinity }}
+                  className="absolute -top-20 -left-20 w-[150%] h-[150%] bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.08)_0%,transparent_70%)]"
+                />
+
+                {/* Floating Geometric Outlines */}
+                {[...Array(3)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    animate={{
+                      rotate: 360,
+                      opacity: [0.1, 0.2, 0.1],
+                      scale: [1, 1.1, 1]
+                    }}
+                    transition={{
+                      duration: 20 + i * 5,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }}
+                    className="absolute border border-gold-500/10 rounded-full"
+                    style={{
+                      width: `${200 + i * 100}px`,
+                      height: `${200 + i * 100}px`,
+                      top: '50%',
+                      left: '50%',
+                      marginLeft: `-${100 + i * 50}px`,
+                      marginTop: `-${100 + i * 50}px`,
+                    }}
+                  />
+                ))}
+                
+                {/* Animated Particles/Glows */}
+                <motion.div 
+                  animate={{ 
+                    y: [0, -120, 0],
+                    opacity: [0.2, 0.6, 0.2]
+                  }}
+                  transition={{ duration: 10, repeat: Infinity }}
+                  className="absolute top-1/4 left-1/4 w-72 h-72 bg-gold-600/15 rounded-full blur-[110px]"
+                />
+                <motion.div 
+                  animate={{ 
+                    y: [0, 120, 0],
+                    opacity: [0.1, 0.4, 0.1]
+                  }}
+                  transition={{ duration: 15, repeat: Infinity, delay: 3 }}
+                  className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gold-500/10 rounded-full blur-[130px]"
+                />
+              </div>
+
+              {/* Animated Text Content */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-center z-10">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 0.5 }}
+                >
+                  <span className="text-[10px] font-display font-black uppercase tracking-[1em] text-gold-500/80 mb-8 block">The Agency of</span>
+                </motion.div>
+                
+                <div className="relative group">
+                  <motion.h2 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1.5, delay: 0.8 }}
+                    className="text-7xl md:text-8xl font-serif italic text-white mb-10 tracking-tighter leading-none relative overflow-hidden"
+                  >
+                    <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-b from-white via-gold-100 to-gold-500">
+                      PROXIMAX
+                    </span>
+                    
+                    {/* Shimmer Effect */}
+                    <motion.div
+                      animate={{
+                        x: ['-100%', '200%']
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        repeatDelay: 2
+                      }}
+                      className="absolute inset-0 z-20 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-20deg]"
+                    />
+                  </motion.h2>
                 </div>
-              )}
+
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 1.2 }}
+                  className="flex flex-col gap-6"
+                >
+                  <div className="h-px w-32 bg-gradient-to-r from-transparent via-gold-500/50 to-transparent mx-auto" />
+                  <p className="text-sm font-display font-black text-slate-500 uppercase tracking-[0.5em]">Digital Excellence</p>
+                </motion.div>
+              </div>
               
               {/* Luxury Overlays */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80" />
-              <div className="absolute inset-0 bg-gradient-to-tr from-gold-900/10 via-transparent to-transparent opacity-40" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-transparent to-transparent opacity-70" />
               
               {/* Premium Badge */}
               <div className="absolute top-8 left-8">
-                <div className="glass px-4 py-2 rounded-full border border-white/10 flex items-center gap-2">
-                  <Sparkles className="w-3 h-3 text-gold-500" />
-                  <span className="text-[8px] font-display font-black uppercase tracking-[0.3em] text-white">Elite Standard</span>
+                <div className="glass px-5 py-2.5 rounded-full border border-white/10 flex items-center gap-2.5 backdrop-blur-md">
+                  <Sparkles className="w-3.5 h-3.5 text-gold-500" />
+                  <span className="text-[9px] font-display font-black uppercase tracking-[0.3em] text-white">Elite Standard</span>
                 </div>
-              </div>
-
-              <div className="absolute bottom-12 left-12 right-12">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="h-px w-12 bg-gold-500" />
-                  <span className="text-[10px] font-display font-black uppercase tracking-[0.5em] text-gold-400">Portfolio Showcase</span>
-                </div>
-                <h2 className="text-5xl font-serif italic text-white leading-tight tracking-tighter">Defining the <br /> Future of Digital</h2>
               </div>
             </div>
             
