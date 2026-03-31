@@ -28,9 +28,413 @@ import {
   Phone,
   Sparkles,
   ShieldCheck,
-  Cpu
+  Cpu,
+  Briefcase,
+  GraduationCap,
+  Clock,
+  FileText,
+  Users,
+  HelpCircle
 } from 'lucide-react';
 import { cn } from './lib/utils';
+
+const InternshipPage = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    college: '',
+    role: 'Digital Marketing Intern',
+    motivation: ''
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    setFormData({ name: '', phone: '', email: '', college: '', role: 'Digital Marketing Intern', motivation: '' });
+  };
+
+  const roles = [
+    { title: "Digital Marketing Intern", icon: Target, desc: "Master SEO, GMB, and performance marketing on real client projects." },
+    { title: "Lead Generation Intern", icon: Briefcase, desc: "Learn the art of finding and qualifying high-value prospects." },
+    { title: "Sales Intern", icon: ArrowRight, desc: "Develop persuasive communication and closing skills." },
+    { title: "Social Media Manager", icon: Instagram, desc: "Build brand presence and engagement across all platforms." },
+    { title: "Web Development Intern", icon: Cpu, desc: "Create high-converting landing pages and business websites." }
+  ];
+
+  const learningPoints = [
+    "Google Business Profile (GMB) Mastery",
+    "High-Quality Lead Generation Strategies",
+    "Professional Client Handling & Communication",
+    "SEO & Content Optimization Techniques",
+    "Social Media Growth & Automation",
+    "Performance Marketing & Ad Campaigns"
+  ];
+
+  const benefits = [
+    { title: "Official Certificate", icon: Award },
+    { title: "Real Project Experience", icon: Target },
+    { title: "Letter of Recommendation", icon: FileText },
+    { title: "Performance Stipend", icon: Sparkles },
+    { title: "Job Opportunities", icon: Briefcase }
+  ];
+
+  const faqs = [
+    { q: "Is this a paid internship?", a: "We offer performance-based stipends to top performers who deliver exceptional results for our clients." },
+    { q: "Will I get a certificate?", a: "Yes, every intern receives an official internship completion certificate from PROXIMAX." },
+    { q: "What are the timings?", a: "We offer flexible timings to accommodate students. You can choose your working hours." },
+    { q: "How are interns selected?", a: "Selection is based on your application, motivation, and a short introductory interview." }
+  ];
+
+  return (
+    <div className="bg-[#050505]">
+      {/* Hero Section */}
+      <section className="relative pt-48 pb-32 overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-gold-600/10 rounded-full blur-[120px]" />
+          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-gold-900/10 rounded-full blur-[120px]" />
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-6xl md:text-8xl font-serif italic text-white mb-8 tracking-tighter leading-[0.9]">
+              Launch Your Career <br /> <span className="text-gold-500">With PROXIMAX</span>
+            </h1>
+            <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-12 font-sans font-light leading-relaxed">
+              Gain real-world experience working on live client projects. Master the skills that actually matter in the digital economy.
+            </p>
+            <button 
+              onClick={() => document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' })}
+              className="bg-gold-600 text-white px-12 py-5 rounded-full font-display font-black text-xs uppercase tracking-widest hover:bg-gold-700 transition-all shadow-2xl shadow-gold-600/20"
+            >
+              Apply Now
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* About Internship */}
+      <section className="py-32 bg-[#0a0a0a]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-gold-500 font-display font-black uppercase tracking-[0.5em] text-[10px] mb-8">The Opportunity</h2>
+              <h3 className="text-5xl font-serif italic text-white mb-8 leading-tight">Practical Skills. <br /> Real Projects. <br /> True Growth.</h3>
+              <p className="text-lg text-slate-400 leading-relaxed font-sans font-light mb-8">
+                At PROXIMAX, we don't believe in "coffee-run" internships. Our interns are integral members of our team, working directly on client accounts, managing real budgets, and delivering actual results.
+              </p>
+              <div className="grid grid-cols-2 gap-8">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full glass flex items-center justify-center text-gold-500">
+                    <CheckCircle2 className="w-5 h-5" />
+                  </div>
+                  <span className="text-sm text-white font-medium">Flexible Timing</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full glass flex items-center justify-center text-gold-500">
+                    <CheckCircle2 className="w-5 h-5" />
+                  </div>
+                  <span className="text-sm text-white font-medium">Remote Work</span>
+                </div>
+              </div>
+            </motion.div>
+            <div className="relative">
+              <div className="aspect-square rounded-3xl overflow-hidden glass border border-white/10 p-8 flex flex-col justify-center">
+                <div className="space-y-6">
+                  {benefits.map((b, i) => (
+                    <div key={i} className="flex items-center gap-6 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-gold-500/30 transition-all">
+                      <div className="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center text-gold-500">
+                        <b.icon className="w-6 h-6" />
+                      </div>
+                      <span className="text-white font-serif italic text-xl">{b.title}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Roles Available */}
+      <section className="py-32">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-24">
+            <h2 className="text-gold-500 font-display font-black uppercase tracking-[0.5em] text-[10px] mb-8">Open Positions</h2>
+            <h3 className="text-6xl font-serif italic text-white tracking-tighter">Choose Your Path</h3>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {roles.map((role, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="glass p-10 rounded-3xl border border-white/5 hover:border-gold-500/30 transition-all group"
+              >
+                <div className="w-16 h-16 rounded-2xl bg-gold-600/10 flex items-center justify-center text-gold-500 mb-8 group-hover:bg-gold-600 group-hover:text-white transition-all duration-500">
+                  <role.icon className="w-8 h-8" />
+                </div>
+                <h4 className="text-2xl font-serif italic text-white mb-4">{role.title}</h4>
+                <p className="text-slate-500 leading-relaxed font-sans font-light">{role.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* What You Will Learn */}
+      <section className="py-32 bg-[#0a0a0a]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="bg-white/5 rounded-[3rem] p-16 md:p-24 border border-white/5">
+            <div className="grid lg:grid-cols-2 gap-20 items-center">
+              <div>
+                <h2 className="text-gold-500 font-display font-black uppercase tracking-[0.5em] text-[10px] mb-8">Curriculum</h2>
+                <h3 className="text-5xl font-serif italic text-white mb-10 leading-tight">Master the Digital <br /> Ecosystem</h3>
+                <div className="space-y-6">
+                  {learningPoints.map((point, i) => (
+                    <div key={i} className="flex items-center gap-4">
+                      <div className="w-6 h-6 rounded-full bg-gold-600/20 flex items-center justify-center text-gold-500 shrink-0">
+                        <Check className="w-3 h-3" />
+                      </div>
+                      <span className="text-slate-300 font-sans font-light">{point}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-6">
+                <div className="space-y-6">
+                  <div className="aspect-square glass rounded-3xl p-8 flex flex-col justify-end">
+                    <div className="text-4xl font-serif italic text-white mb-2">1-3</div>
+                    <div className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest">Months Duration</div>
+                  </div>
+                  <div className="aspect-[4/5] bg-gold-600 rounded-3xl p-8 flex flex-col justify-end">
+                    <div className="text-4xl font-serif italic text-white mb-2">100%</div>
+                    <div className="text-[10px] font-display font-black text-gold-100 uppercase tracking-widest">Practical Work</div>
+                  </div>
+                </div>
+                <div className="space-y-6 pt-12">
+                  <div className="aspect-[4/5] glass rounded-3xl p-8 flex flex-col justify-end">
+                    <div className="text-4xl font-serif italic text-white mb-2">Remote</div>
+                    <div className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest">Work Location</div>
+                  </div>
+                  <div className="aspect-square glass rounded-3xl p-8 flex flex-col justify-end border-gold-500/30">
+                    <div className="text-4xl font-serif italic text-white mb-2">Elite</div>
+                    <div className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest">Mentorship</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Requirements */}
+      <section className="py-32">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h2 className="text-gold-500 font-display font-black uppercase tracking-[0.5em] text-[10px] mb-8">Prerequisites</h2>
+          <h3 className="text-5xl font-serif italic text-white mb-16">What You Need</h3>
+          <div className="flex flex-wrap justify-center gap-8">
+            {[
+              { t: "Smartphone/Laptop", i: Cpu },
+              { t: "Stable Internet", i: ArrowRight },
+              { t: "Eagerness to Learn", i: GraduationCap },
+              { t: "Basic Communication", i: Users }
+            ].map((req, i) => (
+              <div key={i} className="glass px-10 py-8 rounded-2xl border border-white/5 flex items-center gap-6">
+                <req.i className="w-6 h-6 text-gold-500" />
+                <span className="text-white font-medium">{req.t}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Application Form */}
+      <section id="apply-form" className="py-32 bg-[#0a0a0a]">
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="glass p-12 md:p-16 rounded-[3rem] border border-white/10 relative overflow-hidden">
+            {isSubmitted ? (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[#0a0a0a] p-12 text-center"
+              >
+                <div className="w-24 h-24 bg-gold-600/20 rounded-full flex items-center justify-center text-gold-500 mb-8">
+                  <Check className="w-12 h-12" />
+                </div>
+                <h3 className="text-4xl font-serif italic text-white mb-6">Application Received!</h3>
+                <p className="text-slate-400 text-lg leading-relaxed mb-10">
+                  Thank you for applying to PROXIMAX. <br />
+                  Our team will review your application and reach out via WhatsApp/Email soon.
+                </p>
+                <button 
+                  onClick={() => setIsSubmitted(false)}
+                  className="text-gold-500 font-display font-black text-xs uppercase tracking-widest hover:text-gold-400 transition-colors"
+                >
+                  Submit Another Application
+                </button>
+              </motion.div>
+            ) : null}
+
+            <div className="text-center mb-16">
+              <h2 className="text-gold-500 font-display font-black uppercase tracking-[0.5em] text-[10px] mb-6">Apply Now</h2>
+              <h3 className="text-5xl font-serif italic text-white tracking-tighter">Join the Elite</h3>
+            </div>
+
+            <form className="space-y-8" onSubmit={handleSubmit}>
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-3">
+                  <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Full Name</label>
+                  <input 
+                    type="text" required placeholder="Your Name"
+                    value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-gold-500 transition-colors"
+                  />
+                </div>
+                <div className="space-y-3">
+                  <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Phone (WhatsApp)</label>
+                  <input 
+                    type="tel" required placeholder="+91 00000 00000"
+                    value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-gold-500 transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-3">
+                  <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Email Address</label>
+                  <input 
+                    type="email" required placeholder="you@example.com"
+                    value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-gold-500 transition-colors"
+                  />
+                </div>
+                <div className="space-y-3">
+                  <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">College/University</label>
+                  <input 
+                    type="text" required placeholder="Your Institution"
+                    value={formData.college} onChange={(e) => setFormData({...formData, college: e.target.value})}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-gold-500 transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Role Interested In</label>
+                <select 
+                  value={formData.role} onChange={(e) => setFormData({...formData, role: e.target.value})}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-gold-500 transition-colors appearance-none"
+                >
+                  {roles.map(r => <option key={r.title} className="bg-[#0a0a0a]">{r.title}</option>)}
+                </select>
+              </div>
+
+              <div className="space-y-3">
+                <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Why should we hire you?</label>
+                <textarea 
+                  rows={4} required placeholder="Tell us about your motivation and skills..."
+                  value={formData.motivation} onChange={(e) => setFormData({...formData, motivation: e.target.value})}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-gold-500 transition-colors resize-none"
+                ></textarea>
+              </div>
+
+              <button 
+                type="submit" disabled={isSubmitting}
+                className="w-full bg-gold-600 text-white py-5 rounded-full font-display font-black text-xs uppercase tracking-widest hover:bg-gold-700 transition-all shadow-xl shadow-gold-600/20 flex items-center justify-center gap-3"
+              >
+                {isSubmitting ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <FileText className="w-5 h-5" />}
+                {isSubmitting ? 'Submitting...' : 'Submit Application'}
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-32">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-24">
+            <h2 className="text-gold-500 font-display font-black uppercase tracking-[0.5em] text-[10px] mb-8">Success Stories</h2>
+            <h3 className="text-6xl font-serif italic text-white tracking-tighter">From Interns to Experts</h3>
+          </div>
+          <div className="grid md:grid-cols-2 gap-12">
+            {[
+              { name: "Anjali Sharma", role: "Digital Marketing Intern", text: "The hands-on experience I got at PROXIMAX was incredible. I learned more in 2 months than I did in a year of college." },
+              { name: "Rahul Verma", role: "Web Dev Intern", text: "Working on real client websites gave me the confidence to build professional projects. The mentorship is top-notch." }
+            ].map((t, i) => (
+              <div key={i} className="glass p-12 rounded-3xl border border-white/5 relative">
+                <div className="text-gold-500 mb-8">
+                  <Sparkles className="w-10 h-10" />
+                </div>
+                <p className="text-xl text-white italic font-serif leading-relaxed mb-10 opacity-90">"{t.text}"</p>
+                <div>
+                  <p className="text-white font-bold">{t.name}</p>
+                  <p className="text-gold-500 text-xs font-display font-black uppercase tracking-widest mt-1">{t.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-32 bg-[#0a0a0a]">
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="text-center mb-24">
+            <h2 className="text-gold-500 font-display font-black uppercase tracking-[0.5em] text-[10px] mb-8">FAQ</h2>
+            <h3 className="text-5xl font-serif italic text-white tracking-tighter">Common Questions</h3>
+          </div>
+          <div className="space-y-6">
+            {faqs.map((faq, i) => (
+              <div key={i} className="glass p-8 rounded-2xl border border-white/5">
+                <h4 className="text-white font-serif italic text-xl mb-4 flex items-center gap-4">
+                  <HelpCircle className="w-5 h-5 text-gold-500" />
+                  {faq.q}
+                </h4>
+                <p className="text-slate-400 font-sans font-light leading-relaxed pl-9">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-32">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <div className="bg-gradient-to-br from-gold-600 to-gold-800 rounded-[3rem] p-20 relative overflow-hidden">
+            <h2 className="text-5xl md:text-7xl font-serif italic text-white mb-10 tracking-tighter">Don't Just Watch. <br /> Build the Future.</h2>
+            <p className="text-gold-100 text-xl mb-12 max-w-2xl mx-auto opacity-90 font-sans font-light">
+              Limited slots available for the next cohort. Apply today and start your journey towards digital mastery.
+            </p>
+            <button 
+              onClick={() => document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' })}
+              className="bg-white text-gold-700 px-16 py-6 rounded-full font-display font-black text-xs uppercase tracking-widest hover:bg-gold-50 transition-all shadow-2xl"
+            >
+              Apply Now
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
 
 const services = [
   {
@@ -136,6 +540,7 @@ const services = [
 ];
 
 export default function App() {
+  const [view, setView] = useState<'agency' | 'internship'>('agency');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
@@ -313,14 +718,40 @@ export default function App() {
             {['Home', 'Services', 'About', 'Contact'].map((item) => (
               <a 
                 key={item} 
-                href={`#${item.toLowerCase()}`} 
+                href={view === 'agency' ? `#${item.toLowerCase()}` : '#'} 
+                onClick={(e) => {
+                  if (view !== 'agency') {
+                    e.preventDefault();
+                    setView('agency');
+                    setTimeout(() => {
+                      document.getElementById(item.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                  }
+                }}
                 className="text-[10px] font-display font-black uppercase tracking-[0.3em] text-slate-500 hover:text-gold-500 transition-colors"
               >
                 {item}
               </a>
             ))}
             <button 
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => {
+                setView('internship');
+                window.scrollTo(0, 0);
+              }}
+              className={cn(
+                "text-[10px] font-display font-black uppercase tracking-[0.3em] transition-colors",
+                view === 'internship' ? "text-gold-500" : "text-slate-500 hover:text-gold-500"
+              )}
+            >
+              Internship
+            </button>
+            <button 
+              onClick={() => {
+                setView('agency');
+                setTimeout(() => {
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+              }}
               className="bg-gold-600 text-white px-8 py-3 rounded-full text-[10px] font-display font-black uppercase tracking-widest hover:bg-gold-700 transition-all shadow-2xl shadow-gold-600/20"
             >
               Get Started
@@ -347,9 +778,17 @@ export default function App() {
               {['Home', 'Services', 'About', 'Contact'].map((item) => (
                 <a 
                   key={item} 
-                  href={`#${item.toLowerCase()}`} 
+                  href={view === 'agency' ? `#${item.toLowerCase()}` : '#'} 
                   className="text-3xl font-bold text-white"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    if (view !== 'agency') {
+                      setView('agency');
+                      setTimeout(() => {
+                        document.getElementById(item.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+                      }, 100);
+                    }
+                  }}
                 >
                   {item}
                 </a>
@@ -357,7 +796,20 @@ export default function App() {
               <button 
                 onClick={() => {
                   setIsMenuOpen(false);
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  setView('internship');
+                  window.scrollTo(0, 0);
+                }}
+                className="text-3xl font-bold text-white text-left"
+              >
+                Internship
+              </button>
+              <button 
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  setView('agency');
+                  setTimeout(() => {
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  }, 100);
                 }}
                 className="w-full bg-gold-600 text-white py-5 rounded-full font-display font-black text-xs uppercase tracking-widest hover:bg-gold-700 transition-all shadow-xl shadow-gold-600/20"
               >
@@ -368,8 +820,10 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Hero Section */}
-      <section id="home" className="relative pt-48 pb-32 overflow-hidden">
+      {view === 'agency' ? (
+        <>
+          {/* Hero Section */}
+          <section id="home" className="relative pt-48 pb-32 overflow-hidden">
         {/* Premium Background Elements */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
           {/* Main Glows */}
@@ -664,9 +1118,10 @@ export default function App() {
         </div>
       </section>
 
-      {/* USPs Section */}
-      <section className="py-24 bg-[#0a0a0a] border-y border-white/5">
+      {/* USPs Section (Hidden visually but kept for SEO) */}
+      <section className="sr-only" aria-hidden="false">
         <div className="max-w-7xl mx-auto px-6">
+          <h2>PROXIMAX Unique Selling Points</h2>
           <div className="grid md:grid-cols-5 gap-12">
             {[
               { title: "Lead-Focused", desc: "We don't just get traffic; we get you customers." },
@@ -1024,8 +1479,12 @@ export default function App() {
           </div>
         </div>
       </section>
+    </>
+  ) : (
+    <InternshipPage />
+  )}
 
-      {/* Footer */}
+  {/* Footer */}
       <footer className="bg-[#050505] text-slate-600 pt-32 pb-12 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-20 mb-32">
           <div className="lg:col-span-1">
@@ -1052,8 +1511,27 @@ export default function App() {
           <div>
             <h4 className="text-white font-display font-black text-[10px] uppercase tracking-[0.4em] mb-10">Company</h4>
             <ul className="space-y-6 text-[10px] font-display font-black uppercase tracking-widest">
-              {['Home', 'Services', 'About', 'Contact', 'Privacy'].map(item => (
-                <li key={item}><a href="#" className="hover:text-gold-500 transition-colors">{item}</a></li>
+              {['Home', 'Services', 'About', 'Contact', 'Internship', 'Privacy'].map(item => (
+                <li key={item}>
+                  <button 
+                    onClick={() => {
+                      if (item === 'Internship') {
+                        setView('internship');
+                        window.scrollTo(0, 0);
+                      } else if (item === 'Privacy') {
+                        // Handle privacy if needed
+                      } else {
+                        setView('agency');
+                        setTimeout(() => {
+                          document.getElementById(item.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+                        }, 100);
+                      }
+                    }}
+                    className="hover:text-gold-500 transition-colors text-left"
+                  >
+                    {item}
+                  </button>
+                </li>
               ))}
             </ul>
           </div>
