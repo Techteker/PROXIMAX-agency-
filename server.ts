@@ -34,7 +34,7 @@ async function startServer() {
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: "ranarajendar720@gmail.com",
+      to: process.env.RECIPIENT_EMAIL || "rajendarrana732@gmail.com",
       subject: `New Inquiry from ${name} - PROXIMAX Agency`,
       text: `
         Name: ${name}
@@ -87,7 +87,7 @@ async function startServer() {
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: "ranarajendar720@gmail.com",
+      to: process.env.RECIPIENT_EMAIL || "rajendarrana732@gmail.com",
       subject: `New Internship Application from ${name} - PROXIMAX`,
       text: `
         Name: ${name}
