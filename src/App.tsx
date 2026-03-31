@@ -426,74 +426,125 @@ export default function App() {
             {/* Premium Glow Behind Banner */}
             <div className="absolute -inset-4 bg-gold-600/10 blur-[60px] rounded-[3rem] opacity-50" />
             
-            <div className="relative z-10 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-[0_0_80px_rgba(0,0,0,0.8)] group aspect-[4/5] bg-[#020202]">
+            <div className="relative z-10 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-[0_0_100px_rgba(0,0,0,0.9)] group aspect-square bg-[#010101]">
               {/* Premium Animated Background */}
               <div className="absolute inset-0 overflow-hidden">
                 <motion.div 
                   animate={{ 
-                    scale: [1, 1.15, 1],
-                    rotate: [0, 3, 0],
-                    opacity: [0.3, 0.5, 0.3]
+                    scale: [1, 1.25, 1],
+                    rotate: [0, 8, 0],
+                    opacity: [0.5, 0.7, 0.5]
                   }}
-                  transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 bg-gradient-to-br from-gold-900/30 via-black to-gold-800/20"
+                  transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-0 bg-gradient-to-br from-gold-900/50 via-black to-gold-800/40"
                 />
                 
-                {/* Liquid Gold Accents */}
+                {/* Liquid Gold Accents - High Intensity */}
                 <motion.div 
                   animate={{ 
-                    x: [-20, 20, -20],
-                    y: [-20, 20, -20],
-                    opacity: [0.1, 0.2, 0.1]
+                    x: [-40, 40, -40],
+                    y: [-40, 40, -40],
+                    opacity: [0.2, 0.35, 0.2]
                   }}
-                  transition={{ duration: 15, repeat: Infinity }}
-                  className="absolute -top-20 -left-20 w-[150%] h-[150%] bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.08)_0%,transparent_70%)]"
+                  transition={{ duration: 25, repeat: Infinity }}
+                  className="absolute -top-60 -left-60 w-[250%] h-[250%] bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.15)_0%,transparent_70%)]"
                 />
 
-                {/* Floating Geometric Outlines */}
-                {[...Array(3)].map((_, i) => (
+                {/* Floating Geometric Outlines - Intricate Grid */}
+                {[...Array(6)].map((_, i) => (
                   <motion.div
                     key={i}
                     animate={{
-                      rotate: 360,
-                      opacity: [0.1, 0.2, 0.1],
-                      scale: [1, 1.1, 1]
+                      rotate: i % 2 === 0 ? 360 : -360,
+                      opacity: [0.03, 0.1, 0.03],
+                      scale: [1, 1.2, 1]
                     }}
                     transition={{
-                      duration: 20 + i * 5,
+                      duration: 30 + i * 10,
                       repeat: Infinity,
                       ease: "linear"
                     }}
                     className="absolute border border-gold-500/10 rounded-full"
                     style={{
-                      width: `${200 + i * 100}px`,
-                      height: `${200 + i * 100}px`,
+                      width: `${400 + i * 200}px`,
+                      height: `${400 + i * 200}px`,
                       top: '50%',
                       left: '50%',
-                      marginLeft: `-${100 + i * 50}px`,
-                      marginTop: `-${100 + i * 50}px`,
+                      marginLeft: `-${200 + i * 100}px`,
+                      marginTop: `-${200 + i * 100}px`,
                     }}
                   />
                 ))}
                 
-                {/* Animated Particles/Glows */}
+                {/* Scanline Effect */}
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%] pointer-events-none opacity-20" />
+
+                {/* Animated Particles/Glows - Volumetric */}
                 <motion.div 
                   animate={{ 
-                    y: [0, -120, 0],
-                    opacity: [0.2, 0.6, 0.2]
+                    y: [0, -200, 0],
+                    x: [0, 80, 0],
+                    opacity: [0.4, 0.8, 0.4]
                   }}
-                  transition={{ duration: 10, repeat: Infinity }}
-                  className="absolute top-1/4 left-1/4 w-72 h-72 bg-gold-600/15 rounded-full blur-[110px]"
+                  transition={{ duration: 15, repeat: Infinity }}
+                  className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold-600/25 rounded-full blur-[140px]"
                 />
                 <motion.div 
                   animate={{ 
-                    y: [0, 120, 0],
-                    opacity: [0.1, 0.4, 0.1]
+                    y: [0, 200, 0],
+                    x: [0, -80, 0],
+                    opacity: [0.3, 0.6, 0.3]
                   }}
-                  transition={{ duration: 15, repeat: Infinity, delay: 3 }}
-                  className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gold-500/10 rounded-full blur-[130px]"
+                  transition={{ duration: 22, repeat: Infinity, delay: 5 }}
+                  className="absolute bottom-1/4 right-1/4 w-[40rem] h-[40rem] bg-gold-500/20 rounded-full blur-[180px]"
                 />
+
+                {/* Star Particles - Denser */}
+                {[...Array(40)].map((_, i) => (
+                  <motion.div
+                    key={`star-${i}`}
+                    animate={{
+                      opacity: [0.1, 1, 0.1],
+                      scale: [0.8, 1.8, 0.8]
+                    }}
+                    transition={{
+                      duration: 1.5 + Math.random() * 4,
+                      repeat: Infinity,
+                      delay: Math.random() * 10
+                    }}
+                    className="absolute w-[1px] h-[1px] bg-gold-100 rounded-full"
+                    style={{
+                      top: `${Math.random() * 100}%`,
+                      left: `${Math.random() * 100}%`,
+                    }}
+                  />
+                ))}
               </div>
+
+              {/* Floating Icons with Enhanced Glassmorphism */}
+              <motion.div
+                animate={{ y: [0, -30, 0], rotate: [0, 15, 0] }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-[15%] right-16 z-20 glass p-5 rounded-2xl border border-white/20 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+              >
+                <Cpu className="w-8 h-8 text-gold-500" />
+              </motion.div>
+
+              <motion.div
+                animate={{ y: [0, 30, 0], rotate: [0, -15, 0] }}
+                transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                className="absolute bottom-[15%] left-16 z-20 glass p-5 rounded-2xl border border-white/20 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+              >
+                <ShieldCheck className="w-8 h-8 text-gold-500" />
+              </motion.div>
+
+              <motion.div
+                animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.9, 0.4] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2.5 }}
+                className="absolute top-[45%] right-24 z-20 glass p-4 rounded-xl border border-white/20 backdrop-blur-2xl"
+              >
+                <Target className="w-6 h-6 text-gold-400" />
+              </motion.div>
 
               {/* Animated Text Content */}
               <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-center z-10">
@@ -502,32 +553,49 @@ export default function App() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1, delay: 0.5 }}
                 >
-                  <span className="text-[10px] font-display font-black uppercase tracking-[1em] text-gold-500/80 mb-8 block">The Agency of</span>
+                  <span className="text-[14px] font-display font-black uppercase tracking-[1.5em] text-gold-500 mb-12 block drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]">The Agency of</span>
                 </motion.div>
                 
                 <div className="relative group">
                   <motion.h2 
-                    initial={{ opacity: 0, scale: 0.9 }}
+                    initial={{ opacity: 0, scale: 0.85 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 1.5, delay: 0.8 }}
-                    className="text-7xl md:text-8xl font-serif italic text-white mb-10 tracking-tighter leading-none relative overflow-hidden"
+                    transition={{ duration: 1.8, delay: 0.8, ease: "easeOut" }}
+                    className="text-9xl md:text-[10rem] font-serif italic text-white mb-16 tracking-tighter leading-none relative"
                   >
-                    <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-b from-white via-gold-100 to-gold-500">
+                    <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-b from-white via-gold-100 to-gold-500 drop-shadow-[0_0_40px_rgba(212,175,55,0.4)]">
                       PROXIMAX
                     </span>
                     
-                    {/* Shimmer Effect */}
-                    <motion.div
+                    {/* Digital Glitch Layers */}
+                    <motion.span
                       animate={{
-                        x: ['-100%', '200%']
+                        x: [-2, 2, -2],
+                        opacity: [0, 0.3, 0],
                       }}
                       transition={{
-                        duration: 3,
+                        duration: 0.2,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        delay: 2
+                      }}
+                      className="absolute inset-0 z-0 text-gold-500/30 blur-[2px] translate-x-1"
+                    >
+                      PROXIMAX
+                    </motion.span>
+                    
+                    {/* Shimmer Effect - High Velocity */}
+                    <motion.div
+                      animate={{
+                        x: ['-200%', '300%']
+                      }}
+                      transition={{
+                        duration: 5,
                         repeat: Infinity,
                         ease: "easeInOut",
-                        repeatDelay: 2
+                        repeatDelay: 0.5
                       }}
-                      className="absolute inset-0 z-20 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-20deg]"
+                      className="absolute inset-0 z-20 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-30deg] blur-md"
                     />
                   </motion.h2>
                 </div>
@@ -536,22 +604,38 @@ export default function App() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 1, delay: 1.2 }}
-                  className="flex flex-col gap-6"
+                  className="flex flex-col gap-10"
                 >
-                  <div className="h-px w-32 bg-gradient-to-r from-transparent via-gold-500/50 to-transparent mx-auto" />
-                  <p className="text-sm font-display font-black text-slate-500 uppercase tracking-[0.5em]">Digital Excellence</p>
+                  <div className="h-px w-64 bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto opacity-70" />
+                  <div className="flex items-center justify-center gap-6">
+                    <div className="h-[2px] w-12 bg-gold-500/40" />
+                    <p className="text-lg font-display font-black text-slate-300 uppercase tracking-[0.8em]">Digital Excellence</p>
+                    <div className="h-[2px] w-12 bg-gold-500/40" />
+                  </div>
                 </motion.div>
               </div>
               
-              {/* Luxury Overlays */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-transparent to-transparent opacity-70" />
+              {/* Luxury Overlays - High Contrast */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#010101] via-transparent to-[#010101]/60 opacity-90" />
               
-              {/* Premium Badge */}
-              <div className="absolute top-8 left-8">
-                <div className="glass px-5 py-2.5 rounded-full border border-white/10 flex items-center gap-2.5 backdrop-blur-md">
-                  <Sparkles className="w-3.5 h-3.5 text-gold-500" />
-                  <span className="text-[9px] font-display font-black uppercase tracking-[0.3em] text-white">Elite Standard</span>
+              {/* Premium Badge - Large */}
+              <div className="absolute top-12 left-12">
+                <div className="glass px-8 py-4 rounded-full border border-white/30 flex items-center gap-4 backdrop-blur-3xl shadow-2xl">
+                  <div className="w-3 h-3 rounded-full bg-gold-500 animate-ping" />
+                  <span className="text-[12px] font-display font-black uppercase tracking-[0.5em] text-white">Elite Standard</span>
                 </div>
+              </div>
+
+              {/* Bottom Right Seal - Large */}
+              <div className="absolute bottom-12 right-12">
+                <motion.div 
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                  className="relative w-24 h-24 flex items-center justify-center"
+                >
+                  <div className="absolute inset-0 border-2 border-gold-500/30 rounded-full border-dashed" />
+                  <Award className="w-10 h-10 text-gold-500/70" />
+                </motion.div>
               </div>
             </div>
             
@@ -659,34 +743,36 @@ export default function App() {
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="relative"
+              className="relative flex justify-center"
             >
-              <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-[#121212] border border-white/10 relative group shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-gold-600/20 via-transparent to-gold-600/20 opacity-40 group-hover:opacity-60 transition-opacity duration-1000" />
+              <div className="bg-white p-10 rounded-[30px] shadow-[0_30px_60px_rgba(0,0,0,0.4)] text-center max-w-[450px] w-full border border-gold-500/20 relative overflow-hidden group">
+                {/* Decorative Elements */}
+                <div className="absolute -top-24 -right-24 w-48 h-48 bg-gold-500/10 rounded-full blur-[60px]" />
+                <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-gold-500/10 rounded-full blur-[60px]" />
                 
-                <img 
-                  src="/founder & ceo .png" 
-                  alt="Rajendar Rana" 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100"
-                  referrerPolicy="no-referrer"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = "https://picsum.photos/seed/founder/800/1000";
-                  }}
-                />
-                
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-90" />
-                
-                <div className="absolute bottom-12 left-12 right-12 p-10 glass-dark rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-700">
-                  <div className="text-white">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-8 h-px bg-gold-500" />
-                      <p className="text-[10px] font-display font-black uppercase tracking-[0.5em] text-gold-400">Founder & CEO</p>
-                    </div>
-                    <h4 className="text-5xl font-serif italic tracking-tight mb-2">Rajendar Rana</h4>
-                    <p className="text-[10px] text-slate-500 font-display font-black tracking-widest uppercase">Digital Strategist & Tech Visionary</p>
-                  </div>
+                <div className="relative mb-10 rounded-[20px] overflow-hidden border-[6px] border-[#f8f8f8] shadow-inner group">
+                  <img 
+                    src="1000077645.png" 
+                    alt="Rajendar Rana" 
+                    className="w-full h-auto transition-all duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                    referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "https://picsum.photos/seed/founder/800/1000";
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 </div>
+                
+                <h2 className="text-4xl font-serif italic text-[#1a1a1a] mb-3 tracking-tight">Rajendar Rana</h2>
+                <p className="text-gold-600 font-display font-black uppercase tracking-[0.3em] text-[11px] mb-10">Founder & CEO | Digital Strategist</p>
+                
+                <a 
+                  href="#contact" 
+                  className="inline-block bg-[#1a1a1a] text-gold-500 px-12 py-5 rounded-xl transition-all duration-500 hover:bg-gold-600 hover:text-white font-display font-black uppercase tracking-[0.4em] text-[10px] shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-gold-500/20 hover:-translate-y-1"
+                >
+                  Contact Me
+                </a>
               </div>
             </motion.div>
 
