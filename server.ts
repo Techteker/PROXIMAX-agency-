@@ -5,7 +5,6 @@ import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
-import { blogs } from "./src/data/blogs";
 
 dotenv.config();
 
@@ -194,7 +193,7 @@ async function startServer() {
     ]
   };
 
-  // API Routes
+  // Content API Routes
   app.get("/api/home", (req, res) => {
     res.json({
       hero: {
@@ -220,24 +219,12 @@ async function startServer() {
     res.json(internshipData);
   });
 
-  // Blog API Routes
-  app.get("/api/blogs", (req, res) => {
-    res.json(blogs.map(({ content, ...rest }) => rest)); // Return list without full content
-  });
-
-  app.get("/api/blogs/:slug", (req, res) => {
-    const blog = blogs.find(b => b.slug === req.params.slug);
-    if (blog) {
-      res.json(blog);
-    } else {
-      res.status(404).json({ message: "Blog not found" });
-    }
-  });
-
   // API Route for sending email
   app.post("/api/contact", async (req, res) => {
     const { name, email, service, budget, message } = req.body;
 
+    // Configure your email transporter
+    // Note: You need to set EMAIL_USER and EMAIL_PASS in your environment variables
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -343,7 +330,7 @@ async function startServer() {
   });
 
   // Explicit routes for SPA navigation
-  const spaRoutes = ["/", "/home", "/services", "/faq", "/about", "/contact", "/internship", "/blog", "/blog/:slug"];
+  const spaRoutes = ["/", "/home", "/services", "/faq", "/about", "/contact", "/internship"];
   spaRoutes.forEach(route => {
     app.get(route, (req, res, next) => {
       if (process.env.NODE_ENV === "production") {
