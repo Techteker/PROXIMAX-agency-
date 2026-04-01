@@ -8,6 +8,37 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Hidden forms for Netlify detection -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you" method="POST" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="hidden" name="subject" value="Contact Form Submission" />
+      <input name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="phone" />
+      <input type="text" name="budget" />
+      <textarea name="message"></textarea>
+    </form>
+    <form name="internship" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you" method="POST" hidden encType="multipart/form-data">
+      <input type="hidden" name="form-name" value="internship" />
+      <input type="hidden" name="subject" value="Internship Application Submission" />
+      <input name="bot-field" />
+      <input type="text" name="fullName" />
+      <input type="email" name="email" />
+      <input type="text" name="phone" />
+      <input type="text" name="college" />
+      <input type="text" name="course" />
+      <select name="year">
+        <option value="1st">1st</option>
+        <option value="2nd">2nd</option>
+        <option value="3rd">3rd</option>
+        <option value="4th">4th</option>
+        <option value="Other">Other</option>
+      </select>
+      <textarea name="skills"></textarea>
+      <textarea name="motivation"></textarea>
+      <input type="file" name="resume" />
+    </form>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

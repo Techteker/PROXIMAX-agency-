@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { 
   Search, 
   MapPin, 
@@ -34,9 +35,42 @@ import {
   Clock,
   FileText,
   Users,
-  HelpCircle
+  HelpCircle,
+  Upload
 } from 'lucide-react';
 import { cn } from './lib/utils';
+
+const ThankYou = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="min-h-screen bg-[#050505] flex items-center justify-center px-6">
+      <div className="max-w-2xl w-full glass p-12 md:p-16 rounded-[3rem] border border-white/10 text-center relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-gold-600/10 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-gold-900/10 rounded-full blur-[100px]" />
+        
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="w-24 h-24 bg-gold-600/20 rounded-full flex items-center justify-center text-gold-500 mb-8 mx-auto">
+            <Check className="w-12 h-12" />
+          </div>
+          <h1 className="text-5xl md:text-6xl font-serif italic text-white mb-6 tracking-tighter">Thank You!</h1>
+          <p className="text-xl text-slate-400 font-sans font-light leading-relaxed mb-12">
+            Your submission has been received. We appreciate your interest in PROXIMAX and will get back to you shortly.
+          </p>
+          <button 
+            onClick={() => navigate('/')}
+            className="bg-gold-600 text-white px-12 py-5 rounded-full font-display font-black text-xs uppercase tracking-widest hover:bg-gold-700 transition-all shadow-2xl shadow-gold-600/20"
+          >
+            Back to Home
+          </button>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
 
 const FAQItem = ({ question, answer }: { question: string; answer: string; key?: React.Key }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,43 +110,17 @@ const FAQItem = ({ question, answer }: { question: string; answer: string; key?:
 };
 
 const InternshipPage = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
+    fullName: '',
     email: '',
+    phone: '',
     college: '',
-    role: 'Digital Marketing Intern',
-    motivation: ''
+    course: '',
+    year: '1st',
+    skills: '',
+    motivation: '',
+    resume: null as File | null
   });
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    try {
-      const response = await fetch('/api/internship', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setIsSubmitted(true);
-        setFormData({ name: '', phone: '', email: '', college: '', role: 'Digital Marketing Intern', motivation: '' });
-      } else {
-        alert("Failed to submit application. Please try again later.");
-      }
-    } catch (error) {
-      console.error("Error submitting internship form:", error);
-      alert("An error occurred. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   const roles = [
     { title: "Digital Marketing Intern", icon: Target, desc: "Master SEO, GMB, and performance marketing on real client projects." },
@@ -323,47 +331,42 @@ const InternshipPage = () => {
       <section id="apply-form" className="py-32 bg-[#0a0a0a]">
         <div className="max-w-3xl mx-auto px-6">
           <div className="glass p-12 md:p-16 rounded-[3rem] border border-white/10 relative overflow-hidden">
-            {isSubmitted ? (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[#0a0a0a] p-12 text-center"
-              >
-                <div className="w-24 h-24 bg-gold-600/20 rounded-full flex items-center justify-center text-gold-500 mb-8">
-                  <Check className="w-12 h-12" />
-                </div>
-                <h3 className="text-4xl font-serif italic text-white mb-6">Application Received!</h3>
-                <p className="text-slate-400 text-lg leading-relaxed mb-10">
-                  Thank you for applying to PROXIMAX. <br />
-                  Our team will review your application and reach out via WhatsApp/Email soon.
-                </p>
-                <button 
-                  onClick={() => setIsSubmitted(false)}
-                  className="text-gold-500 font-display font-black text-xs uppercase tracking-widest hover:text-gold-400 transition-colors"
-                >
-                  Submit Another Application
-                </button>
-              </motion.div>
-            ) : null}
-
             <div className="text-center mb-16">
               <h2 className="text-gold-500 font-display font-black uppercase tracking-[0.5em] text-[10px] mb-6">Apply Now</h2>
               <h3 className="text-5xl font-serif italic text-white tracking-tighter">Join the Elite</h3>
             </div>
 
-            <form className="space-y-8" onSubmit={handleSubmit}>
+            <form 
+              className="space-y-8" 
+              name="internship" 
+              method="POST" 
+              data-netlify="true" 
+              data-netlify-honeypot="bot-field"
+              action="/thank-you"
+              encType="multipart/form-data"
+            >
+              <input type="hidden" name="form-name" value="internship" />
+              <input type="hidden" name="subject" value="Internship Application Submission" />
+              <div hidden>
+                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+              </div>
+
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-3">
-                  <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Full Name</label>
+                  <label htmlFor="fullName" className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Full Name</label>
                   <input 
+                    id="fullName"
+                    name="fullName"
                     type="text" required placeholder="Your Name"
-                    value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    value={formData.fullName} onChange={(e) => setFormData({...formData, fullName: e.target.value})}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-gold-500 transition-colors"
                   />
                 </div>
                 <div className="space-y-3">
-                  <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Phone (WhatsApp)</label>
+                  <label htmlFor="phone" className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Phone (WhatsApp)</label>
                   <input 
+                    id="phone"
+                    name="phone"
                     type="tel" required placeholder="+91 00000 00000"
                     value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-gold-500 transition-colors"
@@ -373,16 +376,20 @@ const InternshipPage = () => {
 
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-3">
-                  <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Email Address</label>
+                  <label htmlFor="email" className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Email Address</label>
                   <input 
+                    id="email"
+                    name="email"
                     type="email" required placeholder="you@example.com"
                     value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-gold-500 transition-colors"
                   />
                 </div>
                 <div className="space-y-3">
-                  <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">College/University</label>
+                  <label htmlFor="college" className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">College/University</label>
                   <input 
+                    id="college"
+                    name="college"
                     type="text" required placeholder="Your Institution"
                     value={formData.college} onChange={(e) => setFormData({...formData, college: e.target.value})}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-gold-500 transition-colors"
@@ -390,31 +397,84 @@ const InternshipPage = () => {
                 </div>
               </div>
 
-              <div className="space-y-3">
-                <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Role Interested In</label>
-                <select 
-                  value={formData.role} onChange={(e) => setFormData({...formData, role: e.target.value})}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-gold-500 transition-colors appearance-none"
-                >
-                  {roles.map(r => <option key={r.title} className="bg-[#0a0a0a]">{r.title}</option>)}
-                </select>
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-3">
+                  <label htmlFor="course" className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Course/Stream</label>
+                  <input 
+                    id="course"
+                    name="course"
+                    type="text" required placeholder="B.Tech, MBA, etc."
+                    value={formData.course} onChange={(e) => setFormData({...formData, course: e.target.value})}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-gold-500 transition-colors"
+                  />
+                </div>
+                <div className="space-y-3">
+                  <label htmlFor="year" className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Year of Study</label>
+                  <select 
+                    id="year"
+                    name="year"
+                    value={formData.year} onChange={(e) => setFormData({...formData, year: e.target.value})}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-gold-500 transition-colors appearance-none"
+                  >
+                    <option value="1st" className="bg-[#0a0a0a]">1st Year</option>
+                    <option value="2nd" className="bg-[#0a0a0a]">2nd Year</option>
+                    <option value="3rd" className="bg-[#0a0a0a]">3rd Year</option>
+                    <option value="4th" className="bg-[#0a0a0a]">4th Year</option>
+                    <option value="Other" className="bg-[#0a0a0a]">Other</option>
+                  </select>
+                </div>
               </div>
 
               <div className="space-y-3">
-                <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Why should we hire you?</label>
+                <label htmlFor="skills" className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Skills</label>
                 <textarea 
-                  rows={4} required placeholder="Tell us about your motivation and skills..."
+                  id="skills"
+                  name="skills"
+                  rows={3} required placeholder="SEO, Content Writing, Graphic Design, etc..."
+                  value={formData.skills} onChange={(e) => setFormData({...formData, skills: e.target.value})}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-gold-500 transition-colors resize-none"
+                ></textarea>
+              </div>
+
+              <div className="space-y-3">
+                <label htmlFor="motivation" className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Why do you want this internship?</label>
+                <textarea 
+                  id="motivation"
+                  name="motivation"
+                  rows={4} required placeholder="Tell us about your motivation..."
                   value={formData.motivation} onChange={(e) => setFormData({...formData, motivation: e.target.value})}
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-gold-500 transition-colors resize-none"
                 ></textarea>
               </div>
 
+              <div className="space-y-3">
+                <label htmlFor="resume" className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Resume Upload (Optional)</label>
+                <div className="relative">
+                  <input 
+                    id="resume"
+                    name="resume"
+                    type="file" 
+                    onChange={(e) => setFormData({...formData, resume: e.target.files ? e.target.files[0] : null})}
+                    className="hidden"
+                  />
+                  <label 
+                    htmlFor="resume"
+                    className="w-full bg-white/5 border border-white/10 border-dashed rounded-xl px-6 py-8 flex flex-col items-center justify-center cursor-pointer hover:border-gold-500/50 transition-all group"
+                  >
+                    <Upload className="w-8 h-8 text-slate-600 group-hover:text-gold-500 mb-4 transition-colors" />
+                    <span className="text-sm text-slate-400 group-hover:text-white transition-colors">
+                      {formData.resume ? formData.resume.name : 'Click to upload your resume (PDF/Doc)'}
+                    </span>
+                  </label>
+                </div>
+              </div>
+
               <button 
-                type="submit" disabled={isSubmitting}
+                type="submit"
                 className="w-full bg-gold-600 text-white py-5 rounded-full font-display font-black text-xs uppercase tracking-widest hover:bg-gold-700 transition-all shadow-xl shadow-gold-600/20 flex items-center justify-center gap-3"
               >
-                {isSubmitting ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <FileText className="w-5 h-5" />}
-                {isSubmitting ? 'Submitting...' : 'Submit Application'}
+                <FileText className="w-5 h-5" />
+                Apply Now
               </button>
             </form>
           </div>
@@ -594,54 +654,28 @@ const services = [
 ];
 
 export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainApp />} />
+        <Route path="/thank-you" element={<ThankYou />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+function MainApp() {
   const [view, setView] = useState<'agency' | 'internship'>('agency');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    service: 'Select a service',
+    phone: '',
     budget: '',
     message: ''
   });
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setIsSubmitted(true);
-        setFormData({
-          name: '',
-          email: '',
-          service: 'Select a service',
-          budget: '',
-          message: ''
-        });
-        // Reset success message after 5 seconds
-        setTimeout(() => setIsSubmitted(false), 5000);
-      } else {
-        alert("Failed to send inquiry. Please try again later.");
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("An error occurred. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -1481,34 +1515,26 @@ export default function App() {
             </div>
             
             <div className="bg-[#0a0a0a] p-12 rounded-2xl border border-white/5 shadow-2xl relative">
-              {isSubmitted ? (
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[#0a0a0a] rounded-2xl p-12 text-center"
-                >
-                  <div className="w-20 h-20 bg-gold-600/20 rounded-full flex items-center justify-center text-gold-500 mb-6">
-                    <Check className="w-10 h-10" />
-                  </div>
-                  <h3 className="text-3xl font-serif italic text-white mb-4">Thank You!</h3>
-                  <p className="text-slate-400 leading-relaxed">
-                    Your inquiry has been sent successfully. <br />
-                    We'll get back to you within 24 hours.
-                  </p>
-                  <button 
-                    onClick={() => setIsSubmitted(false)}
-                    className="mt-8 text-gold-500 font-display font-black text-[10px] uppercase tracking-widest hover:text-gold-400 transition-colors"
-                  >
-                    Send Another Message
-                  </button>
-                </motion.div>
-              ) : null}
+              <form 
+                className="space-y-8" 
+                name="contact" 
+                method="POST" 
+                data-netlify="true" 
+                data-netlify-honeypot="bot-field"
+                action="/thank-you"
+              >
+                <input type="hidden" name="form-name" value="contact" />
+                <input type="hidden" name="subject" value="Contact Form Submission" />
+                <div hidden>
+                  <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                </div>
 
-              <form className={`space-y-8 ${isSubmitted ? 'opacity-0 pointer-events-none' : 'opacity-100'}`} onSubmit={handleSubmit}>
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="space-y-3">
-                    <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Full Name</label>
+                    <label htmlFor="contactName" className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Full Name</label>
                     <input 
+                      id="contactName"
+                      name="name"
                       type="text" 
                       required
                       placeholder="John Doe"
@@ -1518,8 +1544,10 @@ export default function App() {
                     />
                   </div>
                   <div className="space-y-3">
-                    <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Email Address</label>
+                    <label htmlFor="contactEmail" className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Email Address</label>
                     <input 
+                      id="contactEmail"
+                      name="email"
                       type="email" 
                       required
                       placeholder="john@example.com"
@@ -1531,21 +1559,25 @@ export default function App() {
                 </div>
                 
                 <div className="space-y-3">
-                  <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Service Interested In</label>
-                  <select 
-                    value={formData.service}
-                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-gold-500 transition-colors appearance-none font-sans"
-                  >
-                    <option className="bg-[#0a0a0a]">Select a service</option>
-                    {services.map(s => <option key={s.title} className="bg-[#0a0a0a]">{s.title}</option>)}
-                  </select>
+                  <label htmlFor="contactPhone" className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Phone Number (Optional)</label>
+                  <input 
+                    id="contactPhone"
+                    name="phone"
+                    type="tel" 
+                    placeholder="+91 00000 00000"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-gold-500 transition-colors font-sans"
+                  />
                 </div>
 
                 <div className="space-y-3">
-                  <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Your Budget</label>
+                  <label htmlFor="contactBudget" className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Your Budget</label>
                   <input 
+                    id="contactBudget"
+                    name="budget"
                     type="text" 
+                    required
                     placeholder="e.g. ₹50,000 or $600"
                     value={formData.budget}
                     onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
@@ -1554,8 +1586,10 @@ export default function App() {
                 </div>
                 
                 <div className="space-y-3">
-                  <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Message</label>
+                  <label htmlFor="contactMessage" className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Message</label>
                   <textarea 
+                    id="contactMessage"
+                    name="message"
                     rows={4}
                     required
                     placeholder="Tell us about your project..."
@@ -1567,15 +1601,10 @@ export default function App() {
                 
                 <button 
                   type="submit"
-                  disabled={isSubmitting}
-                  className={`w-full bg-gold-600 text-white py-5 rounded-full font-display font-black text-xs uppercase tracking-widest hover:bg-gold-700 transition-all shadow-xl shadow-gold-600/20 flex items-center justify-center gap-3 group/submit ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  className="w-full bg-gold-600 text-white py-5 rounded-full font-display font-black text-xs uppercase tracking-widest hover:bg-gold-700 transition-all shadow-xl shadow-gold-600/20 flex items-center justify-center gap-3 group/submit"
                 >
-                  {isSubmitting ? (
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  ) : (
-                    <MessageSquare className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                  )}
-                  {isSubmitting ? 'Sending...' : 'Send Inquiry'}
+                  <MessageSquare className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                  Send Message
                 </button>
               </form>
             </div>
