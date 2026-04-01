@@ -75,14 +75,9 @@ const FAQItem = ({ question, answer }: { question: string; answer: string; key?:
   );
 };
 
-const iconMap: Record<string, any> = {
-  Search, MapPin, Share2, TrendingUp, Layout, MessageSquare, Target, PenTool, Award, Cpu, Briefcase, FileText, Sparkles, Instagram, ArrowRight, Linkedin, Twitter, Mail, Phone, ShieldCheck, GraduationCap, Clock, Users, HelpCircle, CheckCircle2, Check, Menu, X
-};
-
 const InternshipPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [internshipData, setInternshipData] = useState<any>(null);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -91,13 +86,6 @@ const InternshipPage = () => {
     role: 'Digital Marketing Intern',
     motivation: ''
   });
-
-  useEffect(() => {
-    fetch('/api/internship-details')
-      .then(res => res.json())
-      .then(data => setInternshipData(data))
-      .catch(err => console.error("Error fetching internship details:", err));
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -126,9 +114,37 @@ const InternshipPage = () => {
     }
   };
 
-  if (!internshipData) return <div className="min-h-screen bg-[#050505] flex items-center justify-center text-gold-500 font-serif italic text-2xl">Loading...</div>;
+  const roles = [
+    { title: "Digital Marketing Intern", icon: Target, desc: "Master SEO, GMB, and performance marketing on real client projects." },
+    { title: "Lead Generation Intern", icon: Briefcase, desc: "Learn the art of finding and qualifying high-value prospects." },
+    { title: "Sales Intern", icon: ArrowRight, desc: "Develop persuasive communication and closing skills." },
+    { title: "Social Media Manager", icon: Instagram, desc: "Build brand presence and engagement across all platforms." },
+    { title: "Web Development Intern", icon: Cpu, desc: "Create high-converting landing pages and business websites." }
+  ];
 
-  const { roles, learningPoints, benefits, faqs } = internshipData;
+  const learningPoints = [
+    "Google Business Profile (GMB) Mastery",
+    "High-Quality Lead Generation Strategies",
+    "Professional Client Handling & Communication",
+    "SEO & Content Optimization Techniques",
+    "Social Media Growth & Automation",
+    "Performance Marketing & Ad Campaigns"
+  ];
+
+  const benefits = [
+    { title: "Official Certificate", icon: Award },
+    { title: "Real Project Experience", icon: Target },
+    { title: "Letter of Recommendation", icon: FileText },
+    { title: "Performance Stipend", icon: Sparkles },
+    { title: "Job Opportunities", icon: Briefcase }
+  ];
+
+  const faqs = [
+    { q: "Is this a paid internship?", a: "We offer performance-based stipends to top performers who deliver exceptional results for our clients." },
+    { q: "Will I get a certificate?", a: "Yes, every intern receives an official internship completion certificate from PROXIMAX." },
+    { q: "What are the timings?", a: "We offer flexible timings to accommodate students. You can choose your working hours." },
+    { q: "How are interns selected?", a: "Selection is based on your application, motivation, and a short introductory interview." }
+  ];
 
   return (
     <div className="bg-[#050505]">
@@ -193,17 +209,14 @@ const InternshipPage = () => {
             <div className="relative">
               <div className="aspect-square rounded-3xl overflow-hidden glass border border-white/10 p-8 flex flex-col justify-center">
                 <div className="space-y-6">
-                  {benefits.map((b: any, i: number) => {
-                    const Icon = iconMap[b.icon] || Award;
-                    return (
-                      <div key={i} className="flex items-center gap-6 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-gold-500/30 transition-all">
-                        <div className="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center text-gold-500">
-                          <Icon className="w-6 h-6" />
-                        </div>
-                        <span className="text-white font-serif italic text-xl">{b.title}</span>
+                  {benefits.map((b, i) => (
+                    <div key={i} className="flex items-center gap-6 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-gold-500/30 transition-all">
+                      <div className="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center text-gold-500">
+                        <b.icon className="w-6 h-6" />
                       </div>
-                    );
-                  })}
+                      <span className="text-white font-serif italic text-xl">{b.title}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -219,25 +232,22 @@ const InternshipPage = () => {
             <h3 className="text-6xl font-serif italic text-white tracking-tighter">Choose Your Path</h3>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {roles.map((role: any, i: number) => {
-              const Icon = iconMap[role.icon] || Target;
-              return (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="glass p-10 rounded-3xl border border-white/5 hover:border-gold-500/30 transition-all group"
-                >
-                  <div className="w-16 h-16 rounded-2xl bg-gold-600/10 flex items-center justify-center text-gold-500 mb-8 group-hover:bg-gold-600 group-hover:text-white transition-all duration-500">
-                    <Icon className="w-8 h-8" />
-                  </div>
-                  <h4 className="text-2xl font-serif italic text-white mb-4">{role.title}</h4>
-                  <p className="text-slate-500 leading-relaxed font-sans font-light">{role.desc}</p>
-                </motion.div>
-              );
-            })}
+            {roles.map((role, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="glass p-10 rounded-3xl border border-white/5 hover:border-gold-500/30 transition-all group"
+              >
+                <div className="w-16 h-16 rounded-2xl bg-gold-600/10 flex items-center justify-center text-gold-500 mb-8 group-hover:bg-gold-600 group-hover:text-white transition-all duration-500">
+                  <role.icon className="w-8 h-8" />
+                </div>
+                <h4 className="text-2xl font-serif italic text-white mb-4">{role.title}</h4>
+                <p className="text-slate-500 leading-relaxed font-sans font-light">{role.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -480,19 +490,116 @@ const InternshipPage = () => {
   );
 };
 
-// Removed hardcoded services array, now fetched from backend
+const services = [
+  {
+    id: "seo",
+    title: "SEO (On-page & Off-page)",
+    headline: "Rank Your Website on Google & Get More Traffic",
+    description: "We help your website rank higher on Google using proven SEO strategies.",
+    detailedServices: ["On-page SEO", "Off-page SEO", "Keyword Research", "Technical SEO"],
+    process: "Audit → Optimize → Rank",
+    results: ["More traffic", "Higher rankings", "More leads"],
+    cta: "Get Free SEO Audit",
+    icon: Search,
+    color: "bg-gold-500/10 text-gold-500"
+  },
+  {
+    id: "gmb",
+    title: "GMB Optimization",
+    headline: "Rank Your Business on Google Maps & Get Local Customers",
+    description: "We optimize your Google My Business profile to bring more calls and visits.",
+    detailedServices: ["GMB Setup & Optimization", "Local SEO", "Review Management"],
+    results: ["More calls", "More local customers"],
+    cta: "Rank My Business on Maps",
+    icon: MapPin,
+    color: "bg-gold-400/10 text-gold-400"
+  },
+  {
+    id: "smm",
+    title: "Social Media Management",
+    headline: "Grow Your Social Media & Build Your Brand",
+    description: "We manage and grow your social media for better engagement.",
+    detailedServices: ["Content Posting", "Reels & Graphics", "Engagement Strategy"],
+    results: ["More followers", "Better engagement"],
+    cta: "Grow My Social Media",
+    icon: Share2,
+    color: "bg-gold-500/10 text-gold-500"
+  },
+  {
+    id: "performance",
+    title: "Performance Marketing",
+    headline: "Get Instant Leads & Sales with Paid Ads",
+    description: "We run high-converting ad campaigns to grow your business fast.",
+    detailedServices: ["Facebook & Instagram Ads", "Google Ads", "Retargeting"],
+    results: ["More leads", "High ROI"],
+    cta: "Start My Ads Campaign",
+    icon: TrendingUp,
+    color: "bg-gold-600/10 text-gold-600"
+  },
+  {
+    id: "web",
+    title: "Website & Landing Page Design",
+    headline: "Build High-Converting Websites for Your Business",
+    description: "We create modern and responsive websites that convert visitors into customers.",
+    detailedServices: ["Business Website", "Landing Page Design", "Mobile Responsive"],
+    results: ["More conversions", "Professional presence"],
+    cta: "Build My Website",
+    icon: Layout,
+    color: "bg-gold-500/10 text-gold-500"
+  },
+  {
+    id: "whatsapp",
+    title: "WhatsApp Marketing & Automation",
+    headline: "Convert Leads Faster with WhatsApp Automation",
+    description: "We set up WhatsApp systems to automate your customer communication.",
+    detailedServices: ["Bulk Messaging", "Automation", "Chatbot Setup"],
+    results: ["Instant replies", "Higher conversion"],
+    cta: "Setup WhatsApp Marketing",
+    icon: MessageSquare,
+    color: "bg-gold-500/10 text-gold-500"
+  },
+  {
+    id: "leadgen",
+    title: "Lead Generation & Sales Funnel",
+    headline: "Get Daily Quality Leads for Your Business",
+    description: "We build automated systems to generate consistent leads.",
+    detailedServices: ["Funnel Setup", "Landing Page", "Automation"],
+    results: ["Consistent leads", "Automated sales"],
+    cta: "Get More Leads",
+    icon: Target,
+    color: "bg-gold-400/10 text-gold-400"
+  },
+  {
+    id: "content",
+    title: "Content Creation & Copywriting",
+    headline: "Content That Attracts & Converts",
+    description: "We create powerful content that drives engagement and sales.",
+    detailedServices: ["Ad Copy", "Social Media Content", "Website Content"],
+    results: ["More engagement", "Better conversions"],
+    cta: "Create My Content",
+    icon: PenTool,
+    color: "bg-gold-500/10 text-gold-500"
+  },
+  {
+    id: "branding",
+    title: "Branding (Logo & Business Identity)",
+    headline: "Build a Strong & Professional Brand Identity",
+    description: "We design branding that makes your business stand out.",
+    detailedServices: ["Logo Design", "Brand Identity", "Social Media Branding"],
+    results: ["Professional look", "Strong brand image"],
+    cta: "Build My Brand",
+    icon: Award,
+    color: "bg-gold-600/10 text-gold-600"
+  }
+];
 
 export default function App() {
   const [view, setView] = useState<'agency' | 'internship'>('agency');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [selectedService, setSelectedService] = useState<any>(null);
+  const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [heroData, setHeroData] = useState<any>(null);
-  const [services, setServices] = useState<any[]>([]);
-  const [agencyFaqs, setAgencyFaqs] = useState<any[]>([]);
-  const [testimonials, setTestimonials] = useState<any[]>([]);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -500,13 +607,6 @@ export default function App() {
     budget: '',
     message: ''
   });
-
-  useEffect(() => {
-    fetch('/api/home').then(res => res.json()).then(data => setHeroData(data.hero));
-    fetch('/api/services').then(res => res.json()).then(data => setServices(data));
-    fetch('/api/faq').then(res => res.json()).then(data => setAgencyFaqs(data));
-    fetch('/api/testimonials').then(res => res.json()).then(data => setTestimonials(data));
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -599,10 +699,7 @@ export default function App() {
                   
                   <div className="relative z-10">
                     <div className="w-24 h-24 rounded-full bg-gold-600 text-white flex items-center justify-center mb-8 shadow-2xl shadow-gold-500/20 mx-auto">
-                      {(() => {
-                        const Icon = iconMap[selectedService.icon] || Target;
-                        return <Icon className="w-12 h-12" />;
-                      })()}
+                      <selectedService.icon className="w-12 h-12" />
                     </div>
                     <h2 className="text-4xl font-serif italic text-white mb-4 tracking-tight">{selectedService.title}</h2>
                     <p className="text-gold-400 font-display font-black uppercase tracking-[0.3em] text-[10px]">Service Exploration</p>
@@ -805,10 +902,12 @@ export default function App() {
               The Gold Standard of Digital
             </div>
             <h1 className="text-7xl md:text-9xl font-serif italic leading-[0.85] text-white mb-10 tracking-tighter">
-              {heroData?.title || "Grow Your Local Business with Leads."}
+              Grow Your <br />
+              <span className="text-gradient">Local Business</span> <br />
+              with Leads.
             </h1>
             <p className="text-xl text-slate-400 mb-12 max-w-lg leading-relaxed font-sans font-light">
-              {heroData?.subtitle || "We help Real Estate, Jewellery, and Fashion brands dominate their local market with expert SEO and GMB strategies."}
+              We help Real Estate, Jewellery, and Fashion brands dominate their local market with expert SEO and GMB strategies.
             </p>
             <div className="flex flex-wrap gap-6">
               <button 
@@ -1148,10 +1247,7 @@ export default function App() {
                 <div className="absolute -top-24 -right-24 w-48 h-48 bg-gold-500/5 rounded-full blur-[80px] group-hover:bg-gold-500/10 transition-all duration-700" />
                 
                 <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-12 group-hover:bg-gold-600 group-hover:text-white transition-all duration-500">
-                  {(() => {
-                    const Icon = iconMap[service.icon] || HelpCircle;
-                    return <Icon className="w-8 h-8" />;
-                  })()}
+                  <service.icon className="w-8 h-8" />
                 </div>
 
                 <h4 className="text-2xl font-serif italic text-white mb-6 group-hover:text-gold-400 transition-colors">{service.title}</h4>
@@ -1267,7 +1363,40 @@ export default function App() {
           </div>
           
           <div className="space-y-4">
-            {agencyFaqs.map((faq, i) => (
+            {[
+              {
+                q: "GMB se clients kaise milte hain?",
+                a: "GMB optimization se aapka business Google Maps par top par dikhta hai, jisse local customers aapko call ya visit karte hain jab wo aapki services search karte hain."
+              },
+              {
+                q: "Result kitne din me milta hai?",
+                a: "GMB aur Local SEO ka result usually 1-3 months me dikhne lagta hai. Agar aapko instant results chahiye, toh hum ads (Performance Marketing) suggest karte hain jo pehle din se leads de sakte hain."
+              },
+              {
+                q: "Kya aap guarantee dete ho?",
+                a: "Hum quality leads aur growth strategy ki commitment dete hain. Digital marketing me exact numbers ki guarantee dena mushkil hai, par hamara track record 98% client retention ka hai."
+              },
+              {
+                q: "Price kya hai?",
+                a: "Hamare plans aapki business needs ke hisaab se customized hote hain. Hum small businesses ke liye affordable packages se lekar enterprises ke liye premium solutions tak sab provide karte hain."
+              },
+              {
+                q: "Kya small business ke liye useful hai?",
+                a: "Bilkul! Local businesses ke liye GMB aur Local SEO sabse effective aur budget-friendly tarika hai apne area me dominate karne ka."
+              },
+              {
+                q: "Kya mujhe website bhi chahiye?",
+                a: "Website trust build karti hai, par agar aapke paas nahi hai toh hum GMB optimization aur high-converting landing pages se bhi aapka business grow kar sakte hain."
+              },
+              {
+                q: "Kya aap monthly service dete ho?",
+                a: "Haan, hum monthly management provide karte hain jisme hum aapki rankings maintain karte hain, naya content post karte hain aur leads track karte hain."
+              },
+              {
+                q: "Kaise start kare?",
+                a: "Bahut aasaan hai! Aap niche diye gaye 'Contact' form ko fill karein ya WhatsApp par message karein. Hum aapke business ka free audit karke ek custom plan banayenge."
+              }
+            ].map((faq, i) => (
               <FAQItem key={i} question={faq.q} answer={faq.a} />
             ))}
           </div>
