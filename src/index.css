@@ -1,71 +1,92 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Cormorant Garamond", serif;
-  --font-display: "Montserrat", sans-serif;
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
   
-  --color-primary: #b39b6b; /* Gold 500 */
-  --color-secondary: #896d4d; /* Gold 700 */
-  --color-bg-dark: #050505;
-  --color-surface: #0a0a0a;
+  --color-gold-50: #fdfbf7;
+  --color-gold-100: #f9f2e6;
+  --color-gold-200: #f0e0c2;
+  --color-gold-300: #e4c991;
+  --color-gold-400: #d7ab5f;
+  --color-gold-500: #cb8e3b;
+  --color-gold-600: #b8732e;
+  --color-gold-700: #995928;
+  --color-gold-800: #7c4825;
+  --color-gold-900: #663c21;
+  --color-gold-950: #3a1f11;
 
-  --color-gold-50: #fbfaf7;
-  --color-gold-100: #f7f5ef;
-  --color-gold-200: #ece7d7;
-  --color-gold-300: #dbd1b5;
-  --color-gold-400: #c4b289;
-  --color-gold-500: #b39b6b;
-  --color-gold-600: #a4865b;
-  --color-gold-700: #896d4d;
-  --color-gold-800: #715a43;
-  --color-gold-900: #5d4b3a;
-  --color-gold-950: #31271e;
+  --color-dark-bg: #050505;
+  --color-dark-card: #0a0a0a;
+  --color-text-muted: #a0a0a0;
+  --color-text-dim: #606060;
 
-  @keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
   }
 
-  @keyframes spin-slow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-}
-
-@layer utilities {
-  .animate-shimmer {
-    animation: shimmer 2s infinite;
-  }
-  .animate-spin-slow {
-    animation: spin-slow 8s linear infinite;
-  }
-  .glass {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10;
-  }
-  .glass-dark {
-    @apply bg-black/40 backdrop-blur-2xl border border-white/5;
-  }
-  .text-balance {
-    text-wrap: balance;
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.5; filter: blur(20px); }
+    50% { opacity: 1; filter: blur(40px); }
   }
 }
 
 @layer base {
   body {
-    @apply font-sans text-slate-400 bg-[#050505] antialiased selection:bg-gold-500/30 selection:text-white;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    @apply bg-dark-bg text-white font-sans antialiased selection:bg-gold-500/30;
   }
+  
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display text-white tracking-tight;
+    @apply font-display font-bold tracking-tight;
   }
 }
 
-.text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-gold-300 via-gold-500 to-gold-700;
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600;
+  }
+  
+  .bg-neon-gradient {
+    @apply bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600;
+  }
+
+  .neon-glow {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+  }
+
+  .glass-card {
+    @apply bg-dark-card/40 backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300;
+  }
+
+  .glass-premium {
+    @apply bg-white/[0.02] backdrop-blur-2xl border border-white/5 hover:border-white/10 transition-all duration-500;
+  }
+
+  .tracking-luxury {
+    @apply tracking-[0.3em] uppercase text-[10px] font-display font-black;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
 }
 
-.bg-gradient-primary {
-  @apply bg-gradient-to-br from-gold-500 to-gold-700;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-dark-bg;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full hover:bg-gold-500/50 transition-colors;
 }

@@ -86,7 +86,7 @@ async function startServer() {
         detailedServices: ["Bulk Messaging", "Automation", "Chatbot Setup"],
         results: ["Instant replies", "Higher conversion"],
         cta: "Setup WhatsApp Marketing",
-        icon: "MessageSquare",
+        icon: "WhatsApp",
         color: "bg-gold-500/10 text-gold-500"
       },
       {
@@ -121,6 +121,17 @@ async function startServer() {
         cta: "Build My Brand",
         icon: "Award",
         color: "bg-gold-600/10 text-gold-600"
+      },
+      {
+        id: "influencer",
+        title: "Influencer Marketing",
+        headline: "Collaborate with Top Influencers to Grow Your Brand",
+        description: "We connect your brand with the right influencers for maximum reach and ROI.",
+        detailedServices: ["Influencer Sourcing", "Campaign Management", "Performance Tracking"],
+        results: ["Massive reach", "Authentic engagement"],
+        cta: "Start Influencer Campaign",
+        icon: "Users",
+        color: "bg-gold-500/10 text-gold-500"
       }
     ],
     faqs: [
@@ -220,15 +231,44 @@ async function startServer() {
     res.json(internshipData);
   });
 
+  app.post("/api/internship", (req, res) => {
+    console.log("New Internship Application:", req.body);
+    // In a real app, you'd save this to a database or send an email
+    res.json({ success: true, message: "Application received" });
+  });
+
+  app.post("/api/influencer", (req, res) => {
+    console.log("New Influencer Application:", req.body);
+    // In a real app, you'd save this to a database or send an email
+    res.json({ success: true, message: "Application received" });
+  });
+
   // Blog API Routes
+  console.log(`Loaded ${blogs.length} blogs from data source.`);
+  
+  // Pre-calculate readTime for all blogs
+  const getReadTime = (content: string) => {
+    const words = content.split(/\s+/).length;
+    return Math.ceil(words / 200);
+  };
+
+  const cachedBlogList = blogs.map(({ content, ...rest }) => ({
+    ...rest,
+    readTime: getReadTime(content || '')
+  }));
+
   app.get("/api/blogs", (req, res) => {
-    res.json(blogs.map(({ content, ...rest }) => rest)); // Return list without full content
+    // Return the pre-calculated list for speed
+    res.json(cachedBlogList);
   });
 
   app.get("/api/blogs/:slug", (req, res) => {
     const blog = blogs.find(b => b.slug === req.params.slug);
     if (blog) {
-      res.json(blog);
+      res.json({
+        ...blog,
+        readTime: getReadTime(blog.content || '')
+      });
     } else {
       res.status(404).json({ message: "Blog not found" });
     }

@@ -7,7 +7,7 @@ export const generateInductionBanner = async () => {
     contents: {
       parts: [
         {
-          text: 'An ultra-premium, luxury digital agency banner for PROXIMAX. The aesthetic should be "Quiet Luxury" meets "High-Tech". Deep matte black background with liquid gold accents. Minimalist and sophisticated. Subtle, elegant 3D trending charts and network nodes in glowing gold. The PROXIMAX logo should be integrated with a metallic gold finish. Cinematic lighting, soft bokeh, and high-end textures. Avoid clutter. Focus on prestige, authority, and digital excellence. 8K resolution, photorealistic, architectural visualization style.',
+          text: 'An ultra-premium, luxury digital agency banner for PROXIMAX. The aesthetic should be "Quiet Luxury" meets "High-Tech". Deep matte black background with vibrant orange and deep blue accents. Minimalist and sophisticated. Subtle, elegant 3D trending charts and network nodes in glowing blue. The PROXIMAX logo should be integrated with a metallic finish. Cinematic lighting, soft bokeh, and high-end textures. Avoid clutter. Focus on prestige, authority, and digital excellence. 8K resolution, photorealistic, architectural visualization style.',
         },
       ],
     },

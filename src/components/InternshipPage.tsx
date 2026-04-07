@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
+import { Helmet } from 'react-helmet-async';
 import { 
   CheckCircle2, 
   Check, 
@@ -25,8 +26,11 @@ import {
   Calendar 
 } from 'lucide-react';
 
+import { cn } from '../lib/utils';
+import { WhatsAppIcon } from './icons/WhatsApp';
+
 const iconMap: Record<string, any> = {
-  Search: Target, MapPin: Target, Share2: Target, TrendingUp: Target, Layout: Target, MessageSquare: Target, Target, PenTool: Target, Award, Cpu, Briefcase, FileText, Sparkles, Instagram, ArrowRight, Linkedin, Twitter, Mail, Phone, ShieldCheck, GraduationCap, Clock, Users, HelpCircle, CheckCircle2, Check, Menu, X, Calendar
+  Search: Target, MapPin: Target, Share2: Target, TrendingUp: Target, Layout: Target, MessageSquare: Target, WhatsApp: WhatsAppIcon, Target, PenTool: Target, Award, Cpu, Briefcase, FileText, Sparkles, Instagram, ArrowRight, Linkedin, Twitter, Mail, Phone, ShieldCheck, GraduationCap, Clock, Users, HelpCircle, CheckCircle2, Check, Menu, X, Calendar
 };
 
 const InternshipPage = () => {
@@ -49,39 +53,55 @@ const InternshipPage = () => {
       .catch(err => console.error("Error fetching internship details:", err));
   }, []);
 
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const encode = (data: any) => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError(null);
     
     try {
-      const response = await fetch('/api/internship', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({
+          "form-name": "internship",
+          ...formData
+        })
       });
 
       if (response.ok) {
         setIsSubmitted(true);
         setFormData({ name: '', phone: '', email: '', college: '', role: 'Digital Marketing Intern', motivation: '' });
       } else {
-        alert("Failed to submit application. Please try again later.");
+        setSubmitError("Failed to submit application. Please try again later.");
       }
     } catch (error) {
       console.error("Error submitting internship form:", error);
-      alert("An error occurred. Please try again.");
+      setSubmitError("An error occurred. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  if (!internshipData) return <div className="min-h-screen bg-[#050505] flex items-center justify-center text-gold-500 font-serif italic text-2xl">Loading...</div>;
+  if (!internshipData) return null;
 
   const { roles, learningPoints, benefits, faqs } = internshipData;
 
   return (
     <div className="bg-[#050505]">
+      <Helmet>
+        <title>Digital Marketing Internship in India | PROXIMAX Academy</title>
+        <meta name="description" content="Kickstart your career with the best digital marketing internship in India. Gain hands-on experience in SEO, GMB, and performance marketing. Apply now!" />
+        <meta name="keywords" content="digital marketing internship india, seo internship, gmb optimization training, proximax academy" />
+        <link rel="canonical" href="https://proximax.in/internship" />
+      </Helmet>
       {/* Hero Section */}
       <section className="relative pt-48 pb-32 overflow-hidden">
         <div className="absolute inset-0 -z-10">
@@ -96,10 +116,10 @@ const InternshipPage = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-6xl md:text-8xl font-serif italic text-white mb-8 tracking-tighter leading-[0.9]">
-              Launch Your Career <br /> <span className="text-gold-500">With PROXIMAX</span>
+              Digital Marketing <br /> <span className="text-gold-500">Internship in India</span>
             </h1>
             <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-12 font-sans font-light leading-relaxed">
-              Gain real-world experience working on live client projects. Master the skills that actually matter in the digital economy.
+              Launch your career with the best digital marketing agency. Gain real-world experience in SEO, GMB optimization, and performance marketing with an official certificate.
             </p>
             <button 
               onClick={() => document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' })}
@@ -121,9 +141,9 @@ const InternshipPage = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-gold-500 font-display font-black uppercase tracking-[0.5em] text-[10px] mb-8">The Opportunity</h2>
-              <h3 className="text-5xl font-serif italic text-white mb-8 leading-tight">Practical Skills. <br /> Real Projects. <br /> True Growth.</h3>
+              <h3 className="text-5xl font-serif italic text-white mb-8 leading-tight">Best Digital Marketing <br /> Internship Experience. <br /> True Growth.</h3>
               <p className="text-lg text-slate-400 leading-relaxed font-sans font-light mb-8">
-                At PROXIMAX, we don't believe in "coffee-run" internships. Our interns are integral members of our team, working directly on client accounts, managing real budgets, and delivering actual results.
+                At PROXIMAX, we offer a comprehensive digital marketing internship where you work directly on client accounts, managing real SEO and GMB projects to deliver actual results.
               </p>
               <div className="grid grid-cols-2 gap-8">
                 <div className="flex items-center gap-4">
@@ -166,7 +186,7 @@ const InternshipPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-24">
             <h2 className="text-gold-500 font-display font-black uppercase tracking-[0.5em] text-[10px] mb-8">Open Positions</h2>
-            <h3 className="text-6xl font-serif italic text-white tracking-tighter">Choose Your Path</h3>
+            <h3 className="text-6xl font-serif italic text-white tracking-tighter">Internship Roles</h3>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {roles.map((role: any, i: number) => {
@@ -199,7 +219,7 @@ const InternshipPage = () => {
             <div className="grid lg:grid-cols-2 gap-20 items-center">
               <div>
                 <h2 className="text-gold-500 font-display font-black uppercase tracking-[0.5em] text-[10px] mb-8">Curriculum</h2>
-                <h3 className="text-5xl font-serif italic text-white mb-10 leading-tight">Master the Digital <br /> Ecosystem</h3>
+                <h3 className="text-5xl font-serif italic text-white mb-10 leading-tight">Digital Marketing <br /> Internship Curriculum</h3>
                 <div className="space-y-6">
                   {learningPoints.map((point: string, i: number) => (
                     <div key={i} className="flex items-center gap-4">
@@ -209,6 +229,11 @@ const InternshipPage = () => {
                       <span className="text-slate-300 font-sans font-light">{point}</span>
                     </div>
                   ))}
+                </div>
+                <div className="mt-12">
+                  <a href="/" className="text-gold-500 hover:text-gold-400 transition-colors flex items-center gap-2 font-display font-black text-[10px] uppercase tracking-widest">
+                    View Agency Services <ArrowRight className="w-4 h-4" />
+                  </a>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-6">
@@ -288,10 +313,21 @@ const InternshipPage = () => {
 
             <div className="text-center mb-16">
               <h2 className="text-gold-500 font-display font-black uppercase tracking-[0.5em] text-[10px] mb-6">Apply Now</h2>
-              <h3 className="text-5xl font-serif italic text-white tracking-tighter">Join the Elite</h3>
+              <h3 className="text-5xl font-serif italic text-white tracking-tighter">Apply for Internship</h3>
             </div>
 
-            <form className="space-y-8" onSubmit={handleSubmit}>
+            <form 
+              className="space-y-8" 
+              onSubmit={handleSubmit}
+              name="internship"
+              data-netlify="true"
+            >
+              <input type="hidden" name="form-name" value="internship" />
+              {submitError && (
+                <div className="bg-red-500/10 border border-red-500/20 text-red-500 p-6 rounded-2xl text-center">
+                  {submitError}
+                </div>
+              )}
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-3">
                   <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Full Name</label>
@@ -359,6 +395,25 @@ const InternshipPage = () => {
               </button>
             </form>
           </div>
+        </div>
+      </section>
+      {/* SEO Section (Hidden visually but kept for SEO) */}
+      <section className="sr-only" aria-hidden="false">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2>Digital Marketing Internship in India - PROXIMAX</h2>
+          <p>
+            Join the best digital marketing internship program in India. We offer hands-on experience in SEO services, GMB optimization, social media management, and performance marketing. 
+            Our internship with certificate is designed for students and graduates looking to build a career in the digital marketing industry. 
+            Learn from GMB experts and SEO specialists while working on real-world projects.
+          </p>
+          <ul>
+            <li>Digital Marketing Internship with Certificate</li>
+            <li>SEO Internship India</li>
+            <li>GMB Optimization Training</li>
+            <li>Social Media Marketing Internship</li>
+            <li>Performance Marketing Experience</li>
+            <li>Lead Generation Strategies for Local Business</li>
+          </ul>
         </div>
       </section>
     </div>
