@@ -60,23 +60,12 @@ const InternshipPage = () => {
     setIsSubmitting(true);
     setSubmitError(null);
     
-    const form = e.target as HTMLFormElement;
-    
     try {
-      const result = await (window as any).emailjs.sendForm(
-        'service_ind0oyk',
-        'template_f9lvw8e',
-        form
-      );
-
-      if (result.text === 'OK') {
-        alert("Submitted Successfully!");
-        setIsSubmitted(true);
-        setFormData({ name: '', phone: '', email: '', college: '', role: 'Digital Marketing Intern', motivation: '' });
-        form.reset();
-      } else {
-        setSubmitError("Failed to submit application. Please try again later.");
-      }
+      const form = e.target as HTMLFormElement;
+      await (window as any).emailjs.sendForm('service_ind0oyk', 'template_f9lvw8e', form);
+      setIsSubmitted(true);
+      setFormData({ name: '', phone: '', email: '', college: '', role: 'Digital Marketing Intern', motivation: '' });
+      alert('Submitted Successfully!');
     } catch (error) {
       console.error("Error submitting internship form:", error);
       setSubmitError("An error occurred. Please try again.");
@@ -324,6 +313,7 @@ const InternshipPage = () => {
                 <div className="space-y-3">
                   <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Full Name</label>
                   <input 
+                    name="name"
                     type="text" required placeholder="Your Name"
                     value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-gold-500 transition-colors"
@@ -332,17 +322,19 @@ const InternshipPage = () => {
                 <div className="space-y-3">
                   <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Phone (WhatsApp)</label>
                   <input 
+                    name="phone"
                     type="tel" required placeholder="+91 00000 00000"
                     value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-gold-500 transition-colors"
                   />
                 </div>
               </div>
-
+ 
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-3">
                   <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Email Address</label>
                   <input 
+                    name="email"
                     type="email" required placeholder="you@example.com"
                     value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-gold-500 transition-colors"
@@ -351,23 +343,25 @@ const InternshipPage = () => {
                 <div className="space-y-3">
                   <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">College/University</label>
                   <input 
+                    name="college"
                     type="text" required placeholder="Your Institution"
                     value={formData.college} onChange={(e) => setFormData({...formData, college: e.target.value})}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-gold-500 transition-colors"
                   />
                 </div>
               </div>
-
+ 
               <div className="space-y-3">
                 <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Select Role</label>
                 <select 
+                  name="role"
                   value={formData.role} onChange={(e) => setFormData({...formData, role: e.target.value})}
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-gold-500 transition-colors appearance-none"
                 >
                   {roles.map((role: any, i: number) => <option key={i} className="bg-[#0a0a0a]">{role.title}</option>)}
                 </select>
               </div>
-
+ 
               <div className="space-y-3">
                 <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Why should we hire you?</label>
                 <textarea 

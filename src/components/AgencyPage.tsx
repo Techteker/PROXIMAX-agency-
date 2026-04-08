@@ -74,6 +74,7 @@ const AgencyPage = () => {
     name: '',
     email: '',
     phone: '',
+    service: 'General Inquiry',
     budget: '',
     message: ''
   });
@@ -90,24 +91,12 @@ const AgencyPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
-    
-    const form = e.target as HTMLFormElement;
-    
     try {
-      const result = await (window as any).emailjs.sendForm(
-        'service_ind0oyk',
-        'template_f9lvw8e',
-        form
-      );
-      
-      if (result.text === 'OK') {
-        alert("Submitted Successfully!");
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', phone: '', budget: '', message: '' });
-        form.reset();
-      } else {
-        setSubmitStatus('error');
-      }
+      const form = e.target as HTMLFormElement;
+      await (window as any).emailjs.sendForm('service_ind0oyk', 'template_f9lvw8e', form);
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', phone: '', service: 'General Inquiry', budget: '', message: '' });
+      alert('Submitted Successfully!');
     } catch (error) {
       console.error("Form submission error:", error);
       setSubmitStatus('error');
@@ -679,17 +668,33 @@ const AgencyPage = () => {
                         />
                       </div>
                       <div className="space-y-3">
-                        <label htmlFor="contactBudget" className="text-text-dim tracking-luxury ml-1">Budget Range</label>
-                        <input 
-                          id="contactBudget"
-                          name="budget"
-                          type="text" 
-                          placeholder="e.g. ₹50k - ₹1L"
-                          value={formData.budget}
-                          onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-text-dim focus:outline-none focus:border-gold-500 transition-colors font-sans"
-                        />
+                        <label htmlFor="contactService" className="text-text-dim tracking-luxury ml-1">Service</label>
+                        <select 
+                          id="contactService"
+                          name="service"
+                          value={formData.service}
+                          onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-gold-500 transition-colors font-sans appearance-none"
+                        >
+                          <option value="General Inquiry" className="bg-[#0a0a0a]">General Inquiry</option>
+                          {services.map(s => (
+                            <option key={s.id} value={s.title} className="bg-[#0a0a0a]">{s.title}</option>
+                          ))}
+                        </select>
                       </div>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      <label htmlFor="contactBudget" className="text-text-dim tracking-luxury ml-1">Budget Range</label>
+                      <input 
+                        id="contactBudget"
+                        name="budget"
+                        type="text" 
+                        placeholder="e.g. ₹50k - ₹1L"
+                        value={formData.budget}
+                        onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-text-dim focus:outline-none focus:border-gold-500 transition-colors font-sans"
+                      />
                     </div>
                     
                     <div className="space-y-3">

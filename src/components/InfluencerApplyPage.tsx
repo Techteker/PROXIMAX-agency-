@@ -30,33 +30,21 @@ const InfluencerApplyPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
-    
-    const form = e.target as HTMLFormElement;
-    
     try {
-      const result = await (window as any).emailjs.sendForm(
-        'service_ind0oyk',
-        'template_f9lvw8e',
-        form
-      );
-      
-      if (result.text === 'OK') {
-        alert("Submitted Successfully!");
-        setSubmitStatus('success');
-        setFormData({
-          fullName: '',
-          email: '',
-          whatsapp: '',
-          city: '',
-          platform: 'Instagram',
-          profileLink: '',
-          followers: '',
-          message: ''
-        });
-        form.reset();
-      } else {
-        setSubmitStatus('error');
-      }
+      const form = e.target as HTMLFormElement;
+      await (window as any).emailjs.sendForm('service_ind0oyk', 'template_f9lvw8e', form);
+      setSubmitStatus('success');
+      setFormData({
+        fullName: '',
+        email: '',
+        whatsapp: '',
+        city: '',
+        platform: 'Instagram',
+        profileLink: '',
+        followers: '',
+        message: ''
+      });
+      alert('Submitted Successfully!');
     } catch (error) {
       console.error("Influencer form submission error:", error);
       setSubmitStatus('error');
