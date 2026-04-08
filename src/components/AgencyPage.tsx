@@ -226,52 +226,62 @@ const AgencyPage = () => {
         </div>
         
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gold-500 text-[10px] font-display font-black uppercase tracking-luxury mb-8">
+              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gold-500 text-[8px] md:text-[10px] font-display font-black uppercase tracking-luxury mb-6 md:mb-8">
                 <Sparkles className="w-3 h-3" />
                 The Gold Standard in Digital Growth
               </div>
-              <h1 className="text-6xl md:text-8xl font-serif italic text-white mb-8 tracking-tighter leading-[0.9]">
+              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif italic text-white mb-6 md:mb-8 tracking-tighter leading-[0.9]">
                 Grow Your <br /> <span className="text-gold-500">Local Business</span> <br /> with Leads.
               </h1>
-              <p className="text-xl text-text-muted max-w-xl mb-12 font-sans font-light leading-relaxed">
+              <p className="text-base md:text-xl text-text-muted max-w-xl mb-8 md:mb-12 font-sans font-light leading-relaxed">
                 We help Real Estate, Jewellery, and Fashion brands dominate their local market with expert SEO and GMB strategies.
               </p>
-              <div className="flex flex-col sm:flex-row gap-6">
+              <div className="flex flex-col sm:flex-row gap-4 md:gap-6">
                 <button 
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="bg-gold-600 text-white px-12 py-5 rounded-full font-display font-black text-xs uppercase tracking-luxury hover:bg-gold-700 transition-all shadow-2xl shadow-gold-600/20 flex items-center justify-center gap-3 group"
+                  className="bg-gold-600 text-white px-8 md:px-12 py-4 md:py-5 rounded-full font-display font-black text-[10px] md:text-xs uppercase tracking-luxury hover:bg-gold-700 transition-all shadow-2xl shadow-gold-600/20 flex items-center justify-center gap-3 group"
                 >
                   Get Free Audit <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
-                <div className="flex items-center gap-4 px-8 py-5 rounded-full glass-premium border border-white/10">
+                <div className="flex items-center gap-4 px-6 md:px-8 py-4 md:py-5 rounded-full glass-premium border border-white/10">
                   <div className="flex -space-x-3">
                     {[1, 2, 3].map(i => (
-                      <div key={i} className="w-10 h-10 rounded-full border-2 border-[#050505] bg-gold-600 flex items-center justify-center text-[10px] font-bold text-white">
+                      <div key={i} className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-[#050505] bg-gold-600 flex items-center justify-center text-[8px] md:text-[10px] font-bold text-white">
                         {i}
                       </div>
                     ))}
                   </div>
                   <div className="text-left">
-                    <p className="text-white font-bold text-sm">50+ Clients</p>
-                    <p className="text-[10px] text-text-dim uppercase tracking-widest">Trust PROXIMAX</p>
+                    <p className="text-white font-bold text-xs md:text-sm">50+ Clients</p>
+                    <p className="text-[8px] md:text-[10px] text-text-dim uppercase tracking-widest">Trust PROXIMAX</p>
                   </div>
                 </div>
               </div>
             </motion.div>
             
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className="relative"
+              initial={{ opacity: 0, scale: 0.8, rotateY: 20, rotateX: 10 }}
+              animate={{ opacity: 1, scale: 1, rotateY: 0, rotateX: 0 }}
+              transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+              className="relative perspective-2000 mt-12 md:mt-0"
             >
-              <div className="relative z-10 aspect-square rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl group">
+              <motion.div 
+                whileHover={{ 
+                  rotateY: -15, 
+                  rotateX: 10,
+                  scale: 1.05,
+                  translateZ: 50
+                }}
+                whileTap={{ scale: 0.95, rotateY: 5 }}
+                transition={{ type: "spring", stiffness: 150, damping: 20 }}
+                className="relative z-10 aspect-square rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5),0_0_50px_rgba(212,175,55,0.1)] group preserve-3d"
+              >
                 <img 
                   src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80" 
                   alt="Digital Marketing Excellence" 
@@ -280,11 +290,24 @@ const AgencyPage = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-60" />
                 
+                {/* 3D Floating Elements inside the card */}
+                <div className="absolute inset-0 pointer-events-none">
+                  <motion.div 
+                    animate={{ 
+                      y: [0, -10, 0],
+                      x: [0, 5, 0]
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-12 right-12 w-24 h-24 bg-gold-500/10 rounded-full blur-2xl"
+                  />
+                </div>
+
                 {/* Floating Stats Card */}
                 <motion.div 
+                  style={{ transformStyle: "preserve-3d", translateZ: "100px" }}
                   animate={{ y: [0, -20, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute bottom-12 left-12 right-12 glass-premium p-8 rounded-3xl border border-white/10 backdrop-blur-2xl"
+                  className="absolute bottom-12 left-12 right-12 glass-premium p-8 rounded-3xl border border-white/10 backdrop-blur-2xl shadow-2xl"
                 >
                   <div className="grid grid-cols-2 gap-8">
                     <div>
@@ -297,11 +320,18 @@ const AgencyPage = () => {
                     </div>
                   </div>
                 </motion.div>
-              </div>
+              </motion.div>
               
-              {/* Decorative Elements */}
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-gold-600/20 rounded-full blur-3xl" />
+              {/* Decorative Elements with 3D Depth */}
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-gold-600/20 rounded-full blur-3xl animate-pulse" />
               <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-gold-900/20 rounded-full blur-3xl" />
+              
+              {/* 3D Orbiting Ring */}
+              <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-[-10%] border border-gold-500/10 rounded-full pointer-events-none"
+              />
             </motion.div>
           </div>
         </div>
@@ -322,7 +352,7 @@ const AgencyPage = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <motion.div
                 key={service.id}
@@ -331,7 +361,7 @@ const AgencyPage = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 onClick={() => setSelectedService(service)}
-                className="group relative glass-premium p-10 rounded-[2.5rem] border border-white/5 hover:border-gold-500/30 transition-all duration-500 cursor-pointer overflow-hidden"
+                className="group relative glass-premium p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] border border-white/5 hover:border-gold-500/30 transition-all duration-500 cursor-pointer overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-gold-600/0 via-transparent to-transparent group-hover:from-gold-600/5 transition-all duration-700" />
                 
@@ -501,24 +531,24 @@ const AgencyPage = () => {
             <div className="space-y-6">
               {[
                 {
-                  q: "GMB se clients kaise milte hain?",
-                  a: "GMB optimization se aapka business Google Maps par top par dikhta hai, jisse local customers aapko call ya visit karte hain jab wo aapki services search karte hain."
+                  q: "How does GMB optimization generate leads?",
+                  a: "Strategic GMB optimization ensures your business appears at the pinnacle of local search results and Google Maps. This visibility captures high-intent customers exactly when they are searching for your specific services in your area."
                 },
                 {
-                  q: "Result kitne din me milta hai?",
-                  a: "GMB aur Local SEO ka result usually 1-3 months me dikhne lagta hai. Agar aapko instant results chahiye, toh hum ads (Performance Marketing) suggest karte hain jo pehle din se leads de sakte hain."
+                  q: "What is the typical timeline for seeing results?",
+                  a: "While Local SEO and GMB optimization typically show significant traction within 1 to 3 months, our Performance Marketing strategies can generate high-quality leads almost immediately upon campaign launch."
                 },
                 {
-                  q: "Kya aap guarantee dete ho?",
-                  a: "Hum quality leads aur growth strategy ki commitment dete hain. Digital marketing me exact numbers ki guarantee dena mushkil hai, par hamara track record 98% client retention ka hai."
+                  q: "Do you provide performance guarantees?",
+                  a: "We commit to delivering high-quality leads and a data-driven growth strategy. While the digital landscape is dynamic, our 98% client retention rate is a testament to the consistent ROI we deliver for our partners."
                 },
                 {
-                  q: "Price kya hai?",
-                  a: "Hamare plans aapki business needs ke hisaab se customized hote hain. Hum small businesses ke liye affordable packages se lekar enterprises ke liye premium solutions tak sab provide karte hain."
+                  q: "How do you determine your pricing structure?",
+                  a: "Our solutions are bespoke. We offer tailored packages ranging from foundational local SEO for emerging businesses to comprehensive, multi-channel growth engines for established enterprises."
                 },
                 {
-                  q: "Kya small business ke liye useful hai?",
-                  a: "Bilkul! Local businesses ke liye GMB aur Local SEO sabse effective aur budget-friendly tarika hai apne area me dominate karne ka."
+                  q: "Is digital marketing effective for smaller local businesses?",
+                  a: "Absolutely. For local businesses, GMB and Local SEO represent the most cost-effective and high-impact methods to establish market dominance and outcompete larger rivals in your specific territory."
                 }
               ].map((faq, i) => (
                 <FAQItem key={i} question={faq.q} answer={faq.a} />
@@ -539,10 +569,10 @@ const AgencyPage = () => {
             <div>
               <h2 className="text-gold-500 tracking-luxury mb-8 uppercase text-sm font-black">Get Started</h2>
               <h3 className="text-5xl md:text-7xl font-serif italic text-white mb-10 leading-tight tracking-tighter">
-                Let's Build Your <br /> <span className="text-gold-500">Legacy.</span>
+                Architecting Your <br /> <span className="text-gold-500">Digital Legacy.</span>
               </h3>
               <p className="text-xl text-text-muted font-sans font-light leading-relaxed mb-16">
-                Ready to dominate your local market? Fill out the form and our experts will reach out with a custom strategy.
+                Ready to command your local market? Partner with our experts to engineer a custom growth strategy that delivers measurable results.
               </p>
               
               <div className="space-y-12">

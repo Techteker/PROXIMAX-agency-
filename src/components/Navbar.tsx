@@ -104,59 +104,94 @@ export const Navbar: React.FC = () => {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            className="fixed inset-0 z-40 bg-[#050505] pt-32 px-10 md:hidden overflow-y-auto"
-          >
-            <div className="flex flex-col gap-8">
-              {navItems.map((item) => (
-                item.type === 'link' ? (
-                  <Link 
-                    key={item.name} 
-                    to={item.path}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={cn(
-                      "text-4xl font-serif italic",
-                      location.pathname === item.path ? "text-gold-500" : "text-white"
-                    )}
-                  >
-                    {item.name}
-                  </Link>
-                ) : (
-                  <button 
-                    key={item.name}
-                    onClick={() => handleNavClick(item)}
-                    className="text-4xl font-serif italic text-white text-left"
-                  >
-                    {item.name}
-                  </button>
-                )
-              ))}
+          <div className="fixed inset-0 z-40 md:hidden">
+            {/* Backdrop */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMenuOpen(false)}
+              className="absolute inset-0 bg-[#050505]/60 backdrop-blur-sm"
+            />
+            
+            {/* Menu Card */}
+            <motion.div 
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="absolute top-24 left-6 right-6 glass-premium rounded-[2.5rem] border border-white/10 p-8 shadow-2xl overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-gold-600/5 to-transparent pointer-events-none" />
               
-              <div className="mt-12 pt-12 border-t border-white/10 space-y-8">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gold-500">
-                    <Mail className="w-5 h-5" />
+              <div className="relative z-10 flex flex-col gap-6">
+                {navItems.map((item, idx) => (
+                  <motion.div
+                    key={item.name}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.05 }}
+                  >
+                    {item.type === 'link' ? (
+                      <Link 
+                        to={item.path}
+                        onClick={() => setIsMenuOpen(false)}
+                        className={cn(
+                          "text-2xl font-serif italic block",
+                          location.pathname === item.path ? "text-gold-500" : "text-white"
+                        )}
+                      >
+                        {item.name}
+                      </Link>
+                    ) : (
+                      <button 
+                        onClick={() => handleNavClick(item)}
+                        className="text-2xl font-serif italic text-white text-left w-full"
+                      >
+                        {item.name}
+                      </button>
+                    )}
+                  </motion.div>
+                ))}
+                
+                <div className="mt-6 pt-6 border-t border-white/10 grid grid-cols-1 gap-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gold-500">
+                      <Mail className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[8px] tracking-luxury text-text-dim uppercase">Email</p>
+                      <p className="text-white text-xs">hello@proximax.in</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-[10px] tracking-luxury text-text-dim uppercase">Email Us</p>
-                    <p className="text-white">hello@proximax.in</p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gold-500">
+                      <Phone className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[8px] tracking-luxury text-text-dim uppercase">Call</p>
+                      <p className="text-white text-xs">+91 93415 79348</p>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gold-500">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] tracking-luxury text-text-dim uppercase">Call Us</p>
-                    <p className="text-white">+91 93415 79348</p>
-                  </div>
-                </div>
+
+                <button 
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    if (location.pathname !== '/') {
+                      navigate('/');
+                      setTimeout(() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }), 100);
+                    } else {
+                      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className="w-full bg-gold-600 text-white py-4 rounded-full tracking-luxury hover:bg-gold-700 transition-all shadow-xl shadow-gold-600/20 text-[10px] mt-4"
+                >
+                  Get Started
+                </button>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </>

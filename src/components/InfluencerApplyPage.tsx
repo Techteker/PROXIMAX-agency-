@@ -84,10 +84,10 @@ const InfluencerApplyPage = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-6xl md:text-8xl font-serif italic text-white mb-8 tracking-tighter leading-[0.9]">
-              Join the <span className="text-gold-500">PROXIMAX</span> <br /> Influencer Network
+              The <span className="text-gold-500">PROXIMAX</span> <br /> Creator Collective
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
-              Partner with top brands, grow your audience, and monetize your content. We connect creators with opportunities that matter.
+              Partner with elite brands, amplify your influence, and monetize your creative vision. We bridge the gap between high-impact creators and market-leading opportunities.
             </p>
             <button 
               onClick={() => document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' })}
@@ -103,8 +103,8 @@ const InfluencerApplyPage = () => {
       <section className="py-32 bg-[#0a0a0a]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-gold-500 tracking-widest uppercase text-sm font-bold mb-4">Why Join Us?</h2>
-            <h3 className="text-4xl md:text-5xl font-serif italic text-white">Exclusive Benefits for Creators</h3>
+            <h2 className="text-gold-500 tracking-widest uppercase text-sm font-bold mb-4">The Collective Advantage</h2>
+            <h3 className="text-4xl md:text-5xl font-serif italic text-white">Elite Opportunities for Creators</h3>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -106,10 +106,10 @@ const InternshipPage = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-6xl md:text-8xl font-serif italic text-white mb-8 tracking-tighter leading-[0.9]">
-              Digital Marketing <br /> <span className="text-gold-500">Internship in India</span>
+              Elite Digital <br /> <span className="text-gold-500">Marketing Residency</span>
             </h1>
             <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-12 font-sans font-light leading-relaxed">
-              Launch your career with the best digital marketing agency. Gain real-world experience in SEO, GMB optimization, and performance marketing with an official certificate.
+              Accelerate your career at India's premier digital growth agency. Gain hands-on mastery in SEO, GMB engineering, and high-performance marketing under elite mentorship.
             </p>
             <button 
               onClick={() => document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' })}
@@ -131,9 +131,9 @@ const InternshipPage = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-gold-500 font-display font-black uppercase tracking-[0.5em] text-[10px] mb-8">The Opportunity</h2>
-              <h3 className="text-5xl font-serif italic text-white mb-8 leading-tight">Best Digital Marketing <br /> Internship Experience. <br /> True Growth.</h3>
+              <h3 className="text-5xl font-serif italic text-white mb-8 leading-tight">A Masterclass in <br /> Digital Excellence. <br /> Real Impact.</h3>
               <p className="text-lg text-slate-400 leading-relaxed font-sans font-light mb-8">
-                At PROXIMAX, we offer a comprehensive digital marketing internship where you work directly on client accounts, managing real SEO and GMB projects to deliver actual results.
+                At PROXIMAX, we don't just offer internships; we provide a rigorous residency program. You will work directly on high-stakes client accounts, mastering the strategies that drive real-world business growth.
               </p>
               <div className="grid grid-cols-2 gap-8">
                 <div className="flex items-center gap-4">
