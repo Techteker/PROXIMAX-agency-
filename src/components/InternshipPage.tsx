@@ -29,14 +29,15 @@ import {
 import { cn } from '../lib/utils';
 import { WhatsAppIcon } from './icons/WhatsApp';
 
-const iconMap: Record<string, any> = {
-  Search: Target, MapPin: Target, Share2: Target, TrendingUp: Target, Layout: Target, MessageSquare: Target, WhatsApp: WhatsAppIcon, Target, PenTool: Target, Award, Cpu, Briefcase, FileText, Sparkles, Instagram, ArrowRight, Linkedin, Twitter, Mail, Phone, ShieldCheck, GraduationCap, Clock, Users, HelpCircle, CheckCircle2, Check, Menu, X, Calendar
-};
+import { 
+  internshipRoles as roles, 
+  internshipBenefits as benefits,
+  internshipLearningPoints as learningPoints
+} from '../constants';
 
 const InternshipPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [internshipData, setInternshipData] = useState<any>(null);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -45,13 +46,6 @@ const InternshipPage = () => {
     role: 'Digital Marketing Intern',
     motivation: ''
   });
-
-  useEffect(() => {
-    fetch('/api/internship-details')
-      .then(res => res.json())
-      .then(data => setInternshipData(data))
-      .catch(err => console.error("Error fetching internship details:", err));
-  }, []);
 
   const [submitError, setSubmitError] = useState<string | null>(null);
 
@@ -89,10 +83,6 @@ const InternshipPage = () => {
       setIsSubmitting(false);
     }
   };
-
-  if (!internshipData) return null;
-
-  const { roles, learningPoints, benefits, faqs } = internshipData;
 
   return (
     <div className="bg-[#050505]">
@@ -164,7 +154,7 @@ const InternshipPage = () => {
               <div className="aspect-square rounded-3xl overflow-hidden glass border border-white/10 p-8 flex flex-col justify-center">
                 <div className="space-y-6">
                   {benefits.map((b: any, i: number) => {
-                    const Icon = iconMap[b.icon] || Award;
+                    const Icon = b.icon || Award;
                     return (
                       <div key={i} className="flex items-center gap-6 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-gold-500/30 transition-all">
                         <div className="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center text-gold-500">
@@ -190,7 +180,7 @@ const InternshipPage = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {roles.map((role: any, i: number) => {
-              const Icon = iconMap[role.icon] || Target;
+              const Icon = role.icon || Target;
               return (
                 <motion.div
                   key={i}

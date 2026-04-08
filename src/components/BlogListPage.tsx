@@ -5,74 +5,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Calendar, ArrowRight, Search, Clock, Sparkles } from 'lucide-react';
 import { cn } from '../lib/utils';
 
-const SAMPLE_BLOGS = [
-  {
-    id: 's1',
-    title: 'Google My Business Optimization Guide for 2026',
-    slug: 'gmb-optimization-guide-2026',
-    date: '2026-04-03',
-    author: 'PROXIMAX Team',
-    category: 'Local SEO',
-    banner: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?q=80&w=2073&auto=format&fit=crop',
-    excerpt: '2026 me Google My Business (GMB) optimization ke bina local business grow karna namumkin hai. Janiye latest strategies aur tips leads badhane ke liye.',
-    readTime: 8
-  },
-  {
-    id: 's2',
-    title: 'How to Rank #1 on Google Maps in India',
-    slug: 'rank-1-google-maps-india',
-    date: '2026-04-03',
-    author: 'PROXIMAX Team',
-    category: 'Local SEO',
-    banner: 'https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2006&auto=format&fit=crop',
-    excerpt: 'Google Maps par rank karna ab pehle se zyada competitive hai. Janiye kaise aap India me apne business ko #1 position par la sakte hain.',
-    readTime: 10
-  },
-  {
-    id: 's3',
-    title: 'Local SEO Strategies for Small Businesses',
-    slug: 'local-seo-strategies-small-business',
-    date: '2026-04-03',
-    author: 'PROXIMAX Team',
-    category: 'Local SEO',
-    banner: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop',
-    excerpt: 'Small business owners ke liye local SEO ab luxury nahi, necessity hai. Janiye kaise aap kam budget me local customers attract kar sakte hain.',
-    readTime: 7
-  },
-  {
-    id: 's4',
-    title: 'Real Estate Marketing Trends 2026',
-    slug: 'real-estate-marketing-trends-2026',
-    date: '2026-04-03',
-    author: 'PROXIMAX Team',
-    category: 'Real Estate',
-    banner: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2073&auto=format&fit=crop',
-    excerpt: '2026 me real estate bechna pehle jaisa nahi raha. AI, VR aur personalized marketing ne game badal diya hai.',
-    readTime: 12
-  },
-  {
-    id: 's5',
-    title: 'Jewellery Marketing Ideas 2026',
-    slug: 'jewellery-marketing-ideas-2026',
-    date: '2026-04-03',
-    author: 'PROXIMAX Team',
-    category: 'Jewellery',
-    banner: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2070&auto=format&fit=crop',
-    excerpt: 'Jewellery business me trust aur aesthetics sabse zaroori hain. Janiye 2026 ke best marketing ideas jo aapki sales 2x kar sakte hain.',
-    readTime: 9
-  },
-  {
-    id: 's6',
-    title: 'Fashion Branding in the Digital Age',
-    slug: 'fashion-branding-digital-age',
-    date: '2026-04-03',
-    author: 'PROXIMAX Team',
-    category: 'Fashion',
-    banner: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop',
-    excerpt: 'Fashion brands ko digital presence build karne ke liye kya karna chahiye? Janiye latest branding tips aur growth strategies.',
-    readTime: 11
-  }
-];
+import { SAMPLE_BLOGS } from '../constants';
 
 const BlogListPage = () => {
   const [blogs, setBlogs] = useState<any[]>([]);

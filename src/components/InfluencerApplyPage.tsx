@@ -3,6 +3,8 @@ import { motion } from 'motion/react';
 import { Helmet } from 'react-helmet-async';
 import { CheckCircle2, Send } from 'lucide-react';
 
+import { influencerBenefits as benefits } from '../constants';
+
 const InfluencerApplyPage = () => {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -17,15 +19,6 @@ const InfluencerApplyPage = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-
-  const benefits = [
-    "Exclusive Brand Collaborations",
-    "High-Paying Sponsorships",
-    "Professional Growth & Mentorship",
-    "Access to Premium Events",
-    "Content Creation Support",
-    "Fast & Secure Payments"
-  ];
 
   const encode = (data: any) => {
     return Object.keys(data)
@@ -70,7 +63,7 @@ const InfluencerApplyPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-blue-500/30">
+    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-gold-500/30">
       <Helmet>
         <title>Join Our Influencer Network | PROXIMAX Digital Marketing</title>
         <meta name="description" content="Are you a creator? Join the PROXIMAX influencer network to partner with top brands, grow your audience, and monetize your content. Apply now!" />
@@ -80,8 +73,8 @@ const InfluencerApplyPage = () => {
       {/* Header / Banner */}
       <section className="relative pt-48 pb-32 overflow-hidden">
         <div className="absolute inset-0 -z-10">
-          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[120px]" />
+          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-gold-600/10 rounded-full blur-[120px] animate-pulse" />
+          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-gold-900/10 rounded-full blur-[120px]" />
         </div>
         
         <div className="max-w-7xl mx-auto px-6 text-center">
@@ -91,14 +84,14 @@ const InfluencerApplyPage = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-6xl md:text-8xl font-serif italic text-white mb-8 tracking-tighter leading-[0.9]">
-              Join the <span className="text-blue-500">PROXIMAX</span> <br /> Influencer Network
+              Join the <span className="text-gold-500">PROXIMAX</span> <br /> Influencer Network
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
               Partner with top brands, grow your audience, and monetize your content. We connect creators with opportunities that matter.
             </p>
             <button 
               onClick={() => document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-blue-600 text-white px-12 py-5 rounded-full font-bold text-sm uppercase tracking-widest hover:bg-blue-700 transition-all shadow-2xl shadow-blue-600/20"
+              className="bg-gold-600 text-white px-12 py-5 rounded-full font-bold text-sm uppercase tracking-widest hover:bg-gold-700 transition-all shadow-2xl shadow-gold-600/20"
             >
               Apply Now
             </button>
@@ -110,7 +103,7 @@ const InfluencerApplyPage = () => {
       <section className="py-32 bg-[#0a0a0a]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-blue-500 tracking-widest uppercase text-sm font-bold mb-4">Why Join Us?</h2>
+            <h2 className="text-gold-500 tracking-widest uppercase text-sm font-bold mb-4">Why Join Us?</h2>
             <h3 className="text-4xl md:text-5xl font-serif italic text-white">Exclusive Benefits for Creators</h3>
           </div>
           
@@ -122,9 +115,9 @@ const InfluencerApplyPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white/5 p-8 rounded-2xl border border-white/5 hover:border-blue-500/30 transition-all flex items-center gap-4"
+                className="bg-white/5 p-8 rounded-2xl border border-white/5 hover:border-gold-500/30 transition-all flex items-center gap-4"
               >
-                <div className="w-10 h-10 rounded-full bg-blue-600/20 flex items-center justify-center text-blue-500 shrink-0">
+                <div className="w-10 h-10 rounded-full bg-gold-600/20 flex items-center justify-center text-gold-500 shrink-0">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
                 <span className="text-lg text-gray-200 font-medium">{benefit}</span>
@@ -139,7 +132,7 @@ const InfluencerApplyPage = () => {
         <div className="max-w-3xl mx-auto px-6">
           <div className="bg-white/5 p-12 md:p-16 rounded-[3rem] border border-white/10 relative overflow-hidden backdrop-blur-xl">
             <div className="text-center mb-16">
-              <h2 className="text-blue-500 tracking-widest uppercase text-sm font-bold mb-6">Application Form</h2>
+              <h2 className="text-gold-500 tracking-widest uppercase text-sm font-bold mb-6">Application Form</h2>
               <h3 className="text-5xl font-serif italic text-white tracking-tighter">Start Your Journey</h3>
             </div>
 
@@ -171,7 +164,7 @@ const InfluencerApplyPage = () => {
                     type="text" required placeholder="Enter your full name"
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-blue-500 transition-colors"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-gold-500 transition-colors"
                   />
                 </div>
                 <div className="space-y-3">
@@ -181,7 +174,7 @@ const InfluencerApplyPage = () => {
                     type="email" required placeholder="you@example.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-blue-500 transition-colors"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-gold-500 transition-colors"
                   />
                 </div>
               </div>
@@ -194,7 +187,7 @@ const InfluencerApplyPage = () => {
                     type="tel" required placeholder="+91 00000 00000"
                     value={formData.whatsapp}
                     onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-blue-500 transition-colors"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-gold-500 transition-colors"
                   />
                 </div>
                 <div className="space-y-3">
@@ -204,7 +197,7 @@ const InfluencerApplyPage = () => {
                     type="text" required placeholder="Your City"
                     value={formData.city}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-blue-500 transition-colors"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-gold-500 transition-colors"
                   />
                 </div>
               </div>
@@ -216,7 +209,7 @@ const InfluencerApplyPage = () => {
                     name="platform"
                     value={formData.platform}
                     onChange={(e) => setFormData({ ...formData, platform: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-blue-500 transition-colors appearance-none"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-gold-500 transition-colors appearance-none"
                   >
                     <option value="Instagram" className="bg-[#0a0a0a]">Instagram</option>
                     <option value="YouTube" className="bg-[#0a0a0a]">YouTube</option>
@@ -232,7 +225,7 @@ const InfluencerApplyPage = () => {
                     type="url" required placeholder="https://instagram.com/yourprofile"
                     value={formData.profileLink}
                     onChange={(e) => setFormData({ ...formData, profileLink: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-blue-500 transition-colors"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-gold-500 transition-colors"
                   />
                 </div>
               </div>
@@ -244,7 +237,7 @@ const InfluencerApplyPage = () => {
                   type="text" required placeholder="e.g. 10k, 50k, 1M"
                   value={formData.followers}
                   onChange={(e) => setFormData({ ...formData, followers: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-blue-500 transition-colors"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-gold-500 transition-colors"
                 />
               </div>
 
@@ -255,14 +248,14 @@ const InfluencerApplyPage = () => {
                   rows={4} placeholder="Tell us more about your niche and audience..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-blue-500 transition-colors resize-none"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-gold-500 transition-colors resize-none"
                 ></textarea>
               </div>
 
               <button 
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-blue-600 text-white py-5 rounded-full font-bold text-sm uppercase tracking-widest hover:bg-blue-700 transition-all shadow-xl shadow-blue-600/20 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gold-600 text-white py-5 rounded-full font-bold text-sm uppercase tracking-widest hover:bg-gold-700 transition-all shadow-xl shadow-gold-600/20 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -275,11 +268,6 @@ const InfluencerApplyPage = () => {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="py-12 border-t border-white/5 text-center">
-        <p className="text-gray-500 text-sm">© 2026 PROXIMAX. All rights reserved.</p>
-      </footer>
     </div>
   );
 };

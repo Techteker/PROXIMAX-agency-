@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { WhatsAppIcon } from './icons/WhatsApp';
 import { cn } from '../lib/utils';
+import { SAMPLE_BLOGS } from '../constants';
 
 const BlogPostPage = () => {
   const { slug } = useParams();
@@ -71,8 +72,36 @@ const BlogPostPage = () => {
           });
       })
       .catch(err => {
-        console.error(err);
-        navigate('/blog');
+        console.error("Error fetching blog, trying sample data:", err);
+        const sampleBlog = SAMPLE_BLOGS.find(b => b.slug === slug);
+        if (sampleBlog) {
+          // Mock content for sample blogs if needed, or assume they have it
+          const blogWithContent = {
+            ...sampleBlog,
+            content: sampleBlog.excerpt + "\n\n## Introduction\n\nThis is a sample blog post content.\n\n## Key Strategies\n\n1. Strategy One\n2. Strategy Two\n\n## Conclusion\n\nContact us for more information.",
+            faqs: [
+              { q: "What is Local SEO?", a: "Local SEO is the process of optimizing your online presence to attract more business from relevant local searches." }
+            ]
+          };
+          setBlog(blogWithContent);
+          
+          const headings = blogWithContent.content.match(/^##\s+(.*)/gm) || [];
+          const tocItems = headings.map((h: string) => {
+            const text = h.replace(/^##\s+/, '');
+            const id = text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+            return { id, text };
+          });
+          setToc(tocItems);
+
+          const related = SAMPLE_BLOGS
+            .filter((b: any) => b.slug !== slug && b.category === sampleBlog.category)
+            .slice(0, 3);
+          setRelatedBlogs(related);
+          setLoading(false);
+          window.scrollTo(0, 0);
+        } else {
+          navigate('/blog');
+        }
       });
   }, [slug, navigate]);
 

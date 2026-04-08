@@ -231,18 +231,6 @@ async function startServer() {
     res.json(internshipData);
   });
 
-  app.post("/api/internship", (req, res) => {
-    console.log("New Internship Application:", req.body);
-    // In a real app, you'd save this to a database or send an email
-    res.json({ success: true, message: "Application received" });
-  });
-
-  app.post("/api/influencer", (req, res) => {
-    console.log("New Influencer Application:", req.body);
-    // In a real app, you'd save this to a database or send an email
-    res.json({ success: true, message: "Application received" });
-  });
-
   // Blog API Routes
   console.log(`Loaded ${blogs.length} blogs from data source.`);
   
