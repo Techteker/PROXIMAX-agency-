@@ -90,19 +90,21 @@ const AgencyPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    
+    const form = e.target as HTMLFormElement;
+    
     try {
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({
-          "form-name": "contact",
-          ...formData,
-          service: 'General Inquiry'
-        })
-      });
-      if (response.ok) {
+      const result = await (window as any).emailjs.sendForm(
+        'service_ind0oyk',
+        'template_f9lvw8e',
+        form
+      );
+      
+      if (result.text === 'OK') {
+        alert("Submitted Successfully!");
         setSubmitStatus('success');
         setFormData({ name: '', email: '', phone: '', budget: '', message: '' });
+        form.reset();
       } else {
         setSubmitStatus('error');
       }
@@ -531,24 +533,24 @@ const AgencyPage = () => {
             <div className="space-y-6">
               {[
                 {
-                  q: "How does GMB optimization generate leads?",
-                  a: "Strategic GMB optimization ensures your business appears at the pinnacle of local search results and Google Maps. This visibility captures high-intent customers exactly when they are searching for your specific services in your area."
+                  q: "GMB se clients kaise milte hain?",
+                  a: "GMB optimization se aapka business Google Maps par top par dikhta hai, jisse local customers aapko call ya visit karte hain jab wo aapki services search karte hain."
                 },
                 {
-                  q: "What is the typical timeline for seeing results?",
-                  a: "While Local SEO and GMB optimization typically show significant traction within 1 to 3 months, our Performance Marketing strategies can generate high-quality leads almost immediately upon campaign launch."
+                  q: "Result kitne din me milta hai?",
+                  a: "GMB aur Local SEO ka result usually 1-3 months me dikhne lagta hai. Agar aapko instant results chahiye, toh hum ads (Performance Marketing) suggest karte hain jo pehle din se leads de sakte hain."
                 },
                 {
-                  q: "Do you provide performance guarantees?",
-                  a: "We commit to delivering high-quality leads and a data-driven growth strategy. While the digital landscape is dynamic, our 98% client retention rate is a testament to the consistent ROI we deliver for our partners."
+                  q: "Kya aap guarantee dete ho?",
+                  a: "Hum quality leads aur growth strategy ki commitment dete hain. Digital marketing me exact numbers ki guarantee dena mushkil hai, par hamara track record 98% client retention ka hai."
                 },
                 {
-                  q: "How do you determine your pricing structure?",
-                  a: "Our solutions are bespoke. We offer tailored packages ranging from foundational local SEO for emerging businesses to comprehensive, multi-channel growth engines for established enterprises."
+                  q: "Price kya hai?",
+                  a: "Hamare plans aapki business needs ke hisaab se customized hote hain. Hum small businesses ke liye affordable packages se lekar enterprises ke liye premium solutions tak sab provide karte hain."
                 },
                 {
-                  q: "Is digital marketing effective for smaller local businesses?",
-                  a: "Absolutely. For local businesses, GMB and Local SEO represent the most cost-effective and high-impact methods to establish market dominance and outcompete larger rivals in your specific territory."
+                  q: "Kya small business ke liye useful hai?",
+                  a: "Bilkul! Local businesses ke liye GMB aur Local SEO sabse effective aur budget-friendly tarika hai apne area me dominate karne ka."
                 }
               ].map((faq, i) => (
                 <FAQItem key={i} question={faq.q} answer={faq.a} />
@@ -569,10 +571,10 @@ const AgencyPage = () => {
             <div>
               <h2 className="text-gold-500 tracking-luxury mb-8 uppercase text-sm font-black">Get Started</h2>
               <h3 className="text-5xl md:text-7xl font-serif italic text-white mb-10 leading-tight tracking-tighter">
-                Architecting Your <br /> <span className="text-gold-500">Digital Legacy.</span>
+                Let's Build Your <br /> <span className="text-gold-500">Legacy.</span>
               </h3>
               <p className="text-xl text-text-muted font-sans font-light leading-relaxed mb-16">
-                Ready to command your local market? Partner with our experts to engineer a custom growth strategy that delivers measurable results.
+                Ready to dominate your local market? Fill out the form and our experts will reach out with a custom strategy.
               </p>
               
               <div className="space-y-12">
@@ -632,6 +634,7 @@ const AgencyPage = () => {
                     className="space-y-8"
                   >
                     <input type="hidden" name="form-name" value="contact" />
+                    <input type="hidden" name="form_type" value="Contact" />
                     <div className="grid md:grid-cols-2 gap-8">
                       <div className="space-y-3">
                         <label htmlFor="contactName" className="text-text-dim tracking-luxury ml-1">Full Name</label>

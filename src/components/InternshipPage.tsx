@@ -60,19 +60,20 @@ const InternshipPage = () => {
     setIsSubmitting(true);
     setSubmitError(null);
     
+    const form = e.target as HTMLFormElement;
+    
     try {
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({
-          "form-name": "internship",
-          ...formData
-        })
-      });
+      const result = await (window as any).emailjs.sendForm(
+        'service_ind0oyk',
+        'template_f9lvw8e',
+        form
+      );
 
-      if (response.ok) {
+      if (result.text === 'OK') {
+        alert("Submitted Successfully!");
         setIsSubmitted(true);
         setFormData({ name: '', phone: '', email: '', college: '', role: 'Digital Marketing Intern', motivation: '' });
+        form.reset();
       } else {
         setSubmitError("Failed to submit application. Please try again later.");
       }
@@ -106,10 +107,10 @@ const InternshipPage = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-6xl md:text-8xl font-serif italic text-white mb-8 tracking-tighter leading-[0.9]">
-              Elite Digital <br /> <span className="text-gold-500">Marketing Residency</span>
+              Digital Marketing <br /> <span className="text-gold-500">Internship in India</span>
             </h1>
             <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-12 font-sans font-light leading-relaxed">
-              Accelerate your career at India's premier digital growth agency. Gain hands-on mastery in SEO, GMB engineering, and high-performance marketing under elite mentorship.
+              Launch your career with the best digital marketing agency. Gain real-world experience in SEO, GMB optimization, and performance marketing with an official certificate.
             </p>
             <button 
               onClick={() => document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' })}
@@ -131,9 +132,9 @@ const InternshipPage = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-gold-500 font-display font-black uppercase tracking-[0.5em] text-[10px] mb-8">The Opportunity</h2>
-              <h3 className="text-5xl font-serif italic text-white mb-8 leading-tight">A Masterclass in <br /> Digital Excellence. <br /> Real Impact.</h3>
+              <h3 className="text-5xl font-serif italic text-white mb-8 leading-tight">Best Digital Marketing <br /> Internship Experience. <br /> True Growth.</h3>
               <p className="text-lg text-slate-400 leading-relaxed font-sans font-light mb-8">
-                At PROXIMAX, we don't just offer internships; we provide a rigorous residency program. You will work directly on high-stakes client accounts, mastering the strategies that drive real-world business growth.
+                At PROXIMAX, we offer a comprehensive digital marketing internship where you work directly on client accounts, managing real SEO and GMB projects to deliver actual results.
               </p>
               <div className="grid grid-cols-2 gap-8">
                 <div className="flex items-center gap-4">
@@ -313,6 +314,7 @@ const InternshipPage = () => {
               data-netlify="true"
             >
               <input type="hidden" name="form-name" value="internship" />
+              <input type="hidden" name="form_type" value="Internship" />
               {submitError && (
                 <div className="bg-red-500/10 border border-red-500/20 text-red-500 p-6 rounded-2xl text-center">
                   {submitError}
@@ -369,6 +371,7 @@ const InternshipPage = () => {
               <div className="space-y-3">
                 <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Why should we hire you?</label>
                 <textarea 
+                  name="message"
                   rows={4} required placeholder="Tell us about your motivation..."
                   value={formData.motivation} onChange={(e) => setFormData({...formData, motivation: e.target.value})}
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-gold-500 transition-colors resize-none"

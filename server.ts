@@ -24,148 +24,148 @@ async function startServer() {
     services: [
       {
         id: "seo",
-        title: "SEO (On-page & Off-page)",
-        headline: "Rank Your Website on Google & Get More Traffic",
-        description: "We help your website rank higher on Google using proven SEO strategies.",
-        detailedServices: ["On-page SEO", "Off-page SEO", "Keyword Research", "Technical SEO"],
-        process: "Audit → Optimize → Rank",
-        results: ["More traffic", "Higher rankings", "More leads"],
-        cta: "Get Free SEO Audit",
+        title: "Search Engine Optimization",
+        headline: "Dominate Search Results & Capture Organic Demand",
+        description: "We engineer high-performance SEO strategies that elevate your brand to the pinnacle of search results, driving sustainable organic growth.",
+        detailedServices: ["Strategic On-page SEO", "Authority Building (Off-page)", "Advanced Keyword Intelligence", "Technical Infrastructure Optimization"],
+        process: "Audit → Architect → Accelerate",
+        results: ["Market Dominance", "Elite Search Visibility", "High-Intent Lead Flow"],
+        cta: "Request SEO Strategy",
         icon: "Search",
         color: "bg-gold-500/10 text-gold-500"
       },
       {
         id: "gmb",
-        title: "GMB Optimization",
-        headline: "Rank Your Business on Google Maps & Get Local Customers",
-        description: "We optimize your Google My Business profile to bring more calls and visits.",
-        detailedServices: ["GMB Setup & Optimization", "Local SEO", "Review Management"],
-        results: ["More calls", "More local customers"],
-        cta: "Rank My Business on Maps",
+        title: "GMB & Local Search Mastery",
+        headline: "Command Your Local Market with Precision",
+        description: "Strategic GMB optimization to ensure your business is the first choice for local customers on Google Maps and search.",
+        detailedServices: ["GMB Engineering", "Local Search Dominance", "Reputation Management"],
+        results: ["Peak Local Visibility", "Increased High-Intent Calls"],
+        cta: "Dominate Local Search",
         icon: "MapPin",
         color: "bg-gold-400/10 text-gold-400"
       },
       {
         id: "smm",
         title: "Social Media Management",
-        headline: "Grow Your Social Media & Build Your Brand",
-        description: "We manage and grow your social media for better engagement.",
-        detailedServices: ["Content Posting", "Reels & Graphics", "Engagement Strategy"],
-        results: ["More followers", "Better engagement"],
-        cta: "Grow My Social Media",
+        headline: "Cultivating Digital Influence & Brand Equity",
+        description: "We curate sophisticated social media presences that resonate with your audience and build lasting brand loyalty.",
+        detailedServices: ["Editorial Content Strategy", "Premium Visual Storytelling", "Strategic Community Engagement"],
+        results: ["Enhanced Brand Influence", "Sophisticated Audience Growth"],
+        cta: "Elevate Your Social Presence",
         icon: "Share2",
         color: "bg-gold-500/10 text-gold-500"
       },
       {
         id: "performance",
         title: "Performance Marketing",
-        headline: "Get Instant Leads & Sales with Paid Ads",
-        description: "We run high-converting ad campaigns to grow your business fast.",
-        detailedServices: ["Facebook & Instagram Ads", "Google Ads", "Retargeting"],
-        results: ["More leads", "High ROI"],
-        cta: "Start My Ads Campaign",
+        headline: "Engineered Growth via High-Precision Advertising",
+        description: "Data-driven ad campaigns designed for maximum ROI, capturing demand and converting it into measurable business growth.",
+        detailedServices: ["Meta & Instagram Ads", "Google Search & Display Ads", "Strategic Retargeting Frameworks"],
+        results: ["Accelerated Lead Acquisition", "Optimized ROI"],
+        cta: "Launch Growth Campaign",
         icon: "TrendingUp",
         color: "bg-gold-600/10 text-gold-600"
       },
       {
         id: "web",
-        title: "Website & Landing Page Design",
-        headline: "Build High-Converting Websites for Your Business",
-        description: "We create modern and responsive websites that convert visitors into customers.",
-        detailedServices: ["Business Website", "Landing Page Design", "Mobile Responsive"],
-        results: ["More conversions", "Professional presence"],
-        cta: "Build My Website",
+        title: "Web Design & Digital Experience",
+        headline: "Architecting High-Conversion Digital Storefronts",
+        description: "We design and develop bespoke, responsive websites that serve as the cornerstone of your digital brand identity.",
+        detailedServices: ["Bespoke Enterprise Websites", "High-Conversion Landing Pages", "Mobile-First Experience Design"],
+        results: ["Superior Conversion Rates", "Elite Brand Presentation"],
+        cta: "Architect Your Website",
         icon: "Layout",
         color: "bg-gold-500/10 text-gold-500"
       },
       {
         id: "whatsapp",
         title: "WhatsApp Marketing & Automation",
-        headline: "Convert Leads Faster with WhatsApp Automation",
-        description: "We set up WhatsApp systems to automate your customer communication.",
-        detailedServices: ["Bulk Messaging", "Automation", "Chatbot Setup"],
-        results: ["Instant replies", "Higher conversion"],
-        cta: "Setup WhatsApp Marketing",
+        headline: "Accelerate Conversions with Intelligent Automation",
+        description: "Streamline your customer journey with sophisticated WhatsApp automation and intelligent chatbot frameworks.",
+        detailedServices: ["Strategic Bulk Messaging", "Intelligent Workflow Automation", "AI Chatbot Integration"],
+        results: ["Instantaneous Engagement", "Enhanced Conversion Velocity"],
+        cta: "Automate Your Growth",
         icon: "WhatsApp",
         color: "bg-gold-500/10 text-gold-500"
       },
       {
         id: "leadgen",
-        title: "Lead Generation & Sales Funnel",
-        headline: "Get Daily Quality Leads for Your Business",
-        description: "We build automated systems to generate consistent leads.",
-        detailedServices: ["Funnel Setup", "Landing Page", "Automation"],
-        results: ["Consistent leads", "Automated sales"],
-        cta: "Get More Leads",
+        title: "Lead Generation & Sales Funnels",
+        headline: "Consistent Acquisition of High-Value Prospects",
+        description: "We build automated, high-performance sales funnels that deliver a steady stream of qualified leads to your business.",
+        detailedServices: ["Strategic Funnel Architecture", "High-Impact Landing Pages", "Lead Nurturing Automation"],
+        results: ["Predictable Lead Flow", "Automated Sales Velocity"],
+        cta: "Scale Your Lead Flow",
         icon: "Target",
         color: "bg-gold-400/10 text-gold-400"
       },
       {
         id: "content",
         title: "Content Creation & Copywriting",
-        headline: "Content That Attracts & Converts",
-        description: "We create powerful content that drives engagement and sales.",
-        detailedServices: ["Ad Copy", "Social Media Content", "Website Content"],
-        results: ["More engagement", "Better conversions"],
-        cta: "Create My Content",
+        headline: "Narratives That Compel & Convert",
+        description: "We craft powerful, persuasive content that captures attention and drives meaningful audience action.",
+        detailedServices: ["Strategic Ad Copywriting", "Premium Social Content", "Persuasive Website Narratives"],
+        results: ["Heightened Engagement", "Superior Conversion Performance"],
+        cta: "Craft Your Narrative",
         icon: "PenTool",
         color: "bg-gold-500/10 text-gold-500"
       },
       {
         id: "branding",
-        title: "Branding (Logo & Business Identity)",
-        headline: "Build a Strong & Professional Brand Identity",
-        description: "We design branding that makes your business stand out.",
-        detailedServices: ["Logo Design", "Brand Identity", "Social Media Branding"],
-        results: ["Professional look", "Strong brand image"],
-        cta: "Build My Brand",
+        title: "Branding & Identity Design",
+        headline: "Defining Elite Business Identities",
+        description: "We engineer distinctive brand identities that command respect and establish market authority.",
+        detailedServices: ["Bespoke Logo Design", "Comprehensive Brand Systems", "Strategic Visual Identity"],
+        results: ["Market Distinction", "Authoritative Brand Image"],
+        cta: "Define Your Brand",
         icon: "Award",
         color: "bg-gold-600/10 text-gold-600"
       },
       {
         id: "influencer",
         title: "Influencer Marketing",
-        headline: "Collaborate with Top Influencers to Grow Your Brand",
-        description: "We connect your brand with the right influencers for maximum reach and ROI.",
-        detailedServices: ["Influencer Sourcing", "Campaign Management", "Performance Tracking"],
-        results: ["Massive reach", "Authentic engagement"],
-        cta: "Start Influencer Campaign",
+        headline: "Amplifying Reach via Strategic Partnerships",
+        description: "We connect your brand with high-impact influencers to drive authentic engagement and massive market reach.",
+        detailedServices: ["Strategic Influencer Sourcing", "Campaign Architecture", "Performance Analytics"],
+        results: ["Exponential Market Reach", "Authentic Brand Advocacy"],
+        cta: "Initiate Partnership",
         icon: "Users",
         color: "bg-gold-500/10 text-gold-500"
       }
     ],
     faqs: [
       {
-        q: "GMB se clients kaise milte hain?",
-        a: "GMB optimization se aapka business Google Maps par top par dikhta hai, jisse local customers aapko call ya visit karte hain jab wo aapki services search karte hain."
+        q: "How does GMB optimization generate leads?",
+        a: "Strategic GMB optimization ensures your business appears at the pinnacle of local search results and Google Maps. This visibility captures high-intent customers exactly when they are searching for your specific services in your area."
       },
       {
-        q: "Result kitne din me milta hai?",
-        a: "GMB aur Local SEO ka result usually 1-3 months me dikhne lagta hai. Agar aapko instant results chahiye, toh hum ads (Performance Marketing) suggest karte hain jo pehle din se leads de sakte hain."
+        q: "What is the typical timeline for seeing results?",
+        a: "While Local SEO and GMB optimization typically show significant traction within 1 to 3 months, our Performance Marketing strategies can generate high-quality leads almost immediately upon campaign launch."
       },
       {
-        q: "Kya aap guarantee dete ho?",
-        a: "Hum quality leads aur growth strategy ki commitment dete hain. Digital marketing me exact numbers ki guarantee dena mushkil hai, par hamara track record 98% client retention ka hai."
+        q: "Do you provide performance guarantees?",
+        a: "We commit to delivering high-quality leads and a data-driven growth strategy. While the digital landscape is dynamic, our 98% client retention rate is a testament to the consistent ROI we deliver for our partners."
       },
       {
-        q: "Price kya hai?",
-        a: "Hamare plans aapki business needs ke hisaab se customized hote hain. Hum small businesses ke liye affordable packages se lekar enterprises ke liye premium solutions tak sab provide karte hain."
+        q: "How do you determine your pricing structure?",
+        a: "Our solutions are bespoke. We offer tailored packages ranging from foundational local SEO for emerging businesses to comprehensive, multi-channel growth engines for established enterprises."
       },
       {
-        q: "Kya small business ke liye useful hai?",
-        a: "Bilkul! Local businesses ke liye GMB aur Local SEO sabse effective aur budget-friendly tarika hai apne area me dominate karne ka."
+        q: "Is digital marketing effective for smaller local businesses?",
+        a: "Absolutely. For local businesses, GMB and Local SEO represent the most cost-effective and high-impact methods to establish market dominance and outcompete larger rivals in your specific territory."
       },
       {
-        q: "Kya mujhe website bhi chahiye?",
-        a: "Website trust build karti hai, par agar aapke paas nahi hai toh hum GMB optimization aur high-converting landing pages se bhi aapka business grow kar sakte hain."
+        q: "Is a professional website necessary for growth?",
+        a: "A website establishes authority and trust. However, we can also drive significant growth using GMB optimization and high-conversion landing pages if you are currently without a full site."
       },
       {
-        q: "Kya aap monthly service dete ho?",
-        a: "Haan, hum monthly management provide karte hain jisme hum aapki rankings maintain karte hain, naya content post karte hain aur leads track karte hain."
+        q: "Do you offer ongoing management services?",
+        a: "Yes, we provide comprehensive monthly management, ensuring your rankings are maintained, content is consistently refreshed, and lead flow is continuously optimized."
       },
       {
-        q: "Kaise start kare?",
-        a: "Bahut aasaan hai! Aap niche diye gaye 'Contact' form ko fill karein ya WhatsApp par message karein. Hum aapke business ka free audit karke ek custom plan banayenge."
+        q: "How do we initiate a partnership?",
+        a: "The process is seamless. Simply submit the contact form or reach out via WhatsApp. Our team will perform a complimentary audit of your digital presence and architect a custom growth plan."
       }
     ],
     testimonials: [
@@ -176,32 +176,32 @@ async function startServer() {
 
   const internshipData = {
     roles: [
-      { title: "Digital Marketing Intern", icon: "Target", desc: "Master SEO, GMB, and performance marketing on real client projects." },
-      { title: "Lead Generation Intern", icon: "Briefcase", desc: "Learn the art of finding and qualifying high-value prospects." },
-      { title: "Sales Intern", icon: "ArrowRight", desc: "Develop persuasive communication and closing skills." },
-      { title: "Social Media Manager", icon: "Instagram", desc: "Build brand presence and engagement across all platforms." },
-      { title: "Web Development Intern", icon: "Cpu", desc: "Create high-converting landing pages and business websites." }
+      { title: "Digital Marketing Residency", icon: "Target", desc: "Master the intricacies of SEO, GMB engineering, and performance marketing on high-stakes client accounts." },
+      { title: "Strategic Lead Acquisition", icon: "Briefcase", desc: "Master the methodology of identifying and qualifying high-value enterprise prospects." },
+      { title: "Business Development & Sales", icon: "ArrowRight", desc: "Cultivate persuasive communication and high-level negotiation skills in a professional environment." },
+      { title: "Social Media Strategy", icon: "Instagram", desc: "Architect brand influence and sophisticated engagement frameworks across global platforms." },
+      { title: "Full-Stack Digital Development", icon: "Cpu", desc: "Engineer high-conversion digital storefronts and sophisticated enterprise web solutions." }
     ],
     learningPoints: [
-      "Google Business Profile (GMB) Mastery",
-      "High-Quality Lead Generation Strategies",
-      "Professional Client Handling & Communication",
-      "SEO & Content Optimization Techniques",
-      "Social Media Growth & Automation",
-      "Performance Marketing & Ad Campaigns"
+      "Advanced Google Business Profile (GMB) Engineering",
+      "High-Performance Lead Acquisition Methodologies",
+      "Executive Client Relations & Strategic Communication",
+      "Elite SEO & Content Optimization Frameworks",
+      "Sophisticated Social Influence & Automation",
+      "Data-Driven Performance Marketing & ROI Optimization"
     ],
     benefits: [
-      { title: "Official Certificate", icon: "Award" },
-      { title: "Real Project Experience", icon: "Target" },
-      { title: "Letter of Recommendation", icon: "FileText" },
-      { title: "Performance Stipend", icon: "Sparkles" },
-      { title: "Job Opportunities", icon: "Briefcase" }
+      { title: "Professional Certification", icon: "Award" },
+      { title: "High-Stakes Project Experience", icon: "Target" },
+      { title: "Executive Letter of Recommendation", icon: "FileText" },
+      { title: "Performance-Based Stipend", icon: "Sparkles" },
+      { title: "Elite Career Opportunities", icon: "Briefcase" }
     ],
     faqs: [
-      { q: "Is this a paid internship?", a: "We offer performance-based stipends to top performers who deliver exceptional results for our clients." },
-      { q: "Will I get a certificate?", a: "Yes, every intern receives an official internship completion certificate from PROXIMAX." },
-      { q: "What are the timings?", a: "We offer flexible timings to accommodate students. You can choose your working hours." },
-      { q: "How are interns selected?", a: "Selection is based on your application, motivation, and a short introductory interview." }
+      { q: "Is this a compensated residency?", a: "We provide performance-based stipends to elite residents who deliver exceptional value and measurable results for our partners." },
+      { q: "Will I receive official accreditation?", a: "Yes, every resident receives an official certification of completion from PROXIMAX upon successful conclusion of the program." },
+      { q: "What is the expected time commitment?", a: "We offer flexible engagement models to accommodate academic schedules, allowing you to balance professional growth with your studies." },
+      { q: "What is the selection criteria?", a: "Selection is based on a rigorous review of your application, demonstrated motivation, and a strategic introductory interview." }
     ]
   };
 

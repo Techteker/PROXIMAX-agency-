@@ -132,33 +132,33 @@ export const services = [
 ];
 
 export const internshipRoles = [
-  { title: "Digital Marketing Intern", icon: Target, desc: "Master SEO, GMB, and performance marketing on real client projects." },
-  { title: "Lead Generation Intern", icon: Briefcase, desc: "Learn the art of finding and qualifying high-value prospects." },
-  { title: "Sales Intern", icon: ArrowRight, desc: "Develop persuasive communication and closing skills." },
-  { title: "Social Media Manager", icon: Instagram, desc: "Build brand presence and engagement across all platforms." },
-  { title: "Web Development Intern", icon: Cpu, desc: "Create high-converting landing pages and business websites." }
+  { title: "Digital Marketing Residency", icon: Target, desc: "Master the intricacies of SEO, GMB engineering, and performance marketing on high-stakes client accounts." },
+  { title: "Strategic Lead Acquisition", icon: Briefcase, desc: "Master the methodology of identifying and qualifying high-value enterprise prospects." },
+  { title: "Business Development & Sales", icon: ArrowRight, desc: "Cultivate persuasive communication and high-level negotiation skills in a professional environment." },
+  { title: "Social Media Strategy", icon: Instagram, desc: "Architect brand influence and sophisticated engagement frameworks across global platforms." },
+  { title: "Full-Stack Digital Development", icon: Cpu, desc: "Engineer high-conversion digital storefronts and sophisticated enterprise web solutions." }
 ];
 
 export const internshipBenefits = [
-  { title: "Official Certificate", icon: Award },
-  { title: "Real Project Experience", icon: Target },
-  { title: "Letter of Recommendation", icon: FileText },
-  { title: "Performance Stipend", icon: Sparkles },
-  { title: "Job Opportunities", icon: Briefcase }
+  { title: "Professional Certification", icon: Award },
+  { title: "High-Stakes Project Experience", icon: Target },
+  { title: "Executive Letter of Recommendation", icon: FileText },
+  { title: "Performance-Based Stipend", icon: Sparkles },
+  { title: "Elite Career Opportunities", icon: Briefcase }
 ];
 
 export const internshipLearningPoints = [
-  "Advanced Search Engine Optimization (SEO)",
-  "Google My Business (GMB) Optimization",
-  "Local Business Growth Strategies",
-  "Performance Marketing & Paid Ads",
-  "Lead Generation & Sales Funnels",
-  "Professional Client Communication"
+  "Advanced Google Business Profile (GMB) Engineering",
+  "High-Performance Lead Acquisition Methodologies",
+  "Executive Client Relations & Strategic Communication",
+  "Elite SEO & Content Optimization Frameworks",
+  "Sophisticated Social Influence & Automation",
+  "Data-Driven Performance Marketing & ROI Optimization"
 ];
 
 export const influencerBenefits = [
   "Exclusive Brand Collaborations",
-  "High-Paying Sponsorships",
+  "High-Impact Sponsorships",
   "Professional Growth & Mentorship",
   "Access to Premium Events",
   "Content Creation Support",

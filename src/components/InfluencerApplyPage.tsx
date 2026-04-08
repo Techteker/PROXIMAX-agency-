@@ -30,16 +30,18 @@ const InfluencerApplyPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    
+    const form = e.target as HTMLFormElement;
+    
     try {
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({
-          "form-name": "influencer",
-          ...formData
-        })
-      });
-      if (response.ok) {
+      const result = await (window as any).emailjs.sendForm(
+        'service_ind0oyk',
+        'template_f9lvw8e',
+        form
+      );
+      
+      if (result.text === 'OK') {
+        alert("Submitted Successfully!");
         setSubmitStatus('success');
         setFormData({
           fullName: '',
@@ -51,6 +53,7 @@ const InfluencerApplyPage = () => {
           followers: '',
           message: ''
         });
+        form.reset();
       } else {
         setSubmitStatus('error');
       }
@@ -84,10 +87,10 @@ const InfluencerApplyPage = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-6xl md:text-8xl font-serif italic text-white mb-8 tracking-tighter leading-[0.9]">
-              The <span className="text-gold-500">PROXIMAX</span> <br /> Creator Collective
+              Join the <span className="text-gold-500">PROXIMAX</span> <br /> Influencer Network
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
-              Partner with elite brands, amplify your influence, and monetize your creative vision. We bridge the gap between high-impact creators and market-leading opportunities.
+              Partner with top brands, grow your audience, and monetize your content. We connect creators with opportunities that matter.
             </p>
             <button 
               onClick={() => document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' })}
@@ -103,8 +106,8 @@ const InfluencerApplyPage = () => {
       <section className="py-32 bg-[#0a0a0a]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-gold-500 tracking-widest uppercase text-sm font-bold mb-4">The Collective Advantage</h2>
-            <h3 className="text-4xl md:text-5xl font-serif italic text-white">Elite Opportunities for Creators</h3>
+            <h2 className="text-gold-500 tracking-widest uppercase text-sm font-bold mb-4">Why Join Us?</h2>
+            <h3 className="text-4xl md:text-5xl font-serif italic text-white">Exclusive Benefits for Creators</h3>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -143,6 +146,7 @@ const InfluencerApplyPage = () => {
               data-netlify="true"
             >
               <input type="hidden" name="form-name" value="influencer" />
+              <input type="hidden" name="form_type" value="Influencer" />
               {submitStatus === 'success' && (
                 <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 p-8 rounded-2xl text-center mb-12">
                   <CheckCircle2 className="w-12 h-12 mx-auto mb-4" />
@@ -160,7 +164,7 @@ const InfluencerApplyPage = () => {
                 <div className="space-y-3">
                   <label className="text-gray-400 text-sm ml-1">Full Name</label>
                   <input 
-                    name="fullName"
+                    name="name"
                     type="text" required placeholder="Enter your full name"
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
@@ -183,7 +187,7 @@ const InfluencerApplyPage = () => {
                 <div className="space-y-3">
                   <label className="text-gray-400 text-sm ml-1">WhatsApp Number</label>
                   <input 
-                    name="whatsapp"
+                    name="phone"
                     type="tel" required placeholder="+91 00000 00000"
                     value={formData.whatsapp}
                     onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
@@ -221,7 +225,7 @@ const InfluencerApplyPage = () => {
                 <div className="space-y-3">
                   <label className="text-gray-400 text-sm ml-1">Profile Link</label>
                   <input 
-                    name="profileLink"
+                    name="profile"
                     type="url" required placeholder="https://instagram.com/yourprofile"
                     value={formData.profileLink}
                     onChange={(e) => setFormData({ ...formData, profileLink: e.target.value })}
@@ -233,7 +237,7 @@ const InfluencerApplyPage = () => {
               <div className="space-y-3">
                 <label className="text-gray-400 text-sm ml-1">Followers Count</label>
                 <input 
-                  name="followersCount"
+                  name="followers"
                   type="text" required placeholder="e.g. 10k, 50k, 1M"
                   value={formData.followers}
                   onChange={(e) => setFormData({ ...formData, followers: e.target.value })}
