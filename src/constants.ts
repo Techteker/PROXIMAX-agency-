@@ -13,30 +13,31 @@ import {
   Instagram,
   ArrowRight,
   Sparkles,
-  FileText
+  FileText,
+  Check
 } from 'lucide-react';
 import { WhatsAppIcon } from './components/icons/WhatsApp';
 
 export const services = [
   {
     id: "seo",
-    title: "SEO (On-page & Off-page)",
-    headline: "Rank Your Website on Google & Get More Traffic",
-    description: "We help your website rank higher on Google using proven SEO strategies.",
+    title: "SEO (Search Engine Optimization)",
+    headline: "Rank Higher & Generate Consistent Organic Leads",
+    description: "If your business is not visible on Google, you are losing potential customers. We help you rank higher and generate consistent organic leads.",
     detailedServices: ["On-page SEO", "Off-page SEO", "Keyword Research", "Technical SEO"],
     process: "Audit → Optimize → Rank",
-    results: ["More traffic", "Higher rankings", "More leads"],
-    cta: "Get Free SEO Audit",
+    results: ["Consistent organic leads", "Top Google rankings", "Increased revenue"],
+    cta: "Get More Leads Now",
     icon: Search,
     color: "bg-gold-500/10 text-gold-500"
   },
   {
     id: "gmb",
-    title: "GMB Optimization",
-    headline: "Rank Your Business on Google Maps & Get Local Customers",
-    description: "We optimize your Google My Business profile to bring more calls and visits.",
+    title: "Google My Business Optimization",
+    headline: "Dominate Google Maps & Increase Local Calls",
+    description: "Rank higher on Google Maps and increase calls, visits, and local customer inquiries from your immediate area.",
     detailedServices: ["GMB Setup & Optimization", "Local SEO", "Review Management"],
-    results: ["More calls", "More local customers"],
+    results: ["More phone calls", "Increased store visits", "Local market dominance"],
     cta: "Rank My Business on Maps",
     icon: MapPin,
     color: "bg-gold-400/10 text-gold-400"
@@ -44,106 +45,106 @@ export const services = [
   {
     id: "smm",
     title: "Social Media Management",
-    headline: "Grow Your Social Media & Build Your Brand",
-    description: "We manage and grow your social media for better engagement.",
+    headline: "Build a High-Authority Brand Presence",
+    description: "We turn your social media into a high-authority brand presence that builds trust and attracts loyal customers.",
     detailedServices: ["Content Posting", "Reels & Graphics", "Engagement Strategy"],
-    results: ["More followers", "Better engagement"],
-    cta: "Grow My Social Media",
+    results: ["Stronger brand trust", "Higher engagement", "Loyal customer base"],
+    cta: "Start Your Growth Today",
     icon: Share2,
     color: "bg-gold-500/10 text-gold-500"
   },
   {
     id: "performance",
-    title: "Performance Marketing",
-    headline: "Get Instant Leads & Sales with Paid Ads",
-    description: "We run high-converting ad campaigns to grow your business fast.",
+    title: "Performance Marketing (Paid Ads)",
+    headline: "Get Instant Leads & Measurable ROI",
+    description: "Run high-converting ad campaigns that generate immediate leads and measurable ROI for your business.",
     detailedServices: ["Facebook & Instagram Ads", "Google Ads", "Retargeting"],
-    results: ["More leads", "High ROI"],
+    results: ["Immediate lead flow", "High ROI", "Scalable growth"],
     cta: "Start My Ads Campaign",
     icon: TrendingUp,
     color: "bg-gold-600/10 text-gold-600"
   },
   {
     id: "web",
-    title: "Website & Landing Page Design",
-    headline: "Build High-Converting Websites for Your Business",
-    description: "We create modern and responsive websites that convert visitors into customers.",
+    title: "High-Converting Website Design",
+    headline: "Turn Your Website Into a 24/7 Sales Machine",
+    description: "We create modern, responsive websites designed to convert visitors into high-paying customers.",
     detailedServices: ["Business Website", "Landing Page Design", "Mobile Responsive"],
-    results: ["More conversions", "Professional presence"],
-    cta: "Build My Website",
+    results: ["Higher conversion rates", "Professional authority", "Better user experience"],
+    cta: "Build My Sales Machine",
     icon: Layout,
     color: "bg-gold-500/10 text-gold-500"
   },
   {
     id: "whatsapp",
     title: "WhatsApp Marketing & Automation",
-    headline: "Convert Leads Faster with WhatsApp Automation",
-    description: "We set up WhatsApp systems to automate your customer communication.",
+    headline: "Convert Leads Instantly with Automation",
+    description: "Capture and convert leads instantly with automated WhatsApp communication systems that work while you sleep.",
     detailedServices: ["Bulk Messaging", "Automation", "Chatbot Setup"],
-    results: ["Instant replies", "Higher conversion"],
-    cta: "Setup WhatsApp Marketing",
+    results: ["Instant lead response", "Higher closing rates", "Time-saving automation"],
+    cta: "Setup WhatsApp Automation",
     icon: WhatsAppIcon,
     color: "bg-gold-500/10 text-gold-500"
   },
   {
     id: "leadgen",
-    title: "Lead Generation & Sales Funnel",
-    headline: "Get Daily Quality Leads for Your Business",
-    description: "We build automated systems to generate consistent leads.",
+    title: "Lead Generation & Sales Funnels",
+    headline: "Build a Predictable Pipeline of High-Quality Leads",
+    description: "Build a predictable pipeline of high-quality leads for your business every month using our proven funnel systems.",
     detailedServices: ["Funnel Setup", "Landing Page", "Automation"],
-    results: ["Consistent leads", "Automated sales"],
-    cta: "Get More Leads",
+    results: ["Consistent lead flow", "Predictable revenue", "Automated acquisition"],
+    cta: "Get More Leads Now",
     icon: Target,
     color: "bg-gold-400/10 text-gold-400"
   },
   {
     id: "content",
     title: "Content Creation & Copywriting",
-    headline: "Content That Attracts & Converts",
-    description: "We create powerful content that drives engagement and sales.",
+    headline: "High-Performance Copy That Sells",
+    description: "We create powerful, result-driven content that drives engagement and turns readers into buyers.",
     detailedServices: ["Ad Copy", "Social Media Content", "Website Content"],
-    results: ["More engagement", "Better conversions"],
-    cta: "Create My Content",
+    results: ["Better conversions", "Higher engagement", "Clear brand voice"],
+    cta: "Get High-Performance Copy",
     icon: PenTool,
     color: "bg-gold-500/10 text-gold-500"
   },
   {
     id: "branding",
-    title: "Branding (Logo & Business Identity)",
-    headline: "Build a Strong & Professional Brand Identity",
-    description: "We design branding that makes your business stand out.",
+    title: "Brand Identity & Positioning",
+    headline: "Position Your Business as a Premium Brand",
+    description: "We design professional brand identities that make your business stand out and command premium prices.",
     detailedServices: ["Logo Design", "Brand Identity", "Social Media Branding"],
-    results: ["Professional look", "Strong brand image"],
-    cta: "Build My Brand",
+    results: ["Premium brand image", "Market differentiation", "Professional authority"],
+    cta: "Position My Brand",
     icon: Award,
     color: "bg-gold-600/10 text-gold-600"
   },
   {
     id: "influencer",
-    title: "Influencer Marketing",
-    headline: "Collaborate with Top Influencers to Grow Your Brand",
-    description: "We connect your brand with the right influencers for maximum reach and ROI.",
+    title: "Influencer Marketing & Collaborations",
+    headline: "Leverage Authority for Maximum Reach & ROI",
+    description: "We connect your brand with high-authority influencers for maximum reach, trust, and measurable ROI.",
     detailedServices: ["Influencer Sourcing", "Campaign Management", "Performance Tracking"],
-    results: ["Massive reach", "Authentic engagement"],
-    cta: "Start Influencer Campaign",
+    results: ["Massive reach", "Authentic trust", "Increased sales"],
+    cta: "Start My Campaign",
     icon: Users,
     color: "bg-gold-500/10 text-gold-500"
   }
 ];
 
 export const internshipRoles = [
-  { title: "Digital Marketing Intern", icon: Target, desc: "Master SEO, GMB, and performance marketing on real client projects." },
-  { title: "Lead Generation Intern", icon: Briefcase, desc: "Learn the art of finding and qualifying high-value prospects." },
-  { title: "Sales Intern", icon: ArrowRight, desc: "Develop persuasive communication and closing skills." },
-  { title: "Social Media Manager", icon: Instagram, desc: "Build brand presence and engagement across all platforms." },
-  { title: "Web Development Intern", icon: Cpu, desc: "Create high-converting landing pages and business websites." }
+  { title: "Digital Marketing Intern", icon: Target, desc: "Work on real client projects and master SEO, GMB, and performance marketing." },
+  { title: "Lead Generation Intern", icon: Briefcase, desc: "Develop practical skills in finding and qualifying high-value prospects." },
+  { title: "Sales Intern", icon: ArrowRight, desc: "Learn persuasive communication and closing skills with performance-based earnings." },
+  { title: "Social Media Manager", icon: Instagram, desc: "Build brand presence and engagement while earning a certificate of completion." },
+  { title: "Web Development Intern", icon: Cpu, desc: "Create high-converting landing pages and business websites for real clients." }
 ];
 
 export const internshipBenefits = [
   { title: "Official Certificate", icon: Award },
-  { title: "Real Project Experience", icon: Target },
-  { title: "Letter of Recommendation", icon: FileText },
-  { title: "Performance Stipend", icon: Sparkles },
+  { title: "Real Client Projects", icon: Target },
+  { title: "Practical Skill Development", icon: FileText },
+  { title: "Performance-Based Earnings", icon: Sparkles },
   { title: "Job Opportunities", icon: Briefcase }
 ];
 
@@ -157,12 +158,12 @@ export const internshipLearningPoints = [
 ];
 
 export const influencerBenefits = [
-  "Exclusive Brand Collaborations",
-  "High-Paying Sponsorships",
-  "Professional Growth & Mentorship",
-  "Access to Premium Events",
-  "Content Creation Support",
-  "Fast & Secure Payments"
+  { title: "Paid Collaboration Opportunities", icon: Award },
+  { title: "Affiliate Earning Potential", icon: Sparkles },
+  { title: "Brand Exposure & Growth", icon: Target },
+  { title: "Professional Growth & Mentorship", icon: FileText },
+  { title: "Content Creation Support", icon: Briefcase },
+  { title: "Fast & Secure Payments", icon: Check }
 ];
 
 export const SAMPLE_BLOGS = [

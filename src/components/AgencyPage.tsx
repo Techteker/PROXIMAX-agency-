@@ -238,20 +238,20 @@ const AgencyPage = () => {
             >
               <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gold-500 text-[8px] md:text-[10px] font-display font-black uppercase tracking-luxury mb-6 md:mb-8">
                 <Sparkles className="w-3 h-3" />
-                The Gold Standard in Digital Growth
+                Trusted by growing businesses | Limited slots available each month
               </div>
               <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif italic text-white mb-6 md:mb-8 tracking-tighter leading-[0.9]">
-                Grow Your <br /> <span className="text-gold-500">Local Business in India</span> <br /> with High-Quality Leads.
+                Get More Calls, Leads, <br /> <span className="text-gold-500">and Customers from Google</span> <br /> in 7–30 Days.
               </h1>
               <p className="text-base md:text-xl text-text-muted max-w-xl mb-8 md:mb-12 font-sans font-light leading-relaxed">
-                As the leading digital marketing agency in India, we help Real Estate, Jewellery, and Fashion brands dominate their local market with expert SEO and GMB optimization strategies.
+                We help local businesses dominate Google Search and Maps using SEO, Google My Business optimization, and high-converting marketing systems.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 md:gap-6">
                 <button 
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                   className="bg-gold-600 text-white px-8 md:px-12 py-4 md:py-5 rounded-full font-display font-black text-[10px] md:text-xs uppercase tracking-luxury hover:bg-gold-700 transition-all shadow-2xl shadow-gold-600/20 flex items-center justify-center gap-3 group"
                 >
-                  Get Free Audit <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  Start Your Growth Today <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
                 <div className="flex items-center gap-4 px-6 md:px-8 py-4 md:py-5 rounded-full glass-premium border border-white/10">
                   <div className="flex -space-x-3">
@@ -316,13 +316,14 @@ const AgencyPage = () => {
                   <div className="grid grid-cols-2 gap-8">
                     <div>
                       <p className="text-gold-500 font-display font-black text-3xl mb-1">98%</p>
-                      <p className="text-[10px] text-text-dim uppercase tracking-luxury">Client Retention</p>
+                      <p className="text-[10px] text-text-dim uppercase tracking-luxury">Client Retention Rate</p>
                     </div>
                     <div>
                       <p className="text-gold-500 font-display font-black text-3xl mb-1">10x</p>
-                      <p className="text-[10px] text-text-dim uppercase tracking-luxury">Average ROI</p>
+                      <p className="text-[10px] text-text-dim uppercase tracking-luxury">Potential ROI</p>
                     </div>
                   </div>
+                  <p className="text-[8px] text-text-dim/50 mt-4 text-center uppercase tracking-widest">Based on internal campaign performance data</p>
                 </motion.div>
               </motion.div>
               
@@ -348,11 +349,11 @@ const AgencyPage = () => {
             <div className="max-w-2xl">
               <h2 className="text-gold-500 tracking-luxury mb-8 uppercase text-sm font-black">Our Expertise</h2>
               <h3 className="text-5xl md:text-7xl font-serif italic text-white tracking-tighter leading-none">
-                Digital Marketing <br /> <span className="text-gold-500">Services in India.</span>
+                Systems That <br /> <span className="text-gold-500">Generate Results.</span>
               </h3>
             </div>
             <p className="text-text-muted max-w-sm font-sans font-light leading-relaxed">
-              From local SEO to global performance marketing, we provide end-to-end digital solutions tailored for your growth.
+              We don’t just offer services — we build systems that generate real business results, leads, and revenue growth.
             </p>
           </div>
 
@@ -434,14 +435,14 @@ const AgencyPage = () => {
             <div>
               <h2 className="text-gold-500 tracking-luxury mb-8 uppercase text-sm font-black">Our Story</h2>
               <h3 className="text-5xl md:text-6xl font-serif italic text-white mb-10 leading-tight tracking-tighter">
-                Leading SEO Agency <br /> <span className="text-gold-500">in India.</span>
+                Results-Focused <br /> <span className="text-gold-500">Execution.</span>
               </h3>
               <div className="space-y-8 text-lg text-text-muted font-sans font-light leading-relaxed">
                 <p>
-                  PROXIMAX was born from a simple vision: to bridge the gap between local businesses and the digital future. We don't just provide services; we build growth engines.
+                  PROXIMAX was created to help businesses generate real results — leads, calls, and customers — instead of relying on ineffective marketing activity.
                 </p>
                 <p>
-                  Our approach combines the precision of data analytics with the soul of creative storytelling. We believe every business has a unique story that deserves to be told with excellence.
+                  We focus on measurable outcomes and data-driven decision making. No unrealistic promises — only proven systems that turn your online presence into consistent customer acquisition.
                 </p>
               </div>
               
@@ -467,7 +468,7 @@ const AgencyPage = () => {
             <div>
               <h2 className="text-gold-500 tracking-luxury mb-8 uppercase text-sm font-black">Insights</h2>
               <h3 className="text-5xl md:text-7xl font-serif italic text-white tracking-tighter leading-none">
-                Digital <br /> <span className="text-gold-500">Intelligence.</span>
+                Growth <br /> <span className="text-gold-500">Strategies.</span>
               </h3>
             </div>
             <Link 
@@ -535,24 +536,24 @@ const AgencyPage = () => {
             <div className="space-y-6">
               {[
                 {
-                  q: "GMB se clients kaise milte hain?",
-                  a: "GMB optimization se aapka business Google Maps par top par dikhta hai, jisse local customers aapko call ya visit karte hain jab wo aapki services search karte hain."
+                  q: "How long does it take to see results?",
+                  a: "Typically between 7–30 days depending on the strategy used. Paid ads show results almost immediately, while SEO and GMB optimization build long-term momentum."
                 },
                 {
-                  q: "Result kitne din me milta hai?",
-                  a: "GMB aur Local SEO ka result usually 1-3 months me dikhne lagta hai. Agar aapko instant results chahiye, toh hum ads (Performance Marketing) suggest karte hain jo pehle din se leads de sakte hain."
+                  q: "Do you guarantee results?",
+                  a: "We focus on measurable outcomes. We continuously optimize your campaigns to improve performance and ensure you get the best possible return on investment."
                 },
                 {
-                  q: "Kya aap guarantee dete ho?",
-                  a: "Hum quality leads aur growth strategy ki commitment dete hain. Digital marketing me exact numbers ki guarantee dena mushkil hai, par hamara track record 98% client retention ka hai."
+                  q: "How many leads can I expect?",
+                  a: "Depending on your niche and budget, businesses can generate 20–50+ high-quality leads per month using our proven systems."
                 },
                 {
-                  q: "Price kya hai?",
-                  a: "Hamare plans aapki business needs ke hisaab se customized hote hain. Hum small businesses ke liye affordable packages se lekar enterprises ke liye premium solutions tak sab provide karte hain."
+                  q: "What is your pricing?",
+                  a: "Our plans are customized to your business needs and start from ₹2,999 depending on your specific requirements and growth goals."
                 },
                 {
-                  q: "Kya small business ke liye useful hai?",
-                  a: "Bilkul! Local businesses ke liye GMB aur Local SEO sabse effective aur budget-friendly tarika hai apne area me dominate karne ka."
+                  q: "Is this suitable for small businesses?",
+                  a: "Yes, especially for local businesses looking to grow. Our systems are designed to help small to medium enterprises dominate their local market."
                 }
               ].map((faq, i) => (
                 <FAQItem key={i} question={faq.q} answer={faq.a} />
@@ -573,10 +574,10 @@ const AgencyPage = () => {
             <div>
               <h2 className="text-gold-500 tracking-luxury mb-8 uppercase text-sm font-black">Get Started</h2>
               <h3 className="text-5xl md:text-7xl font-serif italic text-white mb-10 leading-tight tracking-tighter">
-                Let's Build Your <br /> <span className="text-gold-500">Legacy.</span>
+                Let's Grow Your <br /> <span className="text-gold-500">Business.</span>
               </h3>
               <p className="text-xl text-text-muted font-sans font-light leading-relaxed mb-16">
-                Ready to dominate your local market? Fill out the form and our experts will reach out with a custom strategy.
+                Fill out the form and receive a customized strategy along with a free consultation. We respond within 24 hours.
               </p>
               
               <div className="space-y-12">
@@ -618,13 +619,13 @@ const AgencyPage = () => {
                     <div className="w-20 h-20 bg-gold-600/20 rounded-full flex items-center justify-center text-gold-500 mb-8 mx-auto">
                       <Check className="w-10 h-10" />
                     </div>
-                    <h4 className="text-3xl font-serif italic text-white mb-4">Message Sent!</h4>
-                    <p className="text-text-muted mb-8">We'll get back to you within 24 hours.</p>
+                    <h4 className="text-3xl font-serif italic text-white mb-4">Strategy Requested!</h4>
+                    <p className="text-text-muted mb-8">We've received your details and will contact you within 24 hours with your custom growth plan.</p>
                     <button 
                       onClick={() => setSubmitStatus('idle')}
                       className="text-gold-500 font-display font-black text-xs uppercase tracking-luxury"
                     >
-                      Send Another Message
+                      Send Another Request
                     </button>
                   </motion.div>
                 ) : (
@@ -642,7 +643,7 @@ const AgencyPage = () => {
                           name="name"
                           type="text" 
                           required
-                          placeholder="John Doe"
+                          placeholder="Your Name"
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                           className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-text-dim focus:outline-none focus:border-gold-500 transition-colors font-sans"
@@ -655,7 +656,7 @@ const AgencyPage = () => {
                           name="email"
                           type="email" 
                           required
-                          placeholder="john@example.com"
+                          placeholder="you@example.com"
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                           className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-text-dim focus:outline-none focus:border-gold-500 transition-colors font-sans"
@@ -706,7 +707,7 @@ const AgencyPage = () => {
                         id="contactBudget"
                         name="budget"
                         type="text" 
-                        placeholder="e.g. ₹50k - ₹1L"
+                        placeholder="e.g. ₹5k - ₹50k"
                         value={formData.budget}
                         onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                         className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-text-dim focus:outline-none focus:border-gold-500 transition-colors font-sans"
@@ -720,7 +721,7 @@ const AgencyPage = () => {
                         name="message"
                         rows={4}
                         required
-                        placeholder="Tell us about your project..."
+                        placeholder="Tell us about your business goals..."
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-text-dim focus:outline-none focus:border-gold-500 transition-colors resize-none font-sans"
@@ -737,7 +738,7 @@ const AgencyPage = () => {
                       ) : (
                         <MessageSquare className="w-5 h-5 group-hover:scale-110 transition-transform" />
                       )}
-                      {isSubmitting ? 'Sending...' : 'Send Message'}
+                      {isSubmitting ? 'Sending...' : 'Get More Leads Now'}
                     </button>
                   </form>
                 )}

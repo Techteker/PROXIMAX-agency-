@@ -81,10 +81,10 @@ const InfluencerApplyPage = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-6xl md:text-8xl font-serif italic text-white mb-8 tracking-tighter leading-[0.9]">
-              Influencer Marketing <br /> <span className="text-gold-500">Agency in India</span>
+              Partner with <br /> <span className="text-gold-500">PROXIMAX as an Influencer.</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
-              We are the leading influencer marketing agency in India, connecting elite creators with premium brands. Join our exclusive network and scale your influence.
+              Join our exclusive network and get access to paid collaborations, affiliate opportunities, and brand growth support.
             </p>
             <button 
               onClick={() => document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' })}
@@ -100,12 +100,12 @@ const InfluencerApplyPage = () => {
       <section className="py-32 bg-[#0a0a0a]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-gold-500 tracking-widest uppercase text-sm font-bold mb-4">Why Join Us?</h2>
+            <h2 className="text-gold-500 tracking-widest uppercase text-sm font-bold mb-4">Why Partner With Us?</h2>
             <h3 className="text-4xl md:text-5xl font-serif italic text-white">Exclusive Benefits for Creators</h3>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {benefits.map((benefit, i) => (
+            {benefits.map((benefit: any, i: number) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
@@ -117,7 +117,7 @@ const InfluencerApplyPage = () => {
                 <div className="w-10 h-10 rounded-full bg-gold-600/20 flex items-center justify-center text-gold-500 shrink-0">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
-                <span className="text-lg text-gray-200 font-medium">{benefit}</span>
+                <span className="text-lg text-gray-200 font-medium">{benefit.title}</span>
               </motion.div>
             ))}
           </div>
@@ -130,7 +130,7 @@ const InfluencerApplyPage = () => {
           <div className="bg-white/5 p-12 md:p-16 rounded-[3rem] border border-white/10 relative overflow-hidden backdrop-blur-xl">
             <div className="text-center mb-16">
               <h2 className="text-gold-500 tracking-widest uppercase text-sm font-bold mb-6">Application Form</h2>
-              <h3 className="text-5xl font-serif italic text-white tracking-tighter">Start Your Journey</h3>
+              <h3 className="text-5xl font-serif italic text-white tracking-tighter">Join Our Network</h3>
             </div>
 
             <form 
@@ -143,7 +143,7 @@ const InfluencerApplyPage = () => {
                 <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 p-8 rounded-2xl text-center mb-12">
                   <CheckCircle2 className="w-12 h-12 mx-auto mb-4" />
                   <h4 className="text-xl font-serif italic mb-2">Application Received!</h4>
-                  <p className="text-sm opacity-80">Thank you for joining our network. We'll be in touch soon.</p>
+                  <p className="text-sm opacity-80">Thank you for joining our network. Our team will review your profile and contact you soon.</p>
                 </div>
               )}
               {submitStatus === 'error' && (
