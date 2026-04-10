@@ -20,6 +20,7 @@ export const Navbar: React.FC = () => {
     { name: 'Home', path: '/', type: 'link' },
     { name: 'Services', path: '/#services', type: 'anchor' },
     { name: 'Blog', path: '/blog', type: 'link' },
+    { name: 'Case Studies', path: '/case-studies', type: 'link' },
     { name: 'FAQ', path: '/#faq', type: 'anchor' },
     { name: 'About', path: '/#about', type: 'anchor' },
     { name: 'Contact', path: '/#contact', type: 'anchor' },

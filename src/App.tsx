@@ -14,6 +14,7 @@ import BlogPostPage from './components/BlogPostPage';
 import InfluencerApplyPage from './components/InfluencerApplyPage';
 import AgencyPage from './components/AgencyPage';
 import InternshipPage from './components/InternshipPage';
+import CaseStudyPage from './components/CaseStudyPage';
 import { WhatsAppIcon } from './components/icons/WhatsApp';
 
 const ScrollToTop = () => {
@@ -197,6 +198,7 @@ export default function App() {
                 <Route path="/blog" element={<BlogListPage />} />
                 <Route path="/blog/:slug" element={<BlogPostPage />} />
                 <Route path="/internship" element={<InternshipPage />} />
+                <Route path="/case-studies" element={<CaseStudyPage />} />
                 <Route path="/influencer-apply" element={<InfluencerApplyPage />} />
                 <Route path="/thank-you" element={<ThankYou />} />
               </Routes>

@@ -48,6 +48,7 @@ export const Footer: React.FC = () => {
               { name: 'Home', type: 'link', path: '/' },
               { name: 'Services', type: 'anchor', id: 'services' },
               { name: 'Blog', type: 'link', path: '/blog' },
+              { name: 'Case Studies', type: 'link', path: '/case-studies' },
               { name: 'Internship', type: 'link', path: '/internship' },
               { name: 'Influencer', type: 'link', path: '/influencer-apply' },
               { name: 'FAQ', type: 'anchor', id: 'faq' },
