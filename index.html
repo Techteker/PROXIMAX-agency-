@@ -228,30 +228,6 @@
     </form>
     <script type="module" src="/src/main.tsx"></script>
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-    <script>
-      (function() {
-        emailjs.init("rjOxQ70915IIF0uSP");
-      })();
-
-      document.addEventListener('submit', function(event) {
-        const form = event.target;
-        const formType = form.querySelector('input[name="form_type"]');
-        
-        if (formType) {
-          event.preventDefault();
-          
-          emailjs.sendForm('service_ind0oyk', 'template_f9lvw8e', form)
-            .then(function() {
-              alert('Submitted Successfully!');
-              form.reset();
-              // Optional: Redirect or update UI state if needed
-              // For now, just following the prompt's requirements
-            }, function(error) {
-              console.log('FAILED...', error);
-            });
-        }
-      });
-    </script>
   </body>
 </html>
 

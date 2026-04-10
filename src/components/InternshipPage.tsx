@@ -61,13 +61,19 @@ const InternshipPage = () => {
     setSubmitError(null);
     
     try {
-      const form = e.target as HTMLFormElement;
-      await (window as any).emailjs.sendForm('service_ind0oyk', 'template_f9lvw8e', form);
+      const result = await (window as any).emailjs.sendForm(
+        'service_ind0oyk',
+        'template_f9lvw8e',
+        e.target
+      );
+      
+      console.log('EmailJS Success:', result.text);
+      alert("Submitted Successfully!");
       setIsSubmitted(true);
       setFormData({ name: '', phone: '', email: '', college: '', role: 'Digital Marketing Intern', motivation: '' });
-      alert('Submitted Successfully!');
+      (e.target as HTMLFormElement).reset();
     } catch (error) {
-      console.error("Error submitting internship form:", error);
+      console.error("EmailJS Error:", error);
       setSubmitError("An error occurred. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -77,9 +83,9 @@ const InternshipPage = () => {
   return (
     <div className="bg-[#050505]">
       <Helmet>
-        <title>Digital Marketing Internship in India | PROXIMAX Academy</title>
-        <meta name="description" content="Kickstart your career with the best digital marketing internship in India. Gain hands-on experience in SEO, GMB, and performance marketing. Apply now!" />
-        <meta name="keywords" content="digital marketing internship india, seo internship, gmb optimization training, proximax academy" />
+        <title>Digital Marketing Internship in India 2026 | PROXIMAX Academy</title>
+        <meta name="description" content="Join the best digital marketing internship in India. Gain hands-on experience in SEO, GMB optimization, and performance marketing with PROXIMAX. Apply now for 2026!" />
+        <meta name="keywords" content="digital marketing internship india, best seo internship, gmb optimization training india, proximax academy internship" />
         <link rel="canonical" href="https://proximax.in/internship" />
       </Helmet>
       {/* Hero Section */}
@@ -300,9 +306,7 @@ const InternshipPage = () => {
               className="space-y-8" 
               onSubmit={handleSubmit}
               name="internship"
-              data-netlify="true"
             >
-              <input type="hidden" name="form-name" value="internship" />
               <input type="hidden" name="form_type" value="Internship" />
               {submitError && (
                 <div className="bg-red-500/10 border border-red-500/20 text-red-500 p-6 rounded-2xl text-center">
@@ -329,7 +333,7 @@ const InternshipPage = () => {
                   />
                 </div>
               </div>
- 
+
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-3">
                   <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Email Address</label>
@@ -350,7 +354,7 @@ const InternshipPage = () => {
                   />
                 </div>
               </div>
- 
+
               <div className="space-y-3">
                 <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Select Role</label>
                 <select 
@@ -361,7 +365,7 @@ const InternshipPage = () => {
                   {roles.map((role: any, i: number) => <option key={i} className="bg-[#0a0a0a]">{role.title}</option>)}
                 </select>
               </div>
- 
+
               <div className="space-y-3">
                 <label className="text-[10px] font-display font-black text-slate-600 uppercase tracking-widest ml-1">Why should we hire you?</label>
                 <textarea 

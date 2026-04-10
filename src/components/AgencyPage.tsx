@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Helmet } from 'react-helmet-async';
 import { 
   Search, 
   MapPin, 
@@ -74,7 +75,7 @@ const AgencyPage = () => {
     name: '',
     email: '',
     phone: '',
-    service: 'General Inquiry',
+    service: 'SEO (On-page & Off-page)',
     budget: '',
     message: ''
   });
@@ -90,15 +91,21 @@ const AgencyPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitStatus('idle');
+    
     try {
-      const form = e.target as HTMLFormElement;
-      await (window as any).emailjs.sendForm('service_ind0oyk', 'template_f9lvw8e', form);
+      const result = await (window as any).emailjs.sendForm(
+        'service_ind0oyk',
+        'template_f9lvw8e',
+        e.target
+      );
+      
+      console.log('EmailJS Success:', result.text);
+      alert("Submitted Successfully!");
       setSubmitStatus('success');
-      setFormData({ name: '', email: '', phone: '', service: 'General Inquiry', budget: '', message: '' });
-      alert('Submitted Successfully!');
+      setFormData({ name: '', email: '', phone: '', service: 'SEO (On-page & Off-page)', budget: '', message: '' });
+      (e.target as HTMLFormElement).reset();
     } catch (error) {
-      console.error("Form submission error:", error);
+      console.error("EmailJS Error:", error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -125,6 +132,12 @@ const AgencyPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>PROXIMAX | Best Digital Marketing Agency in India | SEO & GMB Experts</title>
+        <meta name="description" content="Scale your business with PROXIMAX, the best digital marketing agency in India. We specialize in expert SEO, GMB optimization, and lead generation for Real Estate, Jewellery, and Fashion brands." />
+        <meta name="keywords" content="digital marketing agency india, best seo agency india, gmb optimization services, lead generation for real estate, performance marketing india, social media marketing agency" />
+        <link rel="canonical" href="https://proximax.in" />
+      </Helmet>
       {/* Service Detail Modal */}
       <AnimatePresence>
         {selectedService && (
@@ -228,10 +241,10 @@ const AgencyPage = () => {
                 The Gold Standard in Digital Growth
               </div>
               <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif italic text-white mb-6 md:mb-8 tracking-tighter leading-[0.9]">
-                Grow Your <br /> <span className="text-gold-500">Local Business</span> <br /> with Leads.
+                Grow Your <br /> <span className="text-gold-500">Local Business in India</span> <br /> with High-Quality Leads.
               </h1>
               <p className="text-base md:text-xl text-text-muted max-w-xl mb-8 md:mb-12 font-sans font-light leading-relaxed">
-                We help Real Estate, Jewellery, and Fashion brands dominate their local market with expert SEO and GMB strategies.
+                As the leading digital marketing agency in India, we help Real Estate, Jewellery, and Fashion brands dominate their local market with expert SEO and GMB optimization strategies.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 md:gap-6">
                 <button 
@@ -275,7 +288,7 @@ const AgencyPage = () => {
               >
                 <img 
                   src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80" 
-                  alt="Digital Marketing Excellence" 
+                  alt="PROXIMAX Digital Marketing Agency Excellence in India" 
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100"
                   referrerPolicy="no-referrer"
                 />
@@ -335,7 +348,7 @@ const AgencyPage = () => {
             <div className="max-w-2xl">
               <h2 className="text-gold-500 tracking-luxury mb-8 uppercase text-sm font-black">Our Expertise</h2>
               <h3 className="text-5xl md:text-7xl font-serif italic text-white tracking-tighter leading-none">
-                Services That <br /> <span className="text-gold-500">Drive Results.</span>
+                Digital Marketing <br /> <span className="text-gold-500">Services in India.</span>
               </h3>
             </div>
             <p className="text-text-muted max-w-sm font-sans font-light leading-relaxed">
@@ -421,7 +434,7 @@ const AgencyPage = () => {
             <div>
               <h2 className="text-gold-500 tracking-luxury mb-8 uppercase text-sm font-black">Our Story</h2>
               <h3 className="text-5xl md:text-6xl font-serif italic text-white mb-10 leading-tight tracking-tighter">
-                Crafting Digital <br /> <span className="text-gold-500">Masterpieces.</span>
+                Leading SEO Agency <br /> <span className="text-gold-500">in India.</span>
               </h3>
               <div className="space-y-8 text-lg text-text-muted font-sans font-light leading-relaxed">
                 <p>
@@ -617,12 +630,9 @@ const AgencyPage = () => {
                 ) : (
                   <form 
                     name="contact"
-                    method="POST"
-                    data-netlify="true"
                     onSubmit={handleSubmit}
                     className="space-y-8"
                   >
-                    <input type="hidden" name="form-name" value="contact" />
                     <input type="hidden" name="form_type" value="Contact" />
                     <div className="grid md:grid-cols-2 gap-8">
                       <div className="space-y-3">
@@ -668,22 +678,28 @@ const AgencyPage = () => {
                         />
                       </div>
                       <div className="space-y-3">
-                        <label htmlFor="contactService" className="text-text-dim tracking-luxury ml-1">Service</label>
-                        <select 
-                          id="contactService"
-                          name="service"
-                          value={formData.service}
-                          onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-gold-500 transition-colors font-sans appearance-none"
-                        >
-                          <option value="General Inquiry" className="bg-[#0a0a0a]">General Inquiry</option>
-                          {services.map(s => (
-                            <option key={s.id} value={s.title} className="bg-[#0a0a0a]">{s.title}</option>
-                          ))}
-                        </select>
+                        <label htmlFor="contactService" className="text-text-dim tracking-luxury ml-1">Select Service</label>
+                        <div className="relative">
+                          <select 
+                            id="contactService"
+                            name="service"
+                            value={formData.service}
+                            onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-gold-500 transition-colors font-sans appearance-none"
+                          >
+                            {services.map(service => (
+                              <option key={service.id} value={service.title} className="bg-[#050505]">
+                                {service.title}
+                              </option>
+                            ))}
+                          </select>
+                          <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-gold-500">
+                            <ChevronRight className="w-4 h-4 rotate-90" />
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    
+
                     <div className="space-y-3">
                       <label htmlFor="contactBudget" className="text-text-dim tracking-luxury ml-1">Budget Range</label>
                       <input 

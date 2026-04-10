@@ -31,8 +31,14 @@ const InfluencerApplyPage = () => {
     setIsSubmitting(true);
     setSubmitStatus('idle');
     try {
-      const form = e.target as HTMLFormElement;
-      await (window as any).emailjs.sendForm('service_ind0oyk', 'template_f9lvw8e', form);
+      const result = await (window as any).emailjs.sendForm(
+        'service_ind0oyk',
+        'template_f9lvw8e',
+        e.target
+      );
+      
+      console.log('EmailJS Success:', result.text);
+      alert("Submitted Successfully!");
       setSubmitStatus('success');
       setFormData({
         fullName: '',
@@ -44,9 +50,9 @@ const InfluencerApplyPage = () => {
         followers: '',
         message: ''
       });
-      alert('Submitted Successfully!');
+      (e.target as HTMLFormElement).reset();
     } catch (error) {
-      console.error("Influencer form submission error:", error);
+      console.error("EmailJS Error:", error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -56,9 +62,9 @@ const InfluencerApplyPage = () => {
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-gold-500/30">
       <Helmet>
-        <title>Join Our Influencer Network | PROXIMAX Digital Marketing</title>
-        <meta name="description" content="Are you a creator? Join the PROXIMAX influencer network to partner with top brands, grow your audience, and monetize your content. Apply now!" />
-        <meta name="keywords" content="influencer network india, brand collaborations, creator monetization, proximax influencers" />
+        <title>Influencer Marketing Agency India | Join PROXIMAX Network</title>
+        <meta name="description" content="Join the top influencer marketing agency in India. PROXIMAX connects creators with premium brands for high-impact collaborations. Apply now to grow your influence!" />
+        <meta name="keywords" content="influencer marketing agency india, join influencer network india, brand collaborations for creators, proximax influencer network" />
         <link rel="canonical" href="https://proximax.in/influencer-apply" />
       </Helmet>
       {/* Header / Banner */}
@@ -75,10 +81,10 @@ const InfluencerApplyPage = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-6xl md:text-8xl font-serif italic text-white mb-8 tracking-tighter leading-[0.9]">
-              Join the <span className="text-gold-500">PROXIMAX</span> <br /> Influencer Network
+              Influencer Marketing <br /> <span className="text-gold-500">Agency in India</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
-              Partner with top brands, grow your audience, and monetize your content. We connect creators with opportunities that matter.
+              We are the leading influencer marketing agency in India, connecting elite creators with premium brands. Join our exclusive network and scale your influence.
             </p>
             <button 
               onClick={() => document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' })}
@@ -131,9 +137,7 @@ const InfluencerApplyPage = () => {
               className="space-y-8" 
               onSubmit={handleSubmit}
               name="influencer"
-              data-netlify="true"
             >
-              <input type="hidden" name="form-name" value="influencer" />
               <input type="hidden" name="form_type" value="Influencer" />
               {submitStatus === 'success' && (
                 <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 p-8 rounded-2xl text-center mb-12">

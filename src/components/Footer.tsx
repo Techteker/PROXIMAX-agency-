@@ -26,7 +26,7 @@ export const Footer: React.FC = () => {
             <span className="text-2xl font-display font-black tracking-tighter text-white">PROXIMAX</span>
           </div>
           <p className="text-sm leading-relaxed mb-10 text-text-muted font-sans font-light">
-            Your premier digital growth partner. We combine creativity, technology, and data to deliver results that matter.
+            PROXIMAX is the best digital marketing agency in India, helping brands scale with expert SEO, GMB optimization, and performance marketing.
           </p>
           <div className="flex gap-6">
             {[
@@ -75,7 +75,7 @@ export const Footer: React.FC = () => {
         <div>
           <h4 className="text-white tracking-luxury mb-10">Solutions</h4>
           <ul className="space-y-6 tracking-luxury">
-            {['SEO & GMB', 'Performance', 'Web Design', 'Social Media', 'Branding'].map(item => (
+            {['SEO & GMB Optimization', 'Performance Marketing', 'Website Design', 'Social Media Marketing', 'Brand Strategy'].map(item => (
               <li key={item}><a href="#" className="hover:text-gold-500 transition-colors">{item}</a></li>
             ))}
           </ul>
