@@ -255,10 +255,10 @@ const AgencyPage = () => {
                 Trusted by growing businesses | Limited slots available each month
               </div>
               <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif italic text-white mb-6 md:mb-8 tracking-tighter leading-[0.9]">
-                Get More Calls, Leads, <br /> <span className="text-gold-500">and Customers from Google</span> <br /> in 7–30 Days.
+                Digital Marketing Agency <br /> <span className="text-gold-500">India: SEO & Lead Generation</span> <br /> Experts.
               </h1>
               <p className="text-base md:text-xl text-text-muted max-w-xl mb-8 md:mb-12 font-sans font-light leading-relaxed">
-                We help local businesses dominate Google Search and Maps using SEO, Google My Business optimization, and high-converting marketing systems.
+                As a premier Digital Marketing Agency India, we provide expert SEO Services India and GMB Optimization to help local businesses dominate search results and grow revenue.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 md:gap-6">
                 <button 
@@ -362,13 +362,13 @@ const AgencyPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
             <div className="max-w-2xl">
-              <h2 className="text-gold-500 tracking-luxury mb-8 uppercase text-sm font-black">Our Expertise</h2>
+              <h2 className="text-gold-500 tracking-luxury mb-8 uppercase text-sm font-black">SEO Services India</h2>
               <h3 className="text-5xl md:text-7xl font-serif italic text-white tracking-tighter leading-none">
-                Systems That <br /> <span className="text-gold-500">Generate Results.</span>
+                GMB Optimization <br /> <span className="text-gold-500">& Lead Generation.</span>
               </h3>
             </div>
             <p className="text-text-muted max-w-sm font-sans font-light leading-relaxed">
-              We don’t just offer services — we build systems that generate real business results, leads, and revenue growth.
+              Our Digital Marketing Agency India builds high-performance systems that generate consistent leads, calls, and customers for your business.
             </p>
           </div>
 
@@ -449,16 +449,16 @@ const AgencyPage = () => {
             </div>
 
             <div>
-              <h2 className="text-gold-500 tracking-luxury mb-8 uppercase text-sm font-black">Our Story</h2>
+              <h2 className="text-gold-500 tracking-luxury mb-8 uppercase text-sm font-black">Lead Generation Agency</h2>
               <h3 className="text-5xl md:text-6xl font-serif italic text-white mb-10 leading-tight tracking-tighter">
-                Results-Focused <br /> <span className="text-gold-500">Execution.</span>
+                Results-Focused <br /> <span className="text-gold-500">SEO Execution.</span>
               </h3>
               <div className="space-y-8 text-lg text-text-muted font-sans font-light leading-relaxed">
                 <p>
-                  PROXIMAX was created to help businesses generate real results — leads, calls, and customers — instead of relying on ineffective marketing activity.
+                  PROXIMAX is a leading Digital Marketing Agency India created to help businesses generate real results — leads, calls, and customers — through expert SEO Services India.
                 </p>
                 <p>
-                  We focus on measurable outcomes and data-driven decision making. No unrealistic promises — only proven systems that turn your online presence into consistent customer acquisition.
+                  As a specialized Lead Generation Agency, we focus on measurable outcomes and data-driven GMB Optimization. We turn your online presence into a consistent customer acquisition machine.
                 </p>
               </div>
               

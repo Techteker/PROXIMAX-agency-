@@ -154,12 +154,14 @@ const StructuredData = () => {
     "@context": "https://schema.org",
     "@type": "DigitalMarketingAgency",
     "name": "PROXIMAX",
+    "alternateName": "Proximax Agency",
     "url": "https://proximax.in",
     "logo": "https://proximax.in/logo.png",
     "image": "https://proximax.in/og-image.jpg",
-    "description": "PROXIMAX is the best digital marketing agency in India, specializing in expert SEO services, GMB optimization, lead generation, and performance marketing for Real Estate, Jewellery, and Fashion brands.",
+    "description": "PROXIMAX is a leading Digital Marketing Agency in India, providing expert SEO Services India, GMB Optimization, and Lead Generation Agency services.",
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "Simdega",
       "addressLocality": "Simdega",
       "addressRegion": "Jharkhand",
       "postalCode": "835223",
@@ -172,11 +174,59 @@ const StructuredData = () => {
     },
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+91 93415 79348",
+      "telephone": "+91-9341579348",
       "contactType": "customer service",
       "areaServed": "IN",
       "availableLanguage": ["English", "Hindi"]
     },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Digital Marketing Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "SEO Services India",
+            "description": "Comprehensive on-page and off-page SEO services to improve search rankings."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "GMB Optimization",
+            "description": "Google My Business optimization to dominate local search results."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Lead Generation Agency",
+            "description": "High-converting lead generation strategies for business growth."
+          }
+        }
+      ]
+    },
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How long does it take to see results?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Typically between 7–30 days depending on the strategy used. Paid ads show results almost immediately, while SEO and GMB optimization build long-term momentum."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you guarantee results?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We focus on measurable outcomes. We continuously optimize your campaigns to improve performance and ensure you get the best possible return on investment."
+        }
+      }
+    ],
     "sameAs": [
       "https://www.linkedin.com/company/proximax",
       "https://twitter.com/proximax",
@@ -228,17 +278,18 @@ export default function App() {
     <HelmetProvider>
       <ErrorBoundary>
         <Helmet>
-          <title>PROXIMAX | Best Digital Marketing Agency in India | SEO & GMB Experts</title>
-          <meta name="description" content="PROXIMAX is the best digital marketing agency in India. We specialize in expert SEO services, GMB optimization, and performance marketing to scale your local business. Get a free audit today!" />
-          <meta name="keywords" content="digital marketing agency india, best seo services india, gmb optimization india, local business growth india, proximax agency, social media marketing india, lead generation services india" />
+          <title>PROXIMAX | Digital Marketing Agency India | SEO & GMB Experts</title>
+          <meta name="description" content="PROXIMAX is a premier Digital Marketing Agency in India. We offer expert SEO Services India, GMB Optimization, and Lead Generation Agency solutions to grow your business." />
+          <meta name="keywords" content="Digital Marketing Agency India, SEO Services India, GMB Optimization, Lead Generation Agency, Local SEO India, Digital Marketing Internship India" />
           <link rel="canonical" href="https://proximax.in" />
-          <meta property="og:title" content="PROXIMAX | Best Digital Marketing Agency in India | SEO & GMB Experts" />
-          <meta property="og:description" content="Scale your business with the best digital marketing agency in India. Expert SEO, GMB, and performance marketing strategies." />
+          <link rel="alternate" hrefLang="en-in" href="https://proximax.in" />
+          <meta property="og:title" content="PROXIMAX | Digital Marketing Agency India | SEO & GMB Experts" />
+          <meta property="og:description" content="Scale your business with the premier Digital Marketing Agency in India. Expert SEO Services India, GMB Optimization, and Lead Generation Agency solutions." />
           <meta property="og:url" content="https://proximax.in" />
           <meta property="og:type" content="website" />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="PROXIMAX | Best Digital Marketing Agency in India | SEO & GMB Experts" />
-          <meta name="twitter:description" content="Expert SEO and GMB optimization services to grow your local business in India. Scale your revenue with PROXIMAX." />
+          <meta name="twitter:title" content="PROXIMAX | Digital Marketing Agency India | SEO & GMB Experts" />
+          <meta name="twitter:description" content="Expert SEO Services India and GMB Optimization to grow your business. Scale your revenue with PROXIMAX, the leading Digital Marketing Agency in India." />
         </Helmet>
         <StructuredData />
         <BrowserRouter>
