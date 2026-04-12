@@ -6,6 +6,7 @@ import { Calendar, ArrowRight, Search, Clock, Sparkles } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 import { SAMPLE_BLOGS } from '../constants';
+import { fetchBlogs } from '../services/supabaseService';
 
 const BlogListPage = () => {
   const [blogs, setBlogs] = useState<any[]>([]);
@@ -52,27 +53,23 @@ const BlogListPage = () => {
   };
 
   useEffect(() => {
-    console.log("Fetching blogs...");
-    fetch('/api/blogs')
-      .then(res => {
-        if (!res.ok) throw new Error('Network response was not ok');
-        return res.json();
-      })
-      .then(data => {
-        console.log("Fetched blogs count:", data?.length || 0);
-        if (data && Array.isArray(data) && data.length > 0) {
+    const loadBlogs = async () => {
+      setLoading(true);
+      try {
+        const data = await fetchBlogs();
+        if (data && data.length > 0) {
           setBlogs(data);
         } else {
-          console.warn("No blogs returned from API, using sample data");
           setBlogs(SAMPLE_BLOGS);
         }
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error("Error fetching blogs, using sample data:", err);
+      } catch (err) {
+        console.error("Error fetching blogs from Supabase:", err);
         setBlogs(SAMPLE_BLOGS);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+    loadBlogs();
   }, []);
 
   const categories = ['All', ...new Set(blogs.map(blog => blog.category))];

@@ -144,7 +144,7 @@ export const internshipBenefits = [
   { title: "Official Certificate", icon: Award },
   { title: "Real Client Projects", icon: Target },
   { title: "Practical Skill Development", icon: FileText },
-  { title: "Performance-Based Earnings", icon: Sparkles },
+  { title: "Performance-Based Earnings", subtitle: "( 500-35000 rs. )", icon: Sparkles },
   { title: "Job Opportunities", icon: Briefcase }
 ];
 
@@ -160,6 +160,7 @@ export const internshipLearningPoints = [
 export const influencerBenefits = [
   { title: "Paid Collaboration Opportunities", icon: Award },
   { title: "Affiliate Earning Potential", icon: Sparkles },
+  { title: "Performance-Based Salary", subtitle: "( 50,000 to 50,00,000 rs. )", icon: Sparkles },
   { title: "Brand Exposure & Growth", icon: Target },
   { title: "Professional Growth & Mentorship", icon: FileText },
   { title: "Content Creation Support", icon: Briefcase },

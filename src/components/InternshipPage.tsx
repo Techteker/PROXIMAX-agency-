@@ -25,6 +25,7 @@ import {
   X, 
   Calendar 
 } from 'lucide-react';
+import { submitInternshipApplication } from '../services/supabaseService';
 
 import { cn } from '../lib/utils';
 import { WhatsAppIcon } from './icons/WhatsApp';
@@ -61,20 +62,34 @@ const InternshipPage = () => {
     setSubmitError(null);
     
     try {
-      const result = await (window as any).emailjs.sendForm(
-        'service_ind0oyk',
-        'template_f9lvw8e',
-        e.target
-      );
+      // 1. Submit to Supabase
+      await submitInternshipApplication({
+        fullName: formData.name,
+        email: formData.email,
+        whatsapp: formData.phone,
+        city: formData.college, // Using college field for city as per schema or vice versa
+        position: formData.role,
+        message: formData.motivation
+      });
+
+      // 2. Submit to EmailJS (optional backup)
+      try {
+        await (window as any).emailjs.sendForm(
+          'service_ind0oyk',
+          'template_f9lvw8e',
+          e.target
+        );
+      } catch (emailError) {
+        console.warn("EmailJS Backup failed, but Supabase succeeded:", emailError);
+      }
       
-      console.log('EmailJS Success:', result.text);
-      alert("Submitted Successfully!");
+      alert("Application Submitted Successfully!");
       setIsSubmitted(true);
       setFormData({ name: '', phone: '', email: '', college: '', role: 'Digital Marketing Intern', motivation: '' });
       (e.target as HTMLFormElement).reset();
     } catch (error) {
-      console.error("EmailJS Error:", error);
-      setSubmitError("An error occurred. Please try again.");
+      console.error("Submission Error:", error);
+      setSubmitError("An error occurred while submitting your application. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -156,7 +171,14 @@ const InternshipPage = () => {
                         <div className="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center text-gold-500">
                           <Icon className="w-6 h-6" />
                         </div>
-                        <span className="text-white font-serif italic text-xl">{b.title}</span>
+                        <div className="flex flex-col">
+                          <span className="text-white font-serif italic text-xl">{b.title}</span>
+                          {b.subtitle && (
+                            <span className="text-text-dim text-[10px] uppercase tracking-widest mt-1">
+                              {b.subtitle}
+                            </span>
+                          )}
+                        </div>
                       </div>
                     );
                   })}

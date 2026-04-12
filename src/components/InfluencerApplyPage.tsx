@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Helmet } from 'react-helmet-async';
 import { CheckCircle2, Send } from 'lucide-react';
+import { submitInfluencerApplication } from '../services/supabaseService';
 
 import { influencerBenefits as benefits } from '../constants';
 
@@ -31,14 +32,21 @@ const InfluencerApplyPage = () => {
     setIsSubmitting(true);
     setSubmitStatus('idle');
     try {
-      const result = await (window as any).emailjs.sendForm(
-        'service_ind0oyk',
-        'template_f9lvw8e',
-        e.target
-      );
+      // 1. Submit to Supabase
+      await submitInfluencerApplication(formData);
+
+      // 2. Submit to EmailJS (optional backup)
+      try {
+        await (window as any).emailjs.sendForm(
+          'service_ind0oyk',
+          'template_f9lvw8e',
+          e.target
+        );
+      } catch (emailError) {
+        console.warn("EmailJS Backup failed, but Supabase succeeded:", emailError);
+      }
       
-      console.log('EmailJS Success:', result.text);
-      alert("Submitted Successfully!");
+      alert("Application Submitted Successfully!");
       setSubmitStatus('success');
       setFormData({
         fullName: '',
@@ -52,7 +60,7 @@ const InfluencerApplyPage = () => {
       });
       (e.target as HTMLFormElement).reset();
     } catch (error) {
-      console.error("EmailJS Error:", error);
+      console.error("Submission Error:", error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -117,7 +125,14 @@ const InfluencerApplyPage = () => {
                 <div className="w-10 h-10 rounded-full bg-gold-600/20 flex items-center justify-center text-gold-500 shrink-0">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
-                <span className="text-lg text-gray-200 font-medium">{benefit.title}</span>
+                <div className="flex flex-col">
+                  <span className="text-lg text-gray-200 font-medium">{benefit.title}</span>
+                  {benefit.subtitle && (
+                    <span className="text-text-dim text-[10px] uppercase tracking-widest mt-1">
+                      {benefit.subtitle}
+                    </span>
+                  )}
+                </div>
               </motion.div>
             ))}
           </div>

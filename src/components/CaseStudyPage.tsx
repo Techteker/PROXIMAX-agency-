@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Helmet } from 'react-helmet-async';
 import { 
@@ -13,8 +13,47 @@ import {
   Quote
 } from 'lucide-react';
 import { CASE_STUDIES } from '../constants';
+import { fetchCaseStudies } from '../services/supabaseService';
 
 const CaseStudyPage = () => {
+  const [studies, setStudies] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadStudies = async () => {
+      setLoading(true);
+      try {
+        const data = await fetchCaseStudies();
+        if (data && data.length > 0) {
+          // Map snake_case from DB to camelCase used in component
+          const mappedData = data.map((s: any) => ({
+            id: s.id,
+            title: s.title,
+            subheadline: s.subheadline,
+            clientOverview: s.client_overview,
+            problem: s.problem,
+            goal: s.goal,
+            strategy: s.strategy,
+            execution: s.execution,
+            results: s.results,
+            feedback: s.feedback,
+            takeaways: s.takeaways,
+            category: s.category
+          }));
+          setStudies(mappedData);
+        } else {
+          setStudies(CASE_STUDIES);
+        }
+      } catch (err) {
+        console.error("Error fetching case studies from Supabase:", err);
+        setStudies(CASE_STUDIES);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadStudies();
+  }, []);
+
   return (
     <div className="bg-[#050505] min-h-screen">
       <Helmet>
@@ -52,15 +91,20 @@ const CaseStudyPage = () => {
       {/* Case Studies List */}
       <section className="pb-32">
         <div className="max-w-7xl mx-auto px-6 space-y-32">
-          {CASE_STUDIES.map((study, index) => (
-            <motion.div
-              key={study.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: index % 2 * 0.1 }}
-              className="glass-premium rounded-[3rem] border border-white/10 overflow-hidden relative"
-            >
+          {loading ? (
+            <div className="flex justify-center py-20">
+              <div className="w-12 h-12 border-4 border-gold-600/20 border-t-gold-600 rounded-full animate-spin" />
+            </div>
+          ) : (
+            studies.map((study, index) => (
+              <motion.div
+                key={study.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: index % 2 * 0.1 }}
+                className="glass-premium rounded-[3rem] border border-white/10 overflow-hidden relative"
+              >
               <div className="grid lg:grid-cols-12 gap-0">
                 {/* Left Side: Overview & Problem */}
                 <div className="lg:col-span-5 p-10 md:p-16 border-b lg:border-b-0 lg:border-r border-white/10">
@@ -172,7 +216,7 @@ const CaseStudyPage = () => {
                 </div>
               </div>
             </motion.div>
-          ))}
+          )))}
         </div>
       </section>
 

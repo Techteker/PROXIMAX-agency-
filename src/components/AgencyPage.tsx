@@ -28,6 +28,7 @@ import {
 import { cn } from '../lib/utils';
 import { services, SAMPLE_BLOGS } from '../constants';
 import { Link } from 'react-router-dom';
+import { submitContactInquiry } from '../services/supabaseService';
 
 const FAQItem = ({ question, answer }: { question: string; answer: string }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -93,19 +94,32 @@ const AgencyPage = () => {
     setIsSubmitting(true);
     
     try {
-      const result = await (window as any).emailjs.sendForm(
-        'service_ind0oyk',
-        'template_f9lvw8e',
-        e.target
-      );
+      // 1. Submit to Supabase
+      await submitContactInquiry({
+        name: formData.name,
+        email: formData.email,
+        whatsapp: formData.phone,
+        businessType: formData.service,
+        message: formData.message
+      });
+
+      // 2. Submit to EmailJS (optional backup)
+      try {
+        await (window as any).emailjs.sendForm(
+          'service_ind0oyk',
+          'template_f9lvw8e',
+          e.target
+        );
+      } catch (emailError) {
+        console.warn("EmailJS Backup failed, but Supabase succeeded:", emailError);
+      }
       
-      console.log('EmailJS Success:', result.text);
       alert("Submitted Successfully!");
       setSubmitStatus('success');
       setFormData({ name: '', email: '', phone: '', service: 'SEO (On-page & Off-page)', budget: '', message: '' });
       (e.target as HTMLFormElement).reset();
     } catch (error) {
-      console.error("EmailJS Error:", error);
+      console.error("Submission Error:", error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -288,9 +302,10 @@ const AgencyPage = () => {
               >
                 <img 
                   src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80" 
-                  alt="PROXIMAX Digital Marketing Agency Excellence in India" 
+                  alt="PROXIMAX Digital Marketing Agency Team working on SEO and GMB optimization in India" 
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-60" />
                 
@@ -402,9 +417,10 @@ const AgencyPage = () => {
               >
                 <img 
                   src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop" 
-                  alt="Rajendar Rana - Founder of PROXIMAX" 
+                  alt="Rajendar Rana - Founder and CEO of PROXIMAX Digital Marketing Agency" 
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-[2s] group-hover:scale-110"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-1000" />
                 
@@ -489,9 +505,10 @@ const AgencyPage = () => {
                 <div className="relative aspect-[16/10] rounded-3xl overflow-hidden mb-8 border border-white/5">
                   <img 
                     src={blog.image || blog.banner} 
-                    alt={blog.title}
+                    alt={`Blog Post: ${blog.title} - PROXIMAX Insights`}
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
                     referrerPolicy="no-referrer"
+                    loading="lazy"
                   />
                   <div className="absolute top-6 left-6 px-4 py-2 rounded-full glass-premium text-[10px] font-display font-black text-white uppercase tracking-luxury">
                     {blog.category}

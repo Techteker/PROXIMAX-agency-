@@ -1,21 +1,24 @@
-import React, { useState, useEffect, Suspense, Component, ErrorInfo, ReactNode } from 'react';
+import React, { useState, useEffect, Suspense, Component, ErrorInfo, ReactNode, lazy } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { 
   Check,
-  MessageSquare
+  MessageSquare,
+  ArrowUp
 } from 'lucide-react';
 import { FloatingBubbles } from './components/FloatingBubbles';
 import { MagicCursor } from './components/MagicCursor';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import BlogListPage from './components/BlogListPage';
-import BlogPostPage from './components/BlogPostPage';
-import InfluencerApplyPage from './components/InfluencerApplyPage';
-import AgencyPage from './components/AgencyPage';
-import InternshipPage from './components/InternshipPage';
-import CaseStudyPage from './components/CaseStudyPage';
 import { WhatsAppIcon } from './components/icons/WhatsApp';
+
+// Lazy load pages for performance
+const AgencyPage = lazy(() => import('./components/AgencyPage'));
+const BlogListPage = lazy(() => import('./components/BlogListPage'));
+const BlogPostPage = lazy(() => import('./components/BlogPostPage'));
+const InfluencerApplyPage = lazy(() => import('./components/InfluencerApplyPage'));
+const InternshipPage = lazy(() => import('./components/InternshipPage'));
+const CaseStudyPage = lazy(() => import('./components/CaseStudyPage'));
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -23,6 +26,42 @@ const ScrollToTop = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
   return null;
+};
+
+const ScrollToTopButton = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  if (!isVisible) return null;
+
+  return (
+    <button
+      onClick={scrollToTop}
+      className="fixed bottom-28 right-8 z-50 w-12 h-12 bg-gold-600/20 backdrop-blur-md border border-gold-500/30 rounded-full flex items-center justify-center text-gold-500 shadow-2xl hover:bg-gold-600 hover:text-white transition-all duration-300"
+      aria-label="Scroll to top"
+    >
+      <ArrowUp className="w-6 h-6" />
+    </button>
+  );
 };
 
 // Error Boundary Component
@@ -158,6 +197,22 @@ const StructuredData = () => {
       "Digital Strategy",
       "Performance Marketing",
       "Influencer Marketing"
+    ],
+    "offers": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "SEO & GMB Dominance"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Performance Marketing"
+        }
+      }
     ]
   };
 
@@ -189,21 +244,24 @@ export default function App() {
         <BrowserRouter>
           <ScrollToTop />
           <Suspense fallback={<LoadingSpinner />}>
-            <div className="min-h-screen bg-[#050505] text-text-muted selection:bg-gold-500/30 selection:text-white relative overflow-hidden">
+            <div className="min-h-screen bg-[#050505] text-text-muted selection:bg-gold-500/30 selection:text-white relative overflow-hidden flex flex-col">
               <MagicCursor />
               <FloatingBubbles />
               <Navbar />
-              <Routes>
-                <Route path="/" element={<AgencyPage />} />
-                <Route path="/blog" element={<BlogListPage />} />
-                <Route path="/blog/:slug" element={<BlogPostPage />} />
-                <Route path="/internship" element={<InternshipPage />} />
-                <Route path="/case-studies" element={<CaseStudyPage />} />
-                <Route path="/influencer-apply" element={<InfluencerApplyPage />} />
-                <Route path="/thank-you" element={<ThankYou />} />
-              </Routes>
+              <main className="flex-grow">
+                <Routes>
+                  <Route path="/" element={<AgencyPage />} />
+                  <Route path="/blog" element={<BlogListPage />} />
+                  <Route path="/blog/:slug" element={<BlogPostPage />} />
+                  <Route path="/internship" element={<InternshipPage />} />
+                  <Route path="/case-studies" element={<CaseStudyPage />} />
+                  <Route path="/influencer-apply" element={<InfluencerApplyPage />} />
+                  <Route path="/thank-you" element={<ThankYou />} />
+                </Routes>
+              </main>
               <Footer />
               <FloatingWhatsApp />
+              <ScrollToTopButton />
             </div>
           </Suspense>
         </BrowserRouter>
