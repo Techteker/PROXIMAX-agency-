@@ -92,6 +92,105 @@
   .translate-z-100 {
     transform: translateZ(100px);
   }
+
+  /* Mobile Usability & Accessibility Improvements */
+  @media (max-width: 768px) {
+    html {
+      font-size: 15px; /* Slightly larger for better readability than 14px */
+      -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape */
+    }
+    
+    body {
+      overflow-x: hidden; /* Prevent horizontal scroll */
+      width: 100%;
+    }
+
+    /* Increase line height for better readability on small screens */
+    p, li {
+      line-height: 1.6;
+      letter-spacing: 0.01em;
+    }
+    
+    /* Tap Target Sizes */
+    button, a, .clickable, [role="button"] {
+      min-height: 48px !important; /* Android/iOS recommended minimum */
+      min-width: 48px !important;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px; /* Ensure internal spacing */
+    }
+
+    /* Navbar Mobile Overrides */
+    nav.fixed {
+      padding: 12px 16px !important;
+    }
+    
+    nav .max-w-7xl {
+      padding: 8px 16px !important;
+    }
+
+    /* Form Accessibility */
+    input, select, textarea {
+      font-size: 16px !important; /* Prevent iOS zoom on focus */
+      padding: 14px !important; /* Larger touch area for inputs */
+    }
+
+    /* Layout Adjustments */
+    .container, .max-w-7xl, .px-6 {
+      padding-left: 16px !important;
+      padding-right: 16px !important;
+    }
+
+    /* Section Spacing */
+    section {
+      padding-top: 64px !important;
+      padding-bottom: 64px !important;
+    }
+
+    /* Card & Container Padding */
+    .glass-card, .glass-premium, .p-12, .p-16, .p-24 {
+      padding: 24px !important; /* Reduce excessive padding on mobile */
+      @apply rounded-2xl; /* Softer corners for mobile */
+      margin-bottom: 16px; /* Ensure vertical separation */
+    }
+
+    /* Typography Adjustments */
+    h1 { font-size: 2.5rem !important; line-height: 1.1 !important; }
+    h2 { font-size: 2rem !important; line-height: 1.2 !important; }
+    h3 { font-size: 1.75rem !important; line-height: 1.2 !important; }
+
+    .tracking-luxury {
+      @apply tracking-[0.15em]; /* Reduce letter spacing further for mobile readability */
+    }
+
+    /* Hide non-essential decorative elements on mobile to reduce clutter */
+    .mobile-hide {
+      display: none !important;
+    }
+
+    /* Ensure images don't cause layout shift or overflow */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  /* Accessibility: Focus States */
+  :focus-visible {
+    outline: 2px solid var(--color-gold-500);
+    outline-offset: 4px;
+  }
+
+  /* Performance: Smooth Scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Prevent Layout Shift */
+  img {
+    content-visibility: auto;
+  }
 }
 
 /* Custom Scrollbar */

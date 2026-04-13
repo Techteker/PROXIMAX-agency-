@@ -152,13 +152,13 @@ const FloatingWhatsApp = () => (
 const StructuredData = () => {
   const schema = {
     "@context": "https://schema.org",
-    "@type": "DigitalMarketingAgency",
+    "@type": "Organization",
     "name": "PROXIMAX",
     "alternateName": "Proximax Agency",
     "url": "https://proximax.in",
     "logo": "https://proximax.in/logo.png",
     "image": "https://proximax.in/og-image.jpg",
-    "description": "PROXIMAX is a leading Digital Marketing Agency in India, providing expert SEO Services India, GMB Optimization, and Lead Generation Agency services.",
+    "description": "PROXIMAX is a premier Performance Marketing Agency specializing in Lead Generation and ROI focused strategies.",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Simdega",
@@ -278,18 +278,17 @@ export default function App() {
     <HelmetProvider>
       <ErrorBoundary>
         <Helmet>
-          <title>PROXIMAX | Digital Marketing Agency India | SEO & GMB Experts</title>
-          <meta name="description" content="PROXIMAX is a premier Digital Marketing Agency in India. We offer expert SEO Services India, GMB Optimization, and Lead Generation Agency solutions to grow your business." />
-          <meta name="keywords" content="Digital Marketing Agency India, SEO Services India, GMB Optimization, Lead Generation Agency, Local SEO India, Digital Marketing Internship India" />
-          <link rel="canonical" href="https://proximax.in" />
+          <title>Performance Marketing Agency | Lead Generation | ROI focused</title>
+          <meta name="description" content="PROXIMAX is a premier Performance Marketing Agency specializing in Lead Generation and ROI focused strategies to scale your business growth in India." />
+          <meta name="keywords" content="Performance Marketing Agency, Lead Generation, ROI focused, Digital Marketing India, SEO Services, GMB Optimization" />
           <link rel="alternate" hrefLang="en-in" href="https://proximax.in" />
-          <meta property="og:title" content="PROXIMAX | Digital Marketing Agency India | SEO & GMB Experts" />
-          <meta property="og:description" content="Scale your business with the premier Digital Marketing Agency in India. Expert SEO Services India, GMB Optimization, and Lead Generation Agency solutions." />
+          <meta property="og:title" content="Performance Marketing Agency | Lead Generation | ROI focused" />
+          <meta property="og:description" content="Scale your business with the premier Performance Marketing Agency in India. Expert Lead Generation and ROI focused solutions." />
           <meta property="og:url" content="https://proximax.in" />
           <meta property="og:type" content="website" />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="PROXIMAX | Digital Marketing Agency India | SEO & GMB Experts" />
-          <meta name="twitter:description" content="Expert SEO Services India and GMB Optimization to grow your business. Scale your revenue with PROXIMAX, the leading Digital Marketing Agency in India." />
+          <meta name="twitter:title" content="Performance Marketing Agency | Lead Generation | ROI focused" />
+          <meta name="twitter:description" content="Expert Lead Generation and ROI focused strategies to grow your business. Scale your revenue with PROXIMAX." />
         </Helmet>
         <StructuredData />
         <BrowserRouter>
