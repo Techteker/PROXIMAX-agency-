@@ -89,7 +89,7 @@ export const Navbar: React.FC = () => {
                   document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="bg-gold-600 text-white px-6 lg:px-8 py-3 rounded-full tracking-luxury hover:bg-gold-700 transition-all shadow-2xl shadow-gold-600/20 text-xs"
+              className="btn-premium text-white px-6 lg:px-8 py-3 text-xs"
             >
               Get Started
             </button>
@@ -190,7 +190,7 @@ export const Navbar: React.FC = () => {
                       document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                     }
                   }}
-                  className="w-full bg-gold-600 text-white py-4 rounded-full tracking-luxury hover:bg-gold-700 transition-all shadow-xl shadow-gold-600/20 text-[10px] mt-4"
+                  className="btn-premium w-full text-white py-4 text-[10px] mt-4"
                 >
                   Get Started
                 </button>

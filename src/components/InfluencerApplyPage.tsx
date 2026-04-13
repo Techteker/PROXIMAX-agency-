@@ -89,14 +89,14 @@ const InfluencerApplyPage = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-6xl md:text-8xl font-serif italic text-white mb-8 tracking-tighter leading-[0.9]">
-              Partner with <br /> <span className="text-gold-500">PROXIMAX as an Influencer.</span>
+              Partner with <br /> <span className="text-gradient">PROXIMAX as an Influencer.</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
               Join our exclusive network and get access to paid collaborations, affiliate opportunities, and brand growth support.
             </p>
             <button 
               onClick={() => document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-gold-600 text-white px-12 py-5 rounded-full font-bold text-sm uppercase tracking-widest hover:bg-gold-700 transition-all shadow-2xl shadow-gold-600/20"
+              className="btn-premium text-white px-12 py-5 text-sm"
             >
               Apply Now
             </button>
@@ -266,7 +266,7 @@ const InfluencerApplyPage = () => {
               <button 
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gold-600 text-white py-5 rounded-full font-bold text-sm uppercase tracking-widest hover:bg-gold-700 transition-all shadow-xl shadow-gold-600/20 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="btn-premium w-full text-white py-5 text-sm flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

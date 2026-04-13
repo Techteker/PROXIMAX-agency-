@@ -117,14 +117,14 @@ const InternshipPage = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-6xl md:text-8xl font-serif italic text-white mb-8 tracking-tighter leading-[0.9]">
-              Digital Marketing <br /> <span className="text-gold-500">Internship – Learn & Earn.</span>
+              Digital Marketing <br /> <span className="text-gradient">Internship – Learn & Earn.</span>
             </h1>
             <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-12 font-sans font-light leading-relaxed">
               Work on real client projects, develop practical skills, and earn performance-based stipends while building your professional portfolio.
             </p>
             <button 
               onClick={() => document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-gold-600 text-white px-12 py-5 rounded-full font-display font-black text-xs uppercase tracking-widest hover:bg-gold-700 transition-all shadow-2xl shadow-gold-600/20"
+              className="btn-premium text-white px-12 py-5 text-xs"
             >
               Apply Now
             </button>
@@ -401,7 +401,7 @@ const InternshipPage = () => {
               <button 
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full bg-gold-600 text-white py-6 rounded-full font-display font-black text-xs uppercase tracking-widest hover:bg-gold-700 transition-all shadow-xl shadow-gold-600/20 flex items-center justify-center gap-3 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`btn-premium w-full text-white py-6 text-xs flex items-center justify-center gap-3 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 {isSubmitting ? 'Submitting...' : 'Submit Application'}
                 {!isSubmitting && <ArrowRight className="w-5 h-5" />}

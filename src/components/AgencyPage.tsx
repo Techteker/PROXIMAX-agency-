@@ -255,7 +255,7 @@ const AgencyPage = () => {
                 Trusted by growing businesses | Limited slots available each month
               </div>
               <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif italic text-white mb-6 md:mb-8 tracking-tighter leading-[0.9]">
-                Digital Marketing Agency <br /> <span className="text-gold-500">India: SEO & Lead Generation</span> <br /> Experts.
+                Digital Marketing Agency <br /> <span className="text-gradient">India: SEO & Lead Generation</span> <br /> Experts.
               </h1>
               <p className="text-base md:text-xl text-text-muted max-w-xl mb-8 md:mb-12 font-sans font-light leading-relaxed">
                 As a premier Digital Marketing Agency India, we provide expert SEO Services India and GMB Optimization to help local businesses dominate search results and grow revenue.
@@ -263,7 +263,7 @@ const AgencyPage = () => {
               <div className="flex flex-col sm:flex-row gap-4 md:gap-6">
                 <button 
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="bg-gold-600 text-white px-8 md:px-12 py-4 md:py-5 rounded-full font-display font-black text-[10px] md:text-xs uppercase tracking-luxury hover:bg-gold-700 transition-all shadow-2xl shadow-gold-600/20 flex items-center justify-center gap-3 group"
+                  className="btn-premium text-white px-8 md:px-12 py-4 md:py-5 text-[10px] md:text-xs flex items-center justify-center gap-3 group"
                 >
                   Start Your Growth Today <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
