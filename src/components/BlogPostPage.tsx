@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, useScroll, useSpring } from 'motion/react';
+import emailjs from '@emailjs/browser';
 import Markdown from 'react-markdown';
 import { 
   Calendar, 
@@ -138,6 +139,22 @@ const BlogPostPage = () => {
         })
       });
       if (response.ok) {
+        // Submit to EmailJS
+        try {
+          const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+          const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+          
+          if (serviceId && templateId && e.target) {
+            await emailjs.sendForm(
+              serviceId,
+              templateId,
+              e.target as HTMLFormElement
+            );
+          }
+        } catch (emailError) {
+          console.warn("EmailJS Blog Contact failed:", emailError);
+        }
+
         setSubmitStatus('success');
         setFormData({ name: '', phone: '', business: '', message: '' });
       } else {

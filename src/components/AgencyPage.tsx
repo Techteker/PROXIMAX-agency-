@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Helmet } from 'react-helmet-async';
+import emailjs from '@emailjs/browser';
 import { 
   Search, 
   MapPin, 
@@ -94,24 +95,28 @@ const AgencyPage = () => {
     setIsSubmitting(true);
     
     try {
-      // 1. Submit to Supabase
-      await submitContactInquiry({
+      // 1. Submit to Supabase (Non-blocking)
+      submitContactInquiry({
         name: formData.name,
         email: formData.email,
         whatsapp: formData.phone,
         businessType: formData.service,
         message: formData.message
-      });
+      }).catch(err => console.warn("Supabase submission failed:", err));
 
-      // 2. Submit to EmailJS (optional backup)
-      try {
-        await (window as any).emailjs.sendForm(
-          'service_ind0oyk',
-          'template_f9lvw8e',
-          e.target
+      // 2. Submit to EmailJS (Primary for user feedback)
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      
+      if (serviceId && templateId && e.target) {
+        await emailjs.sendForm(
+          serviceId,
+          templateId,
+          e.target as HTMLFormElement
         );
-      } catch (emailError) {
-        console.warn("EmailJS Backup failed, but Supabase succeeded:", emailError);
+      } else {
+        console.warn("EmailJS keys missing or form target invalid");
+        // We still consider it a success if Supabase worked, or we can throw if we want strict EmailJS
       }
       
       alert("Submitted Successfully!");
@@ -128,7 +133,18 @@ const AgencyPage = () => {
 
   useEffect(() => {
     fetch('/api/blogs')
-      .then(res => res.json())
+      .then(async res => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const contentType = res.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          const text = await res.text();
+          console.error("Expected JSON but got:", text.substring(0, 100));
+          throw new TypeError("Oops, we haven't got JSON!");
+        }
+        return res.json();
+      })
       .then(data => {
         if (data && data.blogs) {
           setHomeBlogs(data.blogs.slice(0, 3));

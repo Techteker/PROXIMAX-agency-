@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import emailjs from '@emailjs/browser';
 import { Send, Instagram, Youtube, Facebook, Music2, Ghost, Upload, CheckCircle2, AlertCircle } from 'lucide-react';
 
 interface FormData {
@@ -67,11 +68,40 @@ export const ApplicationForm: React.FC = () => {
     setError(null);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Submit to EmailJS
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+
+      if (serviceId && templateId) {
+        await emailjs.send(
+          serviceId,
+          templateId,
+          {
+            from_name: formData.fullName,
+            from_email: formData.email,
+            phone: formData.phone,
+            city: formData.cityCountry,
+            niche: formData.niche,
+            instagram: formData.instagramLink,
+            youtube: formData.youtubeLink,
+            facebook: formData.facebookLink,
+            tiktok: formData.tiktokLink,
+            snapchat: formData.snapchatUsername,
+            followers: formData.totalFollowers,
+            views: formData.averageViews,
+            engagement: formData.engagementRate,
+            past_collabs: formData.pastCollaborations,
+            why_join: formData.whyJoin
+          }
+        );
+      } else {
+        console.warn("EmailJS keys missing");
+      }
+
       setIsSubmitted(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
+      console.error("EmailJS Error:", err);
       setError('Something went wrong. Please try again later.');
     } finally {
       setIsSubmitting(false);

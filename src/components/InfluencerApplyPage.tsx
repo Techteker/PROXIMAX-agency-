@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Helmet } from 'react-helmet-async';
+import emailjs from '@emailjs/browser';
 import { CheckCircle2, Send } from 'lucide-react';
 import { submitInfluencerApplication } from '../services/supabaseService';
 
@@ -32,18 +33,21 @@ const InfluencerApplyPage = () => {
     setIsSubmitting(true);
     setSubmitStatus('idle');
     try {
-      // 1. Submit to Supabase
-      await submitInfluencerApplication(formData);
+      // 1. Submit to Supabase (Non-blocking)
+      submitInfluencerApplication(formData).catch(err => console.warn("Supabase submission failed:", err));
 
-      // 2. Submit to EmailJS (optional backup)
-      try {
-        await (window as any).emailjs.sendForm(
-          'service_ind0oyk',
-          'template_f9lvw8e',
-          e.target
+      // 2. Submit to EmailJS (Primary for user feedback)
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+
+      if (serviceId && templateId && e.target) {
+        await emailjs.sendForm(
+          serviceId,
+          templateId,
+          e.target as HTMLFormElement
         );
-      } catch (emailError) {
-        console.warn("EmailJS Backup failed, but Supabase succeeded:", emailError);
+      } else {
+        console.warn("EmailJS keys missing or form target invalid");
       }
       
       alert("Application Submitted Successfully!");

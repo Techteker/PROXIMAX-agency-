@@ -125,25 +125,26 @@ export const Navbar: React.FC = () => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="absolute top-24 left-6 right-6 glass-premium rounded-[2.5rem] border border-white/10 p-8 shadow-2xl overflow-hidden"
+              className="absolute top-24 left-6 right-6 glass-premium rounded-[2.5rem] border border-white/10 p-10 shadow-2xl overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-gold-600/5 to-transparent pointer-events-none" />
               
-              <div className="relative z-10 flex flex-col gap-6">
+              <div className="relative z-10 flex flex-col gap-8">
                 {navItems.map((item, idx) => (
                   <motion.div
                     key={item.name}
-                    initial={{ opacity: 0, x: -10 }}
+                    initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.05 }}
+                    className="border-b border-white/5 pb-4"
                   >
                     {item.type === 'link' ? (
                       <Link 
                         to={item.path}
                         onClick={() => setIsMenuOpen(false)}
                         className={cn(
-                          "text-2xl font-serif italic block",
-                          location.pathname === item.path ? "text-gold-500" : "text-white"
+                          "text-3xl font-serif italic block transition-all duration-300",
+                          location.pathname === item.path ? "text-gold-500 translate-x-2" : "text-white hover:text-gold-500 hover:translate-x-2"
                         )}
                       >
                         {item.name}
@@ -151,7 +152,7 @@ export const Navbar: React.FC = () => {
                     ) : (
                       <button 
                         onClick={() => handleNavClick(item)}
-                        className="text-2xl font-serif italic text-white text-left w-full"
+                        className="text-3xl font-serif italic text-white text-left w-full hover:text-gold-500 hover:translate-x-2 transition-all duration-300"
                       >
                         {item.name}
                       </button>

@@ -5,7 +5,11 @@ import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
-import { blogs } from "./src/data/blogs";
+import { ALL_BLOGS as blogs } from "./src/data/blogs";
+
+console.log("Starting server.ts...");
+console.log(`Environment: ${process.env.NODE_ENV}`);
+console.log(`Loaded ${blogs.length} blogs.`);
 
 dotenv.config();
 
@@ -18,6 +22,57 @@ async function startServer() {
 
   app.use(cors());
   app.use(express.json());
+
+  // Custom Header for Verification
+  app.use((req, res, next) => {
+    res.setHeader("X-Powered-By", "PROXIMAX-Server");
+    next();
+  });
+
+  // Request Logging
+  app.use("/api", (req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    next();
+  });
+
+  // Health Check
+  app.get("/api/health", (req, res) => {
+    res.json({ status: "ok", blogsLoaded: blogs.length });
+  });
+
+  // Blog API Routes
+  console.log(`Loaded ${blogs.length} blogs from data source.`);
+  
+  const getReadTime = (content: string) => {
+    const words = (content || '').split(/\s+/).length;
+    return Math.ceil(words / 200);
+  };
+
+  const cachedBlogList = blogs.map(({ content, ...rest }) => ({
+    ...rest,
+    readTime: getReadTime(content || '')
+  }));
+
+  app.get("/api/blogs", (req, res) => {
+    res.json(cachedBlogList);
+  });
+
+  app.get("/api/blogs/:slug", (req, res) => {
+    const blog = blogs.find(b => b.slug === req.params.slug);
+    if (blog) {
+      res.json({
+        ...blog,
+        readTime: getReadTime(blog.content || '')
+      });
+    } else {
+      res.status(404).json({ message: "Blog not found" });
+    }
+  });
+
+  // Catch-all for API routes to ensure they return JSON
+  app.all("/api/*", (req, res) => {
+    res.status(404).json({ error: "API route not found" });
+  });
 
   // Content Data
   const agencyData = {
@@ -229,37 +284,6 @@ async function startServer() {
 
   app.get("/api/internship-details", (req, res) => {
     res.json(internshipData);
-  });
-
-  // Blog API Routes
-  console.log(`Loaded ${blogs.length} blogs from data source.`);
-  
-  // Pre-calculate readTime for all blogs
-  const getReadTime = (content: string) => {
-    const words = content.split(/\s+/).length;
-    return Math.ceil(words / 200);
-  };
-
-  const cachedBlogList = blogs.map(({ content, ...rest }) => ({
-    ...rest,
-    readTime: getReadTime(content || '')
-  }));
-
-  app.get("/api/blogs", (req, res) => {
-    // Return the pre-calculated list for speed
-    res.json(cachedBlogList);
-  });
-
-  app.get("/api/blogs/:slug", (req, res) => {
-    const blog = blogs.find(b => b.slug === req.params.slug);
-    if (blog) {
-      res.json({
-        ...blog,
-        readTime: getReadTime(blog.content || '')
-      });
-    } else {
-      res.status(404).json({ message: "Blog not found" });
-    }
   });
 
   // API Route for sending email

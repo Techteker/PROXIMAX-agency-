@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'motion/react';
+import emailjs from '@emailjs/browser';
 import { Calendar, ArrowRight, Search, Clock, Sparkles } from 'lucide-react';
 import { cn } from '../lib/utils';
 
@@ -40,6 +41,22 @@ const BlogListPage = () => {
         })
       });
       if (response.ok) {
+        // Submit to EmailJS
+        try {
+          const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+          const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+          
+          if (serviceId && templateId) {
+            await emailjs.send(
+              serviceId,
+              templateId,
+              { email: newsletterEmail }
+            );
+          }
+        } catch (emailError) {
+          console.warn("EmailJS Newsletter failed:", emailError);
+        }
+
         setSubmitStatus('success');
         setNewsletterEmail('');
       } else {
@@ -56,6 +73,21 @@ const BlogListPage = () => {
     const loadBlogs = async () => {
       setLoading(true);
       try {
+        // Try local API first
+        const response = await fetch('/api/blogs');
+        if (response.ok) {
+          const contentType = response.headers.get("content-type");
+          if (contentType && contentType.includes("application/json")) {
+            const data = await response.json();
+            if (Array.isArray(data) && data.length > 0) {
+              setBlogs(data);
+              setLoading(false);
+              return;
+            }
+          }
+        }
+        
+        // Fallback to Supabase
         const data = await fetchBlogs();
         if (data && data.length > 0) {
           setBlogs(data);
@@ -63,7 +95,7 @@ const BlogListPage = () => {
           setBlogs(SAMPLE_BLOGS);
         }
       } catch (err) {
-        console.error("Error fetching blogs from Supabase:", err);
+        console.error("Error fetching blogs, using sample data:", err);
         setBlogs(SAMPLE_BLOGS);
       } finally {
         setLoading(false);
@@ -124,11 +156,11 @@ const BlogListPage = () => {
   return (
     <div className="min-h-screen bg-[#050505] pt-48 pb-32 relative overflow-hidden">
       <Helmet>
-        <title>The Journal | Digital Marketing & SEO Insights | PROXIMAX</title>
-        <meta name="description" content="Read the latest insights on Local SEO, GMB optimization, and digital marketing strategies from PROXIMAX. Stay ahead in the Indian digital landscape." />
-        <meta name="keywords" content="digital marketing blog, seo insights india, gmb optimization tips, local seo strategies, proximax journal" />
-        <meta property="og:title" content="The Journal | Digital Marketing & SEO Insights | PROXIMAX" />
-        <meta property="og:description" content="Expert strategies and insights to grow your business online. Explore the PROXIMAX Journal." />
+        <title>The Journal | Performance Marketing & ROI Insights | PROXIMAX</title>
+        <meta name="description" content="Read the latest insights on Performance Marketing, Lead Generation, and ROI focused strategies from PROXIMAX. Stay ahead in the Indian digital landscape." />
+        <meta name="keywords" content="performance marketing blog, lead generation insights, roi focused marketing, seo strategies india, proximax journal" />
+        <meta property="og:title" content="The Journal | Performance Marketing & ROI Insights | PROXIMAX" />
+        <meta property="og:description" content="Expert ROI-focused strategies and lead generation insights to grow your business online. Explore the PROXIMAX Journal." />
         <link rel="canonical" href="https://proximax.in/blog" />
       </Helmet>
 
