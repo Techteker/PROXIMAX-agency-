@@ -7,6 +7,12 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://proximax.in/pricing</loc>
+    <lastmod>2026-04-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://proximax.in/blog</loc>
     <lastmod>2026-04-10</lastmod>
     <changefreq>weekly</changefreq>
@@ -29,5 +35,21 @@
     <lastmod>2026-04-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://proximax.in/blog/gmb-optimization-guide-2026</loc>
+    <lastmod>2026-04-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://proximax.in/blog/rank-1-google-maps-india</loc>
+    <lastmod>2026-04-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://proximax.in/blog/local-seo-strategies-small-business</loc>
+    <lastmod>2026-04-10</lastmod>
+    <priority>0.6</priority>
   </url>
 </urlset>

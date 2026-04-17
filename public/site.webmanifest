@@ -1,0 +1,16 @@
+{
+  "name": "PROXIMAX - Performance Marketing Agency",
+  "short_name": "PROXIMAX",
+  "description": "Premier Performance Marketing Agency specializing in Lead Generation and ROI focused strategies.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#D4AF37",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

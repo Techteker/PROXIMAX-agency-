@@ -19,6 +19,14 @@ const BlogPostPage = lazy(() => import('./components/BlogPostPage'));
 const InfluencerApplyPage = lazy(() => import('./components/InfluencerApplyPage'));
 const InternshipPage = lazy(() => import('./components/InternshipPage'));
 const CaseStudyPage = lazy(() => import('./components/CaseStudyPage'));
+const PricingPage = lazy(() => import('./components/PricingPage'));
+
+// Legal Pages
+const PrivacyPolicy = lazy(() => import('./components/legal/LegalPages').then(m => ({ default: m.PrivacyPolicy })));
+const TermsConditions = lazy(() => import('./components/legal/LegalPages').then(m => ({ default: m.TermsConditions })));
+const RefundPolicy = lazy(() => import('./components/legal/LegalPages').then(m => ({ default: m.RefundPolicy })));
+const ShippingPolicy = lazy(() => import('./components/legal/LegalPages').then(m => ({ default: m.ShippingPolicy })));
+const CompliancePage = lazy(() => import('./components/legal/LegalPages').then(m => ({ default: m.CompliancePage })));
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -306,7 +314,15 @@ export default function App() {
                   <Route path="/internship" element={<InternshipPage />} />
                   <Route path="/case-studies" element={<CaseStudyPage />} />
                   <Route path="/influencer-apply" element={<InfluencerApplyPage />} />
+                  <Route path="/pricing" element={<PricingPage />} />
                   <Route path="/thank-you" element={<ThankYou />} />
+                  
+                  {/* Legal Routes */}
+                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                  <Route path="/terms-conditions" element={<TermsConditions />} />
+                  <Route path="/refund-policy" element={<RefundPolicy />} />
+                  <Route path="/shipping-policy" element={<ShippingPolicy />} />
+                  <Route path="/compliance" element={<CompliancePage />} />
                 </Routes>
               </main>
               <Footer />

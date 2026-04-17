@@ -44,8 +44,16 @@ const BlogPostPage = () => {
     setLoading(true);
     // Fetch current blog
     fetch(`/api/blogs/${slug}`)
-      .then(res => {
-        if (!res.ok) throw new Error("Blog not found");
+      .then(async res => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const contentType = res.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          const text = await res.text();
+          console.error("Expected JSON but got:", text.substring(0, 100));
+          throw new TypeError("Oops, we haven't got JSON!");
+        }
         return res.json();
       })
       .then(data => {
@@ -62,9 +70,22 @@ const BlogPostPage = () => {
 
         // Fetch all blogs to find related ones
         return fetch('/api/blogs')
-          .then(res => res.json())
+          .then(async res => {
+            if (!res.ok) {
+              throw new Error(`HTTP error! status: ${res.status}`);
+            }
+            const contentType = res.headers.get("content-type");
+            if (!contentType || !contentType.includes("application/json")) {
+              const text = await res.text();
+              console.error("Expected JSON but got:", text.substring(0, 100));
+              throw new TypeError("Oops, we haven't got JSON!");
+            }
+            return res.json();
+          })
           .then(allBlogsData => {
-            const related = (Array.isArray(allBlogsData) ? allBlogsData : [])
+            const blogsArray = Array.isArray(allBlogsData) ? allBlogsData : 
+                               (allBlogsData && (allBlogsData as any).blogs ? (allBlogsData as any).blogs : []);
+            const related = blogsArray
               .filter((b: any) => b.slug !== slug && b.category === data.category)
               .slice(0, 3);
             setRelatedBlogs(related);

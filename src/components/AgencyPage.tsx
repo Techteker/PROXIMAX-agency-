@@ -119,7 +119,6 @@ const AgencyPage = () => {
         // We still consider it a success if Supabase worked, or we can throw if we want strict EmailJS
       }
       
-      alert("Submitted Successfully!");
       setSubmitStatus('success');
       setFormData({ name: '', email: '', phone: '', service: 'SEO (On-page & Off-page)', budget: '', message: '' });
       (e.target as HTMLFormElement).reset();

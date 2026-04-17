@@ -87,7 +87,6 @@ const InternshipPage = () => {
         console.warn("EmailJS keys missing or form target invalid");
       }
       
-      alert("Application Submitted Successfully!");
       setIsSubmitted(true);
       setFormData({ name: '', phone: '', email: '', college: '', role: 'Digital Marketing Intern', motivation: '' });
       (e.target as HTMLFormElement).reset();

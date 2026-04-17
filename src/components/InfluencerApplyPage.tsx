@@ -50,7 +50,6 @@ const InfluencerApplyPage = () => {
         console.warn("EmailJS keys missing or form target invalid");
       }
       
-      alert("Application Submitted Successfully!");
       setSubmitStatus('success');
       setFormData({
         fullName: '',

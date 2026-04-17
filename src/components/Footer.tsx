@@ -107,9 +107,18 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 tracking-luxury opacity-30">
-        <p>© {new Date().getFullYear()} PROXIMAX Agency. All rights reserved.</p>
-        <p>Designed for Digital Excellence</p>
+      <div className="max-w-7xl mx-auto px-6 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] tracking-luxury">
+        <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 opacity-40">
+          <p>© {new Date().getFullYear()} PROXIMAX Agency. All rights reserved.</p>
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+            <Link to="/privacy-policy" className="hover:text-gold-500 transition-colors">Privacy Policy</Link>
+            <Link to="/terms-conditions" className="hover:text-gold-500 transition-colors">Terms & Conditions</Link>
+            <Link to="/refund-policy" className="hover:text-gold-500 transition-colors">Refund Policy</Link>
+            <Link to="/shipping-policy" className="hover:text-gold-500 transition-colors">Shipping Policy</Link>
+            <Link to="/compliance" className="hover:text-gold-500 transition-colors">Compliance</Link>
+          </div>
+        </div>
+        <p className="opacity-40">Designed for Digital Excellence</p>
       </div>
     </footer>
   );

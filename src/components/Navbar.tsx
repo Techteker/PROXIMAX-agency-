@@ -18,6 +18,7 @@ export const Navbar: React.FC = () => {
 
   const navItems = [
     { name: 'Home', path: '/', type: 'link' },
+    { name: 'Pricing', path: '/pricing', type: 'link' },
     { name: 'Services', path: '/#services', type: 'anchor' },
     { name: 'Blog', path: '/blog', type: 'link' },
     { name: 'Case Studies', path: '/case-studies', type: 'link' },
