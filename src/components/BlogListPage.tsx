@@ -379,7 +379,7 @@ const BlogListPage = () => {
                   <div className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-xl">
                     <img 
                       src={blog.banner} 
-                      alt={blog.title}
+                      alt={`Article: ${blog.title} - PROXIMAX Journal`}
                       className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110"
                       referrerPolicy="no-referrer"
                       loading="lazy"

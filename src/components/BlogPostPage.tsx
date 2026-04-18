@@ -220,6 +220,39 @@ const BlogPostPage = () => {
         <title>{blog.metaTitle || blog.title}</title>
         <meta name="description" content={blog.metaDescription || blog.excerpt} />
         <meta name="keywords" content={blog.keywords?.join(', ')} />
+        <link rel="canonical" href={`https://proximax.in/blog/${blog.slug}`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={blog.metaTitle || blog.title} />
+        <meta property="og:description" content={blog.metaDescription || blog.excerpt} />
+        <meta property="og:image" content={blog.banner} />
+        <meta property="article:published_time" content={blog.date} />
+        <meta property="article:author" content={blog.author} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": blog.title,
+            "description": blog.metaDescription || blog.excerpt,
+            "image": blog.banner,
+            "author": {
+              "@type": "Person",
+              "name": blog.author
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "PROXIMAX",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://proximax.in/logo.png"
+              }
+            },
+            "datePublished": blog.date,
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": `https://proximax.in/blog/${blog.slug}`
+            }
+          })}
+        </script>
       </Helmet>
 
       {/* Reading Progress Bar */}

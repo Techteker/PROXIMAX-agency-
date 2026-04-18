@@ -165,8 +165,19 @@ const StructuredData = () => {
     "alternateName": "Proximax Agency",
     "url": "https://proximax.in",
     "logo": "https://proximax.in/logo.png",
+    "sameAs": [
+      "https://www.linkedin.com/company/proximax",
+      "https://twitter.com/proximax",
+      "https://www.instagram.com/rajendar_rana_732/",
+      "https://www.facebook.com/proximaxagency"
+    ],
     "image": "https://proximax.in/og-image.jpg",
-    "description": "PROXIMAX is a premier Performance Marketing Agency specializing in Lead Generation and ROI focused strategies.",
+    "description": "PROXIMAX is a premier Performance Marketing Agency in India specializing in Lead Generation, SEO, and ROI focused digital strategies.",
+    "brand": {
+      "@type": "Brand",
+      "name": "PROXIMAX",
+      "logo": "https://proximax.in/logo.png"
+    },
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Simdega",
@@ -235,12 +246,6 @@ const StructuredData = () => {
         }
       }
     ],
-    "sameAs": [
-      "https://www.linkedin.com/company/proximax",
-      "https://twitter.com/proximax",
-      "https://www.instagram.com/rajendar_rana_732/",
-      "https://www.facebook.com/proximaxagency"
-    ],
     "priceRange": "₹₹",
     "areaServed": {
       "@type": "Country",
@@ -286,17 +291,24 @@ export default function App() {
     <HelmetProvider>
       <ErrorBoundary>
         <Helmet>
-          <title>Performance Marketing Agency | Lead Generation | ROI focused</title>
-          <meta name="description" content="PROXIMAX is a premier Performance Marketing Agency specializing in Lead Generation and ROI focused strategies to scale your business growth in India." />
-          <meta name="keywords" content="Performance Marketing Agency, Lead Generation, ROI focused, Digital Marketing India, SEO Services, GMB Optimization" />
+          <title>PROXIMAX | Best Digital Marketing Agency India | Lead Generation & SEO</title>
+          <meta name="description" content="PROXIMAX is India's premier Performance Marketing Agency. We specialize in high-ROI Lead Generation, SEO Services, GMB Optimization, and Social Media Marketing to scale your business growth." />
+          <meta name="keywords" content="Best Digital Marketing Agency India, Performance Marketing India, Lead Generation Agency, SEO Services India, GMB Optimization Expert, Digital Marketing for Real Estate, Jewellery Marketing Agency" />
+          <link rel="canonical" href="https://proximax.in" />
+          <meta name="author" content="PROXIMAX Team" />
+          <meta name="robots" content="index, follow" />
           <link rel="alternate" hrefLang="en-in" href="https://proximax.in" />
-          <meta property="og:title" content="Performance Marketing Agency | Lead Generation | ROI focused" />
-          <meta property="og:description" content="Scale your business with the premier Performance Marketing Agency in India. Expert Lead Generation and ROI focused solutions." />
+          <meta property="og:title" content="PROXIMAX | Best Digital Marketing Agency India | Lead Generation & SEO" />
+          <meta property="og:description" content="Scale your business with the premier Performance Marketing Agency in India. Expert Lead Generation, SEO, and ROI focused solutions for modern brands." />
           <meta property="og:url" content="https://proximax.in" />
+          <meta property="og:image" content="https://proximax.in/og-image.jpg" />
           <meta property="og:type" content="website" />
+          <meta property="og:site_name" content="PROXIMAX" />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Performance Marketing Agency | Lead Generation | ROI focused" />
-          <meta name="twitter:description" content="Expert Lead Generation and ROI focused strategies to grow your business. Scale your revenue with PROXIMAX." />
+          <meta name="twitter:site" content="@proximax" />
+          <meta name="twitter:title" content="PROXIMAX | Best Digital Marketing Agency India | Lead Generation & SEO" />
+          <meta name="twitter:description" content="Expert Lead Generation and ROI focused strategies to grow your business. Scale your revenue with India's best marketing agency." />
+          <meta name="twitter:image" content="https://proximax.in/og-image.jpg" />
         </Helmet>
         <StructuredData />
         <BrowserRouter>

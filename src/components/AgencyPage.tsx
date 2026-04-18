@@ -270,10 +270,10 @@ const AgencyPage = () => {
                 Trusted by growing businesses | Limited slots available each month
               </div>
               <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif italic text-white mb-6 md:mb-8 tracking-tighter leading-[0.9]">
-                Digital Marketing Agency <br /> <span className="text-gradient">India: SEO & Lead Generation</span> <br /> Experts.
+                Best Digital Marketing <br /> <span className="text-gradient">Agency India: SEO & Lead</span> <br /> Generation.
               </h1>
               <p className="text-base md:text-xl text-text-muted max-w-xl mb-8 md:mb-12 font-sans font-light leading-relaxed">
-                As a premier Digital Marketing Agency India, we provide expert SEO Services India and GMB Optimization to help local businesses dominate search results and grow revenue.
+                As India's top ROI-focused Marketing Agency, we provide performance SEO Services, Google My Business (GMB) Optimization, and expert Lead Generation to scale businesses in Real Estate, Jewelry, and Tech.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 md:gap-6">
                 <button 
@@ -317,7 +317,7 @@ const AgencyPage = () => {
               >
                 <img 
                   src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80" 
-                  alt="PROXIMAX Digital Marketing Agency Team working on SEO and GMB optimization in India" 
+                  alt="PROXIMAX Digital Marketing Agency India - Performance Marketing & SEO Team" 
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100"
                   referrerPolicy="no-referrer"
                   loading="lazy"
@@ -368,6 +368,20 @@ const AgencyPage = () => {
                 className="absolute inset-[-10%] border border-gold-500/10 rounded-full pointer-events-none"
               />
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Industry Expertise Section (SEO Boost) */}
+      <section className="py-24 bg-[#050505]/50 border-y border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-700">
+            <span className="text-white font-display font-black text-xs uppercase tracking-widest">Real Estate Marketing</span>
+            <span className="text-white font-display font-black text-xs uppercase tracking-widest">Jewelry Growth Experts</span>
+            <span className="text-white font-display font-black text-xs uppercase tracking-widest">Fashion Brand Scaling</span>
+            <span className="text-white font-display font-black text-xs uppercase tracking-widest">E-commerce Dominance</span>
+            <span className="text-white font-display font-black text-xs uppercase tracking-widest">Medical SEO Services</span>
+            <span className="text-white font-display font-black text-xs uppercase tracking-widest">B2B Lead Generation</span>
           </div>
         </div>
       </section>
@@ -432,7 +446,7 @@ const AgencyPage = () => {
               >
                 <img 
                   src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop" 
-                  alt="Rajendar Rana - Founder and CEO of PROXIMAX Digital Marketing Agency" 
+                  alt="Founder of PROXIMAX - SEO Expert & Digital Marketing Strategist India" 
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-[2s] group-hover:scale-110"
                   referrerPolicy="no-referrer"
                   loading="lazy"

@@ -180,8 +180,10 @@ const PricingPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#050505] pt-32 pb-20 relative overflow-hidden">
       <Helmet>
-        <title>Pricing Plans | Performance Marketing Packages | PROXIMAX</title>
-        <meta name="description" content="Transparent pricing for ROI-focused digital marketing. From startups to enterprises, choose a plan that fuels your growth." />
+        <title>Pricing Plans & Digital Marketing Packages | PROXIMAX India</title>
+        <meta name="description" content="Explore ROI-focused digital marketing pricing plans for SEO, GMB Optimization, Lead Generation, and Influencer Marketing. Scale your brand with PROXIMAX India's expert packages." />
+        <meta name="keywords" content="digital marketing packages india, seo pricing india, lead generation services costs, influencer marketing packages, proximax pricing" />
+        <link rel="canonical" href="https://proximax.in/pricing" />
       </Helmet>
 
       {/* Background Elements */}
@@ -357,9 +359,10 @@ const PricingPage: React.FC = () => {
               <div className="flex items-center gap-6 mb-8">
                 <img 
                   src={testimonial.image} 
-                  alt={testimonial.name} 
+                  alt={`Testimonial from ${testimonial.name} - ${testimonial.role} about PROXIMAX services`} 
                   className="w-16 h-16 rounded-full border-2 border-gold-500/20"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
                 />
                 <div>
                   <h4 className="text-xl font-display text-white">{testimonial.name}</h4>

@@ -189,26 +189,3 @@ export const fetchFounderInfo = async () => {
   if (error && error.code !== 'PGRST116') throw error; // PGRST116 is "no rows returned"
   return data;
 };
-
-// 13. Admin: Fetch All Applications (Generic)
-export const fetchAdminData = async (table: string) => {
-  const { data, error } = await supabase
-    .from(table)
-    .select('*')
-    .order('created_at', { ascending: false });
-  
-  if (error) throw error;
-  return data;
-};
-
-// 14. Admin: Update Application Status
-export const updateApplicationStatus = async (table: string, id: string, status: string) => {
-  const { data, error } = await supabase
-    .from(table)
-    .update({ status })
-    .eq('id', id)
-    .select();
-  
-  if (error) throw error;
-  return data;
-};

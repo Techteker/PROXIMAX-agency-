@@ -57,8 +57,10 @@ const CaseStudyPage = () => {
   return (
     <div className="bg-[#050505] min-h-screen">
       <Helmet>
-        <title>Case Studies | Real Results for Real Businesses | PROXIMAX</title>
-        <meta name="description" content="See how PROXIMAX helps local businesses in India generate leads, increase sales, and dominate their market with expert digital marketing case studies." />
+        <title>Case Studies: Lead Generation & SEO Success Stories | PROXIMAX India</title>
+        <meta name="description" content="Discover how PROXIMAX India delivers 10x ROI for clients using advanced SEO, GMB Optimization, and high-performance Lead Generation strategies. Read our success stories." />
+        <meta name="keywords" content="digital marketing case studies india, seo results real estate, lead generation success stories, proximax results" />
+        <link rel="canonical" href="https://proximax.in/case-studies" />
       </Helmet>
 
       {/* Hero Section */}
