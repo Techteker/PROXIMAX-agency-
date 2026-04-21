@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-ro
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { 
   Check,
-  MessageSquare,
   ArrowUp
 } from 'lucide-react';
 import { FloatingBubbles } from './components/FloatingBubbles';
@@ -21,6 +20,8 @@ const InternshipPage = lazy(() => import('./components/InternshipPage'));
 const CaseStudyPage = lazy(() => import('./components/CaseStudyPage'));
 const PricingPage = lazy(() => import('./components/PricingPage'));
 const CareersPage = lazy(() => import('./components/CareersPage'));
+const AdminLoginPage = lazy(() => import('./components/AdminLoginPage'));
+const AdminDashboard = lazy(() => import('./components/AdminDashboard'));
 
 // Legal Pages
 const PrivacyPolicy = lazy(() => import('./components/legal/LegalPages').then(m => ({ default: m.PrivacyPolicy })));
@@ -178,112 +179,36 @@ const StructuredData = () => {
       "@type": "Brand",
       "name": "PROXIMAX",
       "logo": "https://proximax.in/logo.png"
-    },
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Simdega",
-      "addressLocality": "Simdega",
-      "addressRegion": "Jharkhand",
-      "postalCode": "835223",
-      "addressCountry": "IN"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 22.6234,
-      "longitude": 84.4815
-    },
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+91-9341579348",
-      "contactType": "customer service",
-      "areaServed": "IN",
-      "availableLanguage": ["English", "Hindi"]
-    },
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Digital Marketing Services",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "SEO Services India",
-            "description": "Comprehensive on-page and off-page SEO services to improve search rankings."
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "GMB Optimization",
-            "description": "Google My Business optimization to dominate local search results."
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Lead Generation Agency",
-            "description": "High-converting lead generation strategies for business growth."
-          }
-        }
-      ]
-    },
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How long does it take to see results?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Typically between 7–30 days depending on the strategy used. Paid ads show results almost immediately, while SEO and GMB optimization build long-term momentum."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do you guarantee results?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "We focus on measurable outcomes. We continuously optimize your campaigns to improve performance and ensure you get the best possible return on investment."
-        }
-      }
-    ],
-    "priceRange": "₹₹",
-    "areaServed": {
-      "@type": "Country",
-      "name": "India"
-    },
-    "knowsAbout": [
-      "Search Engine Optimization",
-      "Google My Business Optimization",
-      "Local SEO",
-      "Social Media Marketing",
-      "Lead Generation",
-      "Digital Strategy",
-      "Performance Marketing",
-      "Influencer Marketing"
-    ],
-    "offers": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "SEO & GMB Dominance"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Performance Marketing"
-        }
-      }
-    ]
+    }
   };
 
   return (
     <script type="application/ld+json">
       {JSON.stringify(schema)}
     </script>
+  );
+};
+
+const MainLayout = ({ children }: { children: ReactNode }) => {
+  const { pathname } = useLocation();
+  const isAdminPath = pathname.startsWith('/admin');
+
+  if (isAdminPath) {
+    return <main className="flex-grow">{children}</main>;
+  }
+
+  return (
+    <div className="min-h-screen bg-bg text-text-muted selection:bg-gold-500/30 selection:text-white relative overflow-hidden flex flex-col transition-colors duration-500">
+      <MagicCursor />
+      <FloatingBubbles />
+      <Navbar />
+      <main className="flex-grow">
+        {children}
+      </main>
+      <Footer />
+      <FloatingWhatsApp />
+      <ScrollToTopButton />
+    </div>
   );
 };
 
@@ -299,50 +224,35 @@ export default function App() {
           <meta name="author" content="PROXIMAX Team" />
           <meta name="robots" content="index, follow" />
           <link rel="alternate" hrefLang="en-in" href="https://proximax.in" />
-          <meta property="og:title" content="PROXIMAX | Best Digital Marketing Agency India | Lead Generation & SEO" />
-          <meta property="og:description" content="Scale your business with the premier Performance Marketing Agency in India. Expert Lead Generation, SEO, and ROI focused solutions for modern brands." />
-          <meta property="og:url" content="https://proximax.in" />
-          <meta property="og:image" content="https://proximax.in/og-image.jpg" />
-          <meta property="og:type" content="website" />
-          <meta property="og:site_name" content="PROXIMAX" />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:site" content="@proximax" />
-          <meta name="twitter:title" content="PROXIMAX | Best Digital Marketing Agency India | Lead Generation & SEO" />
-          <meta name="twitter:description" content="Expert Lead Generation and ROI focused strategies to grow your business. Scale your revenue with India's best marketing agency." />
-          <meta name="twitter:image" content="https://proximax.in/og-image.jpg" />
         </Helmet>
         <StructuredData />
         <BrowserRouter>
           <ScrollToTop />
           <Suspense fallback={<LoadingSpinner />}>
-            <div className="min-h-screen bg-bg text-text-muted selection:bg-gold-500/30 selection:text-white relative overflow-hidden flex flex-col transition-colors duration-500">
-              <MagicCursor />
-              <FloatingBubbles />
-              <Navbar />
-              <main className="flex-grow">
-                <Routes>
-                  <Route path="/" element={<AgencyPage />} />
-                  <Route path="/blog" element={<BlogListPage />} />
-                  <Route path="/blog/:slug" element={<BlogPostPage />} />
-                  <Route path="/internship" element={<InternshipPage />} />
-                  <Route path="/case-studies" element={<CaseStudyPage />} />
-                  <Route path="/influencer-apply" element={<InfluencerApplyPage />} />
-                  <Route path="/pricing" element={<PricingPage />} />
-                  <Route path="/careers" element={<CareersPage />} />
-                  <Route path="/thank-you" element={<ThankYou />} />
-                  
-                  {/* Legal Routes */}
-                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                  <Route path="/terms-conditions" element={<TermsConditions />} />
-                  <Route path="/refund-policy" element={<RefundPolicy />} />
-                  <Route path="/shipping-policy" element={<ShippingPolicy />} />
-                  <Route path="/compliance" element={<CompliancePage />} />
-                </Routes>
-              </main>
-              <Footer />
-              <FloatingWhatsApp />
-              <ScrollToTopButton />
-            </div>
+            <MainLayout>
+              <Routes>
+                <Route path="/" element={<AgencyPage />} />
+                <Route path="/blog" element={<BlogListPage />} />
+                <Route path="/blog/:slug" element={<BlogPostPage />} />
+                <Route path="/internship" element={<InternshipPage />} />
+                <Route path="/case-studies" element={<CaseStudyPage />} />
+                <Route path="/influencer-apply" element={<InfluencerApplyPage />} />
+                <Route path="/pricing" element={<PricingPage />} />
+                <Route path="/careers" element={<CareersPage />} />
+                <Route path="/thank-you" element={<ThankYou />} />
+                
+                {/* Legal Routes */}
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-conditions" element={<TermsConditions />} />
+                <Route path="/refund-policy" element={<RefundPolicy />} />
+                <Route path="/shipping-policy" element={<ShippingPolicy />} />
+                <Route path="/compliance" element={<CompliancePage />} />
+                
+                {/* Admin Routes */}
+                <Route path="/admin/login" element={<AdminLoginPage />} />
+                <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              </Routes>
+            </MainLayout>
           </Suspense>
         </BrowserRouter>
       </ErrorBoundary>

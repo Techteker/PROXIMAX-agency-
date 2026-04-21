@@ -15,6 +15,8 @@ import {
 import { CASE_STUDIES } from '../constants';
 import { fetchCaseStudies } from '../services/supabaseService';
 
+import CaseStudyVisual from './CaseStudyVisual';
+
 const CaseStudyPage = () => {
   const [studies, setStudies] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -190,12 +192,9 @@ const CaseStudyPage = () => {
                     </div>
                   </div>
 
-                  {/* Proof Placeholder */}
-                  <div className="mb-16 p-8 rounded-2xl border border-dashed border-white/10 flex flex-col items-center justify-center text-center bg-white/5">
-                    <BarChart3 className="w-12 h-12 text-gold-600/20 mb-4" />
-                    <p className="text-text-dim text-[10px] uppercase tracking-widest font-black">
-                      [ Real-time Data Proof: Leads / Ads / WhatsApp / Analytics ]
-                    </p>
+                  {/* Real Proof Visuals */}
+                  <div className="mb-16">
+                    <CaseStudyVisual id={study.id} />
                   </div>
 
                   <div className="mt-auto">
@@ -219,6 +218,72 @@ const CaseStudyPage = () => {
               </div>
             </motion.div>
           )))}
+        </div>
+      </section>
+
+      {/* Cumulative Growth Analysis */}
+      <section className="py-24 bg-white/[0.02] border-y border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <p className="text-gold-500 font-display font-black text-xs uppercase tracking-[0.5em] mb-6">Aggregate Performance</p>
+              <h2 className="text-4xl md:text-6xl font-serif italic text-white mb-8 leading-tight">
+                Data-Driven <br /> <span className="text-gold-500">Industry Analysis.</span>
+              </h2>
+              <p className="text-text-muted font-sans font-light text-lg leading-relaxed mb-10">
+                Across 100+ campaigns, we've identified the key pillars that drive scaling for local and national brands. Our analysis shows a consistent 3.5x average increase in inbound lead velocity within the first 90 days of implementation.
+              </p>
+              <div className="space-y-6">
+                {[
+                  { label: "Avg. Customer Acquisition Cost (CAC) reduction", val: "28%" },
+                  { label: "Avg. ROI for Real Estate campaigns", val: "12x" },
+                  { label: "Avg. GMB search visibility growth", val: "400%" }
+                ].map((stat, i) => (
+                  <div key={i} className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10 group hover:border-gold-500/30 transition-all">
+                    <span className="text-zinc-400 text-sm">{stat.label}</span>
+                    <span className="text-xl font-black text-gold-500 italic">{stat.val}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="relative">
+              <div className="glass-premium p-8 rounded-[3rem] border border-white/10 relative z-10">
+                <div className="flex items-center justify-between mb-10">
+                  <h3 className="text-xl font-serif italic text-white">Market Growth Trend</h3>
+                  <div className="flex gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-gold-500 animate-pulse" />
+                    <span className="text-[10px] text-zinc-500 uppercase font-black">Live Analysis</span>
+                  </div>
+                </div>
+                <div className="h-64 flex items-end gap-2 relative">
+                  {/* Grid Lines */}
+                  <div className="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20">
+                    <div className="w-full h-[1px] bg-white" />
+                    <div className="w-full h-[1px] bg-white" />
+                    <div className="w-full h-[1px] bg-white" />
+                    <div className="w-full h-[1px] bg-white" />
+                  </div>
+                  {[20, 30, 25, 45, 40, 60, 55, 80, 75, 95, 90, 100].map((h, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ height: 0 }}
+                      whileInView={{ height: `${h}%` }}
+                      transition={{ delay: i * 0.1, duration: 1 }}
+                      className="flex-1 bg-gradient-to-t from-gold-600 to-gold-400/20 rounded-t-lg"
+                    />
+                  ))}
+                </div>
+                <div className="mt-8 flex justify-between text-[10px] text-zinc-500 uppercase tracking-widest font-black">
+                  <span>Q1</span>
+                  <span>Q2</span>
+                  <span>Q3</span>
+                  <span>Q4 (Projected)</span>
+                </div>
+              </div>
+              {/* Background Glow */}
+              <div className="absolute -inset-10 bg-gold-600/10 blur-[100px] rounded-full -z-10" />
+            </div>
+          </div>
         </div>
       </section>
 

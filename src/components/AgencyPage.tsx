@@ -32,7 +32,8 @@ import {
 import { cn } from '../lib/utils';
 import { services, SAMPLE_BLOGS } from '../constants';
 import { Link } from 'react-router-dom';
-import { submitContactInquiry } from '../services/supabaseService';
+import { supabase } from '../lib/supabase';
+import { submitContactInquiry, fetchFounderInfo } from '../services/supabaseService';
 
 const FAQItem = ({ question, answer }: { question: string; answer: string }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,6 +77,7 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
 
 const AgencyPage = () => {
   const [homeBlogs, setHomeBlogs] = useState<any[]>([]);
+  const [founder, setFounder] = useState<any>(null);
   const [selectedService, setSelectedService] = useState<any | null>(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -87,6 +89,23 @@ const AgencyPage = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    const hasSeenPopup = localStorage.getItem('proximax_popup_seen');
+    if (!hasSeenPopup) {
+      const timer = setTimeout(() => {
+        setShowPopup(true);
+      }, 5000); // 5 second delay for first time visitors
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  const closePopup = () => {
+    setShowPopup(false);
+    localStorage.setItem('proximax_popup_seen', 'true');
+  };
 
   const encode = (data: any) => {
     return Object.keys(data)
@@ -133,6 +152,36 @@ const AgencyPage = () => {
       setIsSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    // 1. Initial Fetch
+    fetchFounderInfo()
+      .then(data => {
+        setFounder(data);
+      })
+      .catch(err => console.error("Error fetching founder info:", err));
+
+    // 2. Real-time Subscription
+    const channel = supabase
+      .channel('founder-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'founder_info'
+        },
+        (payload) => {
+          console.log('Real-time update received:', payload);
+          setFounder(payload.new as any);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
 
   useEffect(() => {
     fetch('/api/blogs')
@@ -230,7 +279,7 @@ const AgencyPage = () => {
                   
                   <div className="space-y-10">
                     <div>
-                      <h4 className="tracking-luxury text-text-dim mb-4">Core Services</h4>
+                      <h4 className="tracking-luxury text-text-dim mb-4">Core Focus Areas</h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         {selectedService.detailedServices.map((s: string, i: number) => (
                           <div key={i} className="flex items-center gap-3 text-white font-medium text-sm">
@@ -241,15 +290,40 @@ const AgencyPage = () => {
                       </div>
                     </div>
 
-                    <button 
-                      onClick={() => {
-                        setSelectedService(null);
-                        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                      }}
-                      className="w-full bg-gold-600 text-white py-5 rounded-full font-display font-black text-sm uppercase tracking-widest hover:bg-gold-700 transition-all shadow-xl shadow-gold-600/20 flex items-center justify-center gap-3"
-                    >
-                      {selectedService.cta} <ArrowRight className="w-5 h-5" />
-                    </button>
+                    {selectedService.results && (
+                      <div>
+                        <h4 className="tracking-luxury text-text-dim mb-4">Key Outcomes</h4>
+                        <div className="space-y-3">
+                          {selectedService.results.map((r: string, i: number) => (
+                            <div key={i} className="flex items-center gap-4 text-gold-500/80 font-serif italic text-lg leading-tight">
+                              <span className="text-2xl">👉</span>
+                              {r}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <button 
+                        onClick={() => {
+                          setSelectedService(null);
+                          document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        className="w-full bg-gold-600 text-white py-5 rounded-full font-display font-black text-xs uppercase tracking-widest hover:bg-gold-700 transition-all shadow-xl shadow-gold-600/20 flex items-center justify-center gap-3"
+                      >
+                        Get Free Consultation
+                      </button>
+                      <button 
+                        onClick={() => {
+                          setSelectedService(null);
+                          document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        className="w-full bg-white/5 text-white py-5 rounded-full font-display font-black text-xs uppercase tracking-widest hover:bg-white/10 border border-white/10 transition-all flex items-center justify-center gap-3 group/explore"
+                      >
+                        {selectedService.cta || 'Explore Strategy'} <ArrowUpRight className="w-4 h-4 group-hover:scale-125 transition-transform" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -435,8 +509,8 @@ const AgencyPage = () => {
         <div className="max-w-[1400px] mx-auto px-6">
           <div className="glass-luxury rounded-[2.5rem] border border-white/10 py-12 relative overflow-hidden group shadow-[0_0_80px_-40px_rgba(255,255,255,0.2)]">
             {/* Premium Corner Shadows/Glows */}
-            <div className="absolute top-0 left-0 w-64 h-64 bg-white/[0.07] blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-            <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/[0.07] blur-[100px] translate-x-1/2 translate-y-1/2 pointer-events-none" />
+            <div className="absolute top-0 left-0 w-80 h-80 bg-white/[0.15] blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+            <div className="absolute bottom-0 right-0 w-80 h-80 bg-white/[0.15] blur-[100px] translate-x-1/2 translate-y-1/2 pointer-events-none" />
             
             <div className="absolute inset-0 bg-gradient-to-r from-bg via-transparent to-bg z-10 pointer-events-none" />
             
@@ -508,7 +582,7 @@ const AgencyPage = () => {
                 className="group relative cursor-pointer"
               >
                 {/* 3D Deep Card */}
-                <div className="relative glass-premium p-10 md:p-14 rounded-[4rem] border border-white/40 transition-all duration-700 group-hover:border-gold-500/30 shadow-2xl h-full flex flex-col items-start preserve-3d">
+                <div className="relative glass-premium p-10 md:p-14 rounded-[4rem] border border-white/70 transition-all duration-700 group-hover:border-gold-500/50 shadow-2xl h-full flex flex-col items-start preserve-3d">
                   <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
                   <div className="absolute inset-0 bg-gradient-to-br from-gold-600/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                   
@@ -559,8 +633,8 @@ const AgencyPage = () => {
               >
                 <div className="aspect-[4/5] rounded-[4rem] overflow-hidden border border-white/10 relative shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] card-3d">
                   <img 
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop" 
-                    alt="Founder of PROXIMAX" 
+                    src={founder?.image_url || "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop"} 
+                    alt={founder?.name || "Founder of PROXIMAX"} 
                     className="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-1000 group-hover:scale-105"
                     referrerPolicy="no-referrer"
                     loading="lazy"
@@ -568,14 +642,14 @@ const AgencyPage = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent opacity-80" />
                   
                   <div className="absolute bottom-12 left-12 right-12 translate-z-50">
-                    <p className="text-white font-serif italic text-6xl mb-3 tracking-tighter drop-shadow-2xl">Rajendar Rana</p>
+                    <p className="text-white font-serif italic text-6xl mb-3 tracking-tighter drop-shadow-2xl">{founder?.name || "Rajendar Rana"}</p>
                     <div className="flex items-center gap-4">
                       <motion.div 
                         animate={{ width: [0, 48, 0] }}
                         transition={{ duration: 3, repeat: Infinity }}
                         className="h-1 bg-gold-500" 
                       />
-                      <p className="text-gold-500 tracking-[0.3em] uppercase text-[11px] font-black italic">The Architect of Growth</p>
+                      <p className="text-gold-500 tracking-[0.3em] uppercase text-[11px] font-black italic">{founder?.role || "The Architect of Growth"}</p>
                     </div>
                   </div>
                 </div>
@@ -666,7 +740,8 @@ const AgencyPage = () => {
               {[...homeBlogs, ...homeBlogs].map((blog, i) => (
                 <motion.div 
                   key={`${blog.slug}-${i}`}
-                  className="w-[400px] shrink-0 preserve-3d"
+                  whileHover={{ scale: 1.02, y: -10 }}
+                  className="w-[400px] shrink-0 preserve-3d transition-all duration-500"
                 >
                   <Link to={`/blog/${blog.slug}`} className="block group h-full">
                     <div className="glass-premium p-8 rounded-[4rem] border border-white/5 transition-all duration-700 group-hover:border-gold-500/30 shadow-2xl relative overflow-hidden h-full card-3d">
@@ -952,6 +1027,143 @@ const AgencyPage = () => {
           </div>
         </div>
       </section>
+
+      {/* High-Conversion Lead Popup */}
+      <AnimatePresence>
+        {showPopup && (
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-6 sm:p-10 pointer-events-none">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={closePopup}
+              className="absolute inset-0 bg-bg/80 backdrop-blur-xl pointer-events-auto"
+            />
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8, y: 50, rotateX: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: 50, rotateX: 20 }}
+              transition={{ type: "spring", damping: 20, stiffness: 100 }}
+              className="relative w-full max-w-4xl glass-luxury rounded-[4rem] border border-white/10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] overflow-hidden pointer-events-auto perspective-2000"
+            >
+              <div className="absolute inset-0 bg-grain opacity-[0.05]" />
+              <button 
+                onClick={closePopup}
+                className="absolute top-8 right-8 w-12 h-12 rounded-full glass-premium border border-white/10 flex items-center justify-center text-white hover:text-gold-500 hover:scale-110 transition-all z-20"
+              >
+                <X size={20} />
+              </button>
+
+              <div className="grid md:grid-cols-2">
+                {/* Visual Side */}
+                <div className="relative overflow-hidden hidden md:block">
+                  <img 
+                    src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop" 
+                    className="w-full h-full object-cover grayscale brightness-50"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-bg via-transparent to-transparent" />
+                  <div className="absolute inset-0 p-16 flex flex-col justify-end">
+                    <div className="glass-premium p-8 rounded-3xl border border-white/10 backdrop-blur-2xl">
+                      <p className="text-gold-500 font-black tracking-luxury text-[10px] mb-4">Limited Opportunity</p>
+                      <h4 className="text-3xl font-serif italic text-white mb-4">Stop Losing Potential Clients Today.</h4>
+                      <div className="flex items-center gap-4 text-[10px] text-text-dim uppercase tracking-widest font-black italic">
+                        <TrendingUp size={16} className="text-gold-500" />
+                        Avg. +200% Growth in 90 Days
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Form Side */}
+                <div className="p-12 sm:p-16 relative">
+                  <div className="mb-10">
+                    <h3 className="text-4xl font-serif italic text-white mb-4">Scale Your Business.</h3>
+                    <p className="text-text-muted font-sans font-light">Get a custom growth blueprint from our senior architects.</p>
+                  </div>
+
+                  {submitStatus === 'success' ? (
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="text-center py-20"
+                    >
+                      <div className="w-20 h-20 rounded-full bg-gold-600/20 border border-gold-600/30 flex items-center justify-center mx-auto mb-8">
+                        <CheckCircle2 className="text-gold-500 w-10 h-10" />
+                      </div>
+                      <h4 className="text-3xl font-serif italic text-white mb-4">Success!</h4>
+                      <p className="text-text-muted font-sans font-light">One of our specialists will contact you within 24 hours.</p>
+                      <button 
+                        onClick={closePopup}
+                        className="mt-10 btn-premium px-10 py-5 text-[11px]"
+                      >
+                        Great, Thank You
+                      </button>
+                    </motion.div>
+                  ) : (
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <div className="grid grid-cols-2 gap-6">
+                        <input 
+                          required
+                          name="name"
+                          placeholder="Your Name"
+                          value={formData.name}
+                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-text-dim focus:border-gold-500 transition-colors outline-none text-sm"
+                        />
+                        <input 
+                          required
+                          name="phone"
+                          placeholder="WhatsApp No."
+                          value={formData.phone}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-text-dim focus:border-gold-500 transition-colors outline-none text-sm"
+                        />
+                      </div>
+                      <input 
+                        required
+                        name="email"
+                        type="email"
+                        placeholder="Business Email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-text-dim focus:border-gold-500 transition-colors outline-none text-sm"
+                      />
+                      <select 
+                        required
+                        name="service"
+                        value={formData.service}
+                        onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:border-gold-500 transition-colors outline-none text-sm appearance-none"
+                      >
+                        <option value="" disabled className="bg-bg">Target Growth Area</option>
+                        <option value="Lead Generation" className="bg-bg">Lead Generation</option>
+                        <option value="Advanced SEO" className="bg-bg">Advanced SEO</option>
+                        <option value="GMB Optimization" className="bg-bg">GMB Optimization</option>
+                        <option value="Full Digital Scaling" className="bg-bg">Full Digital Scaling</option>
+                      </select>
+                      
+                      <button 
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full bg-gold-600 text-white py-5 rounded-xl font-display font-black text-[11px] uppercase tracking-luxury hover:bg-gold-700 transition-all shadow-xl shadow-gold-600/20 disabled:opacity-50 mt-4 flex items-center justify-center gap-3"
+                      >
+                        {isSubmitting ? (
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        ) : (
+                          <>Deploy My Blueprint <Zap size={14} /></>
+                        )}
+                      </button>
+                      <p className="text-[9px] text-text-dim text-center uppercase tracking-widest font-black italic">No Spam. Pure Growth Protocol.</p>
+                    </form>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

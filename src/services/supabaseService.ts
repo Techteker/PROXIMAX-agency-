@@ -184,8 +184,46 @@ export const fetchFounderInfo = async () => {
   const { data, error } = await supabase
     .from('founder_info')
     .select('*')
-    .single();
+    .limit(1);
   
-  if (error && error.code !== 'PGRST116') throw error; // PGRST116 is "no rows returned"
-  return data;
+  if (error && error.code !== 'PGRST116') throw error; 
+  return data && data.length > 0 ? data[0] : null;
+};
+
+// 13. Upsert Founder Info (Create if not exists)
+export const upsertFounderInfo = async (updates: any) => {
+  // If we have an ID, we target that specific record
+  // If not, we just upsert (assuming a single record design or using a static ID)
+  const { data, error } = await supabase
+    .from('founder_info')
+    .upsert([updates])
+    .select();
+
+  if (error) throw error;
+  return data && data.length > 0 ? data[0] : null;
+};
+
+// 14. Upload Founder Image
+export const uploadFounderImage = async (file: File) => {
+  const fileExt = file.name.split('.').pop();
+  const fileName = `founder_${Math.random()}.${fileExt}`;
+  const filePath = `public/${fileName}`;
+
+  // Using the bucket name "PROXIMAX" as configured by the user
+  const { error: uploadError } = await supabase.storage
+    .from('PROXIMAX')
+    .upload(filePath, file, {
+      cacheControl: '3600',
+      upsert: false
+    });
+
+  if (uploadError) {
+    throw uploadError;
+  }
+
+  const { data } = supabase.storage
+    .from('PROXIMAX')
+    .getPublicUrl(filePath);
+
+  return data.publicUrl;
 };

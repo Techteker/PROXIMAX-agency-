@@ -400,6 +400,40 @@ const BlogPostPage = () => {
             </div>
           </div>
 
+          {/* Post-Content Banner */}
+          <div className="mt-32 glass-premium p-12 md:p-20 rounded-[3.5rem] border border-white/10 relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gradient-to-br from-gold-600/10 to-transparent pointer-events-none" />
+            <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h3 className="text-4xl font-serif italic text-white mb-6 leading-tight">Elevate Your Strategy Beyond This Article</h3>
+                <p className="text-text-muted text-lg font-sans font-light leading-relaxed">
+                  Insights are the first step; execution is where the ROI happens. Let's discuss how to apply these frameworks to your specific business model.
+                </p>
+              </div>
+              <div className="flex flex-col gap-4">
+                <button 
+                  onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="w-full bg-gold-600 text-white py-5 rounded-2xl tracking-luxury hover:bg-gold-700 transition-all shadow-xl shadow-gold-600/20 font-display font-black uppercase text-[10px]"
+                >
+                  Schedule Your Audit
+                </button>
+                <div className="flex items-center justify-center gap-6 mt-4">
+                  <div className="h-px flex-grow bg-white/5" />
+                  <span className="text-[9px] text-slate-500 uppercase tracking-widest font-black">Or</span>
+                  <div className="h-px flex-grow bg-white/5" />
+                </div>
+                <a 
+                  href="https://wa.me/919341579348" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-full bg-white/5 border border-white/10 text-white py-5 rounded-2xl tracking-luxury hover:bg-white/10 transition-all text-center font-display font-black uppercase text-[10px] flex items-center justify-center gap-3"
+                >
+                  <WhatsAppIcon className="w-4 h-4" /> Chat with Expert
+                </a>
+              </div>
+            </div>
+          </div>
+
           {/* FAQ Section - Refined Accordion */}
           {blog.faqs && blog.faqs.length > 0 && (
             <div className="mt-48 border-t border-white/5 pt-32">

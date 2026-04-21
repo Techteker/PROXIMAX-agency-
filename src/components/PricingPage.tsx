@@ -25,7 +25,8 @@ const pricingPlans = [
     name: "Starter Boost",
     id: "starter",
     icon: <Zap className="w-6 h-6" />,
-    price: "₹4,999",
+    priceINR: "₹4,999",
+    priceUSD: "$59",
     period: "/month",
     description: "Ideal for beginners & small businesses looking to establish their presence.",
     features: [
@@ -44,7 +45,8 @@ const pricingPlans = [
     id: "growth",
     tag: "🔥 Most Popular",
     icon: <Rocket className="w-6 h-6" />,
-    price: "₹9,999",
+    priceINR: "₹9,999",
+    priceUSD: "$119",
     period: "/month",
     description: "Powerful tools for scaling brands that want dominate their market.",
     features: [
@@ -64,7 +66,8 @@ const pricingPlans = [
     name: "Scale Pro",
     id: "scale",
     icon: <TrendingUp className="w-6 h-6" />,
-    price: "₹19,999",
+    priceINR: "₹19,999",
+    priceUSD: "$239",
     period: "/month",
     description: "Advanced performance marketing for high-growth enterprises.",
     features: [
@@ -83,7 +86,8 @@ const pricingPlans = [
     name: "Influencer Engine",
     id: "influencer",
     icon: <Target className="w-6 h-6" />,
-    price: "₹14,999",
+    priceINR: "₹14,999",
+    priceUSD: "$179",
     period: "/month",
     description: "Leverage the power of creators to drive authentic engagement.",
     features: [
@@ -101,7 +105,8 @@ const pricingPlans = [
     name: "Custom Enterprise",
     id: "enterprise",
     icon: <Building2 className="w-6 h-6" />,
-    price: "Custom",
+    priceINR: "Custom",
+    priceUSD: "Custom",
     period: "",
     description: "Bespeak solutions tailored specifically for global organizations.",
     features: [
@@ -165,6 +170,7 @@ const comparisonFeatures = [
 const PricingPage: React.FC = () => {
   const navigate = useNavigate();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [currency, setCurrency] = useState<'INR' | 'USD'>('INR');
 
   const handleCtaClick = (plan: string) => {
     // Navigate to contact section or specialized form
@@ -218,10 +224,30 @@ const PricingPage: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-xl text-text-muted max-w-2xl mx-auto font-sans font-light"
+            className="text-xl text-text-muted max-w-2xl mx-auto font-sans font-light mb-16"
           >
             Flexible pricing for startups, creators & businesses. No hidden fees, just pure ROI-driven performance.
           </motion.p>
+
+          {/* Currency Toggle */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3 }}
+            className="flex items-center justify-center gap-6 mb-8"
+          >
+            <span className={cn("text-sm font-display tracking-widest transition-colors", currency === 'INR' ? "text-gold-500 font-bold" : "text-text-dim")}>INR</span>
+            <button 
+              onClick={() => setCurrency(currency === 'INR' ? 'USD' : 'INR')}
+              className="w-16 h-8 rounded-full bg-white/5 border border-white/10 relative p-1 transition-all hover:border-gold-500/30"
+            >
+              <motion.div 
+                animate={{ x: currency === 'INR' ? 0 : 32 }}
+                className="w-6 h-6 rounded-full bg-gold-600 shadow-lg shadow-gold-600/20"
+              />
+            </button>
+            <span className={cn("text-sm font-display tracking-widest transition-colors", currency === 'USD' ? "text-gold-500 font-bold" : "text-text-dim")}>USD</span>
+          </motion.div>
         </div>
 
         {/* Pricing Cards Grid */}
@@ -263,7 +289,9 @@ const PricingPage: React.FC = () => {
                   </div>
 
                   <div className="mb-10 flex items-baseline gap-1">
-                    <span className="text-4xl font-display font-black text-text-main">{plan.price}</span>
+                    <span className="text-4xl font-display font-black text-text-main">
+                      {currency === 'INR' ? plan.priceINR : plan.priceUSD}
+                    </span>
                     <span className="text-text-dim text-sm">{plan.period}</span>
                   </div>
 
@@ -308,7 +336,12 @@ const PricingPage: React.FC = () => {
                 <tr className="border-b border-white/5">
                   <th className="py-6 px-4 text-left text-[10px] tracking-luxury text-gold-500">Features</th>
                   {pricingPlans.map(plan => (
-                    <th key={plan.id} className="py-6 px-4 text-center text-sm font-serif italic text-white">{plan.name}</th>
+                    <th key={plan.id} className="py-6 px-4 text-center">
+                      <div className="flex flex-col items-center gap-1">
+                        <span className="text-sm font-serif italic text-white">{plan.name}</span>
+                        <span className="text-[9px] text-gold-500 uppercase font-black">{currency === 'INR' ? plan.priceINR : plan.priceUSD}</span>
+                      </div>
+                    </th>
                   ))}
                 </tr>
               </thead>
@@ -348,35 +381,38 @@ const PricingPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Testimonials */}
-        <div className="grid md:grid-cols-2 gap-12 mb-32">
-          {testimonials.map((testimonial, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, x: idx === 0 ? -20 : 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="glass-card p-12 rounded-[3rem] relative"
-            >
-              <Quote className="absolute top-10 right-10 w-12 h-12 text-gold-600/10" />
-              <div className="flex items-center gap-6 mb-8">
-                <img 
-                  src={testimonial.image} 
-                  alt={`Testimonial from ${testimonial.name} - ${testimonial.role} about PROXIMAX services`} 
-                  className="w-16 h-16 rounded-full border-2 border-gold-500/20"
-                  referrerPolicy="no-referrer"
-                  loading="lazy"
-                />
-                <div>
-                  <h4 className="text-xl font-display text-white">{testimonial.name}</h4>
-                  <p className="text-xs text-gold-500 tracking-luxury">{testimonial.role}</p>
+        {/* Testimonials Auto Slider */}
+        <div className="mb-32 relative overflow-hidden group/marquee mask-edge-fade">
+          <div className="absolute inset-0 bg-gradient-to-r from-bg via-transparent to-bg z-10 pointer-events-none" />
+          
+          <div className="flex animate-marquee-right hover:[animation-play-state:paused] whitespace-nowrap gap-12 items-stretch py-10">
+            {[...testimonials, ...testimonials, ...testimonials].map((testimonial, idx) => (
+              <motion.div
+                key={`${idx}`}
+                className="w-[500px] shrink-0"
+              >
+                <div className="glass-card p-12 rounded-[3rem] relative h-full flex flex-col whitespace-normal border border-white/5 hover:border-gold-500/30 transition-all duration-500">
+                  <Quote className="absolute top-10 right-10 w-12 h-12 text-gold-600/10" />
+                  <div className="flex items-center gap-6 mb-8">
+                    <img 
+                      src={testimonial.image} 
+                      alt={`Testimonial from ${testimonial.name} - ${testimonial.role} about PROXIMAX services`} 
+                      className="w-16 h-16 rounded-full border-2 border-gold-500/20 shrink-0"
+                      referrerPolicy="no-referrer"
+                      loading="lazy"
+                    />
+                    <div>
+                      <h4 className="text-xl font-display text-white">{testimonial.name}</h4>
+                      <p className="text-xs text-gold-500 tracking-luxury">{testimonial.role}</p>
+                    </div>
+                  </div>
+                  <p className="text-lg text-text-muted font-serif italic leading-relaxed">
+                    "{testimonial.content}"
+                  </p>
                 </div>
-              </div>
-              <p className="text-lg text-text-muted font-serif italic leading-relaxed">
-                "{testimonial.content}"
-              </p>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* FAQ Section */}

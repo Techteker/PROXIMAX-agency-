@@ -14,7 +14,9 @@ import {
   ArrowRight,
   Sparkles,
   FileText,
-  Check
+  Check,
+  Mail,
+  ShoppingCart
 } from 'lucide-react';
 import { WhatsAppIcon } from './components/icons/WhatsApp';
 
@@ -130,6 +132,28 @@ export const services = [
     results: ["Massive reach", "Authentic trust", "Increased sales"],
     cta: "Start My Campaign",
     icon: Users,
+    color: "bg-gold-500/10 text-gold-500"
+  },
+  {
+    id: "email",
+    title: "Email Marketing & Automation (Gmail Marketing)",
+    headline: "Turn Your Audience Into Repeat Customers",
+    description: "We design and automate high-converting email funnels including welcome series, follow-ups, and promotional campaigns. Turn your audience into repeat customers with powerful email campaigns.",
+    detailedServices: ["Welcome Series", "Follow-ups", "Promotional Campaigns"],
+    results: ["More repeat sales", "Long-term customer relationships"],
+    cta: "Explore Strategy",
+    icon: Mail,
+    color: "bg-gold-600/10 text-gold-600"
+  },
+  {
+    id: "ecommerce",
+    title: "E-commerce Marketing (All Platforms)",
+    headline: "Scale Your Online Store Across All Platforms",
+    description: "Scale your online store with data-driven marketing strategies across platforms like Shopify, Amazon, and Flipkart. We optimize your product listings, run high-converting ads, and boost sales.",
+    detailedServices: ["Shopify & Amazon Optimization", "Product Listing Optimization", "High-Converting Ads"],
+    results: ["More orders", "Higher revenue growth"],
+    cta: "Explore Strategy",
+    icon: ShoppingCart,
     color: "bg-gold-500/10 text-gold-500"
   }
 ];
