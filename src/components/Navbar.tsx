@@ -1,20 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Mail, Phone, MapPin } from 'lucide-react';
+import { Menu, X, Mail, Phone, MapPin, Moon, Sun } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '../lib/utils';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
+    
+    // Check initial theme
+    const isLight = document.documentElement.classList.contains('light');
+    setTheme(isLight ? 'light' : 'dark');
+    
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    if (newTheme === 'light') {
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.remove('light');
+    }
+  };
 
   const navItems = [
     { name: 'Home', path: '/', type: 'link' },
@@ -25,8 +41,7 @@ export const Navbar: React.FC = () => {
     { name: 'FAQ', path: '/#faq', type: 'anchor' },
     { name: 'About', path: '/#about', type: 'anchor' },
     { name: 'Contact', path: '/#contact', type: 'anchor' },
-    { name: 'Internship', path: '/internship', type: 'link' },
-    { name: 'Influencer', path: '/influencer-apply', type: 'link' },
+    { name: 'Careers', path: '/careers', type: 'link' },
   ];
 
   const handleNavClick = (item: any) => {
@@ -49,16 +64,17 @@ export const Navbar: React.FC = () => {
     <>
       <nav className={cn(
         "fixed top-0 w-full z-50 transition-all duration-500 px-6 py-6",
-        isScrolled ? "bg-[#050505]/90 backdrop-blur-xl border-b border-white/5 py-4 shadow-2xl" : "bg-transparent"
+        isScrolled ? "bg-bg/90 backdrop-blur-xl border-b border-white/5 py-4 shadow-2xl" : "bg-transparent"
       )}>
-        <div className="max-w-7xl mx-auto flex justify-between items-center glass-premium px-8 py-4 rounded-full border border-white/10 backdrop-blur-xl">
+        <div className="max-w-7xl mx-auto flex justify-between items-center glass-premium px-8 py-4 rounded-full border border-white/10 backdrop-blur-xl relative overflow-hidden">
+          <div className="absolute inset-0 bg-grain opacity-[0.05] pointer-events-none" />
           <Link to="/" className="flex items-center gap-3 group cursor-pointer" aria-label="PROXIMAX - Best Digital Marketing Agency">
             <div className="w-12 h-12 bg-gradient-to-br from-gold-400 to-gold-600 rounded-full flex items-center justify-center text-white font-display font-bold text-2xl shadow-2xl shadow-gold-500/20 group-hover:scale-110 transition-transform" aria-hidden="true">P</div>
-            <span className="text-2xl font-display font-black tracking-tighter text-white">PROXIMAX</span>
+            <span className="text-2xl font-display font-black tracking-tighter text-text-main">PROXIMAX</span>
           </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8 lg:gap-10">
+          {/* Desktop Nav - Hidden to use Hamburger for all sizes */}
+          <div className="hidden">
             {navItems.map((item) => (
               item.type === 'link' ? (
                 <Link 
@@ -96,28 +112,39 @@ export const Navbar: React.FC = () => {
             </button>
           </div>
 
-          {/* Mobile Toggle */}
-          <button 
-            className="md:hidden p-2 text-white" 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          >
-            {isMenuOpen ? <X /> : <Menu />}
-          </button>
+          {/* Toggle Buttons Group */}
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={toggleTheme}
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-gold-500 hover:bg-gold-500/10 transition-all"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+
+            {/* Toggle Button - Visible on all sizes */}
+            <button 
+              className="p-2 text-text-main bg-white/5 rounded-full border border-white/10 hover:bg-gold-500/10 transition-all" 
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            >
+              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Unified Menu Container */}
       <AnimatePresence>
         {isMenuOpen && (
-          <div className="fixed inset-0 z-40 md:hidden">
+          <div className="fixed inset-0 z-40">
             {/* Backdrop */}
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMenuOpen(false)}
-              className="absolute inset-0 bg-[#050505]/60 backdrop-blur-sm"
+              className="absolute inset-0 bg-bg/60 backdrop-blur-sm"
             />
             
             {/* Menu Card */}
@@ -126,7 +153,7 @@ export const Navbar: React.FC = () => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="absolute top-24 left-6 right-6 glass-premium rounded-[2.5rem] border border-white/10 p-10 shadow-2xl overflow-hidden"
+              className="absolute top-24 left-6 right-6 md:left-auto md:right-10 md:w-[450px] card-3d glass-premium rounded-[2.5rem] border border-white/10 p-10 shadow-2xl overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-gold-600/5 to-transparent pointer-events-none" />
               
@@ -145,7 +172,7 @@ export const Navbar: React.FC = () => {
                         onClick={() => setIsMenuOpen(false)}
                         className={cn(
                           "text-3xl font-serif italic block transition-all duration-300",
-                          location.pathname === item.path ? "text-gold-500 translate-x-2" : "text-white hover:text-gold-500 hover:translate-x-2"
+                          location.pathname === item.path ? "text-gold-500 translate-x-2" : "text-text-main hover:text-gold-500 hover:translate-x-2"
                         )}
                       >
                         {item.name}
@@ -153,7 +180,7 @@ export const Navbar: React.FC = () => {
                     ) : (
                       <button 
                         onClick={() => handleNavClick(item)}
-                        className="text-3xl font-serif italic text-white text-left w-full hover:text-gold-500 hover:translate-x-2 transition-all duration-300"
+                        className="text-3xl font-serif italic text-text-main text-left w-full hover:text-gold-500 hover:translate-x-2 transition-all duration-300"
                       >
                         {item.name}
                       </button>
@@ -168,7 +195,7 @@ export const Navbar: React.FC = () => {
                     </div>
                     <div>
                       <p className="text-[8px] tracking-luxury text-text-dim uppercase">Email</p>
-                      <p className="text-white text-xs">hello@proximax.in</p>
+                      <p className="text-text-main text-xs">hello@proximax.in</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
@@ -177,7 +204,7 @@ export const Navbar: React.FC = () => {
                     </div>
                     <div>
                       <p className="text-[8px] tracking-luxury text-text-dim uppercase">Call</p>
-                      <p className="text-white text-xs">+91 93415 79348</p>
+                      <p className="text-text-main text-xs">+91 93415 79348</p>
                     </div>
                   </div>
                 </div>

@@ -20,6 +20,7 @@ const InfluencerApplyPage = lazy(() => import('./components/InfluencerApplyPage'
 const InternshipPage = lazy(() => import('./components/InternshipPage'));
 const CaseStudyPage = lazy(() => import('./components/CaseStudyPage'));
 const PricingPage = lazy(() => import('./components/PricingPage'));
+const CareersPage = lazy(() => import('./components/CareersPage'));
 
 // Legal Pages
 const PrivacyPolicy = lazy(() => import('./components/legal/LegalPages').then(m => ({ default: m.PrivacyPolicy })));
@@ -118,7 +119,7 @@ const LoadingSpinner = () => (
 const ThankYou = () => {
   const navigate = useNavigate();
   return (
-    <div className="min-h-screen bg-[#050505] flex items-center justify-center px-6">
+    <div className="min-h-screen bg-bg flex items-center justify-center px-6">
       <div className="max-w-2xl w-full glass-premium p-12 md:p-16 rounded-[3rem] border border-white/10 text-center relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-gold-600/10 rounded-full blur-[100px]" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-gold-900/10 rounded-full blur-[100px]" />
@@ -127,7 +128,7 @@ const ThankYou = () => {
           <div className="w-24 h-24 bg-gold-600/20 rounded-full flex items-center justify-center text-gold-500 mb-8 mx-auto">
             <Check className="w-12 h-12" />
           </div>
-          <h1 className="text-5xl md:text-6xl font-serif italic text-white mb-6 tracking-tighter">Thank You!</h1>
+          <h1 className="text-5xl md:text-6xl font-serif italic text-text-main mb-6 tracking-tighter">Thank You!</h1>
           <p className="text-xl text-text-muted font-sans font-light leading-relaxed mb-12">
             Your submission has been received. We appreciate your interest in PROXIMAX and will get back to you shortly.
           </p>
@@ -314,7 +315,7 @@ export default function App() {
         <BrowserRouter>
           <ScrollToTop />
           <Suspense fallback={<LoadingSpinner />}>
-            <div className="min-h-screen bg-[#050505] text-text-muted selection:bg-gold-500/30 selection:text-white relative overflow-hidden flex flex-col">
+            <div className="min-h-screen bg-bg text-text-muted selection:bg-gold-500/30 selection:text-white relative overflow-hidden flex flex-col transition-colors duration-500">
               <MagicCursor />
               <FloatingBubbles />
               <Navbar />
@@ -327,6 +328,7 @@ export default function App() {
                   <Route path="/case-studies" element={<CaseStudyPage />} />
                   <Route path="/influencer-apply" element={<InfluencerApplyPage />} />
                   <Route path="/pricing" element={<PricingPage />} />
+                  <Route path="/careers" element={<CareersPage />} />
                   <Route path="/thank-you" element={<ThankYou />} />
                   
                   {/* Legal Routes */}

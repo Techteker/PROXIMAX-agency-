@@ -198,7 +198,7 @@ const BlogPostPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#050505] flex items-center justify-center">
+      <div className="min-h-screen bg-bg flex items-center justify-center">
         <div className="w-12 h-12 border-2 border-gold-600 border-t-transparent rounded-full animate-spin" />
       </div>
     );
@@ -215,7 +215,7 @@ const BlogPostPage = () => {
   const readTime = blog ? calculateReadTime(blog.content) : 5;
 
   return (
-    <div className="min-h-screen bg-[#050505]">
+    <div className="min-h-screen bg-bg">
       <Helmet>
         <title>{blog.metaTitle || blog.title}</title>
         <meta name="description" content={blog.metaDescription || blog.excerpt} />

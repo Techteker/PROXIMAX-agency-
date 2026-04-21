@@ -71,7 +71,7 @@ const InfluencerApplyPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-gold-500/30">
+    <div className="min-h-screen bg-bg text-text-main font-sans selection:bg-gold-500/30">
       <Helmet>
         <title>Influencer Marketing Agency India | Join PROXIMAX Network</title>
         <meta name="description" content="Join the top influencer marketing agency in India. PROXIMAX connects creators with premium brands for high-impact collaborations. Apply now to grow your influence!" />
@@ -91,7 +91,7 @@ const InfluencerApplyPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-6xl md:text-8xl font-serif italic text-white mb-8 tracking-tighter leading-[0.9]">
+            <h1 className="text-6xl md:text-8xl font-serif italic text-text-main mb-8 tracking-tighter leading-[0.9]">
               Partner with <br /> <span className="text-gradient">PROXIMAX as an Influencer.</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
@@ -108,28 +108,28 @@ const InfluencerApplyPage = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-32 bg-[#0a0a0a]">
+      <section className="py-32 bg-card/10">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
             <h2 className="text-gold-500 tracking-widest uppercase text-sm font-bold mb-4">Why Partner With Us?</h2>
-            <h3 className="text-4xl md:text-5xl font-serif italic text-white">Exclusive Benefits for Creators</h3>
+            <h3 className="text-4xl md:text-5xl font-serif italic text-text-main">Exclusive Benefits for Creators</h3>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {benefits.map((benefit: any, i: number) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.9, rotateY: 10 }}
+                whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white/5 p-8 rounded-2xl border border-white/5 hover:border-gold-500/30 transition-all flex items-center gap-4"
+                className="card-3d glow-border bg-card/40 p-8 rounded-2xl border border-white/5 transition-all flex items-center gap-4"
               >
                 <div className="w-10 h-10 rounded-full bg-gold-600/20 flex items-center justify-center text-gold-500 shrink-0">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-lg text-gray-200 font-medium">{benefit.title}</span>
+                  <span className="text-lg text-text-main font-medium">{benefit.title}</span>
                   {benefit.subtitle && (
                     <span className="text-text-dim text-[10px] uppercase tracking-widest mt-1">
                       {benefit.subtitle}

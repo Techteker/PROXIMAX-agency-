@@ -178,7 +178,8 @@ const PricingPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] pt-32 pb-20 relative overflow-hidden">
+    <div className="min-h-screen bg-bg pt-32 pb-20 relative overflow-hidden">
+      <div className="fixed inset-0 pointer-events-none z-[100] bg-grain opacity-[0.03] mix-blend-overlay" />
       <Helmet>
         <title>Pricing Plans & Digital Marketing Packages | PROXIMAX India</title>
         <meta name="description" content="Explore ROI-focused digital marketing pricing plans for SEO, GMB Optimization, Lead Generation, and Influencer Marketing. Scale your brand with PROXIMAX India's expert packages." />
@@ -208,7 +209,7 @@ const PricingPage: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-6xl md:text-8xl font-serif italic text-white mb-8 tracking-tighter leading-none"
+            className="text-6xl md:text-8xl font-serif italic text-text-main mb-8 tracking-tighter leading-none"
           >
             Choose Your <span className="text-gradient">Growth Plan</span> 🚀
           </motion.h1>
@@ -224,16 +225,17 @@ const PricingPage: React.FC = () => {
         </div>
 
         {/* Pricing Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-32 perspective-2000">
           {pricingPlans.map((plan, idx) => (
             <motion.div
               key={plan.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, rotateX: 10 }}
+              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
+              transition={{ delay: idx * 0.1, duration: 0.8 }}
+              whileHover={{ translateZ: 50, scale: 1.05 }}
               className={cn(
-                "group relative h-full",
+                "group relative h-full preserve-3d",
                 plan.popular ? "lg:scale-105 z-10" : ""
               )}
             >
@@ -244,23 +246,24 @@ const PricingPage: React.FC = () => {
               )}
 
               <div className={cn(
-                "h-full glass-premium rounded-[2.5rem] p-8 border border-white/10 flex flex-col transition-all duration-500 overflow-hidden",
-                plan.popular ? "border-gold-500/50 shadow-[0_0_40px_rgba(203,142,59,0.15)]" : "hover:border-white/20"
+                "h-full card-3d glow-border glass-premium rounded-[3rem] p-8 border border-white/10 flex flex-col transition-all duration-500 overflow-hidden",
+                plan.popular ? "border-gold-500/50 shadow-[0_0_60px_rgba(203,142,59,0.2)]" : "hover:border-white/20"
               )}>
+                <div className="absolute inset-0 bg-grain opacity-[0.02] pointer-events-none" />
                 {/* Plan Backdrop Glow */}
                 <div className={cn("absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-700", plan.color)} />
 
-                <div className="relative z-10 flex flex-col h-full">
+                <div className="relative z-10 flex flex-col h-full translate-z-20">
                   <div className="mb-8">
-                    <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-gold-500 mb-6 group-hover:scale-110 transition-transform duration-500">
+                    <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-gold-500 mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500 shadow-2xl">
                       {plan.icon}
                     </div>
-                    <h3 className="text-2xl font-serif italic text-white mb-2">{plan.name}</h3>
-                    <p className="text-xs text-text-muted font-sans font-light">{plan.description}</p>
+                    <h3 className="text-2xl font-serif italic text-text-main mb-2">{plan.name}</h3>
+                    <p className="text-xs text-text-muted font-sans font-light leading-relaxed">{plan.description}</p>
                   </div>
 
                   <div className="mb-10 flex items-baseline gap-1">
-                    <span className="text-4xl font-display font-black text-white">{plan.price}</span>
+                    <span className="text-4xl font-display font-black text-text-main">{plan.price}</span>
                     <span className="text-text-dim text-sm">{plan.period}</span>
                   </div>
 
@@ -295,7 +298,7 @@ const PricingPage: React.FC = () => {
         {/* Comparison Table */}
         <div className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif italic text-white mb-4">Plan Comparison</h2>
+            <h2 className="text-4xl md:text-5xl font-serif italic text-text-main mb-4">Plan Comparison</h2>
             <p className="text-text-muted">Compare features side-by-side to find your match</p>
           </div>
 

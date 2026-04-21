@@ -119,7 +119,7 @@ const InternshipPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-6xl md:text-8xl font-serif italic text-white mb-8 tracking-tighter leading-[0.9]">
+            <h1 className="text-6xl md:text-8xl font-serif italic text-text-main mb-8 tracking-tighter leading-[0.9]">
               Digital Marketing <br /> <span className="text-gradient">Internship – Learn & Earn.</span>
             </h1>
             <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-12 font-sans font-light leading-relaxed">
@@ -136,7 +136,7 @@ const InternshipPage = () => {
       </section>
 
       {/* About Internship */}
-      <section className="py-32 bg-[#0a0a0a]">
+      <section className="py-32 bg-card/10">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <motion.div
@@ -145,8 +145,8 @@ const InternshipPage = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-gold-500 font-display font-black uppercase tracking-[0.5em] text-[10px] mb-8">Why Join Us</h2>
-              <h3 className="text-5xl font-serif italic text-white mb-8 leading-tight">Practical <br /> Skill Development. <br /> True Growth.</h3>
-              <p className="text-lg text-slate-400 leading-relaxed font-sans font-light mb-8">
+              <h3 className="text-5xl font-serif italic text-text-main mb-8 leading-tight">Practical <br /> Skill Development. <br /> True Growth.</h3>
+              <p className="text-lg text-text-muted leading-relaxed font-sans font-light mb-8">
                 At PROXIMAX, we focus on real-world execution. You won't just learn theory — you'll manage actual campaigns and generate real results for real clients.
               </p>
               <div className="grid grid-cols-2 gap-8">
@@ -154,7 +154,7 @@ const InternshipPage = () => {
                   <div className="w-10 h-10 rounded-full glass flex items-center justify-center text-gold-500">
                     <CheckCircle2 className="w-5 h-5" />
                   </div>
-                  <span className="text-sm text-white font-medium">Flexible Timing</span>
+                  <span className="text-sm text-text-main font-medium">Flexible Timing</span>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-full glass flex items-center justify-center text-gold-500">
@@ -199,7 +199,7 @@ const InternshipPage = () => {
             <h2 className="text-gold-500 font-display font-black uppercase tracking-[0.5em] text-[10px] mb-8">Open Positions</h2>
             <h3 className="text-6xl font-serif italic text-white tracking-tighter">Internship Roles</h3>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-2000">
             {roles.map((role: any, i: number) => {
               const Icon = role.icon || Target;
               return (
@@ -209,13 +209,15 @@ const InternshipPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="glass p-10 rounded-3xl border border-white/5 hover:border-gold-500/30 transition-all group"
+                  whileHover={{ y: -10, rotateY: 5, translateZ: 30 }}
+                  className="card-3d glow-border glass-luxury p-10 rounded-[2.5rem] border border-white/5 transition-all group preserve-3d h-full"
                 >
-                  <div className="w-16 h-16 rounded-2xl bg-gold-600/10 flex items-center justify-center text-gold-500 mb-8 group-hover:bg-gold-600 group-hover:text-white transition-all duration-500">
+                  <div className="absolute inset-0 bg-grain opacity-[0.02] pointer-events-none" />
+                  <div className="w-16 h-16 rounded-2xl bg-gold-600/10 flex items-center justify-center text-gold-500 mb-8 group-hover:bg-gold-600 group-hover:text-white transition-all duration-700 shadow-2xl translate-z-20">
                     <Icon className="w-8 h-8" />
                   </div>
-                  <h4 className="text-2xl font-serif italic text-white mb-4">{role.title}</h4>
-                  <p className="text-slate-500 leading-relaxed font-sans font-light">{role.desc}</p>
+                  <h3 className="text-2xl font-serif italic text-white mb-4 translate-z-10">{role.title}</h3>
+                  <p className="text-slate-500 leading-relaxed font-sans font-light text-lg">{role.desc}</p>
                 </motion.div>
               );
             })}

@@ -55,7 +55,7 @@ const CaseStudyPage = () => {
   }, []);
 
   return (
-    <div className="bg-[#050505] min-h-screen">
+    <div className="bg-bg min-h-screen">
       <Helmet>
         <title>Case Studies: Lead Generation & SEO Success Stories | PROXIMAX India</title>
         <meta name="description" content="Discover how PROXIMAX India delivers 10x ROI for clients using advanced SEO, GMB Optimization, and high-performance Lead Generation strategies. Read our success stories." />
@@ -80,7 +80,7 @@ const CaseStudyPage = () => {
               <TrendingUp className="w-3 h-3" />
               Proven Results & Real Growth
             </div>
-            <h1 className="text-6xl md:text-8xl font-serif italic text-white mb-8 tracking-tighter leading-[0.9]">
+            <h1 className="text-6xl md:text-8xl font-serif italic text-text-main mb-8 tracking-tighter leading-[0.9]">
               Our Success <br /> <span className="text-gold-500">Stories.</span>
             </h1>
             <p className="text-xl text-text-muted max-w-2xl mx-auto mb-12 font-sans font-light leading-relaxed">
@@ -101,11 +101,11 @@ const CaseStudyPage = () => {
             studies.map((study, index) => (
               <motion.div
                 key={study.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.95, rotateX: 5 }}
+                whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: index % 2 * 0.1 }}
-                className="glass-premium rounded-[3rem] border border-white/10 overflow-hidden relative"
+                className="card-3d glow-border glass-premium rounded-[3rem] border border-white/10 overflow-hidden relative"
               >
               <div className="grid lg:grid-cols-12 gap-0">
                 {/* Left Side: Overview & Problem */}

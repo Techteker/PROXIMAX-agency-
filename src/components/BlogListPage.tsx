@@ -144,7 +144,7 @@ const BlogListPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#050505] flex items-center justify-center">
+      <div className="min-h-screen bg-bg flex items-center justify-center">
         <div className="flex flex-col items-center gap-6">
           <div className="w-16 h-16 border-4 border-gold-500/20 border-t-gold-500 rounded-full animate-spin" />
           <p className="text-gold-500 tracking-luxury animate-pulse">Loading Archives...</p>
@@ -154,7 +154,7 @@ const BlogListPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#050505] pt-48 pb-32 relative overflow-hidden">
+    <div className="min-h-screen bg-bg pt-48 pb-32 relative overflow-hidden">
       <Helmet>
         <title>The Journal | Performance Marketing & ROI Insights | PROXIMAX</title>
         <meta name="description" content="Read the latest insights on Performance Marketing, Lead Generation, and ROI focused strategies from PROXIMAX. Stay ahead in the Indian digital landscape." />
@@ -189,7 +189,7 @@ const BlogListPage = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-7xl md:text-[10rem] font-serif italic text-white leading-[0.85] tracking-tighter"
+              className="text-7xl md:text-[10rem] font-serif italic text-text-main leading-[0.85] tracking-tighter"
             >
               The <span className="text-gradient">Journal</span>
             </motion.h1>
@@ -215,9 +215,9 @@ const BlogListPage = () => {
           >
             <Link 
               to={`/blog/${featuredBlog.slug}`}
-              className="group relative block"
+              className="group relative block card-3d glow-border rounded-[3rem] p-1 overflow-hidden"
             >
-              <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-16 items-center">
+              <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-16 items-center bg-card/40 rounded-[2.9rem] p-8 md:p-12">
                 <div className="relative aspect-[16/9] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl">
                   <img 
                     src={featuredBlog.banner} 
@@ -374,9 +374,10 @@ const BlogListPage = () => {
               >
                 <Link 
                   to={`/blog/${blog.slug}`}
-                  className="block space-y-8"
+                  className="group block space-y-8 card-3d glow-border glass-premium p-6 rounded-[3rem] transition-all duration-700 preserve-3d"
                 >
-                  <div className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-xl">
+                  <div className="absolute inset-0 bg-grain opacity-[0.02] pointer-events-none" />
+                  <div className="relative aspect-[4/5] rounded-[2.4rem] overflow-hidden shadow-2xl">
                     <img 
                       src={blog.banner} 
                       alt={`Article: ${blog.title} - PROXIMAX Journal`}
@@ -388,30 +389,30 @@ const BlogListPage = () => {
                     
                     {/* Category Overlay */}
                     <div className="absolute bottom-8 left-8">
-                      <div className="glass-premium px-5 py-2 rounded-full border border-white/20">
-                        <span className="text-[9px] font-display font-black uppercase tracking-luxury text-white">{blog.category}</span>
+                      <div className="glass-luxury px-6 py-2.5 rounded-full border border-white/20 shadow-2xl">
+                        <span className="text-[10px] font-display font-black uppercase tracking-luxury text-white">{blog.category}</span>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="space-y-6 px-4">
-                    <div className="flex items-center gap-4 text-[9px] font-display font-black uppercase tracking-luxury text-text-dim">
-                      <span>{new Date(blog.date).toLocaleDateString()}</span>
-                      <div className="w-1 h-1 bg-gold-500/40 rounded-full" />
-                      <span>{blog.readTime} min read</span>
+                  <div className="space-y-6 px-4 translate-z-20">
+                    <div className="flex items-center gap-4 text-[10px] font-display font-black uppercase tracking-luxury text-text-dim">
+                      <span className="group-hover:text-gold-500 transition-colors">{new Date(blog.date).toLocaleDateString()}</span>
+                      <div className="w-1.5 h-1.5 bg-gold-600/30 rounded-full" />
+                      <span className="group-hover:text-gold-500 transition-colors">{blog.readTime} min read</span>
                     </div>
                     
                     <h3 className="text-3xl font-serif italic text-white leading-tight group-hover:text-gold-400 transition-colors duration-500">
                       {blog.title}
                     </h3>
                     
-                    <p className="text-text-muted font-sans font-light leading-relaxed line-clamp-3">
+                    <p className="text-text-muted font-sans font-light leading-relaxed line-clamp-3 text-lg md:text-xl group-hover:text-text-main transition-colors">
                       {blog.excerpt}
                     </p>
                     
-                    <div className="flex items-center gap-3 text-gold-500 group-hover:gap-6 transition-all duration-500">
-                      <span className="tracking-luxury">Read Article</span>
-                      <ArrowRight className="w-4 h-4" />
+                    <div className="flex items-center gap-4 text-gold-500 group-hover:gap-8 transition-all duration-700">
+                      <span className="text-[10px] tracking-luxury">Explore Insight</span>
+                      <ArrowRight className="w-5 h-5" />
                     </div>
                   </div>
                 </Link>
