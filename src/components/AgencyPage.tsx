@@ -635,11 +635,10 @@ const AgencyPage = () => {
                   <img 
                     src={founder?.image_url || "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop"} 
                     alt={founder?.name || "Founder of PROXIMAX"} 
-                    className="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-1000 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
                     referrerPolicy="no-referrer"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent opacity-80" />
                   
                   <div className="absolute bottom-12 left-12 right-12 translate-z-50">
                     <p className="text-white font-serif italic text-6xl mb-3 tracking-tighter drop-shadow-2xl">{founder?.name || "Rajendar Rana"}</p>
