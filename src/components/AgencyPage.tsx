@@ -30,7 +30,7 @@ import {
   Star
 } from 'lucide-react';
 import { cn } from '../lib/utils';
-import { services, SAMPLE_BLOGS } from '../constants';
+import { services, SAMPLE_BLOGS, REVIEWS } from '../constants';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { submitContactInquiry, fetchFounderInfo } from '../services/supabaseService';
@@ -91,6 +91,20 @@ const AgencyPage = () => {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const [showPopup, setShowPopup] = useState(false);
+  const [reviewIndex, setReviewIndex] = useState(0);
+  
+  const nextReview = () => {
+    setReviewIndex((prev) => (prev + 1) % REVIEWS.length);
+  };
+  
+  const prevReview = () => {
+    setReviewIndex((prev) => (prev - 1 + REVIEWS.length) % REVIEWS.length);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(nextReview, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const hasSeenPopup = localStorage.getItem('proximax_popup_seen');
@@ -535,176 +549,232 @@ const AgencyPage = () => {
           </div>
         </div>
       </section>      {/* Services Section */}
-      <section id="services" className="py-32 relative perspective-2000">
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-           <motion.div 
-             animate={{ 
-               scale: [1, 1.2, 1],
-               x: [0, 50, 0],
-               y: [0, -50, 0]
-             }}
-             transition={{ duration: 20, repeat: Infinity }}
-             className="absolute top-1/4 left-0 w-[600px] h-[600px] bg-gold-600/5 rounded-full blur-[120px]" 
-           />
-        </div>
-
+      <section id="services" className="py-32 relative bg-white">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-32 gap-12">
-            <div className="max-w-3xl">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="flex items-center gap-4 mb-8"
-              >
-                <div className="h-px w-12 bg-gold-500" />
-                <h2 className="text-gold-500 tracking-[0.4em] uppercase text-[10px] font-black italic">Next-Gen SEO Ecosystem</h2>
-              </motion.div>
-              <h3 className="text-6xl md:text-8xl font-serif italic text-text-main tracking-tighter leading-none">
-                Elite Algorithmic <br /> <span className="text-gold-500">Mastery.</span>
-              </h3>
+          <div className="flex justify-between items-start mb-16">
+            <div>
+              <h2 className="text-5xl md:text-7xl font-sans font-black text-black uppercase tracking-tight mb-4">What We Offer</h2>
+              <p className="text-black/60 text-lg font-medium">We’re Here To Help Turn Your Ideas Into Something Amazing.</p>
             </div>
-            <p className="text-text-muted max-w-sm font-sans font-extralight text-lg leading-relaxed border-l border-white/10 pl-8">
-              We don't just optimize; we redefine visibility. Our proprietary growth stacks generate consistent, high-value customer acquisitions.
-            </p>
+            <div className="hidden md:flex w-16 h-16 rounded-full bg-black items-center justify-center text-white">
+              <ArrowUpRight className="w-8 h-8" />
+            </div>
           </div>
  
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <motion.div
                 key={service.id}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.8 }}
-                whileHover={{ y: -15 }}
+                transition={{ delay: index * 0.1 }}
                 onClick={() => setSelectedService(service)}
                 className="group relative cursor-pointer"
               >
-                {/* 3D Deep Card */}
-                <div className="relative glass-premium p-10 md:p-14 rounded-[4rem] border border-white/70 transition-all duration-700 group-hover:border-gold-500/50 shadow-2xl h-full flex flex-col items-start preserve-3d">
-                  <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
-                  <div className="absolute inset-0 bg-gradient-to-br from-gold-600/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="relative bg-white p-12 rounded-[2.5rem] border border-black/5 shadow-premium h-full flex flex-col items-start overflow-hidden group-hover:shadow-2xl transition-all duration-500">
+                  {/* Pastel Glow Backgrounds */}
+                  <div className={cn(
+                    "absolute -top-32 -left-32 w-80 h-80 blur-[100px] opacity-30 transition-all duration-700 group-hover:scale-150 group-hover:opacity-50",
+                    index % 3 === 0 ? "bg-yellow-100" : index % 3 === 1 ? "bg-orange-100" : "bg-pink-100"
+                  )} />
                   
-                  {/* Floating Icon Layer */}
-                  <div className="relative mb-12 translate-z-50 shadow-2xl transition-transform duration-700 group-hover:scale-110 group-hover:rotate-6">
-                    <div className={cn("w-20 h-20 rounded-3xl flex items-center justify-center text-white relative z-10", service.color)}>
-                      <service.icon className="w-10 h-10" />
-                    </div>
-                    <div className="absolute inset-0 bg-gold-600/20 blur-2xl group-hover:blur-3xl transition-all" />
-                  </div>
-                  
-                  <div className="translate-z-40">
-                    <h4 className="text-3xl font-serif italic text-white mb-6 group-hover:text-gold-500 transition-colors leading-tight">{service.title}</h4>
-                    <p className="text-text-muted leading-relaxed font-sans font-extralight mb-10 group-hover:text-text-main transition-colors">{service.description}</p>
-                  </div>
-                  
-                  <div className="mt-auto pt-8 border-t border-white/5 w-full translate-z-30">
-                    <div className="flex items-center justify-between group/btn">
-                      <span className="text-[10px] font-display font-black text-gold-500/60 uppercase tracking-[0.2em] group-hover:text-gold-500 transition-colors italic">Deep Exploration</span>
-                      <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-gold-600 transition-colors">
-                        <ArrowUpRight className="w-4 h-4 text-white group-hover:scale-125 transition-transform" />
-                      </div>
+                  <div className="relative mb-10">
+                    <div className="w-20 h-20 text-black flex items-center justify-center rounded-2xl bg-black/5 group-hover:bg-black group-hover:text-white transition-colors duration-500">
+                      <service.icon strokeWidth={1.5} className="w-10 h-10" />
                     </div>
                   </div>
-
-                  {/* Corner Accent */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gold-600/5 blur-[50px] rounded-full group-hover:bg-gold-600/10 transition-colors" />
+                  
+                  <h4 className="text-3xl font-sans font-black text-black mb-6 leading-tight">{service.title}</h4>
+                  <p className="text-black/60 leading-relaxed text-lg mb-10 font-sans font-light">{service.description}</p>
+                  
+                  <div className="mt-auto flex items-center gap-3 text-black font-black text-xs uppercase tracking-[0.2em] group/btn">
+                    <span>Learn More</span>
+                    <div className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center group-hover/btn:bg-yellow-400 group-hover/btn:border-yellow-400 transition-all duration-300">
+                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
-      {/* About Section */}
-      <section id="about" className="py-32 relative overflow-hidden perspective-2000">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gold-600/5 rounded-full blur-[150px] pointer-events-none" />
+
+      {/* About Section (Founder) */}
+      <section id="about" className="py-32 relative bg-black overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-5" />
         
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-32 items-center">
-            <div className="relative group">
-              {/* Complex 3D Photo Frame */}
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                whileHover={{ rotateY: -10, rotateX: 5 }}
-                className="relative z-10 preserve-3d"
-              >
-                <div className="aspect-[4/5] rounded-[4rem] overflow-hidden border border-white/10 relative shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] card-3d">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="flex justify-between items-start mb-20">
+            <div>
+              <h2 className="text-5xl md:text-7xl font-sans font-black text-white uppercase tracking-tight mb-4">
+                The Mind Behind <br />
+                <span className="relative inline-block">
+                  <span className="relative z-10">PROXIMAX</span>
+                  <div className="absolute bottom-2 left-0 w-full h-4 bg-yellow-400 -z-10 -rotate-1" />
+                </span>
+              </h2>
+              <p className="text-white/60 text-lg font-medium">Get To Know The Heart And Soul Of PROXIMAX—Our Founder.</p>
+            </div>
+            <div className="hidden md:flex w-16 h-16 rounded-full bg-white items-center justify-center text-black">
+              <ArrowUpRight className="w-8 h-8" />
+            </div>
+          </div>
+
+          <div className="flex flex-col items-center mb-20">
+            <h4 className="text-white font-black uppercase text-xs tracking-[0.4em] mb-4 flex items-center gap-4">
+              <span className="w-8 h-px bg-yellow-400" />
+              THE MIND BEHIND PROXIMAX
+            </h4>
+            <h2 className="text-4xl md:text-6xl font-sans font-black text-white uppercase tracking-tighter text-center">
+              DRIVEN BY PASSION & RESULTS
+            </h2>
+          </div>
+
+          <div className="bg-white rounded-[4rem] overflow-hidden grid lg:grid-cols-[1.2fr_0.8fr] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)]">
+            <div className="p-12 md:p-24 flex flex-col justify-center">
+              <div className="relative mb-8">
+                <h3 className="font-signature text-7xl text-black leading-none relative z-10">
+                  {founder?.name || "Rajendar Rana"}
+                </h3>
+                <motion.div 
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
+                  className="absolute -bottom-6 -right-12 w-32 h-16 text-yellow-400 rotate-12"
+                >
+                  <svg viewBox="0 0 100 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path 
+                      d="M5 25C20 5 40 45 60 25C80 5 95 25 90 20M90 20L80 15M90 20L85 30" 
+                      stroke="currentColor" 
+                      strokeWidth="3" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                    />
+                  </svg>
+                </motion.div>
+              </div>
+              
+              <p className="text-black font-black uppercase text-xs tracking-[0.3em] mb-12 border-b border-black/5 pb-6 flex items-center gap-4">
+                <span className="w-8 h-px bg-yellow-400" />
+                A DIGITAL VISIONARY FROM INDIA
+              </p>
+              
+              <div className="space-y-8 text-black/80 text-xl leading-relaxed font-sans font-light">
+                <p>
+                  He followed his passion for digital marketing straight out of his academic years. Instead of taking the conventional career route, he dived into mastering the depths of social media and SEO strategies.
+                </p>
+                <p>
+                  Starting by helping local businesses improve their online presence, his hard work and expertise eventually led to the creation of PROXIMAX, a company dedicated to helping brands thrive in the digital era.
+                </p>
+              </div>
+            </div>
+            
+            <div className="relative min-h-[500px] lg:min-h-full bg-yellow-400 flex items-center justify-center p-12 lg:p-20">
+              <div className="relative w-full h-full max-w-lg">
+                <div className="absolute -top-6 -left-6 w-full h-full border-[12px] border-white rounded-[3rem]" />
+                <div className="relative aspect-[4/5] bg-white rounded-[2.5rem] overflow-hidden shadow-2xl transition-transform duration-700">
                   <img 
                     src={founder?.image_url || "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop"} 
                     alt={founder?.name || "Founder of PROXIMAX"} 
-                    className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
+                    className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
-                    loading="lazy"
                   />
-                  
-                  <div className="absolute bottom-12 left-12 right-12 translate-z-50">
-                    <p className="text-white font-serif italic text-6xl mb-3 tracking-tighter drop-shadow-2xl">{founder?.name || "Rajendar Rana"}</p>
-                    <div className="flex items-center gap-4">
-                      <motion.div 
-                        animate={{ width: [0, 48, 0] }}
-                        transition={{ duration: 3, repeat: Infinity }}
-                        className="h-1 bg-gold-500" 
-                      />
-                      <p className="text-gold-500 tracking-[0.3em] uppercase text-[11px] font-black italic">{founder?.role || "The Architect of Growth"}</p>
-                    </div>
-                  </div>
                 </div>
-
-                {/* Floating Meta Pods */}
-                <motion.div 
-                  animate={{ y: [0, -20, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -top-12 -left-12 glass-premium p-8 rounded-[2.5rem] border border-white/20 shadow-2xl translate-z-60 backdrop-blur-2xl"
-                >
-                  <Users className="text-gold-500 mb-2" size={24} />
-                  <p className="text-2xl font-display font-black text-white">500+</p>
-                  <p className="text-[8px] text-text-dim uppercase tracking-widest font-black">Strategy Sessions</p>
-                </motion.div>
-              </motion.div>
-
-              {/* Background Geometric Aura */}
-              <div className="absolute -inset-10 border border-gold-600/10 rounded-[5rem] -z-10 animate-spin-slow opacity-20" />
-              <div className="absolute -inset-20 border border-dashed border-gold-900/10 rounded-[6rem] -z-10 animate-reverse-spin opacity-10" />
+              </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="relative z-10">
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1 }}
+      {/* Review Section */}
+      <section id="reviews" className="py-32 relative bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="flex flex-col items-center mb-24">
+            <h4 className="text-black font-black uppercase text-xs tracking-[0.4em] mb-4 flex items-center gap-4">
+              <span className="w-8 h-px bg-yellow-400" />
+              TRUSTED BY THE CLIENTS
+            </h4>
+            <h2 className="text-5xl md:text-7xl font-sans font-black text-black uppercase tracking-tight text-center">
+              WHAT OUR CLIENTS SAYS
+            </h2>
+          </div>
+
+          <div className="relative">
+            <div className="overflow-hidden py-10 px-4 md:px-0">
+              <motion.div 
+                className="flex gap-8"
+                animate={{ x: `-${reviewIndex * (100 / (typeof window !== 'undefined' && window.innerWidth > 768 ? 2 : 1))}%` }}
+                transition={{ type: "spring", stiffness: 100, damping: 20 }}
               >
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="h-px w-12 bg-gold-600" />
-                  <h2 className="text-gold-600 tracking-[0.4em] uppercase text-[10px] font-black italic">Strategic Integrity</h2>
-                </div>
-                <h3 className="text-6xl md:text-7xl font-serif italic text-text-main mb-12 leading-none tracking-tighter">
-                  Results-Obsessed <br /> <span className="text-gold-500">Execution.</span>
-                </h3>
-                <div className="space-y-10 text-xl text-text-muted font-sans font-extralight leading-relaxed border-l-2 border-gold-500/10 pl-10">
-                  <p>
-                    PROXIMAX was born from a singular vision: to bridge the gap between Indian ambition and global excellence through technical SEO supremacy.
-                  </p>
-                  <p>
-                    We don't sell 'services'—we deploy custom-engineered lead generation engines. Our methodology is rooted in data, refined by experience, and proven through consistent multimillion-rupee growth for our partners.
-                  </p>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-16 mt-20">
-                  <div className="group cursor-default">
-                    <p className="text-6xl font-display font-black text-white mb-2 group-hover:text-gold-500 transition-colors">150%</p>
-                    <p className="text-[10px] text-text-dim uppercase tracking-[0.2em] font-black italic">Avg. Annual Scalability</p>
+                {REVIEWS.map((review, i) => (
+                  <div key={i} className="w-full md:w-[calc(50%-1rem)] shrink-0">
+                    <motion.div 
+                      className="relative bg-white border border-black/5 rounded-[3rem] p-12 shadow-xl overflow-hidden hover:shadow-2xl transition-all h-full flex flex-col"
+                    >
+                      {/* Yellow Quote Icon */}
+                      <div className="absolute top-8 right-8 w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center">
+                        <div className="text-black font-black text-4xl mt-2 leading-none font-serif">””</div>
+                      </div>
+
+                      {/* Card Glow */}
+                      <div className={cn(
+                        "absolute -top-20 -left-20 w-64 h-64 blur-[80px] opacity-20",
+                        i % 2 === 0 ? "bg-yellow-200" : "bg-pink-100"
+                      )} />
+
+                      <div className="relative z-10 flex flex-col items-center text-center h-full">
+                        <div className="w-24 h-24 rounded-full overflow-hidden mb-6 border-4 border-black/5 shadow-inner">
+                          <img src={review.logo} alt={review.brand} className="w-full h-full object-cover" />
+                        </div>
+                        <h4 className="text-2xl font-sans font-black text-black mb-1">{review.brand}</h4>
+                        <p className="text-black/40 text-xs font-black mb-6 uppercase tracking-[0.2em]">{review.niche}</p>
+                        
+                        <div className="flex gap-1 mb-8 text-yellow-400">
+                          {[1, 2, 3, 4, 5].map(star => <Star key={star} size={16} fill="currentColor" stroke="none" />)}
+                        </div>
+                        
+                        <p className="text-black/70 text-lg leading-relaxed font-sans font-light italic">
+                          "{review.text}"
+                        </p>
+                      </div>
+                    </motion.div>
                   </div>
-                  <div className="group cursor-default">
-                    <p className="text-6xl font-display font-black text-white mb-2 group-hover:text-gold-500 transition-colors">24/7</p>
-                    <p className="text-[10px] text-text-dim uppercase tracking-[0.2em] font-black italic">Algorithmic Monitoring</p>
-                  </div>
-                </div>
+                ))}
               </motion.div>
             </div>
+
+            {/* Navigation Controls */}
+            <div className="absolute top-1/2 -left-4 md:-left-12 -translate-y-1/2 z-20">
+              <button 
+                onClick={prevReview}
+                className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white border border-black/5 shadow-xl flex items-center justify-center text-black hover:bg-black hover:text-white transition-all group"
+              >
+                <ChevronRight className="w-6 h-6 md:w-8 md:h-8 rotate-180 group-hover:-translate-x-1 transition-transform" />
+              </button>
+            </div>
+            <div className="absolute top-1/2 -right-4 md:-right-12 -translate-y-1/2 z-20">
+              <button 
+                onClick={nextReview}
+                className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white border border-black/5 shadow-xl flex items-center justify-center text-black hover:bg-black hover:text-white transition-all group"
+              >
+                <ChevronRight className="w-6 h-6 md:w-8 md:h-8 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+          </div>
+
+          <div className="flex justify-center flex-wrap gap-2 mt-16 max-w-2xl mx-auto">
+            {REVIEWS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setReviewIndex(i)}
+                className={cn(
+                  "w-2 h-2 rounded-full transition-all duration-500",
+                  reviewIndex === i ? "bg-yellow-400 w-8" : "bg-black/10 hover:bg-black/20"
+                )}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -839,185 +909,122 @@ const AgencyPage = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-32 relative overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-gold-600/5 rounded-full blur-[200px]" />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-24 items-center">
+      <section id="contact" className="py-32 relative bg-black overflow-hidden perspective-2000">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/grid-me.png')] opacity-10" />
+        <div className="absolute inset-0" style={{ 
+          backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0)`,
+          backgroundSize: '40px 40px' 
+        }} />
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-start mb-24 gap-12">
             <div>
-              <h2 className="text-gold-500 tracking-luxury mb-8 uppercase text-sm font-black">Get Started</h2>
-              <h3 className="text-5xl md:text-7xl font-serif italic text-white mb-10 leading-tight tracking-tighter">
-                Let's Grow Your <br /> <span className="text-gold-500">Business.</span>
-              </h3>
-              <p className="text-xl text-text-muted font-sans font-light leading-relaxed mb-16">
-                Fill out the form and receive a customized strategy along with a free consultation. We respond within 24 hours.
-              </p>
-              
-              <div className="space-y-12">
-                <div className="flex items-center gap-8 group">
-                  <div className="w-16 h-16 rounded-full glass-premium flex items-center justify-center text-gold-500 group-hover:scale-110 transition-transform">
-                    <Mail className="w-6 h-6" />
+              <h4 className="text-yellow-400 font-black uppercase text-xs tracking-[0.4em] mb-6 flex items-center gap-4">
+                <span className="w-8 h-px bg-yellow-400" />
+                GET IN TOUCH
+              </h4>
+              <h2 className="text-6xl md:text-8xl font-sans font-black text-white uppercase tracking-tight">
+                LET'S <span className="text-yellow-400 underline decoration-yellow-400/30 underline-offset-8">CONNECT</span>
+              </h2>
+            </div>
+            <p className="text-white/40 text-lg md:text-xl max-w-sm mt-4 font-sans font-light leading-relaxed">
+              We'd Love To Hear From You. Whether You're Curious About Our Services, Features, Or Even Press—We're Ready To Lead You Into The Future Of Marketing.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-12 md:gap-20">
+            <div className="space-y-8">
+              {[
+                { label: 'CALL US', value: '+91 93415 79348', icon: Phone },
+                { label: 'EMAIL ID', value: 'hello@proximax.in', icon: Mail },
+                { label: 'VISIT US', value: 'Simdega, Jharkhand (Remote)', icon: MapPin }
+              ].map((item, i) => (
+                <motion.div 
+                  key={i} 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="flex items-center gap-8 bg-white/5 border border-white/5 rounded-3xl p-10 hover:bg-white/10 transition-all duration-500 group"
+                >
+                  <div className="w-20 h-20 bg-yellow-400 rounded-2xl flex items-center justify-center text-black shrink-0 group-hover:scale-110 transition-transform duration-500 shadow-xl shadow-yellow-400/20">
+                    <item.icon className="w-10 h-10" />
                   </div>
                   <div>
-                    <p className="text-[10px] tracking-luxury text-text-dim uppercase mb-1">Email Us</p>
-                    <p className="text-2xl text-white font-serif italic">hello@proximax.in</p>
+                    <h4 className="text-white font-black text-[10px] uppercase tracking-[0.4em] mb-2 opacity-40">{item.label}</h4>
+                    <p className="text-white text-xl font-sans font-light tracking-tight">{item.value}</p>
                   </div>
-                </div>
-                <div className="flex items-center gap-8 group">
-                  <div className="w-16 h-16 rounded-full glass-premium flex items-center justify-center text-gold-500 group-hover:scale-110 transition-transform">
-                    <Phone className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] tracking-luxury text-text-dim uppercase mb-1">Call Us</p>
-                    <p className="text-2xl text-white font-serif italic">+91 93415 79348</p>
-                  </div>
-                </div>
-              </div>
+                </motion.div>
+              ))}
             </div>
 
-            <div className="relative perspective-2000">
-              <div className="absolute inset-0 bg-gold-600/20 blur-[100px] -z-10 opacity-30 animate-pulse-glow" />
+            <div className="relative">
               <motion.div 
-                initial={{ opacity: 0, y: 30, rotateX: 15 }}
-                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                whileHover={{ rotateY: 5, rotateX: -5 }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                className="glass-premium p-12 md:p-16 rounded-[4rem] border border-white/10 relative overflow-hidden card-3d group/form shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)]"
+                className="bg-white p-12 md:p-16 rounded-[4rem] text-black"
               >
-                <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
+                <div className="text-center mb-10">
+                  <h3 className="text-3xl font-black uppercase mb-2">TAKE YOUR BUSINESS TO NEW HEIGHTS!</h3>
+                  <p className="text-black/60 font-medium text-sm">Start Your Journey By Filling Out The Form!</p>
+                  <div className="w-full h-px bg-black/10 mt-6" />
+                </div>
                 
                 {submitStatus === 'success' ? (
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="text-center py-12"
-                  >
-                    <div className="w-20 h-20 bg-gold-600/20 rounded-full flex items-center justify-center text-gold-500 mb-8 mx-auto">
+                  <div className="text-center py-12">
+                    <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-green-600 mb-8 mx-auto">
                       <Check className="w-10 h-10" />
                     </div>
-                    <h4 className="text-3xl font-serif italic text-white mb-4">Strategy Requested!</h4>
-                    <p className="text-text-muted mb-8">We've received your details and will contact you within 24 hours with your custom growth plan.</p>
-                    <button 
-                      onClick={() => setSubmitStatus('idle')}
-                      className="text-gold-500 font-display font-black text-xs uppercase tracking-luxury"
-                    >
-                      Send Another Request
-                    </button>
-                  </motion.div>
+                    <h4 className="text-2xl font-black uppercase mb-4">Message Sent!</h4>
+                    <p className="text-black/60 mb-8 font-medium">One of our especialistas will reach out in 24 hours.</p>
+                    <button onClick={() => setSubmitStatus('idle')} className="text-black font-black uppercase tracking-widest text-sm border-b-2 border-yellow-400 pb-1">RETRY</button>
+                  </div>
                 ) : (
-                  <form 
-                    name="contact"
-                    onSubmit={handleSubmit}
-                    className="space-y-8"
-                  >
-                    <input type="hidden" name="form_type" value="Contact" />
+                  <form onSubmit={handleSubmit} className="space-y-8">
+                    <h3 className="text-2xl md:text-3xl font-sans font-black mb-10 text-black uppercase">TAKE YOUR BUSINESS TO NEW HEIGHTS!</h3>
+                    
                     <div className="grid md:grid-cols-2 gap-8">
                       <div className="space-y-3">
-                        <label htmlFor="contactName" className="text-text-dim tracking-luxury ml-1">Full Name</label>
+                        <label className="text-black/40 font-black uppercase text-[10px] tracking-[0.2em] ml-2">Your Name</label>
                         <input 
-                          id="contactName"
-                          name="name"
-                          type="text" 
-                          required
-                          placeholder="Your Name"
-                          value={formData.name}
+                          required name="name" placeholder="Eg. John Doe" value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-text-dim focus:outline-none focus:border-gold-500 transition-colors font-sans"
+                          className="w-full bg-black/5 border-none rounded-2xl px-8 py-5 text-black placeholder:text-black/30 focus:ring-2 focus:ring-yellow-400 outline-none transition-all font-sans font-medium"
                         />
                       </div>
                       <div className="space-y-3">
-                        <label htmlFor="contactEmail" className="text-text-dim tracking-luxury ml-1">Email Address</label>
+                        <label className="text-black/40 font-black uppercase text-[10px] tracking-[0.2em] ml-2">Phone Number</label>
                         <input 
-                          id="contactEmail"
-                          name="email"
-                          type="email" 
-                          required
-                          placeholder="you@example.com"
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-text-dim focus:outline-none focus:border-gold-500 transition-colors font-sans"
+                          required name="phone" placeholder="Eg. +91 91234 56789"
+                          className="w-full bg-black/5 border-none rounded-2xl px-8 py-5 text-black placeholder:text-black/30 focus:ring-2 focus:ring-yellow-400 outline-none transition-all font-sans font-medium"
                         />
                       </div>
                     </div>
                     
-                    <div className="grid md:grid-cols-2 gap-8">
-                      <div className="space-y-3">
-                        <label htmlFor="contactPhone" className="text-text-dim tracking-luxury ml-1">Phone Number</label>
-                        <input 
-                          id="contactPhone"
-                          name="phone"
-                          type="tel" 
-                          required
-                          placeholder="+91 00000 00000"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-text-dim focus:outline-none focus:border-gold-500 transition-colors font-sans"
-                        />
-                      </div>
-                      <div className="space-y-3">
-                        <label htmlFor="contactService" className="text-text-dim tracking-luxury ml-1">Select Service</label>
-                        <div className="relative">
-                          <select 
-                            id="contactService"
-                            name="service"
-                            value={formData.service}
-                            onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                            className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-gold-500 transition-colors font-sans appearance-none"
-                          >
-                            {services.map(service => (
-                              <option key={service.id} value={service.title} className="bg-[#050505]">
-                                {service.title}
-                              </option>
-                            ))}
-                          </select>
-                          <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-gold-500">
-                            <ChevronRight className="w-4 h-4 rotate-90" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
                     <div className="space-y-3">
-                      <label htmlFor="contactBudget" className="text-text-dim tracking-luxury ml-1">Budget Range</label>
+                      <label className="text-black/40 font-black uppercase text-[10px] tracking-[0.2em] ml-2">Email ID</label>
                       <input 
-                        id="contactBudget"
-                        name="budget"
-                        type="text" 
-                        placeholder="e.g. ₹5k - ₹50k"
-                        value={formData.budget}
-                        onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-text-dim focus:outline-none focus:border-gold-500 transition-colors font-sans"
+                        required type="email" name="email" placeholder="Eg. hello@proximax.in" value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full bg-black/5 border-none rounded-2xl px-8 py-5 text-black placeholder:text-black/30 focus:ring-2 focus:ring-yellow-400 outline-none transition-all font-sans font-medium"
                       />
                     </div>
                     
                     <div className="space-y-3">
-                      <label htmlFor="contactMessage" className="text-text-dim tracking-luxury ml-1">Message</label>
+                      <label className="text-black/40 font-black uppercase text-[10px] tracking-[0.2em] ml-2">Tell Us About Your Project</label>
                       <textarea 
-                        id="contactMessage"
-                        name="message"
-                        rows={4}
-                        required
-                        placeholder="Tell us about your business goals..."
-                        value={formData.message}
+                        required name="message" rows={4} placeholder="Your Message..." value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-text-dim focus:outline-none focus:border-gold-500 transition-colors resize-none font-sans"
-                      ></textarea>
+                        className="w-full bg-black/5 border-none rounded-2xl px-8 py-5 text-black placeholder:text-black/30 focus:ring-2 focus:ring-yellow-400 outline-none transition-all font-sans font-medium resize-none"
+                      />
                     </div>
-                    
                     <button 
-                      type="submit"
+                      type="submit" 
                       disabled={isSubmitting}
-                      className="w-full bg-gold-600 text-white py-5 rounded-full font-display font-black text-xs uppercase tracking-widest hover:bg-gold-700 transition-all shadow-xl shadow-gold-600/20 flex items-center justify-center gap-3 group/submit disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full bg-black text-white hover:bg-yellow-400 hover:text-black font-black uppercase py-6 rounded-2xl transition-all duration-500 shadow-xl shadow-black/10 flex items-center justify-center gap-3 group"
                     >
-                      {isSubmitting ? (
-                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      ) : (
-                        <MessageSquare className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                      )}
-                      {isSubmitting ? 'Sending...' : 'Get More Leads Now'}
+                      {isSubmitting ? 'Sending...' : 'SEND MESSAGE'}
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
                     </button>
                   </form>
                 )}

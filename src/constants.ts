@@ -24,137 +24,70 @@ import { ALL_BLOGS } from './data/blogs';
 
 export const services = [
   {
-    id: "seo",
-    title: "SEO (Search Engine Optimization)",
-    headline: "Rank Higher & Generate Consistent Organic Leads",
-    description: "If your business is not visible on Google, you are losing potential customers. We help you rank higher and generate consistent organic leads.",
-    detailedServices: ["On-page SEO", "Off-page SEO", "Keyword Research", "Technical SEO"],
-    process: "Audit → Optimize → Rank",
-    results: ["Consistent organic leads", "Top Google rankings", "Increased revenue"],
-    cta: "Get More Leads Now",
-    icon: Search,
-    color: "bg-gold-500/10 text-gold-500"
-  },
-  {
-    id: "gmb",
-    title: "Google My Business Optimization",
-    headline: "Dominate Google Maps & Increase Local Calls",
-    description: "Rank higher on Google Maps and increase calls, visits, and local customer inquiries from your immediate area.",
-    detailedServices: ["GMB Setup & Optimization", "Local SEO", "Review Management"],
-    results: ["More phone calls", "Increased store visits", "Local market dominance"],
-    cta: "Rank My Business on Maps",
-    icon: MapPin,
-    color: "bg-gold-400/10 text-gold-400"
-  },
-  {
-    id: "smm",
-    title: "Social Media Management",
-    headline: "Build a High-Authority Brand Presence",
-    description: "We turn your social media into a high-authority brand presence that builds trust and attracts loyal customers.",
-    detailedServices: ["Content Posting", "Reels & Graphics", "Engagement Strategy"],
-    results: ["Stronger brand trust", "Higher engagement", "Loyal customer base"],
-    cta: "Start Your Growth Today",
-    icon: Share2,
-    color: "bg-gold-500/10 text-gold-500"
-  },
-  {
-    id: "performance",
-    title: "Performance Marketing (Paid Ads)",
-    headline: "Get Instant Leads & Measurable ROI",
-    description: "Run high-converting ad campaigns that generate immediate leads and measurable ROI for your business.",
-    detailedServices: ["Facebook & Instagram Ads", "Google Ads", "Retargeting"],
-    results: ["Immediate lead flow", "High ROI", "Scalable growth"],
-    cta: "Start My Ads Campaign",
-    icon: TrendingUp,
-    color: "bg-gold-600/10 text-gold-600"
-  },
-  {
     id: "web",
-    title: "High-Converting Website Design",
-    headline: "Turn Your Website Into a 24/7 Sales Machine",
-    description: "We create modern, responsive websites designed to convert visitors into high-paying customers.",
-    detailedServices: ["Business Website", "Landing Page Design", "Mobile Responsive"],
-    results: ["Higher conversion rates", "Professional authority", "Better user experience"],
-    cta: "Build My Sales Machine",
+    title: "Website Design & Development",
+    headline: "Elevate your brand with stunning web design & development",
+    description: "Elevate your brand with stunning web design & development for impactful online experiences.",
+    detailedServices: ["Custom Website Design", "E-commerce Development", "Responsive Layouts", "UI/UX Optimization"],
+    results: ["Enhanced user experience", "Higher mobile traffic", "Increased brand authority"],
+    cta: "Start Your Project",
     icon: Layout,
-    color: "bg-gold-500/10 text-gold-500"
+    color: "bg-yellow-200"
   },
   {
-    id: "whatsapp",
-    title: "WhatsApp Marketing & Automation",
-    headline: "Convert Leads Instantly with Automation",
-    description: "Capture and convert leads instantly with automated WhatsApp communication systems that work while you sleep.",
-    detailedServices: ["Bulk Messaging", "Automation", "Chatbot Setup"],
-    results: ["Instant lead response", "Higher closing rates", "Time-saving automation"],
-    cta: "Setup WhatsApp Automation",
-    icon: WhatsAppIcon,
-    color: "bg-gold-500/10 text-gold-500"
-  },
-  {
-    id: "leadgen",
-    title: "Lead Generation & Sales Funnels",
-    headline: "Build a Predictable Pipeline of High-Quality Leads",
-    description: "Build a predictable pipeline of high-quality leads for your business every month using our proven funnel systems.",
-    detailedServices: ["Funnel Setup", "Landing Page", "Automation"],
-    results: ["Consistent lead flow", "Predictable revenue", "Automated acquisition"],
-    cta: "Get More Leads Now",
-    icon: Target,
-    color: "bg-gold-400/10 text-gold-400"
-  },
-  {
-    id: "content",
-    title: "Content Creation & Copywriting",
-    headline: "High-Performance Copy That Sells",
-    description: "We create powerful, result-driven content that drives engagement and turns readers into buyers.",
-    detailedServices: ["Ad Copy", "Social Media Content", "Website Content"],
-    results: ["Better conversions", "Higher engagement", "Clear brand voice"],
-    cta: "Get High-Performance Copy",
-    icon: PenTool,
-    color: "bg-gold-500/10 text-gold-500"
+    id: "seo",
+    title: "Search Engine Optimization",
+    headline: "Partner with a top SEO agency to optimize strategies",
+    description: "Partner with a top SEO agency in Ranchi or Kolkata to optimize strategies and drive results.",
+    detailedServices: ["On-page SEO", "Off-page SEO", "Keyword Research", "Technical SEO"],
+    results: ["Top Google rankings", "Organic traffic growth", "Better local visibility"],
+    cta: "Rank My Site",
+    icon: Search,
+    color: "bg-orange-200"
   },
   {
     id: "branding",
-    title: "Brand Identity & Positioning",
-    headline: "Position Your Business as a Premium Brand",
-    description: "We design professional brand identities that make your business stand out and command premium prices.",
-    detailedServices: ["Logo Design", "Brand Identity", "Social Media Branding"],
-    results: ["Premium brand image", "Market differentiation", "Professional authority"],
-    cta: "Position My Brand",
+    title: "Branding & Promotion",
+    headline: "Our team crafts unique brands and drives promotions",
+    description: "Our team crafts unique brands, drives promotions, and boosts visibility through audience engagement.",
+    detailedServices: ["Logo & Visual Identity", "Brand Strategy", "Market Positioning", "Promotional Campaigns"],
+    results: ["Stronger market presence", "Unique brand identity", "Higher audience trust"],
+    cta: "Build My Brand",
     icon: Award,
-    color: "bg-gold-600/10 text-gold-600"
+    color: "bg-pink-200"
   },
   {
-    id: "influencer",
-    title: "Influencer Marketing & Collaborations",
-    headline: "Leverage Authority for Maximum Reach & ROI",
-    description: "We connect your brand with high-authority influencers for maximum reach, trust, and measurable ROI.",
-    detailedServices: ["Influencer Sourcing", "Campaign Management", "Performance Tracking"],
-    results: ["Massive reach", "Authentic trust", "Increased sales"],
-    cta: "Start My Campaign",
-    icon: Users,
-    color: "bg-gold-500/10 text-gold-500"
+    id: "graphic",
+    title: "Graphic Design",
+    headline: "Create visually stunning designs that communicate",
+    description: "Create visually stunning designs that communicate your brand's message effectively with expert graphic design.",
+    detailedServices: ["Social Media Graphics", "Print Design", "Marketing Collateral", "Digital Illustrations"],
+    results: ["Better visual communication", "Professional appearance", "Consistent brand look"],
+    cta: "Get Stunning Designs",
+    icon: PenTool,
+    color: "bg-yellow-100"
   },
   {
-    id: "email",
-    title: "Email Marketing & Automation (Gmail Marketing)",
-    headline: "Turn Your Audience Into Repeat Customers",
-    description: "We design and automate high-converting email funnels including welcome series, follow-ups, and promotional campaigns. Turn your audience into repeat customers with powerful email campaigns.",
-    detailedServices: ["Welcome Series", "Follow-ups", "Promotional Campaigns"],
-    results: ["More repeat sales", "Long-term customer relationships"],
-    cta: "Explore Strategy",
-    icon: Mail,
-    color: "bg-gold-600/10 text-gold-600"
+    id: "gmb",
+    title: "Google My Business",
+    headline: "Stand out from the competition with GMB",
+    description: "Stand out from the competition on the world's most popular search engine with Google My Business.",
+    detailedServices: ["GMB Optimization", "Review Management", "Local Citations", "Weekly Posts"],
+    results: ["More local calls", "Increased store visits", "Maps dominance"],
+    cta: "Rank on Maps",
+    icon: MapPin,
+    color: "bg-orange-100"
   },
   {
-    id: "ecommerce",
-    title: "E-commerce Marketing (All Platforms)",
-    headline: "Scale Your Online Store Across All Platforms",
-    description: "Scale your online store with data-driven marketing strategies across platforms like Shopify, Amazon, and Flipkart. We optimize your product listings, run high-converting ads, and boost sales.",
-    detailedServices: ["Shopify & Amazon Optimization", "Product Listing Optimization", "High-Converting Ads"],
-    results: ["More orders", "Higher revenue growth"],
-    cta: "Explore Strategy",
-    icon: ShoppingCart,
-    color: "bg-gold-500/10 text-gold-500"
+    id: "smm",
+    title: "Social Media Marketing",
+    headline: "Build connections and drive growth with SMM",
+    description: "Build connections and drive growth with engaging social media campaigns that deliver real results.",
+    detailedServices: ["Facebook Ads", "Instagram Growth", "Content Creation", "Lead Generation"],
+    results: ["High engagement rates", "Scaleable lead flow", "Brand loyalty"],
+    cta: "Grow My Socials",
+    icon: Share2,
+    color: "bg-pink-100"
   }
 ];
 
@@ -194,6 +127,156 @@ export const influencerBenefits = [
 ];
 
 export const SAMPLE_BLOGS = ALL_BLOGS;
+
+export const REVIEWS = [
+  {
+    brand: "ARB Photography",
+    niche: "Professional Photography Team",
+    text: "We Have Been Using PROXIMAX's Service For The Last Four Years And Are Happy With The Quality They Provide. They Manage Our Website And Social Media Handles. Thanks To Team PROXIMAX.",
+    logo: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "Apollo Clinic",
+    niche: "Health Care Clinic",
+    text: "The Ads Were Amazing We Got Very High Return On The Ad Spents And We Have Been Able To Get That From Team PROXIMAX. With The Right Guidance And Support, Today We Have Grown Our Social Presence Substantially.",
+    logo: "https://images.unsplash.com/photo-1505751172157-c7285937446b?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "Elite Real Estate",
+    niche: "Property Consultants",
+    text: "The lead generation system built by PROXIMAX is revolutionary for our business. We went from struggling for calls to having a consistent pipeline of qualified buyers. Highly recommended!",
+    logo: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "Aura Dental Clinic",
+    niche: "Multi-specialty Dentistry",
+    text: "Our local GMB ranking shot up to #1 within two months. Now, most of our new patients find us directly on Google Maps. The team is professional and data-driven.",
+    logo: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "Sparkle Jewellery",
+    niche: "Premium Showroom",
+    text: "Working with Rajendar and his team has been a game changer for our brand. Our social media engagement is at an all-time high, and it's reflecting in our store walk-ins.",
+    logo: "https://images.unsplash.com/photo-1515562141207-7a18b5ce3377?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "Gym Nation",
+    niche: "Fitness Center",
+    text: "The Facebook ad campaigns managed by PROXIMAX brought in 50+ new memberships in just 3 weeks during our launch. Their targeting strategy is spot on.",
+    logo: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "Urban Woods",
+    niche: "Interior Design Firm",
+    text: "PROXIMAX's SEO work is incredible. We are now ranking for the most competitive interior design keywords in our city. The quality of leads is exactly what we needed.",
+    logo: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "Skyline Education",
+    niche: "Coaching Institute",
+    text: "The automated lead nurturing funnel they set up has saved us so much time. Our counselors now only deal with highly interested students. Great efficiency boost!",
+    logo: "https://images.unsplash.com/photo-1523050338692-7b835a07733f?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "The Spice Kitchen",
+    niche: "Fine Dining Restaurant",
+    text: "Our mid-week bookings increased by 40% after implementing the local ads and influencer strategy recommended by PROXIMAX. They really understand local demand.",
+    logo: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "Luxe Car Rentals",
+    niche: "Luxury Automotive",
+    text: "The website they built for us is not only stunning but also a high-converting machine. The mobile experience is seamless, which is crucial for our rental bookings.",
+    logo: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "Glow Skin Care",
+    niche: "D2C Beauty Brand",
+    text: "Managed to achieve a 5X ROAS on our new product launch thanks to PROXIMAX's scaleable ad strategy. They help us manage our ad spend very effectively.",
+    logo: "https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "Tech Solutions",
+    niche: "Software Agency",
+    text: "PROXIMAX handled our LinkedIn lead generation campaign and the results were phenomenal. We've signed three major B2B contracts through their efforts.",
+    logo: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "Fit Bite",
+    niche: "Healthy Meal Prep",
+    text: "The branding and packaging design work done by the PROXIMAX team is world-class. It gave our startup the premium look needed to compete in the market.",
+    logo: "https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "Legal Path",
+    niche: "Law Firm",
+    text: "Digital marketing for law is tricky, but PROXIMAX handled it perfectly. Our website now ranks consistently for niche legal services in our region.",
+    logo: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "Green Valley",
+    niche: "Organic Farms",
+    text: "Our e-commerce sales grew by 300% within a year of partnering with PROXIMAX. Their knowledge of Shopify SEO and Facebook Ads is unparalleled.",
+    logo: "https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "Moda Fashion",
+    niche: "Apparel Brand",
+    text: "The creative content produced for our Instagram handle is exactly our vibe. We've seen a massive spike in direct messages and inquiries.",
+    logo: "https://images.unsplash.com/photo-1445205174273-59396092d3af?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "Clean Sweep",
+    niche: "Cleaning Services",
+    text: "Local service ads managed by this agency have kept our schedule full since day one. They are the best for local lead generation.",
+    logo: "https://images.unsplash.com/photo-1581578731548-c64695cc6958?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "Pet Paradise",
+    niche: "Pet Care & Spa",
+    text: "Our community growth on social media has been amazing. People in our neighborhood now recognize our brand everywhere. Thanks PROXIMAX!",
+    logo: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "Zenith Travels",
+    niche: "Tour & Travel Agency",
+    text: "The lead flow for our international tour packages has been incredibly consistent. Their Google Ads expertise is clearly visible in our ROI.",
+    logo: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "Build Right",
+    niche: "Construction Company",
+    text: "Professional, transparent, and result-oriented. PROXIMAX is the only agency we trust for our digital expansion. They deliver what they promise.",
+    logo: "https://images.unsplash.com/photo-1503387762-592dea58ef21?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  },
+  {
+    brand: "Home Nest",
+    niche: "Furniture Store",
+    text: "Their local SEO strategy brought us customers from cities as far as 50km away. Our digital presence has never been this strong.",
+    logo: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=100&auto=format&fit=crop",
+    rating: 5
+  }
+];
 
 export const CASE_STUDIES = [
   {
