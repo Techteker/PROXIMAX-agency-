@@ -105,6 +105,47 @@ const InternshipPage = () => {
         <meta name="description" content="Apply for the top digital marketing internship in Ranchi, Jharkhand. Learn Local SEO, GMB optimization, and performance marketing with certificate. Best opportunity for students." />
         <meta name="keywords" content="digital marketing internship ranchi, best seo internship jharkhand, proximax academy ranchi, student developer internship ranchi" />
         <link rel="canonical" href="https://proximax.in/internship" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [{
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://proximax.in"
+              },{
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Internship",
+                "item": "https://proximax.in/internship"
+              }]
+            }
+          `}
+        </script>
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "EducationalOccupationalProgram",
+              "name": "PROXIMAX Digital Marketing Internship",
+              "description": "A 1-3 month practical internship program in Ranchi focusing on SEO, GMB optimization, and Performance Marketing.",
+              "provider": {
+                "@type": "Organization",
+                "name": "PROXIMAX",
+                "url": "https://proximax.in"
+              },
+              "educationalProgramMode": "online",
+              "programPrerequisites": [
+                "Smartphone or Laptop",
+                "Stable Internet",
+                "Basic Communication Skills"
+              ],
+              "occupationalCategory": "Digital Marketer"
+            }
+          `}
+        </script>
       </Helmet>
       {/* Hero Section */}
       <section className="relative pt-48 pb-32 overflow-hidden">

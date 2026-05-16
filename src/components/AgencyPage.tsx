@@ -210,6 +210,65 @@ const AgencyPage = () => {
           {`
             {
               "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              "name": "PROXIMAX",
+              "image": "https://proximax.in/logo.png",
+              "@id": "https://proximax.in",
+              "url": "https://proximax.in",
+              "telephone": "+919341579348",
+              "priceRange": "₹₹",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Simdega",
+                "addressLocality": "Ranchi",
+                "addressRegion": "JH",
+                "postalCode": "834001",
+                "addressCountry": "IN"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 23.3441,
+                "longitude": 85.3096
+              },
+              "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday"
+                ],
+                "opens": "09:00",
+                "closes": "21:00"
+              },
+              "sameAs": [
+                "https://www.instagram.com/rajendar_rana_732/",
+                "https://www.linkedin.com/company/proximax"
+              ],
+              "areaServed": [
+                {
+                  "@type": "City",
+                  "name": "Ranchi"
+                },
+                {
+                  "@type": "State",
+                  "name": "Jharkhand"
+                }
+              ],
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "124"
+              }
+            }
+          `}
+        </script>
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
               "@type": "FAQPage",
               "mainEntity": [
                 {

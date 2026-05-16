@@ -63,6 +63,25 @@ const CaseStudyPage = () => {
         <meta name="description" content="See how PROXIMAX Ranchi delivers 10x ROI for clients using professional SEO, Google Ads, and GMB Optimization. Real results for real estate and retail brands in Jharkhand." />
         <meta name="keywords" content="digital marketing case studies ranchi, seo results jharkhand, lead generation success stories india, proximax client results" />
         <link rel="canonical" href="https://proximax.in/case-studies" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [{
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://proximax.in"
+              },{
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Case Studies",
+                "item": "https://proximax.in/case-studies"
+              }]
+            }
+          `}
+        </script>
       </Helmet>
 
       {/* Hero Section */}

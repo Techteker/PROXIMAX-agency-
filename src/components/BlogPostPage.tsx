@@ -253,6 +253,28 @@ const BlogPostPage = () => {
             }
           })}
         </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [{
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://proximax.in"
+            },{
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Journal",
+              "item": "https://proximax.in/blog"
+            },{
+              "@type": "ListItem",
+              "position": 3,
+              "name": blog.title,
+              "item": `https://proximax.in/blog/${blog.slug}`
+            }]
+          })}
+        </script>
       </Helmet>
 
       {/* Reading Progress Bar */}

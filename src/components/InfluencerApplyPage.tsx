@@ -77,6 +77,25 @@ const InfluencerApplyPage = () => {
         <meta name="description" content="Join the best influencer marketing agency in Ranchi, Jharkhand. Connect with brands, get paid collaborations, and grow your audience with PROXIMAX. Apply today!" />
         <meta name="keywords" content="influencer marketing agency ranchi, creator network jharkhand, brand collaborations for influencers ranchi, join proximax influencer team" />
         <link rel="canonical" href="https://proximax.in/influencer-apply" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [{
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://proximax.in"
+              },{
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Influencer Application",
+                "item": "https://proximax.in/influencer-apply"
+              }]
+            }
+          `}
+        </script>
       </Helmet>
       {/* Header / Banner */}
       <section className="relative pt-48 pb-32 overflow-hidden">

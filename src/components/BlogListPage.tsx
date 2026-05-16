@@ -162,6 +162,25 @@ const BlogListPage = () => {
         <meta property="og:title" content="PROXIMAX Journal | Leading Digital Marketing Insights in Ranchi" />
         <meta property="og:description" content="Expert ROI-focused strategies and lead generation insights for Ranchi businesses. Dominate Jharkhand's digital landscape with PROXIMAX." />
         <link rel="canonical" href="https://proximax.in/blog" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Blog",
+              "name": "The PROXIMAX Journal",
+              "description": "Expert insights on Digital Marketing, SEO, and Performance Marketing for businesses in Ranchi and India.",
+              "url": "https://proximax.in/blog",
+              "publisher": {
+                "@type": "Organization",
+                "name": "PROXIMAX",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://proximax.in/logo.png"
+                }
+              }
+            }
+          `}
+        </script>
       </Helmet>
 
       {/* Decorative Background Elements */}

@@ -118,6 +118,26 @@ const CareersPage = () => {
         <title>Careers & Opportunities in Ranchi | Digital Marketing Jobs | PROXIMAX</title>
         <meta name="description" content="Explore digital marketing careers in Ranchi. Join PROXIMAX's Influencer Program or Internship. Earn while you learn with the best digital agency in Jharkhand." />
         <meta name="keywords" content="digital marketing jobs ranchi, internship in jharkhand, earn money online ranchi, proximax careers india, student jobs ranchi" />
+        <link rel="canonical" href="https://proximax.in/careers" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [{
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://proximax.in"
+              },{
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Careers",
+                "item": "https://proximax.in/careers"
+              }]
+            }
+          `}
+        </script>
         <script type="application/ld+json">
           {`
             {

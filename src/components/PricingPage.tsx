@@ -191,6 +191,65 @@ const PricingPage: React.FC = () => {
         <meta name="description" content="View affordable digital marketing pricing in Ranchi. ROI-focused packages for SEO, GMB optimization, and Lead Generation in Jharkhand. Scale your business today." />
         <meta name="keywords" content="digital marketing packages ranchi, seo price jharkhand, lead generation cost ranchi, proximax pricing india, ads management fees" />
         <link rel="canonical" href="https://proximax.in/pricing" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [{
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://proximax.in"
+              },{
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Pricing",
+                "item": "https://proximax.in/pricing"
+              }]
+            }
+          `}
+        </script>
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "Digital Marketing Packages",
+              "description": "Professional ROI-focused digital marketing packages including SEO, GMB optimization, and Lead Generation.",
+              "brand": {
+                "@type": "Brand",
+                "name": "PROXIMAX"
+              },
+              "offers": [
+                {
+                  "@type": "Offer",
+                  "name": "Starter Boost",
+                  "price": "4999",
+                  "priceCurrency": "INR",
+                  "availability": "https://schema.org/InStock",
+                  "url": "https://proximax.in/pricing"
+                },
+                {
+                  "@type": "Offer",
+                  "name": "Growth Master",
+                  "price": "9999",
+                  "priceCurrency": "INR",
+                  "availability": "https://schema.org/InStock",
+                  "url": "https://proximax.in/pricing"
+                },
+                {
+                  "@type": "Offer",
+                  "name": "Scale Pro",
+                  "price": "19999",
+                  "priceCurrency": "INR",
+                  "availability": "https://schema.org/InStock",
+                  "url": "https://proximax.in/pricing"
+                }
+              ]
+            }
+          `}
+        </script>
       </Helmet>
 
       {/* Background Elements */}
