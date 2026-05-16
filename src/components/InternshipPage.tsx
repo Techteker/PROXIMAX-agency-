@@ -101,9 +101,9 @@ const InternshipPage = () => {
   return (
     <div className="bg-[#050505]">
       <Helmet>
-        <title>Digital Marketing Internship in India 2026 | PROXIMAX Academy</title>
-        <meta name="description" content="Join the best digital marketing internship in India. Gain hands-on experience in SEO, GMB optimization, and performance marketing with PROXIMAX. Apply now for 2026!" />
-        <meta name="keywords" content="digital marketing internship india, best seo internship, gmb optimization training india, proximax academy internship" />
+        <title>Digital Marketing Internship Ranchi 2026 | PROXIMAX Academy</title>
+        <meta name="description" content="Apply for the top digital marketing internship in Ranchi, Jharkhand. Learn Local SEO, GMB optimization, and performance marketing with certificate. Best opportunity for students." />
+        <meta name="keywords" content="digital marketing internship ranchi, best seo internship jharkhand, proximax academy ranchi, student developer internship ranchi" />
         <link rel="canonical" href="https://proximax.in/internship" />
       </Helmet>
       {/* Hero Section */}
@@ -127,6 +127,7 @@ const InternshipPage = () => {
             </p>
             <button 
               onClick={() => document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' })}
+              aria-label="Apply Now for PROXIMAX Internship"
               className="btn-premium text-white px-12 py-5 text-xs"
             >
               Apply Now
@@ -244,7 +245,7 @@ const InternshipPage = () => {
                   ))}
                 </div>
                 <div className="mt-12">
-                  <a href="/" className="text-gold-500 hover:text-gold-400 transition-colors flex items-center gap-2 font-display font-black text-[10px] uppercase tracking-widest">
+                  <a href="/" aria-label="View all agency services" className="text-gold-500 hover:text-gold-400 transition-colors flex items-center gap-2 font-display font-black text-[10px] uppercase tracking-widest">
                     View Agency Services <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>

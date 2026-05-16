@@ -156,11 +156,11 @@ const BlogListPage = () => {
   return (
     <div className="min-h-screen bg-bg pt-48 pb-32 relative overflow-hidden">
       <Helmet>
-        <title>The Journal | Performance Marketing & ROI Insights | PROXIMAX</title>
-        <meta name="description" content="Read the latest insights on Performance Marketing, Lead Generation, and ROI focused strategies from PROXIMAX. Stay ahead in the Indian digital landscape." />
-        <meta name="keywords" content="performance marketing blog, lead generation insights, roi focused marketing, seo strategies india, proximax journal" />
-        <meta property="og:title" content="The Journal | Performance Marketing & ROI Insights | PROXIMAX" />
-        <meta property="og:description" content="Expert ROI-focused strategies and lead generation insights to grow your business online. Explore the PROXIMAX Journal." />
+        <title>The Journal | Digital Marketing & SEO Insights Ranchi | PROXIMAX</title>
+        <meta name="description" content="Discover professional insights on Local SEO, Google Ads, and Performance Marketing from PROXIMAX. Stay updated with the best digital marketing strategies in Ranchi & Jharkhand." />
+        <meta name="keywords" content="digital marketing blog ranchi, seo insights jharkhand, lead generation tips, proximax marketing journal, local business growth blog" />
+        <meta property="og:title" content="PROXIMAX Journal | Leading Digital Marketing Insights in Ranchi" />
+        <meta property="og:description" content="Expert ROI-focused strategies and lead generation insights for Ranchi businesses. Dominate Jharkhand's digital landscape with PROXIMAX." />
         <link rel="canonical" href="https://proximax.in/blog" />
       </Helmet>
 
@@ -215,6 +215,7 @@ const BlogListPage = () => {
           >
             <Link 
               to={`/blog/${featuredBlog.slug}`}
+              aria-label={`Read featured article: ${featuredBlog.title}`}
               className="group relative block card-3d glow-border rounded-[3rem] p-1 overflow-hidden"
             >
               <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-16 items-center bg-card/40 rounded-[2.9rem] p-8 md:p-12">
@@ -374,6 +375,7 @@ const BlogListPage = () => {
               >
                 <Link 
                   to={`/blog/${blog.slug}`}
+                  aria-label={`Read full article: ${blog.title}`}
                   className="group block space-y-8 card-3d glow-border glass-premium p-6 rounded-[3rem] transition-all duration-700 preserve-3d"
                 >
                   <div className="absolute inset-0 bg-grain opacity-[0.02] pointer-events-none" />

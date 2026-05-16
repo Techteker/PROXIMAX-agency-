@@ -73,9 +73,9 @@ const InfluencerApplyPage = () => {
   return (
     <div className="min-h-screen bg-bg text-text-main font-sans selection:bg-gold-500/30">
       <Helmet>
-        <title>Influencer Marketing Agency India | Join PROXIMAX Network</title>
-        <meta name="description" content="Join the top influencer marketing agency in India. PROXIMAX connects creators with premium brands for high-impact collaborations. Apply now to grow your influence!" />
-        <meta name="keywords" content="influencer marketing agency india, join influencer network india, brand collaborations for creators, proximax influencer network" />
+        <title>Influencer Marketing Agency Ranchi | Join PROXIMAX Creator Network</title>
+        <meta name="description" content="Join the best influencer marketing agency in Ranchi, Jharkhand. Connect with brands, get paid collaborations, and grow your audience with PROXIMAX. Apply today!" />
+        <meta name="keywords" content="influencer marketing agency ranchi, creator network jharkhand, brand collaborations for influencers ranchi, join proximax influencer team" />
         <link rel="canonical" href="https://proximax.in/influencer-apply" />
       </Helmet>
       {/* Header / Banner */}
@@ -99,6 +99,7 @@ const InfluencerApplyPage = () => {
             </p>
             <button 
               onClick={() => document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' })}
+              aria-label="Secure your spot in our influencer network"
               className="btn-premium text-white px-12 py-5 text-sm"
             >
               Apply Now

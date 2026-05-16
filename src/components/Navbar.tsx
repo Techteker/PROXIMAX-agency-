@@ -63,72 +63,30 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <nav className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-500 px-6 py-6",
-        isScrolled ? "bg-bg/90 backdrop-blur-xl border-b border-white/5 py-4 shadow-2xl" : "bg-transparent"
+        "fixed top-0 w-full z-50 transition-all duration-500 px-6 py-4 md:px-12 md:py-8",
+        isScrolled ? "bg-black/95 backdrop-blur-xl border-b border-white/5 py-4 shadow-2xl" : "bg-transparent"
       )}>
-        <div className="max-w-7xl mx-auto flex justify-between items-center glass-premium px-8 py-4 rounded-full border border-white/10 backdrop-blur-xl relative overflow-hidden">
-          <div className="absolute inset-0 bg-grain opacity-[0.05] pointer-events-none" />
-          <Link to="/" className="flex items-center gap-3 group cursor-pointer" aria-label="PROXIMAX - Best Digital Marketing Agency">
-            <div className="w-12 h-12 bg-gradient-to-br from-gold-400 to-gold-600 rounded-full flex items-center justify-center text-white font-display font-bold text-2xl shadow-2xl shadow-gold-500/20 group-hover:scale-110 transition-transform" aria-hidden="true">P</div>
-            <span className="text-2xl font-display font-black tracking-tighter text-text-main">PROXIMAX</span>
+        <div className="max-w-7xl mx-auto flex justify-between items-center transition-all duration-500">
+          <Link to="/" className="flex flex-col group cursor-pointer" aria-label="PROXIMAX - Best Digital Marketing Agency">
+            <div className="flex items-center">
+              <span className="text-2xl md:text-3xl font-display font-black tracking-tighter text-white">PROXIM</span>
+              <span className="text-2xl md:text-3xl font-display font-black tracking-tighter text-yellow-400">AX</span>
+            </div>
+            <span className="text-[9px] md:text-[10px] font-display font-black tracking-[0.2em] text-white/50 -mt-1 uppercase">Best Digital Marketing Agency</span>
           </Link>
 
-          {/* Desktop Nav - Hidden to use Hamburger for all sizes */}
-          <div className="hidden">
-            {navItems.map((item) => (
-              item.type === 'link' ? (
-                <Link 
-                  key={item.name} 
-                  to={item.path}
-                  className={cn(
-                    "tracking-luxury transition-colors text-xs lg:text-sm",
-                    location.pathname === item.path ? "text-gold-500" : "text-text-dim hover:text-gold-500"
-                  )}
-                >
-                  {item.name}
-                </Link>
-              ) : (
-                <button 
-                  key={item.name}
-                  onClick={() => handleNavClick(item)}
-                  className="tracking-luxury transition-colors text-xs lg:text-sm text-text-dim hover:text-gold-500"
-                >
-                  {item.name}
-                </button>
-              )
-            ))}
-            <button 
-              onClick={() => {
-                if (location.pathname !== '/') {
-                  navigate('/');
-                  setTimeout(() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }), 100);
-                } else {
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-              className="btn-premium text-white px-6 lg:px-8 py-3 text-xs"
-            >
-              Get Started
-            </button>
-          </div>
-
-          {/* Toggle Buttons Group */}
-          <div className="flex items-center gap-3">
-            <button 
-              onClick={toggleTheme}
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-gold-500 hover:bg-gold-500/10 transition-all"
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </button>
-
+          <div className="flex items-center gap-6">
             {/* Toggle Button - Visible on all sizes */}
             <button 
-              className="p-2 text-text-main bg-white/5 rounded-full border border-white/10 hover:bg-gold-500/10 transition-all" 
+              className="p-2 text-white hover:text-yellow-400 transition-colors group" 
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
-              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              <div className="flex flex-col gap-1.5 items-end">
+                <div className={cn("h-0.5 bg-current transition-all duration-300", isMenuOpen ? "w-6 rotate-45 translate-y-2" : "w-8")} />
+                <div className={cn("h-0.5 bg-current transition-all duration-300", isMenuOpen ? "opacity-0" : "w-6")} />
+                <div className={cn("h-0.5 bg-current transition-all duration-300", isMenuOpen ? "w-6 -rotate-45 -translate-y-2" : "w-4")} />
+              </div>
             </button>
           </div>
         </div>
@@ -170,6 +128,7 @@ export const Navbar: React.FC = () => {
                       <Link 
                         to={item.path}
                         onClick={() => setIsMenuOpen(false)}
+                        aria-label={`Navigate to ${item.name}`}
                         className={cn(
                           "text-3xl font-serif italic block transition-all duration-300",
                           location.pathname === item.path ? "text-gold-500 translate-x-2" : "text-text-main hover:text-gold-500 hover:translate-x-2"
@@ -180,6 +139,7 @@ export const Navbar: React.FC = () => {
                     ) : (
                       <button 
                         onClick={() => handleNavClick(item)}
+                        aria-label={`Scroll to ${item.name} section`}
                         className="text-3xl font-serif italic text-text-main text-left w-full hover:text-gold-500 hover:translate-x-2 transition-all duration-300"
                       >
                         {item.name}

@@ -6,8 +6,10 @@ import { Mail, ShieldCheck } from 'lucide-react';
 const LegalLayout: React.FC<{ title: string; children: React.ReactNode; lastUpdated: string }> = ({ title, children, lastUpdated }) => (
   <div className="min-h-screen bg-[#050505] pt-48 pb-32">
     <Helmet>
-      <title>{title} | PROXIMAX</title>
+      <title>{title} | PROXIMAX - Professional Digital Agency Ranchi</title>
+      <meta name="description" content={`${title} for PROXIMAX. We maintain high standards of transparency and compliance for our digital marketing services in Ranchi and beyond.`} />
       <meta name="robots" content="noindex, follow" />
+      <link rel="canonical" href={`https://proximax.in/${title.toLowerCase().replace(/\s+/g, '-')}`} />
     </Helmet>
     
     <div className="max-w-4xl mx-auto px-6">

@@ -59,9 +59,9 @@ const CaseStudyPage = () => {
   return (
     <div className="bg-bg min-h-screen">
       <Helmet>
-        <title>Case Studies: Lead Generation & SEO Success Stories | PROXIMAX India</title>
-        <meta name="description" content="Discover how PROXIMAX India delivers 10x ROI for clients using advanced SEO, GMB Optimization, and high-performance Lead Generation strategies. Read our success stories." />
-        <meta name="keywords" content="digital marketing case studies india, seo results real estate, lead generation success stories, proximax results" />
+        <title>Case Studies: Local SEO & Lead Generation Success Ranchi | PROXIMAX</title>
+        <meta name="description" content="See how PROXIMAX Ranchi delivers 10x ROI for clients using professional SEO, Google Ads, and GMB Optimization. Real results for real estate and retail brands in Jharkhand." />
+        <meta name="keywords" content="digital marketing case studies ranchi, seo results jharkhand, lead generation success stories india, proximax client results" />
         <link rel="canonical" href="https://proximax.in/case-studies" />
       </Helmet>
 
@@ -301,6 +301,7 @@ const CaseStudyPage = () => {
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button 
               onClick={() => window.location.href = '/#contact'}
+              aria-label="Get More Leads Now - Contact PROXIMAX"
               className="bg-gold-600 text-white px-12 py-5 rounded-full font-display font-black text-xs uppercase tracking-luxury hover:bg-gold-700 transition-all shadow-2xl shadow-gold-600/20 flex items-center justify-center gap-3 group"
             >
               Get More Leads Now <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

@@ -187,9 +187,9 @@ const PricingPage: React.FC = () => {
     <div className="min-h-screen bg-bg pt-32 pb-20 relative overflow-hidden">
       <div className="fixed inset-0 pointer-events-none z-[100] bg-grain opacity-[0.03] mix-blend-overlay" />
       <Helmet>
-        <title>Pricing Plans & Digital Marketing Packages | PROXIMAX India</title>
-        <meta name="description" content="Explore ROI-focused digital marketing pricing plans for SEO, GMB Optimization, Lead Generation, and Influencer Marketing. Scale your brand with PROXIMAX India's expert packages." />
-        <meta name="keywords" content="digital marketing packages india, seo pricing india, lead generation services costs, influencer marketing packages, proximax pricing" />
+        <title>Pricing Plans & Digital Marketing Packages Ranchi | PROXIMAX</title>
+        <meta name="description" content="View affordable digital marketing pricing in Ranchi. ROI-focused packages for SEO, GMB optimization, and Lead Generation in Jharkhand. Scale your business today." />
+        <meta name="keywords" content="digital marketing packages ranchi, seo price jharkhand, lead generation cost ranchi, proximax pricing india, ads management fees" />
         <link rel="canonical" href="https://proximax.in/pricing" />
       </Helmet>
 
@@ -308,6 +308,7 @@ const PricingPage: React.FC = () => {
 
                   <button
                     onClick={() => handleCtaClick(plan.id)}
+                    aria-label={`Get started with ${plan.name} plan`}
                     className={cn(
                       "w-full py-4 rounded-2xl text-[10px] tracking-luxury transition-all duration-500 font-display font-black",
                       plan.popular 
@@ -484,12 +485,14 @@ const PricingPage: React.FC = () => {
             <div className="flex flex-col md:flex-row items-center justify-center gap-6">
               <button 
                 onClick={() => handleCtaClick('confused')}
+                aria-label="Book a free growth consultation"
                 className="btn-premium px-12 py-5 text-white"
               >
                 Book Free Consultation
               </button>
               <button 
                 onClick={() => window.open('https://wa.me/919341579348', '_blank')}
+                aria-label="Chat with a PROXIMAX expert on WhatsApp"
                 className="px-12 py-5 rounded-full bg-white/5 border border-white/10 text-white font-display font-black text-[10px] tracking-luxury hover:bg-white/10 transition-all uppercase"
               >
                 Chat on WhatsApp

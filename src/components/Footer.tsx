@@ -33,64 +33,72 @@ export const Footer: React.FC = () => {
             </p>
             <div className="space-y-4">
               <p className="text-white/40 text-sm font-medium leading-relaxed max-w-xs">
-                Empowering brands to thrive in the modern era with high-impact strategies and cutting-edge solutions.
-              </p>
-            </div>
+              Specializing in Local SEO, Lead Generation, and Google Ads for businesses in Ranchi, Jharkhand, and throughout India.
+            </p>
           </div>
+        </div>
 
-          <div>
-            <h4 className="text-white font-black text-sm uppercase tracking-widest mb-10">Quick Links</h4>
-            <ul className="space-y-6">
-              {[
-                { name: 'Services', id: 'services' },
-                { name: 'Testimonials', id: 'reviews' },
-                { name: 'About Us', id: 'about' },
-                { name: 'Contact', id: 'contact' }
-              ].map(item => (
-                <li key={item.name}>
-                  <button 
-                    onClick={() => handleNavClick(item.id)}
-                    className="text-white/60 hover:text-yellow-400 transition-colors text-sm font-medium uppercase tracking-wider"
-                  >
-                    {item.name}
-                  </button>
-                </li>
-              ))}
-              <li><Link to="/blog" className="text-white/60 hover:text-yellow-400 transition-colors text-sm font-medium uppercase tracking-wider">Our Blog</Link></li>
-            </ul>
+        <div>
+          <h4 className="text-white font-black text-sm uppercase tracking-widest mb-10">Quick Links</h4>
+          <ul className="space-y-6">
+            {[
+              { name: 'Ranchi SEO Services', id: 'services' },
+              { name: 'Client Testimonials', id: 'reviews' },
+              { name: 'About PROXIMAX', id: 'about' },
+              { name: 'Contact Agency', id: 'contact' }
+            ].map(item => (
+              <li key={item.name}>
+                <button 
+                  onClick={() => handleNavClick(item.id)}
+                  aria-label={`Go to ${item.name} section`}
+                  className="text-white/60 hover:text-yellow-400 transition-colors text-sm font-medium uppercase tracking-wider text-left"
+                >
+                  {item.name}
+                </button>
+              </li>
+            ))}
+            <li><Link to="/blog" className="text-white/60 hover:text-yellow-400 transition-colors text-sm font-medium uppercase tracking-wider">Growth Insights Blog</Link></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="text-white font-black text-sm uppercase tracking-widest mb-10">Connect</h4>
+          <ul className="space-y-6">
+            <li className="flex flex-col gap-1">
+              <span className="text-white/40 text-[10px] font-black uppercase tracking-widest">Email Our Team</span>
+              <a href="mailto:hello@proximax.in" className="text-white hover:text-yellow-400 transition-colors">hello@proximax.in</a>
+            </li>
+            <li className="flex flex-col gap-1">
+              <span className="text-white/40 text-[10px] font-black uppercase tracking-widest">Call Ranchi HQ</span>
+              <a href="tel:+919341579348" className="text-white hover:text-yellow-400 transition-colors">+91 93415 79348</a>
+            </li>
+            <li className="flex flex-col gap-1">
+              <span className="text-white/40 text-[10px] font-black uppercase tracking-widest">Our Presence</span>
+              <span className="text-white">Ranchi & Simdega, Jharkhand, India</span>
+            </li>
+          </ul>
+        </div>
+
+        <div className="space-y-10">
+          <h4 className="text-white font-black text-sm uppercase tracking-widest mb-10">Follow Our Growth</h4>
+          <div className="flex gap-4">
+            {[
+              { Icon: Instagram, href: "https://www.instagram.com/rajendar_rana_732/", label: "Follow PROXIMAX on Instagram" },
+              { Icon: Linkedin, href: "#", label: "Connect with PROXIMAX on LinkedIn" },
+              { Icon: Twitter, href: "#", label: "Follow PROXIMAX on Twitter" }
+            ].map((social, i) => (
+              <a 
+                key={i} 
+                href={social.href} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label={social.label}
+                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-yellow-400 hover:text-black hover:border-yellow-400 transition-all duration-300"
+              >
+                <social.Icon className="w-5 h-5" />
+              </a>
+            ))}
           </div>
-
-          <div>
-            <h4 className="text-white font-black text-sm uppercase tracking-widest mb-10">Connect</h4>
-            <ul className="space-y-6">
-              <li className="flex flex-col gap-1">
-                <span className="text-white/40 text-[10px] font-black uppercase tracking-widest">Email</span>
-                <a href="mailto:hello@proximax.in" className="text-white hover:text-yellow-400 transition-colors">hello@proximax.in</a>
-              </li>
-              <li className="flex flex-col gap-1">
-                <span className="text-white/40 text-[10px] font-black uppercase tracking-widest">Phone</span>
-                <a href="tel:+919341579348" className="text-white hover:text-yellow-400 transition-colors">+91 93415 79348</a>
-              </li>
-              <li className="flex flex-col gap-1">
-                <span className="text-white/40 text-[10px] font-black uppercase tracking-widest">Location</span>
-                <span className="text-white">Simdega, Jharkhand, India</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="space-y-10">
-            <h4 className="text-white font-black text-sm uppercase tracking-widest mb-10">Follow Us</h4>
-            <div className="flex gap-4">
-              {[
-                { Icon: Instagram, href: "https://www.instagram.com/rajendar_rana_732/" },
-                { Icon: Linkedin, href: "#" },
-                { Icon: Twitter, href: "#" }
-              ].map((social, i) => (
-                <a key={i} href={social.href} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-yellow-400 hover:text-black hover:border-yellow-400 transition-all duration-300">
-                  <social.Icon className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
             <div className="p-6 bg-white/5 border border-white/10 rounded-2xl">
               <p className="text-[10px] font-black text-white/40 uppercase tracking-widest mb-2">Subscribe</p>
               <div className="flex gap-2">

@@ -30,7 +30,7 @@ import {
   Star
 } from 'lucide-react';
 import { cn } from '../lib/utils';
-import { services, SAMPLE_BLOGS, REVIEWS } from '../constants';
+import { services, SAMPLE_BLOGS, REVIEWS, INDUSTRIES_SERVED } from '../constants';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { submitContactInquiry, fetchFounderInfo } from '../services/supabaseService';
@@ -232,10 +232,60 @@ const AgencyPage = () => {
       <div className="fixed inset-0 pointer-events-none z-[100] bg-grain opacity-[0.03] mix-blend-overlay" />
       
       <Helmet>
-        <title>PROXIMAX | Best Digital Marketing Agency in India | SEO & GMB Experts</title>
-        <meta name="description" content="Scale your business with PROXIMAX, the best digital marketing agency in India. We specialize in expert SEO, GMB optimization, and lead generation for Real Estate, Jewellery, and Fashion brands." />
-        <meta name="keywords" content="digital marketing agency india, best seo agency india, gmb optimization services, lead generation for real estate, performance marketing india, social media marketing agency" />
+        <title>PROXIMAX | #1 Digital Marketing Agency Ranchi | SEO & Performance Marketing</title>
+        <meta name="description" content="PROXIMAX is Ranchi's leading digital marketing agency. We specialize in high-ROI Lead Generation, Local SEO Services, GMB Optimization, and Performance Marketing for Jharkhand businesses. Start growing today!" />
+        <meta name="keywords" content="digital marketing agency ranchi, best seo agency ranchi, performance marketing agency jharkhand, lead generation agency india, google ads expert ranchi, social media marketing jharkhand, proximax ranchi" />
         <link rel="canonical" href="https://proximax.in" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "How long does it take to see results?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Typically between 7–30 days depending on the strategy used. Paid ads show results almost immediately, while SEO and GMB optimization build long-term momentum."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Do you guarantee results?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We focus on measurable outcomes. We continuously optimize your campaigns to improve performance and ensure you get the best possible return on investment."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How many leads can I expect?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Depending on your niche and budget, businesses can generate 20–50+ high-quality leads per month using our proven systems."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What is your pricing?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Our plans are customized to your business needs and start from ₹2,999 depending on your specific requirements and growth goals."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Is this suitable for small businesses?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, especially for local businesses in Ranchi looking to grow. Our systems are designed to help small to medium enterprises dominate their local market."
+                  }
+                }
+              ]
+            }
+          `}
+        </script>
       </Helmet>
       {/* Service Detail Modal */}
       <AnimatePresence>
@@ -253,51 +303,52 @@ const AgencyPage = () => {
               animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
               exit={{ opacity: 0, y: 50, scale: 0.8, rotate: 2 }}
               transition={{ type: "spring", stiffness: 100, damping: 20 }}
-              className="relative w-full max-w-4xl bg-[#0a0a0a] border border-white/10 rounded-[2rem] overflow-hidden shadow-2xl max-h-full overflow-y-auto glass-premium"
+              className="relative w-full max-w-4xl bg-white border border-black/10 rounded-[2rem] overflow-hidden shadow-2xl max-h-full overflow-y-auto"
             >
               <button 
                 onClick={() => setSelectedService(null)}
-                className="absolute top-8 right-8 p-3 rounded-full bg-white/5 text-white hover:bg-white/10 transition-colors z-10"
+                aria-label="Close service details"
+                className="absolute top-8 right-8 p-3 rounded-full bg-black/5 text-black hover:bg-black/10 transition-colors z-10"
               >
                 <X className="w-6 h-6" />
               </button>
 
               <div className="grid lg:grid-cols-2">
-                <div className="relative aspect-square lg:aspect-auto bg-[#0f0f0f] p-12 flex flex-col justify-center items-center text-center overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-gold-600/20 to-transparent z-0" />
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-gold-600/10 rounded-full blur-[100px] animate-pulse" />
-                  <div className="absolute bottom-0 left-0 w-64 h-64 bg-gold-600/5 rounded-full blur-[100px]" />
+                <div className="relative aspect-square lg:aspect-auto bg-gray-50 p-12 flex flex-col justify-center items-center text-center overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 to-transparent z-0" />
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-400/10 rounded-full blur-[100px] animate-pulse" />
+                  <div className="absolute bottom-0 left-0 w-64 h-64 bg-yellow-400/5 rounded-full blur-[100px]" />
                   
                   <motion.div
                     animate={{ 
                       scale: [1, 1.2, 1],
                       rotate: [0, 90, 180, 270, 360],
-                      backgroundColor: ["rgba(179, 155, 107, 0.1)", "rgba(137, 109, 77, 0.15)", "rgba(113, 90, 67, 0.1)"]
+                      backgroundColor: ["rgba(250, 204, 21, 0.1)", "rgba(234, 179, 8, 0.15)", "rgba(202, 138, 4, 0.1)"]
                     }}
                     transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
                     className="absolute inset-0 z-0 blur-[120px]"
                   />
                   
                   <div className="relative z-10">
-                    <div className="w-24 h-24 rounded-full bg-gold-600 text-white flex items-center justify-center mb-8 shadow-2xl shadow-gold-500/20 mx-auto">
+                    <div className="w-24 h-24 rounded-full bg-yellow-400 text-black flex items-center justify-center mb-8 shadow-2xl shadow-yellow-400/20 mx-auto">
                       <selectedService.icon className="w-12 h-12" />
                     </div>
-                    <h2 className="text-4xl font-serif italic text-white mb-4 tracking-tight">{selectedService.title}</h2>
-                    <p className="text-gold-400 tracking-luxury">Service Exploration</p>
+                    <h2 className="text-4xl font-sans font-black text-black mb-4 tracking-tight uppercase">{selectedService.title}</h2>
+                    <p className="text-black/60 font-black tracking-widest text-[10px] uppercase">Service Exploration</p>
                   </div>
                 </div>
 
                 <div className="p-12 lg:p-16">
-                  <h3 className="text-3xl font-serif italic text-white mb-6 leading-tight">{selectedService.headline}</h3>
-                  <p className="text-text-muted mb-10 leading-relaxed font-sans">{selectedService.description}</p>
+                  <h3 className="text-3xl font-sans font-black text-black mb-6 leading-tight uppercase">{selectedService.headline}</h3>
+                  <p className="text-black/60 mb-10 leading-relaxed font-sans">{selectedService.description}</p>
                   
                   <div className="space-y-10">
                     <div>
-                      <h4 className="tracking-luxury text-text-dim mb-4">Core Focus Areas</h4>
+                      <h4 className="text-black font-black uppercase text-[10px] tracking-widest mb-4 opacity-40">Core Focus Areas</h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         {selectedService.detailedServices.map((s: string, i: number) => (
-                          <div key={i} className="flex items-center gap-3 text-white font-medium text-sm">
-                            <CheckCircle2 className="w-4 h-4 text-gold-500" />
+                          <div key={i} className="flex items-center gap-3 text-black font-medium text-sm">
+                            <CheckCircle2 className="w-4 h-4 text-yellow-500" />
                             {s}
                           </div>
                         ))}
@@ -306,10 +357,10 @@ const AgencyPage = () => {
 
                     {selectedService.results && (
                       <div>
-                        <h4 className="tracking-luxury text-text-dim mb-4">Key Outcomes</h4>
+                        <h4 className="text-black font-black uppercase text-[10px] tracking-widest mb-4 opacity-40">Key Outcomes</h4>
                         <div className="space-y-3">
                           {selectedService.results.map((r: string, i: number) => (
-                            <div key={i} className="flex items-center gap-4 text-gold-500/80 font-serif italic text-lg leading-tight">
+                            <div key={i} className="flex items-center gap-4 text-black/80 font-sans font-black text-lg leading-tight uppercase">
                               <span className="text-2xl">👉</span>
                               {r}
                             </div>
@@ -324,7 +375,8 @@ const AgencyPage = () => {
                           setSelectedService(null);
                           document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                         }}
-                        className="w-full bg-gold-600 text-white py-5 rounded-full font-display font-black text-xs uppercase tracking-widest hover:bg-gold-700 transition-all shadow-xl shadow-gold-600/20 flex items-center justify-center gap-3"
+                        aria-label="Book a free consultation for this service"
+                        className="w-full bg-black text-white py-5 rounded-full font-display font-black text-xs uppercase tracking-widest hover:bg-yellow-400 hover:text-black transition-all shadow-xl shadow-black/10 flex items-center justify-center gap-3"
                       >
                         Get Free Consultation
                       </button>
@@ -333,7 +385,8 @@ const AgencyPage = () => {
                           setSelectedService(null);
                           document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                         }}
-                        className="w-full bg-white/5 text-white py-5 rounded-full font-display font-black text-xs uppercase tracking-widest hover:bg-white/10 border border-white/10 transition-all flex items-center justify-center gap-3 group/explore"
+                        aria-label="Explore growth strategy for this service"
+                        className="w-full bg-black/5 text-black py-5 rounded-full font-display font-black text-xs uppercase tracking-widest hover:bg-black/10 border border-black/10 transition-all flex items-center justify-center gap-3 group/explore"
                       >
                         {selectedService.cta || 'Explore Strategy'} <ArrowUpRight className="w-4 h-4 group-hover:scale-125 transition-transform" />
                       </button>
@@ -347,251 +400,111 @@ const AgencyPage = () => {
       </AnimatePresence>
 
       {/* Hero Section */}
-      <section id="home" className="relative pt-48 pb-32 overflow-hidden perspective-2000">
-        <div className="absolute inset-0 -z-10 pointer-events-none">
-          <div className="absolute top-0 right-0 w-[1000px] h-[1000px] bg-gold-600/10 rounded-full blur-[180px] animate-pulse-glow" />
-          <motion.div 
-            style={{ y: '20%' }}
-            className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-gold-900/10 rounded-full blur-[150px] animate-drift" 
-          />
-          
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.02] mix-blend-overlay" />
+      <section id="home" className="relative pt-48 pb-0 overflow-hidden bg-black">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/grid-me.png')] opacity-10" />
+          <div className="absolute inset-0" style={{ 
+            backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0)`,
+            backgroundSize: '40px 40px' 
+          }} />
         </div>
         
-        <div className="max-w-7xl mx-auto px-6 relative">
-          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-24 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -100, rotateY: 30 }}
-              animate={{ opacity: 1, x: 0, rotateY: 0 }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className="relative z-10"
-            >
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full glass-premium border border-white/20 text-gold-500 text-[10px] md:text-[11px] font-display font-black uppercase tracking-[0.3em] mb-10 shadow-2xl shadow-gold-500/10"
-              >
-                <div className="w-2 h-2 rounded-full bg-gold-500 animate-ping" />
-                <span className="italic">Leading ROI Specialist in India</span>
-              </motion.div>
+        <div className="max-w-7xl mx-auto px-6 relative flex flex-col items-center text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="z-10"
+          >
+            <h1 className="text-4xl sm:text-7xl md:text-[5.5rem] font-sans font-black text-white mb-8 tracking-tight leading-tight uppercase">
+              Scale Beyond Limits<br />
+              With <span className="text-yellow-400 relative inline-block">
+                PROXIMAX
+                <div className="absolute bottom-2 left-0 w-full h-1.5 bg-yellow-400/50 rounded-full" />
+              </span>
+            </h1>
 
-              <h1 className="text-6xl sm:text-8xl lg:text-[10rem] font-serif italic text-text-main mb-12 tracking-tighter leading-[0.8] drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
-                Defining <br /> <span className="text-gradient drop-shadow-none">Digital</span> <br /> High-End.
-              </h1>
-
-              <p className="text-xl md:text-2xl text-text-muted max-w-xl mb-16 font-sans font-extralight leading-relaxed border-l-2 border-gold-600/30 pl-8">
-                We engineer elite marketing systems that transform Indian businesses into global giants. Through algorithmic SEO and conversion science, we don't just grow—we dominate.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-8">
-                <button 
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="btn-premium group relative flex items-center justify-center gap-4 px-12 py-6 overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-gold-400 to-gold-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <span className="relative z-10 text-[11px] md:text-[12px]">Request Exclusive Strategy</span>
-                  <ArrowUpRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </button>
-                
-                <div className="flex items-center gap-6 group cursor-pointer">
-                  <div className="flex -space-x-4">
-                    {[1, 2, 3, 4].map(i => (
-                      <motion.div 
-                        key={i} 
-                        whileHover={{ y: -5, scale: 1.1 }}
-                        className="w-12 h-12 rounded-full border-2 border-[#050505] bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-[11px] font-bold text-white shadow-2xl"
-                      >
-                        {i*25}+
-                      </motion.div>
-                    ))}
-                  </div>
-                  <div className="text-left group-hover:translate-x-2 transition-transform">
-                    <div className="flex items-center gap-1 mb-1">
-                      {[1, 2, 3, 4, 5].map(i => <Star key={i} className="w-3 h-3 fill-gold-500 text-gold-500" />)}
-                    </div>
-                    <p className="text-white font-bold text-sm tracking-tight">Top-Rated Agency</p>
-                    <p className="text-[9px] text-text-dim uppercase tracking-[0.2em] font-black">Clutch & G2 Verified</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, scale: 0.7, rotateX: -20 }}
-              animate={{ opacity: 1, scale: 1, rotateX: 0 }}
-              transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-              className="relative hidden lg:block"
-            >
-              {/* Complex 3D Scene */}
-              <div className="relative w-full aspect-square preserve-3d">
-                <motion.div
-                  animate={{ 
-                    rotateY: [0, 10, 0],
-                    rotateX: [0, -5, 0]
-                  }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative w-full h-full preserve-3d scale-110"
-                >
-                  {/* Floating Dashboard Layers */}
-                  <motion.div
-                    whileHover={{ translateZ: 100, rotateY: -10 }}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[80%] glass-luxury rounded-[4rem] border border-white/20 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] p-12 overflow-hidden card-3d"
-                  >
-                    <div className="absolute inset-0 bg-grain opacity-[0.05]" />
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-gold-600/10 rounded-full blur-[100px]" />
-                    
-                    <div className="flex justify-between items-center mb-12">
-                      <div className="space-y-1">
-                        <p className="text-[10px] tracking-[0.3em] text-gold-500 font-black uppercase italic">Live Performance</p>
-                        <h3 className="text-4xl font-serif italic text-white leading-none">Organic Growth Matrix</h3>
-                      </div>
-                      <div className="w-16 h-16 rounded-full bg-gold-500/10 border border-gold-500/20 flex items-center justify-center text-gold-500">
-                        <TrendingUp size={32} />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-8 mb-12">
-                      <div className="glass-premium p-8 rounded-3xl border border-white/10 group cursor-pointer hover:bg-white/5 transition-all">
-                        <p className="text-text-dim text-[10px] uppercase font-black tracking-widest mb-2">Conversions</p>
-                        <p className="text-4xl font-display font-black text-white group-hover:text-gold-500 transition-colors">+428%</p>
-                      </div>
-                      <div className="glass-premium p-8 rounded-3xl border border-white/10 group cursor-pointer hover:bg-white/5 transition-all">
-                        <p className="text-text-dim text-[10px] uppercase font-black tracking-widest mb-2">Revenue ROI</p>
-                        <p className="text-4xl font-display font-black text-white group-hover:text-gold-500 transition-colors">12.5x</p>
-                      </div>
-                    </div>
-
-                    <div className="space-y-6">
-                      {[1, 2, 3].map(i => (
-                        <div key={i} className="flex items-center justify-between p-5 rounded-2xl bg-white/5 border border-white/5">
-                          <div className="flex items-center gap-4">
-                            <div className="w-2 h-2 rounded-full bg-gold-500 animate-pulse" />
-                            <p className="text-xs text-white/80 font-medium">Campaign Alpha-0{i} Active</p>
-                          </div>
-                          <span className="text-[10px] font-black text-gold-500/60 uppercase italic">98% Efficient</span>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-
-                  {/* Satellite Elements with Different Depths */}
-                  <motion.div 
-                    animate={{ y: [0, -30, 0], rotate: [0, 5, 0] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute -top-10 -right-10 translate-z-[150px] glass-premium p-8 rounded-[2.5rem] border border-white/20 shadow-2xl backdrop-blur-3xl"
-                  >
-                    <div className="flex items-center gap-4 mb-3">
-                      <Zap className="text-gold-500 animate-pulse" size={24} />
-                      <p className="text-sm font-serif italic text-white">Quantum Scaling</p>
-                    </div>
-                    <div className="w-32 h-1 bg-white/10 rounded-full overflow-hidden">
-                      <motion.div 
-                        animate={{ width: ['0%', '100%', '0%'] }}
-                        transition={{ duration: 3, repeat: Infinity }}
-                        className="h-full bg-gold-500" 
-                      />
-                    </div>
-                  </motion.div>
-
-                  <motion.div 
-                    animate={{ y: [0, 40, 0], x: [0, 20, 0] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                    className="absolute -bottom-20 -left-10 translate-z-[200px] glass-premium px-10 py-8 rounded-[3rem] border border-white/30 shadow-2xl shadow-gold-600/20"
-                  >
-                    <div className="flex items-center gap-6">
-                      <div className="w-14 h-14 rounded-2xl bg-gold-600 flex items-center justify-center text-white">
-                        <Globe size={28} />
-                      </div>
-                      <div>
-                        <p className="text-2xl font-display font-black text-white mb-1">GLOBAL</p>
-                        <p className="text-[10px] text-gold-500 font-bold uppercase tracking-[0.2em]">Dominance</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Industry Expertise Section (Luxury Marquee) */}
-      <section className="py-20 relative overflow-hidden bg-bg">
-        <div className="absolute inset-0 bg-grain opacity-[0.02]" />
-        
-        <div className="max-w-[1400px] mx-auto px-6">
-          <div className="glass-luxury rounded-[2.5rem] border border-white/10 py-12 relative overflow-hidden group shadow-[0_0_80px_-40px_rgba(255,255,255,0.2)]">
-            {/* Premium Corner Shadows/Glows */}
-            <div className="absolute top-0 left-0 w-80 h-80 bg-white/[0.15] blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-            <div className="absolute bottom-0 right-0 w-80 h-80 bg-white/[0.15] blur-[100px] translate-x-1/2 translate-y-1/2 pointer-events-none" />
-            
-            <div className="absolute inset-0 bg-gradient-to-r from-bg via-transparent to-bg z-10 pointer-events-none" />
-            
-            <div className="flex animate-marquee-right whitespace-nowrap gap-16 items-center">
-              {[1, 2].map((set) => (
-                <div key={set} className="flex gap-16 items-center shrink-0">
-                  <span className="text-white/40 font-display font-black text-xs uppercase tracking-widest hover:text-gold-500 transition-colors cursor-default">Real Estate Marketing</span>
-                  <div className="w-1.5 h-1.5 rounded-full bg-gold-600/30" />
-                  <span className="text-white/40 font-display font-black text-xs uppercase tracking-widest hover:text-gold-500 transition-colors cursor-default">Jewelry Growth Experts</span>
-                  <div className="w-1.5 h-1.5 rounded-full bg-gold-600/30" />
-                  <span className="text-white/40 font-display font-black text-xs uppercase tracking-widest hover:text-gold-500 transition-colors cursor-default">Fashion Brand Scaling</span>
-                  <div className="w-1.5 h-1.5 rounded-full bg-gold-600/30" />
-                  <span className="text-white/40 font-display font-black text-xs uppercase tracking-widest hover:text-gold-500 transition-colors cursor-default">E-commerce Dominance</span>
-                  <div className="w-1.5 h-1.5 rounded-full bg-gold-600/30" />
-                  <span className="text-white/40 font-display font-black text-xs uppercase tracking-widest hover:text-gold-500 transition-colors cursor-default">Medical SEO Services</span>
-                  <div className="w-1.5 h-1.5 rounded-full bg-gold-600/30" />
-                  <span className="text-white/40 font-display font-black text-xs uppercase tracking-widest hover:text-gold-500 transition-colors cursor-default">B2B Lead Generation</span>
-                  <div className="w-1.5 h-1.5 rounded-full bg-gold-600/30" />
+            <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-8">
+              {['4+ EXPERIENCE', '100+ BRANDS', '20 CR. ADS RUN'].map((stat, i) => (
+                <div key={i} className="flex items-center gap-4">
+                  <span className="text-white font-black text-xs md:text-sm tracking-[0.2em]">{stat}</span>
+                  {i < 2 && <div className="w-1.5 h-1.5 rounded-full bg-yellow-400" />}
                 </div>
               ))}
             </div>
-          </div>
+
+            <p className="text-white/60 text-lg md:text-xl max-w-4xl mb-16 font-sans font-medium leading-relaxed mx-auto italic">
+              Premium digital marketing solutions designed to grow your brand, generate quality leads, and turn attention into revenue.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Industries Marquee Section */}
+      <section className="bg-white py-16 md:py-24 overflow-hidden relative z-10">
+        <div className="flex whitespace-nowrap">
+          <motion.div 
+            initial={{ x: 0 }}
+            animate={{ x: "-50%" }}
+            transition={{ duration: 150, repeat: Infinity, ease: "linear" }}
+            className="flex gap-4 md:gap-8 items-center px-4"
+          >
+            {[...INDUSTRIES_SERVED, ...INDUSTRIES_SERVED].map((industry, i) => (
+              <div 
+                key={i} 
+                className="px-8 py-4 md:px-12 md:py-6 border-2 border-yellow-400 rounded-2xl md:rounded-[2.5rem] bg-white shadow-xl shadow-yellow-400/5 group hover:bg-yellow-400 transition-all duration-300"
+              >
+                <span className="text-yellow-400 group-hover:text-black font-sans font-black text-sm md:text-2xl uppercase tracking-[0.3em] whitespace-nowrap">
+                  {industry}
+                </span>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </section>      {/* Services Section */}
-      <section id="services" className="py-32 relative bg-white">
+      <section id="services" className="py-32 relative bg-white rounded-t-[4rem] -mt-20 z-20">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="flex justify-between items-start mb-16">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8">
             <div>
-              <h2 className="text-5xl md:text-7xl font-sans font-black text-black uppercase tracking-tight mb-4">What We Offer</h2>
-              <p className="text-black/60 text-lg font-medium">We’re Here To Help Turn Your Ideas Into Something Amazing.</p>
+              <h2 className="text-5xl md:text-7xl font-sans font-black text-black uppercase tracking-tight mb-4 text-left">What We Offer</h2>
+              <p className="text-black/60 text-lg font-medium text-left">We’re Here To Help Turn Your Ideas Into Something Amazing.</p>
             </div>
-            <div className="hidden md:flex w-16 h-16 rounded-full bg-black items-center justify-center text-white">
+            <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center text-white shrink-0 self-start md:self-auto">
               <ArrowUpRight className="w-8 h-8" />
             </div>
           </div>
  
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
             {services.map((service, index) => (
               <motion.div
                 key={service.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: (index % 3) * 0.1 }}
                 onClick={() => setSelectedService(service)}
                 className="group relative cursor-pointer"
               >
-                <div className="relative bg-white p-12 rounded-[2.5rem] border border-black/5 shadow-premium h-full flex flex-col items-start overflow-hidden group-hover:shadow-2xl transition-all duration-500">
+                <div className="relative bg-white p-6 md:p-12 rounded-[2rem] md:rounded-[2.5rem] border border-black/5 shadow-xl h-full flex flex-col items-start overflow-hidden group-hover:shadow-2xl transition-all duration-500">
                   {/* Pastel Glow Backgrounds */}
                   <div className={cn(
-                    "absolute -top-32 -left-32 w-80 h-80 blur-[100px] opacity-30 transition-all duration-700 group-hover:scale-150 group-hover:opacity-50",
+                    "absolute -top-32 -left-32 w-80 h-80 blur-[80px] md:blur-[100px] opacity-30 transition-all duration-700 group-hover:scale-150 group-hover:opacity-50",
                     index % 3 === 0 ? "bg-yellow-100" : index % 3 === 1 ? "bg-orange-100" : "bg-pink-100"
                   )} />
                   
-                  <div className="relative mb-10">
-                    <div className="w-20 h-20 text-black flex items-center justify-center rounded-2xl bg-black/5 group-hover:bg-black group-hover:text-white transition-colors duration-500">
-                      <service.icon strokeWidth={1.5} className="w-10 h-10" />
+                  <div className="relative mb-6 md:mb-10">
+                    <div className="w-14 h-14 md:w-20 md:h-20 text-black flex items-center justify-center rounded-xl md:rounded-2xl bg-black/5 group-hover:bg-black group-hover:text-white transition-colors duration-500">
+                      <service.icon strokeWidth={1.5} className="w-7 h-7 md:w-10 md:h-10" />
                     </div>
                   </div>
                   
-                  <h4 className="text-3xl font-sans font-black text-black mb-6 leading-tight">{service.title}</h4>
-                  <p className="text-black/60 leading-relaxed text-lg mb-10 font-sans font-light">{service.description}</p>
+                  <h4 className="text-lg md:text-2xl lg:text-3xl font-sans font-black text-black mb-3 md:mb-6 leading-tight text-left">{service.title}</h4>
+                  <p className="text-black/60 leading-relaxed text-sm md:text-lg mb-8 md:mb-10 font-sans font-light line-clamp-3 md:line-clamp-none text-left">{service.description}</p>
                   
-                  <div className="mt-auto flex items-center gap-3 text-black font-black text-xs uppercase tracking-[0.2em] group/btn">
+                  <div className="mt-auto flex items-center gap-2 md:gap-3 text-black font-black text-[10px] md:text-xs uppercase tracking-[0.2em] group/btn">
                     <span>Learn More</span>
-                    <div className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center group-hover/btn:bg-yellow-400 group-hover/btn:border-yellow-400 transition-all duration-300">
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-black/10 flex items-center justify-center group-hover/btn:bg-yellow-400 group-hover/btn:border-yellow-400 transition-all duration-300">
+                      <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </div>
                   </div>
                 </div>
@@ -674,14 +587,15 @@ const AgencyPage = () => {
             <div className="relative min-h-[500px] lg:min-h-full bg-yellow-400 flex items-center justify-center p-12 lg:p-20">
               <div className="relative w-full h-full max-w-lg">
                 <div className="absolute -top-6 -left-6 w-full h-full border-[12px] border-white rounded-[3rem]" />
-                <div className="relative aspect-[4/5] bg-white rounded-[2.5rem] overflow-hidden shadow-2xl transition-transform duration-700">
-                  <img 
-                    src={founder?.image_url || "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop"} 
-                    alt={founder?.name || "Founder of PROXIMAX"} 
-                    className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
+                  <div className="relative aspect-[4/5] bg-white rounded-[2.5rem] overflow-hidden shadow-2xl transition-transform duration-700">
+                    <img 
+                      src={founder?.image_url || "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop"} 
+                      alt={founder?.name ? `${founder.name} - Founder of PROXIMAX Digital Marketing Agency` : "Rajendar Rana - Founder of the Best Digital Marketing Agency in Ranchi"} 
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
               </div>
             </div>
           </div>
@@ -702,6 +616,25 @@ const AgencyPage = () => {
           </div>
 
           <div className="relative">
+            <div className="absolute top-1/2 -left-4 md:-left-12 -translate-y-1/2 z-20">
+              <button 
+                onClick={prevReview}
+                aria-label="View previous client review"
+                className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white border border-black/5 shadow-xl flex items-center justify-center text-black hover:bg-black hover:text-white transition-all group"
+              >
+                <ChevronRight className="w-6 h-6 md:w-8 md:h-8 rotate-180 group-hover:-translate-x-1 transition-transform" />
+              </button>
+            </div>
+            <div className="absolute top-1/2 -right-4 md:-right-12 -translate-y-1/2 z-20">
+              <button 
+                onClick={nextReview}
+                aria-label="View next client review"
+                className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white border border-black/5 shadow-xl flex items-center justify-center text-black hover:bg-black hover:text-white transition-all group"
+              >
+                <ChevronRight className="w-6 h-6 md:w-8 md:h-8 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+
             <div className="overflow-hidden py-10 px-4 md:px-0">
               <motion.div 
                 className="flex gap-8"
@@ -726,7 +659,12 @@ const AgencyPage = () => {
 
                       <div className="relative z-10 flex flex-col items-center text-center h-full">
                         <div className="w-24 h-24 rounded-full overflow-hidden mb-6 border-4 border-black/5 shadow-inner">
-                          <img src={review.logo} alt={review.brand} className="w-full h-full object-cover" />
+                          <img 
+                            src={review.logo} 
+                            alt={`${review.brand} - Happy Client of PROXIMAX SEO Agency`} 
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
                         </div>
                         <h4 className="text-2xl font-sans font-black text-black mb-1">{review.brand}</h4>
                         <p className="text-black/40 text-xs font-black mb-6 uppercase tracking-[0.2em]">{review.niche}</p>
@@ -819,8 +757,9 @@ const AgencyPage = () => {
                       <div className="relative aspect-[4/3] rounded-[3rem] overflow-hidden mb-10 border border-white/10 group-hover:scale-[1.02] transition-transform duration-700">
                         <img 
                           src={blog.image || blog.banner} 
-                          alt={blog.title}
+                          alt={`${blog.title} - Digital Marketing Insights by PROXIMAX`}
                           className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 brightness-75 group-hover:brightness-100"
+                          loading="lazy"
                           referrerPolicy="no-referrer"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-bg/90 to-transparent" />
@@ -871,6 +810,7 @@ const AgencyPage = () => {
                 <p className="text-text-dim text-sm mb-10 leading-relaxed font-sans font-light">Skip the line and connect with a senior growth architect directly.</p>
                 <button 
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  aria-label="Secure your consultation slot now"
                   className="flex items-center gap-4 text-gold-500 font-display font-black text-[11px] uppercase tracking-luxury group/btn"
                 >
                   Secure Your Slot <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover/btn:bg-gold-600 group-hover/btn:border-gold-600 transition-all"><ArrowRight size={16} className="text-white" /></div>
@@ -1066,7 +1006,9 @@ const AgencyPage = () => {
                 <div className="relative overflow-hidden hidden md:block">
                   <img 
                     src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop" 
+                    alt="PROXIMAX Digital Agency Workspace - Ranchi"
                     className="w-full h-full object-cover grayscale brightness-50"
+                    loading="lazy"
                     referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-gradient-to-tr from-bg via-transparent to-transparent" />

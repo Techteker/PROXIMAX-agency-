@@ -115,9 +115,34 @@ const CareersPage = () => {
   return (
     <div className="min-h-screen bg-bg relative overflow-hidden pt-32 pb-20 selection:bg-gold-500/30 selection:text-white">
       <Helmet>
-        <title>Careers & Opportunities | Earn Money Online | PROXIMAX India</title>
-        <meta name="description" content="Join PROXIMAX's Influencer Program or Digital Marketing Internship. Earn while you learn, gain real experience, and secure your future. Perfect for students and beginners." />
-        <meta name="keywords" content="digital marketing internship india, influencer program, earn money online students, proximax careers, work from home opportunities" />
+        <title>Careers & Opportunities in Ranchi | Digital Marketing Jobs | PROXIMAX</title>
+        <meta name="description" content="Explore digital marketing careers in Ranchi. Join PROXIMAX's Influencer Program or Internship. Earn while you learn with the best digital agency in Jharkhand." />
+        <meta name="keywords" content="digital marketing jobs ranchi, internship in jharkhand, earn money online ranchi, proximax careers india, student jobs ranchi" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "JobPosting",
+              "title": "Digital Marketing Intern",
+              "description": "Learn SEO, Google Ads, and Performance Marketing while working on real-world projects in Ranchi.",
+              "hiringOrganization": {
+                "@type": "Organization",
+                "name": "PROXIMAX Digital Advertising Pvt Ltd",
+                "sameAs": "https://proximax.in"
+              },
+              "jobLocation": {
+                "@type": "Place",
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressLocality": "Ranchi",
+                  "addressRegion": "JH",
+                  "addressCountry": "IN"
+                }
+              },
+              "employmentType": "INTERN"
+            }
+          `}
+        </script>
       </Helmet>
 
       {/* Background Atmosphere */}
@@ -165,12 +190,14 @@ const CareersPage = () => {
           >
             <Link 
               to="/influencer-apply"
+              aria-label="Apply for PROXIMAX Influencer Program"
               className="btn-premium w-full sm:w-auto text-white group flex items-center justify-center gap-3"
             >
               Become an Influencer <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
             </Link>
             <Link 
               to="/internship"
+              aria-label="Apply for PROXIMAX Digital Marketing Internship"
               className="w-full sm:w-auto px-10 py-5 rounded-full glass-luxury border border-white/10 text-white font-display font-black text-xs uppercase tracking-luxury hover:bg-white/5 transition-all flex items-center justify-center gap-3"
             >
               Apply for Internship <Briefcase className="w-4 h-4" />
@@ -243,7 +270,7 @@ const CareersPage = () => {
               </div>
               
               <div className="mt-auto">
-                <Link to="/influencer-apply" className="btn-premium w-full text-center">Join the Program</Link>
+                <Link to="/influencer-apply" aria-label="Join PROXIMAX Influencer Program" className="btn-premium w-full text-center">Join the Program</Link>
               </div>
             </motion.div>
 
@@ -273,7 +300,7 @@ const CareersPage = () => {
               </div>
 
               <div className="mt-auto">
-                <Link to="/internship" className="btn-premium w-full text-center">Start Learning</Link>
+                <Link to="/internship" aria-label="Start PROXIMAX Digital Marketing Internship" className="btn-premium w-full text-center">Start Learning</Link>
               </div>
             </motion.div>
           </div>

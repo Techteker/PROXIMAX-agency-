@@ -264,7 +264,7 @@ const BlogPostPage = () => {
       {/* Navigation Bar */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/80 backdrop-blur-xl border-b border-white/5 py-6">
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <Link to="/blog" className="flex items-center gap-3 text-slate-400 hover:text-white transition-colors group">
+          <Link to="/blog" aria-label="Go back to PROXIMAX blog list" className="flex items-center gap-3 text-slate-400 hover:text-white transition-colors group">
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             <span className="tracking-luxury">Back to Journal</span>
           </Link>
@@ -274,6 +274,7 @@ const BlogPostPage = () => {
           </div>
           <button 
             onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
+            aria-label="Request professional consultation"
             className="bg-gold-600 text-white px-8 py-2.5 rounded-full tracking-luxury hover:bg-gold-700 transition-all shadow-lg shadow-gold-600/20"
           >
             Consultation
@@ -349,8 +350,8 @@ const BlogPostPage = () => {
 
       <div className="max-w-7xl mx-auto px-6 py-40 grid lg:grid-cols-[1fr_320px] gap-24 relative">
         {/* Main Content Area */}
-        <div ref={contentRef}>
-          <div className="prose prose-invert prose-gold max-w-none">
+        <main ref={contentRef}>
+          <article className="prose prose-invert prose-gold max-w-none">
             <div className="markdown-body text-text-muted font-sans font-light text-xl leading-relaxed space-y-12">
               <Markdown
                 components={{
@@ -398,7 +399,7 @@ const BlogPostPage = () => {
                 {blog.content}
               </Markdown>
             </div>
-          </div>
+          </article>
 
           {/* Post-Content Banner */}
           <div className="mt-32 glass-premium p-12 md:p-20 rounded-[3.5rem] border border-white/10 relative overflow-hidden group">
@@ -476,7 +477,7 @@ const BlogPostPage = () => {
               </div>
             </div>
           )}
-        </div>
+        </main>
 
         {/* Sidebar - Editorial Style */}
         <aside className="space-y-20">
@@ -503,18 +504,21 @@ const BlogPostPage = () => {
                   <div className="flex gap-4">
                     <button 
                       onClick={() => window.open(`https://twitter.com/intent/tweet?url=${shareUrl}&text=${blog.title}`, '_blank')}
+                      aria-label="Share article on Twitter"
                       className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:bg-gold-600 hover:text-white transition-all"
                     >
                       <Twitter className="w-4 h-4" />
                     </button>
                     <button 
                       onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`, '_blank')}
+                      aria-label="Share article on LinkedIn"
                       className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:bg-gold-600 hover:text-white transition-all"
                     >
                       <Linkedin className="w-4 h-4" />
                     </button>
                     <button 
                       onClick={handleCopyLink}
+                      aria-label="Copy article link to clipboard"
                       className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:bg-gold-600 hover:text-white transition-all relative"
                     >
                       <LinkIcon className="w-4 h-4" />

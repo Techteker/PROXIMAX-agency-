@@ -36,20 +36,20 @@ export const services = [
   },
   {
     id: "seo",
-    title: "Search Engine Optimization",
-    headline: "Partner with a top SEO agency to optimize strategies",
-    description: "Partner with a top SEO agency in Ranchi or Kolkata to optimize strategies and drive results.",
-    detailedServices: ["On-page SEO", "Off-page SEO", "Keyword Research", "Technical SEO"],
-    results: ["Top Google rankings", "Organic traffic growth", "Better local visibility"],
+    title: "Search Engine Optimization (SEO)",
+    headline: "Rank #1 with the Best SEO Agency in Ranchi",
+    description: "Partner with a top-rated SEO agency in Ranchi & Jharkhand to dominate search results, drive organic traffic, and grow your local business visibility.",
+    detailedServices: ["Strategic Keyword Research", "On-page & Technical SEO", "High-Quality Backlink Building", "Local SEO for Ranchi Businesses"],
+    results: ["Top Google rankings", "10x Organic traffic growth", "Google Maps (GMB) dominance"],
     cta: "Rank My Site",
     icon: Search,
     color: "bg-orange-200"
   },
   {
     id: "branding",
-    title: "Branding & Promotion",
-    headline: "Our team crafts unique brands and drives promotions",
-    description: "Our team crafts unique brands, drives promotions, and boosts visibility through audience engagement.",
+    title: "Strategic Branding & Promotion",
+    headline: "Elite Branding Agency in Ranchi for Growing Businesses",
+    description: "We craft unique brand identities that resonate with your audience and drive promotions across Jharkhand to boost market visibility.",
     detailedServices: ["Logo & Visual Identity", "Brand Strategy", "Market Positioning", "Promotional Campaigns"],
     results: ["Stronger market presence", "Unique brand identity", "Higher audience trust"],
     cta: "Build My Brand",
@@ -69,22 +69,22 @@ export const services = [
   },
   {
     id: "gmb",
-    title: "Google My Business",
-    headline: "Stand out from the competition with GMB",
-    description: "Stand out from the competition on the world's most popular search engine with Google My Business.",
-    detailedServices: ["GMB Optimization", "Review Management", "Local Citations", "Weekly Posts"],
-    results: ["More local calls", "Increased store visits", "Maps dominance"],
+    title: "Google My Business & Local SEO",
+    headline: "Dominate Local Search with GMB Optimization Ranchi",
+    description: "Stand out from the competition with professional GMB optimization. We help Ranchi businesses rank #1 on Google Maps for high-intent local searches.",
+    detailedServices: ["GMB Profile Optimization", "Local Review Management", "Local Citation Building", "Google Maps SEO Strategy"],
+    results: ["More local phone calls", "Increased store foot-traffic", "Top 3 Maps ranking"],
     cta: "Rank on Maps",
     icon: MapPin,
     color: "bg-orange-100"
   },
   {
     id: "smm",
-    title: "Social Media Marketing",
-    headline: "Build connections and drive growth with SMM",
-    description: "Build connections and drive growth with engaging social media campaigns that deliver real results.",
-    detailedServices: ["Facebook Ads", "Instagram Growth", "Content Creation", "Lead Generation"],
-    results: ["High engagement rates", "Scaleable lead flow", "Brand loyalty"],
+    title: "Social Media & Performance Marketing",
+    headline: "Grow Your Brand with the Best SMM Agency in Ranchi",
+    description: "Scale your revenue with high-ROI Facebook, Instagram, and Google Ads. Our performance marketing experts in Jharkhand deliver daily quality leads.",
+    detailedServices: ["ROI-Focused Facebook Ads", "Instagram Growth Strategy", "Creative Performance Content", "High-Quality Lead Generation"],
+    results: ["High engagement & ROAS", "Scalable lead generation", "Consistent brand growth"],
     cta: "Grow My Socials",
     icon: Share2,
     color: "bg-pink-100"
@@ -276,6 +276,25 @@ export const REVIEWS = [
     logo: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=100&auto=format&fit=crop",
     rating: 5
   }
+];
+
+export const INDUSTRIES_SERVED = [
+  "Clinic", "Hospital", "Dental Clinic", "Gym & Fitness Center", "Yoga Studio",
+  "Salon & Spa", "Beauty Parlour", "Restaurant & Cafe", "Hotel & Resort",
+  "Real Estate", "Construction Company", "Interior Designer", "Architecture Firm",
+  "Fashion Brand", "Clothing Store", "Footwear Brand", "Jewellery Shop",
+  "Automobile Showroom", "Bike Showroom", "Car Rental Service", "Coaching Institute",
+  "School", "College", "Online Course Business", "Tuition Classes",
+  "E-commerce Store", "Grocery Store", "Electronics Shop", "Mobile Shop",
+  "Furniture Store", "Pharmacy", "Medical Store", "Diagnostic Center",
+  "Pathology Lab", "Travel Agency", "Tour & Tourism", "Event Management",
+  "Wedding Planner", "Photography Studio", "Law Firm", "CA Firm",
+  "Finance Company", "Insurance Advisor", "Startup Brands", "Local Businesses",
+  "Personal Brands", "Influencers & Creators", "YouTubers", "NGOs",
+  "Political Campaigns", "Corporate Companies", "Franchise Businesses",
+  "Home Services", "Plumbing Services", "Electrician Services", "Repair Services",
+  "Logistics & Delivery", "Agriculture & Organic Farming",
+  "Fast Delivery & Quick Commerce", "Tech Startups", "SaaS Companies", "AI Businesses"
 ];
 
 export const CASE_STUDIES = [
