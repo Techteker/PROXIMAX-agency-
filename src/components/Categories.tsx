@@ -31,22 +31,25 @@ export const Categories: React.FC = () => {
         </div>
 
         <div className="flex flex-wrap justify-center gap-6">
-          {categories.map((cat, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.05 }}
-              whileHover={{ y: -10, scale: 1.05 }}
-              className="glass-card px-8 py-10 rounded-[2rem] flex flex-col items-center gap-6 group cursor-default"
-            >
-              <div className={`w-20 h-20 rounded-3xl bg-white/5 flex items-center justify-center ${cat.color} group-hover:scale-110 transition-transform duration-300`}>
-                <cat.icon size={40} />
-              </div>
-              <span className="text-xl font-bold tracking-tight">{cat.name}</span>
-            </motion.div>
-          ))}
+          {categories.map((cat, idx) => {
+            const Icon = cat.icon;
+            return (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.05 }}
+                whileHover={{ y: -10, scale: 1.05 }}
+                className="glass-card px-8 py-10 rounded-[2rem] flex flex-col items-center gap-6 group cursor-default"
+              >
+                <div className={`w-20 h-20 rounded-3xl bg-white/5 flex items-center justify-center ${cat.color} group-hover:scale-110 transition-transform duration-300`}>
+                  <Icon size={40} />
+                </div>
+                <span className="text-xl font-bold tracking-tight">{cat.name}</span>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

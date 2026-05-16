@@ -67,32 +67,35 @@ export const Benefits: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {benefits.map((benefit, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="glass-card p-10 rounded-[2.5rem] relative group overflow-hidden"
-            >
-              {/* Hover Background Glow */}
-              <div className={`absolute -top-24 -right-24 w-48 h-48 bg-gradient-to-br ${benefit.color} opacity-0 group-hover:opacity-20 blur-3xl transition-opacity duration-500`} />
-              
-              <div className="relative z-10">
-                <div className={`w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300`}>
-                  <benefit.icon className="text-white w-8 h-8" />
+          {benefits.map((benefit, idx) => {
+            const Icon = benefit.icon;
+            return (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="glass-card p-10 rounded-[2.5rem] relative group overflow-hidden"
+              >
+                {/* Hover Background Glow */}
+                <div className={`absolute -top-24 -right-24 w-48 h-48 bg-gradient-to-br ${benefit.color} opacity-0 group-hover:opacity-20 blur-3xl transition-opacity duration-500`} />
+                
+                <div className="relative z-10">
+                  <div className={`w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300`}>
+                    <Icon className="text-white w-8 h-8" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4 flex items-center gap-3">
+                    {benefit.title}
+                    <span className="text-xl">{benefit.emoji}</span>
+                  </h3>
+                  <p className="text-white/50 leading-relaxed">
+                    {benefit.description}
+                  </p>
                 </div>
-                <h3 className="text-2xl font-bold mb-4 flex items-center gap-3">
-                  {benefit.title}
-                  <span className="text-xl">{benefit.emoji}</span>
-                </h3>
-                <p className="text-white/50 leading-relaxed">
-                  {benefit.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

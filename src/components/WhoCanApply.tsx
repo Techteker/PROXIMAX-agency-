@@ -37,24 +37,27 @@ export const WhoCanApply: React.FC = () => {
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {platforms.map((platform, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="glass-card p-6 rounded-3xl flex items-center gap-4 group hover:bg-white/10 transition-all duration-300"
-                >
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${platform.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                    <platform.icon className="text-white w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold">{platform.name}</h3>
-                    {platform.extra && <p className="text-xs text-gold-500 font-medium uppercase tracking-wider">{platform.extra}</p>}
-                  </div>
-                </motion.div>
-              ))}
+              {platforms.map((platform, idx) => {
+                const Icon = platform.icon;
+                return (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1 }}
+                    className="glass-card p-6 rounded-3xl flex items-center gap-4 group hover:bg-white/10 transition-all duration-300"
+                  >
+                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${platform.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                      <Icon className="text-white w-6 h-6" />
+                    </div>
+                    <div>
+                      <h3 className="font-bold">{platform.name}</h3>
+                      {platform.extra && <p className="text-xs text-gold-500 font-medium uppercase tracking-wider">{platform.extra}</p>}
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
 

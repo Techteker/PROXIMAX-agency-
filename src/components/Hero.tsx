@@ -88,24 +88,27 @@ export const Hero: React.FC = () => {
             { icon: TrendingUp, label: 'Growth Potential', value: '10x Faster', color: 'text-gold-500' },
             { icon: Users, label: 'Active Brands', value: '200+', color: 'text-gold-400' },
             { icon: Sparkles, label: 'Campaigns', value: '1.2k+', color: 'text-gold-600' },
-          ].map((stat, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, scale: 0.9, rotateY: 10 }}
-              whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="card-3d glow-border glass-card p-8 rounded-3xl flex items-center gap-6 group"
-            >
-              <div className={`w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center ${stat.color} group-hover:scale-110 transition-transform duration-300`}>
-                <stat.icon size={28} />
-              </div>
-              <div>
-                <p className="text-sm text-text-dim font-medium uppercase tracking-wider">{stat.label}</p>
-                <h3 className="text-2xl font-bold mt-1 text-text-main">{stat.value}</h3>
-              </div>
-            </motion.div>
-          ))}
+          ].map((stat, idx) => {
+            const Icon = stat.icon;
+            return (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.9, rotateY: 10 }}
+                whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="card-3d glow-border glass-card p-8 rounded-3xl flex items-center gap-6 group"
+              >
+                <div className={`w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center ${stat.color} group-hover:scale-110 transition-transform duration-300`}>
+                  <Icon size={28} />
+                </div>
+                <div>
+                  <p className="text-sm text-text-dim font-medium uppercase tracking-wider">{stat.label}</p>
+                  <h3 className="text-2xl font-bold mt-1 text-text-main">{stat.value}</h3>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

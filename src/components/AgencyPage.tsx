@@ -76,7 +76,6 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
 };
 
 const AgencyPage = () => {
-  const [homeBlogs, setHomeBlogs] = useState<any[]>([]);
   const [founder, setFounder] = useState<any>(null);
   const [selectedService, setSelectedService] = useState<any | null>(null);
   const [formData, setFormData] = useState({
@@ -197,35 +196,6 @@ const AgencyPage = () => {
     };
   }, []);
 
-  useEffect(() => {
-    fetch('/api/blogs')
-      .then(async res => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        const contentType = res.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-          const text = await res.text();
-          console.error("Expected JSON but got:", text.substring(0, 100));
-          throw new TypeError("Oops, we haven't got JSON!");
-        }
-        return res.json();
-      })
-      .then(data => {
-        if (data && data.blogs) {
-          setHomeBlogs(data.blogs.slice(0, 3));
-        } else if (Array.isArray(data)) {
-          setHomeBlogs(data.slice(0, 3));
-        } else {
-          setHomeBlogs(SAMPLE_BLOGS.slice(0, 3));
-        }
-      })
-      .catch(err => {
-        console.error("Error fetching home blogs, using sample data:", err);
-        setHomeBlogs(SAMPLE_BLOGS.slice(0, 3));
-      });
-  }, []);
-
   return (
     <div className="relative min-h-screen bg-bg">
       {/* Global Grain Texture */}
@@ -331,7 +301,7 @@ const AgencyPage = () => {
                   
                   <div className="relative z-10">
                     <div className="w-24 h-24 rounded-full bg-yellow-400 text-black flex items-center justify-center mb-8 shadow-2xl shadow-yellow-400/20 mx-auto">
-                      <selectedService.icon className="w-12 h-12" />
+                      {selectedService.icon && React.createElement(selectedService.icon, { className: "w-12 h-12" })}
                     </div>
                     <h2 className="text-4xl font-sans font-black text-black mb-4 tracking-tight uppercase">{selectedService.title}</h2>
                     <p className="text-black/60 font-black tracking-widest text-[10px] uppercase">Service Exploration</p>
@@ -475,41 +445,44 @@ const AgencyPage = () => {
           </div>
  
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: (index % 3) * 0.1 }}
-                onClick={() => setSelectedService(service)}
-                className="group relative cursor-pointer"
-              >
-                <div className="relative bg-white p-6 md:p-12 rounded-[2rem] md:rounded-[2.5rem] border border-black/5 shadow-xl h-full flex flex-col items-start overflow-hidden group-hover:shadow-2xl transition-all duration-500">
-                  {/* Pastel Glow Backgrounds */}
-                  <div className={cn(
-                    "absolute -top-32 -left-32 w-80 h-80 blur-[80px] md:blur-[100px] opacity-30 transition-all duration-700 group-hover:scale-150 group-hover:opacity-50",
-                    index % 3 === 0 ? "bg-yellow-100" : index % 3 === 1 ? "bg-orange-100" : "bg-pink-100"
-                  )} />
-                  
-                  <div className="relative mb-6 md:mb-10">
-                    <div className="w-14 h-14 md:w-20 md:h-20 text-black flex items-center justify-center rounded-xl md:rounded-2xl bg-black/5 group-hover:bg-black group-hover:text-white transition-colors duration-500">
-                      <service.icon strokeWidth={1.5} className="w-7 h-7 md:w-10 md:h-10" />
+            {services.map((service, index) => {
+              const Icon = service.icon;
+              return (
+                <motion.div
+                  key={service.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: (index % 3) * 0.1 }}
+                  onClick={() => setSelectedService(service)}
+                  className="group relative cursor-pointer"
+                >
+                  <div className="relative bg-white p-6 md:p-12 rounded-[2rem] md:rounded-[2.5rem] border border-black/5 shadow-xl h-full flex flex-col items-start overflow-hidden group-hover:shadow-2xl transition-all duration-500">
+                    {/* Pastel Glow Backgrounds */}
+                    <div className={cn(
+                      "absolute -top-32 -left-32 w-80 h-80 blur-[80px] md:blur-[100px] opacity-30 transition-all duration-700 group-hover:scale-150 group-hover:opacity-50",
+                      index % 3 === 0 ? "bg-yellow-100" : index % 3 === 1 ? "bg-orange-100" : "bg-pink-100"
+                    )} />
+                    
+                    <div className="relative mb-6 md:mb-10">
+                      <div className="w-14 h-14 md:w-20 md:h-20 text-black flex items-center justify-center rounded-xl md:rounded-2xl bg-black/5 group-hover:bg-black group-hover:text-white transition-colors duration-500">
+                        <Icon strokeWidth={1.5} className="w-7 h-7 md:w-10 md:h-10" />
+                      </div>
+                    </div>
+                    
+                    <h4 className="text-lg md:text-2xl lg:text-3xl font-sans font-black text-black mb-3 md:mb-6 leading-tight text-left">{service.title}</h4>
+                    <p className="text-black/60 leading-relaxed text-sm md:text-lg mb-8 md:mb-10 font-sans font-light line-clamp-3 md:line-clamp-none text-left">{service.description}</p>
+                    
+                    <div className="mt-auto flex items-center gap-2 md:gap-3 text-black font-black text-[10px] md:text-xs uppercase tracking-[0.2em] group/btn">
+                      <span>Learn More</span>
+                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-black/10 flex items-center justify-center group-hover/btn:bg-yellow-400 group-hover/btn:border-yellow-400 transition-all duration-300">
+                        <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover/btn:translate-x-1 transition-transform" />
+                      </div>
                     </div>
                   </div>
-                  
-                  <h4 className="text-lg md:text-2xl lg:text-3xl font-sans font-black text-black mb-3 md:mb-6 leading-tight text-left">{service.title}</h4>
-                  <p className="text-black/60 leading-relaxed text-sm md:text-lg mb-8 md:mb-10 font-sans font-light line-clamp-3 md:line-clamp-none text-left">{service.description}</p>
-                  
-                  <div className="mt-auto flex items-center gap-2 md:gap-3 text-black font-black text-[10px] md:text-xs uppercase tracking-[0.2em] group/btn">
-                    <span>Learn More</span>
-                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-black/10 flex items-center justify-center group-hover/btn:bg-yellow-400 group-hover/btn:border-yellow-400 transition-all duration-300">
-                      <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -717,72 +690,7 @@ const AgencyPage = () => {
         </div>
       </section>
 
-      {/* Blog Preview Section */}
-      <section id="blog" className="py-32 relative overflow-hidden bg-bg/50">
-        <div className="absolute inset-0 bg-grain opacity-[0.02]" />
-        
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-32 gap-12">
-            <div>
-              <div className="flex items-center gap-4 mb-8">
-                <div className="h-px w-12 bg-gold-500" />
-                <h2 className="text-gold-500 tracking-[0.4em] uppercase text-[10px] font-black italic">The Growth Vault</h2>
-              </div>
-              <h3 className="text-6xl md:text-8xl font-serif italic text-text-main tracking-tighter leading-none">
-                Elite <br /> <span className="text-gold-500">Insights.</span>
-              </h3>
-            </div>
-            <Link 
-              to="/blog" 
-              className="btn-premium px-10 py-5 text-[11px] flex items-center justify-center gap-4 group"
-            >
-              Access Complete Repository <ArrowUpRight className="w-5 h-5 group-hover:scale-125 transition-transform" />
-            </Link>
-          </div>
 
-          <div className="relative overflow-hidden group/marquee">
-            <div className="absolute inset-0 bg-gradient-to-r from-bg via-transparent to-bg z-10 pointer-events-none" />
-            
-            <div className="flex animate-marquee-right hover:[animation-play-state:paused] whitespace-nowrap gap-12 items-stretch py-20">
-              {[...homeBlogs, ...homeBlogs].map((blog, i) => (
-                <motion.div 
-                  key={`${blog.slug}-${i}`}
-                  whileHover={{ scale: 1.02, y: -10 }}
-                  className="w-[400px] shrink-0 preserve-3d transition-all duration-500"
-                >
-                  <Link to={`/blog/${blog.slug}`} className="block group h-full">
-                    <div className="glass-premium p-8 rounded-[4rem] border border-white/5 transition-all duration-700 group-hover:border-gold-500/30 shadow-2xl relative overflow-hidden h-full card-3d">
-                      <div className="absolute inset-0 bg-grain opacity-[0.02]" />
-                      
-                      <div className="relative aspect-[4/3] rounded-[3rem] overflow-hidden mb-10 border border-white/10 group-hover:scale-[1.02] transition-transform duration-700">
-                        <img 
-                          src={blog.image || blog.banner} 
-                          alt={`${blog.title} - Digital Marketing Insights by PROXIMAX`}
-                          className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 brightness-75 group-hover:brightness-100"
-                          loading="lazy"
-                          referrerPolicy="no-referrer"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-bg/90 to-transparent" />
-                        <div className="absolute bottom-6 left-6 px-5 py-2 rounded-full glass-luxury text-[9px] font-black text-gold-500 uppercase tracking-widest leading-none flex items-center justify-center">
-                          {blog.category}
-                        </div>
-                      </div>
-                      
-                      <div className="space-y-6 whitespace-normal">
-                        <h4 className="text-3xl font-serif italic text-white group-hover:text-gold-500 transition-colors leading-[1.1]">{blog.title}</h4>
-                        <div className="flex items-center justify-between text-[10px] text-text-dim uppercase tracking-[0.2em] font-black italic">
-                          <span className="flex items-center gap-2 min-h-0"><Clock size={14} className="text-gold-600 shrink-0" /> {blog.readTime} MIN READ</span>
-                          <ArrowRight className="w-5 h-5 -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all text-gold-500 shrink-0" />
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* FAQ Section */}
       <section id="faq" className="py-40 relative">

@@ -223,15 +223,18 @@ const CareersPage = () => {
                 { label: "Community Members", value: "15,000+", icon: Users },
                 { label: "Avg. Student Earning", value: "₹25,000/mo", icon: TrendingUp },
                 { label: "India Presence", value: "28 States", icon: Globe },
-              ].map((stat, i) => (
-                <div key={i} className="space-y-4">
-                  <div className="w-12 h-12 rounded-2xl bg-gold-600/10 flex items-center justify-center text-gold-500 mx-auto">
-                    <stat.icon className="w-6 h-6" />
+              ].map((stat, i) => {
+                const Icon = stat.icon;
+                return (
+                  <div key={i} className="space-y-4">
+                    <div className="w-12 h-12 rounded-2xl bg-gold-600/10 flex items-center justify-center text-gold-500 mx-auto">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-4xl lg:text-5xl font-display font-black text-text-main">{stat.value}</h3>
+                    <p className="text-[10px] tracking-luxury text-text-dim uppercase">{stat.label}</p>
                   </div>
-                  <h3 className="text-4xl lg:text-5xl font-display font-black text-text-main">{stat.value}</h3>
-                  <p className="text-[10px] tracking-luxury text-text-dim uppercase">{stat.label}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
@@ -320,15 +323,18 @@ const CareersPage = () => {
                 { title: "Skill Mastery", desc: "Master SEO, Ads, and Content that corporate India is looking for.", icon: Star },
                 { title: "Personal Brand", desc: "Learn how to build your own authority in the digital world.", icon: Users },
                 { title: "Global Exposure", desc: "Work with brands not just from India, but from across the globe.", icon: Sparkles }
-              ].map((benefit, i) => (
-                <div key={i} className="text-left space-y-4 group">
-                  <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-gold-500 group-hover:scale-110 group-hover:rotate-6 transition-all shadow-xl">
-                    <benefit.icon className="w-7 h-7" />
+              ].map((benefit, i) => {
+                const Icon = benefit.icon;
+                return (
+                  <div key={i} className="text-left space-y-4 group">
+                    <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-gold-500 group-hover:scale-110 group-hover:rotate-6 transition-all shadow-xl">
+                      <Icon className="w-7 h-7" />
+                    </div>
+                    <h4 className="text-xl font-serif italic text-white">{benefit.title}</h4>
+                    <p className="text-sm text-text-dim leading-relaxed font-sans font-light">{benefit.desc}</p>
                   </div>
-                  <h4 className="text-xl font-serif italic text-white">{benefit.title}</h4>
-                  <p className="text-sm text-text-dim leading-relaxed font-sans font-light">{benefit.desc}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
